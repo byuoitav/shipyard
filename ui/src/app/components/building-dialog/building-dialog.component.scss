@@ -13,10 +13,16 @@ mat-form-field {
     margin-right: 1vw;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .tag-container {
     width: 40%;
+}
+
+.tag-label {
+    font-size: 20px;
+    margin-top: 10px;
 }
 
 .actions-container {

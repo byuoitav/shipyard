@@ -16,7 +16,21 @@ export class BuildingDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: String) { }
 
   ngOnInit(): void {
-    this.bldg = new Building();
+    this.bldg = {
+      ID: "",
+      Tags: new Map()
+    };
+  }
+
+  addTag() {
+    this.bldg.Tags.set(this.tagKey, this.tagValue);
+    this.tagKey = "";
+    this.tagValue = "";
+  }
+
+  removeTag(key: String) {
+    console.log(key);
+    this.bldg.Tags.delete(key);
   }
 
   onCancel() {

@@ -36,6 +36,9 @@ export class BuildingListComponent implements OnInit {
     dialog.afterClosed().subscribe(result => {
       if (result != null) {
         console.log(result.ID);
+        result.Tags.forEach((value, key, map) => {
+          console.log(key + " - " + value);
+        });
       }
     });
   }

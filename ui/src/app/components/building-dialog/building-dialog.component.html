@@ -1,4 +1,5 @@
 <div class="input-container">
+    <p>Info</p>
     <div class="text-row">
         <mat-form-field>
             <mat-label>ID</mat-label>
@@ -19,17 +20,22 @@
                 <input matInput type="text" [(ngModel)]="tagValue">
             </mat-form-field>
         </div>
-        <button mat-icon-button color="black">
+        <button mat-icon-button (click)="addTag()">
             <mat-icon>add</mat-icon>
         </button>
     </div>
     <span *ngFor="let tag of bldg.Tags | keyvalue">
-        <mat-form-field>
-            <mat-label>Key</mat-label>
-            <input matInput type="text" [(ngModel)]="tag.key">
-            <mat-label>Value</mat-label>
-            <input matInput type="text" [(ngModel)]="tag.value">
-        </mat-form-field>
+        <div class="text-row">
+            <div class="tag-container">
+                <p class="tag-label">{{ tag.key }}</p>
+            </div>
+            <div class="tag-container">
+                <p class="tag-label">{{ tag.value }}</p>
+            </div>
+            <button mat-icon-button (click)="removeTag(tag.key)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
     </span>
 </div>
 
