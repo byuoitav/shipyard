@@ -3,31 +3,42 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RoomPageComponent } from './components/room-page/room-page.component';
-import { BuildingListComponent } from './components/building-list/building-list.component';
-import { RoomListComponent } from './components/room-list/room-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input'
+
+import { RoomPageComponent } from './components/room-page/room-page.component';
+import { BuildingListComponent } from './components/building-list/building-list.component';
+import { RoomListComponent } from './components/room-list/room-list.component';
+import { BuildingDialogComponent } from './components/building-dialog/building-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoomPageComponent,
     BuildingListComponent,
-    RoomListComponent
+    RoomListComponent,
+    BuildingDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

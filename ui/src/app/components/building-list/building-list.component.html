@@ -1,5 +1,8 @@
 <div class="action-container">
-    <button mat-raised-button color="primary">ADD</button>
+    <button mat-raised-button color="primary" (click)="addBuilding()">
+        <mat-icon>add</mat-icon>
+        Add New
+    </button>
     <!-- filter buildings -->
 </div>
 
@@ -7,13 +10,13 @@
     <ng-container *ngFor="let b of buildings">
         <mat-card>
             <mat-card-header>
-                <mat-card-title (click)="routeToRoomList(b)">{{ b }}</mat-card-title>
-                <span class="spacing" (click)="routeToRoomList(b)"></span>
+                <mat-card-title (click)="routeToRoomList(b.ID)">{{ b.ID }}</mat-card-title>
+                <span class="spacing" (click)="routeToRoomList(b.ID)"></span>
                 <button mat-icon-button>
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </mat-card-header>
-            <img mat-card-image [src]="getImage(b)" alt="A cool image of the {{ b }}" class="image" (click)="routeToRoomList(b)">
+            <img mat-card-image [src]="getImage(b.ID)" alt="A cool image of the {{ b.ID }}" class="image" (click)="routeToRoomList(b.ID)">
         </mat-card>
     </ng-container>
 </div>
