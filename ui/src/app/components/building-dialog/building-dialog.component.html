@@ -1,47 +1,49 @@
-<div class="input-container">
-    <p>Info</p>
-    <div class="text-row">
-        <mat-form-field>
-            <mat-label>ID</mat-label>
-            <input matInput type="text" [(ngModel)]="bldg.ID">
-        </mat-form-field>
-    </div>
-    <p>Tags</p>
-    <div class="text-row">
-        <div class="tag-container">
+<mat-dialog-content>
+    <div class="input-container">
+        <p>Info</p>
+        <div class="text-row">
             <mat-form-field>
-                <mat-label>Key</mat-label>
-                <input matInput type="text" [(ngModel)]="tagKey">
+                <mat-label>ID</mat-label>
+                <input matInput type="text" [(ngModel)]="bldg.ID">
             </mat-form-field>
         </div>
-        <div class="tag-container">
-            <mat-form-field>
-                <mat-label>Value</mat-label>
-                <input matInput type="text" [(ngModel)]="tagValue">
-            </mat-form-field>
-        </div>
-        <button mat-icon-button (click)="addTag()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-    <span *ngFor="let tag of bldg.Tags | keyvalue">
+        <p>Tags</p>
         <div class="text-row">
             <div class="tag-container">
-                <p class="tag-label">{{ tag.key }}</p>
+                <mat-form-field>
+                    <mat-label>Key</mat-label>
+                    <input matInput type="text" [(ngModel)]="tagKey">
+                </mat-form-field>
             </div>
             <div class="tag-container">
-                <p class="tag-label">{{ tag.value }}</p>
+                <mat-form-field>
+                    <mat-label>Value</mat-label>
+                    <input matInput type="text" [(ngModel)]="tagValue">
+                </mat-form-field>
             </div>
-            <button mat-icon-button (click)="removeTag(tag.key)">
-                <mat-icon>delete</mat-icon>
+            <button mat-icon-button (click)="addTag()">
+                <mat-icon>add</mat-icon>
             </button>
         </div>
-    </span>
-</div>
+        <span *ngFor="let tag of bldg.Tags | keyvalue">
+            <div class="text-row">
+                <div class="tag-container">
+                    <p class="tag-label">{{ tag.key }}</p>
+                </div>
+                <div class="tag-container">
+                    <p class="tag-label">{{ tag.value }}</p>
+                </div>
+                <button mat-icon-button (click)="removeTag(tag.key)">
+                    <mat-icon>remove</mat-icon>
+                </button>
+            </div>
+        </span>
+    </div>
 
-<div class="actions-container">
-    <span class="spacer-left"></span>
-    <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
-    <button mat-stroked-button *ngIf="!newBldg" color="warn" (click)="onDelete()">Delete</button>
-    <button mat-stroked-button color="primary" (click)="onSave()">Save</button>
-</div>
+    <div class="actions-container">
+        <span class="spacer-left"></span>
+        <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
+        <button mat-stroked-button *ngIf="!newBldg" color="warn" (click)="onDelete()">Delete</button>
+        <button mat-stroked-button color="primary" (click)="onSave()">Save</button>
+    </div>
+</mat-dialog-content>
