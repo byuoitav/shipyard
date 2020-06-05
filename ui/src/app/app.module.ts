@@ -18,6 +18,7 @@ import { RoomPageComponent } from './components/room-page/room-page.component';
 import { BuildingListComponent } from './components/building-list/building-list.component';
 import { RoomListComponent } from './components/room-list/room-list.component';
 import { BuildingDialogComponent } from './components/building-dialog/building-dialog.component';
+import { RoomDialogComponent } from './components/room-dialog/room-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BuildingDialogComponent } from './components/building-dialog/building-d
     RoomPageComponent,
     BuildingListComponent,
     RoomListComponent,
-    BuildingDialogComponent
+    BuildingDialogComponent,
+    RoomDialogComponent
   ],
   imports: [
     BrowserModule,

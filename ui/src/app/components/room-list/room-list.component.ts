@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Building } from 'src/app/services/api.service';
+import { Room, ApiService } from 'src/app/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
 
 @Component({
   selector: 'app-room-list',
@@ -9,15 +11,34 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RoomListComponent implements OnInit {
   bldgID: String;
-  building: Building;
+  rooms: Room[];
 
-  constructor(private route: ActivatedRoute) {
+
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private api: ApiService,
+    private dialog: MatDialog) {
     this.route.params.subscribe(params => {
       this.bldgID = params["bldgID"];
     });
+    this.rooms = this.api.getRooms(this.bldgID);
   }
 
   ngOnInit(): void {
+  }
+
+  routeToRoomPage(roomID: String) {
+    this.router.navigate(["/campus/" + roomID]);
+  }
+
+  editRoom() {
+    const roomDialog = this.dialog.open(RoomDialogComponent);
+
+    roomDialog.afterClosed().subscribe(result => {
+      if (result != null) {
+        console.log(result.ID);
+      }
+    });
   }
 
 }
