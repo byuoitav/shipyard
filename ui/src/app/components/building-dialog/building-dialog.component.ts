@@ -36,7 +36,6 @@ export class BuildingDialogComponent implements OnInit {
   }
 
   removeTag(key: String) {
-    console.log(key);
     this.bldg.Tags.delete(key);
   }
 

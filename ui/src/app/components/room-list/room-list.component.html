@@ -1,5 +1,5 @@
 <div class="action-container">
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="editRoom(null)">
         <mat-icon>add</mat-icon>
         Add New
     </button>
@@ -12,7 +12,7 @@
             <mat-card-header>
                 <mat-card-title (click)="routeToRoomPage(r.ID)">{{ r.ID }}</mat-card-title>
                 <span class="spacing" (click)="routeToRoomPage(r.ID)"></span>
-                <button mat-icon-button (click)="editRoom()">
+                <button mat-icon-button (click)="editRoom(r)">
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </mat-card-header>

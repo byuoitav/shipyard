@@ -10,6 +10,8 @@ import { Room } from 'src/app/services/api.service';
 export class RoomDialogComponent implements OnInit {
   room: Room;
   newRoom: boolean;
+  tagKey: String;
+  tagValue: String;
 
   constructor(private dialogRef: MatDialogRef<RoomDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Room) {
@@ -18,7 +20,9 @@ export class RoomDialogComponent implements OnInit {
       this.newRoom = false;
     } else {
       this.room = {
-        ID: ""
+        ID: "",
+        Desc: "",
+        Tags: new Map()
       }
       this.newRoom = true;
     }
@@ -27,6 +31,26 @@ export class RoomDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
+  addTag() {
+    this.room.Tags.set(this.tagKey, this.tagValue);
+    this.tagKey = "";
+    this.tagValue = "";
+  }
+
+  removeTag(key: String) {
+    this.room.Tags.delete(key);
+  }
+
+  onCancel() {
+    this.dialogRef.close(null);
+  }
+
+  onDelete() {
+    this.dialogRef.close("delete");
+  }
+
+  onSave() {
+    this.dialogRef.close(this.room);
+  }
 
 }

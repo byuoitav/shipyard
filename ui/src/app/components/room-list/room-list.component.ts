@@ -31,8 +31,8 @@ export class RoomListComponent implements OnInit {
     this.router.navigate(["/campus/" + roomID]);
   }
 
-  editRoom() {
-    const roomDialog = this.dialog.open(RoomDialogComponent);
+  editRoom(r: Room) {
+    const roomDialog = this.dialog.open(RoomDialogComponent, {data: r});
 
     roomDialog.afterClosed().subscribe(result => {
       if (result != null) {

@@ -12,7 +12,8 @@ mat-form-field {
     margin-left: 1vw;
     margin-right: 1vw;
     display: flex;
-    justify-content: space-between;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
     margin-bottom: 10px;
 }
 

@@ -7,6 +7,8 @@ export class Building {
 
 export class Room {
   ID: String;
+  Desc: String;
+  Tags: Map<String, String>;
 }
 
 @Injectable({
@@ -44,31 +46,49 @@ export class ApiService {
   getRooms(bldgID: String): Room[] {
     return [
       {
-        ID: "Room-1"
+        ID: "Room-1",
+        Desc: "this is Room-1",
+        Tags: new Map()
       },
       {
-        ID: "Room-2"
+        ID: "Room-2",
+        Desc: "this is Room-2",
+        Tags: new Map()
       },
       {
-        ID: "Room-3"
+        ID: "Room-3",
+        Desc: "this is Room-3",
+        Tags: new Map()
       },
       {
-        ID: "Room-4"
+        ID: "Room-4",
+        Desc: "this is Room-4",
+        Tags: new Map()
       },
       {
-        ID: "Room-5"
+        ID: "Room-5",
+        Desc: "this is Room-5",
+        Tags: new Map()
       },
       {
-        ID: "Room-6"
+        ID: "Room-6",
+        Desc: "this is Room-6",
+        Tags: new Map()
       },
       {
-        ID: "Room-7"
+        ID: "Room-7",
+        Desc: "this is Room-7",
+        Tags: new Map()
       },
       {
-        ID: "Room-8"
+        ID: "Room-8",
+        Desc: "this is Room-8",
+        Tags: new Map()
       },
       {
-        ID: "Room-9"
+        ID: "Room-9",
+        Desc: "this is Room-9",
+        Tags: new Map()
       }
     ]
   }
