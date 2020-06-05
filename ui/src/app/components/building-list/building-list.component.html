@@ -1,5 +1,5 @@
 <div class="action-container">
-    <button mat-raised-button color="primary" (click)="addBuilding()">
+    <button mat-raised-button color="primary" (click)="editBuilding(null)">
         <mat-icon>add</mat-icon>
         Add New
     </button>
@@ -12,7 +12,7 @@
             <mat-card-header>
                 <mat-card-title (click)="routeToRoomList(b.ID)">{{ b.ID }}</mat-card-title>
                 <span class="spacing" (click)="routeToRoomList(b.ID)"></span>
-                <button mat-icon-button>
+                <button mat-icon-button (click)="editBuilding(b)">
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </mat-card-header>

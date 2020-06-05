@@ -11,16 +11,23 @@ export class BuildingDialogComponent implements OnInit {
   bldg: Building;
   tagKey: String;
   tagValue: String;
+  newBldg: boolean;
 
   constructor(private dialogRef: MatDialogRef<BuildingDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: String) { }
+    @Inject(MAT_DIALOG_DATA) private data: Building) {
+      if (data != null) {
+        this.bldg = data;
+        this.newBldg = false;
+      } else {
+        this.bldg = {
+          ID: "",
+          Tags: new Map()
+        };
+        this.newBldg = true;
+      }
+    }
 
-  ngOnInit(): void {
-    this.bldg = {
-      ID: "",
-      Tags: new Map()
-    };
-  }
+  ngOnInit(): void {}
 
   addTag() {
     this.bldg.Tags.set(this.tagKey, this.tagValue);
@@ -38,8 +45,11 @@ export class BuildingDialogComponent implements OnInit {
   }
 
   onSave() {
-    console.log("save new building");
     this.dialogRef.close(this.bldg);
+  }
+
+  onDelete() {
+    this.dialogRef.close("delete");
   }
 
 }

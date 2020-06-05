@@ -30,15 +30,16 @@ export class BuildingListComponent implements OnInit {
     this.router.navigate(["/campus/" + bldgID + "/roomList"]);
   }
 
-  addBuilding() {
-    const dialog = this.dialogRef.open(BuildingDialogComponent);
+  editBuilding(b: Building) {
+    const dialog = this.dialogRef.open(BuildingDialogComponent, {
+      data: b
+    });
 
     dialog.afterClosed().subscribe(result => {
-      if (result != null) {
-        console.log(result.ID);
-        result.Tags.forEach((value, key, map) => {
-          console.log(key + " - " + value);
-        });
+      if (result == "delete") {
+        console.log("deleting");
+      } else if (result != null) {
+        console.log("updating building list");
       }
     });
   }

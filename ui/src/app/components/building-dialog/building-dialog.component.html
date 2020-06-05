@@ -42,5 +42,6 @@
 <div class="actions-container">
     <span class="spacer-left"></span>
     <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
+    <button mat-stroked-button *ngIf="!newBldg" color="warn" (click)="onDelete()">Delete</button>
     <button mat-stroked-button color="primary" (click)="onSave()">Save</button>
 </div>
