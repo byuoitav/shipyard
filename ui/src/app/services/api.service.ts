@@ -3,12 +3,29 @@ import { Injectable } from '@angular/core';
 export class Building {
   ID: String;
   Tags: Map<String, String>;
+
+  constructor() {
+    this.ID = "";
+    this.Tags = new Map();
+  }
 }
 
 export class Room {
   ID: String;
   Desc: String;
   Tags: Map<String, String>;
+
+  constructor() {
+    this.ID = "";
+    this.Desc = "";
+    this.Tags = new Map();
+  }
+}
+
+export class Device {
+  ID: String;
+  Type: String;
+  Address: String;
 }
 
 @Injectable({
@@ -87,6 +104,34 @@ export class ApiService {
     }
   ];
 
+  testDevices: Device[] = [
+    {
+      ID: "Device-1",
+      Type: "Type-1",
+      Address: "Device_1.byu.edu"
+    },
+    {
+      ID: "Device-2",
+      Type: "Type-2",
+      Address: "Device_2.byu.edu"
+    },
+    {
+      ID: "Device-3",
+      Type: "Type-3",
+      Address: "Device_3.byu.edu"
+    },
+    {
+      ID: "Device-4",
+      Type: "Type-4",
+      Address: "Device_4.byu.edu"
+    },
+    {
+      ID: "Device-5",
+      Type: "Type-5",
+      Address: "Device_5.byu.edu"
+    },
+  ];
+
   constructor() { }
 
   getBuildings(): Building[] {
@@ -117,5 +162,19 @@ export class ApiService {
       }
     }
     this.testRooms.push(room);
+  }
+
+  getDevices(roomID: String): Device[] {
+    return this.testDevices;
+  }
+
+  setDevice(device: Device) {
+    for (var i = 0; i < this.testDevices.length; i++) {
+      if (this.testDevices[i].ID == device.ID) {
+        this.testDevices[i] = device;
+        return;
+      }
+    }
+    this.testDevices.push(device);
   }
 }

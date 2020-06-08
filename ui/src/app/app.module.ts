@@ -12,13 +12,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
 import { BuildingListComponent } from './components/building-list/building-list.component';
 import { RoomListComponent } from './components/room-list/room-list.component';
 import { BuildingDialogComponent } from './components/building-dialog/building-dialog.component';
 import { RoomDialogComponent } from './components/room-dialog/room-dialog.component';
+import { DevicesComponent } from './components/room-page/devices/devices.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { RoomDialogComponent } from './components/room-dialog/room-dialog.compon
     BuildingListComponent,
     RoomListComponent,
     BuildingDialogComponent,
-    RoomDialogComponent
+    RoomDialogComponent,
+    DevicesComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import { RoomDialogComponent } from './components/room-dialog/room-dialog.compon
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

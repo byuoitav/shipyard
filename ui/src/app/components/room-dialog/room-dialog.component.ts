@@ -8,11 +8,7 @@ import { Room } from 'src/app/services/api.service';
   styleUrls: ['./room-dialog.component.scss']
 })
 export class RoomDialogComponent implements OnInit {
-  room: Room = {
-    ID: "",
-    Desc: "",
-    Tags: new Map()
-  };
+  room = new Room();
   newRoom = true;
   tagKey: String;
   tagValue: String;

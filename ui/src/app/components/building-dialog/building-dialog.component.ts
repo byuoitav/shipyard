@@ -8,10 +8,7 @@ import { Building } from 'src/app/services/api.service';
   styleUrls: ['./building-dialog.component.scss']
 })
 export class BuildingDialogComponent implements OnInit {
-  bldg: Building = {
-    ID: "",
-    Tags: new Map()
-  };
+  bldg = new Building();
   tagKey: String;
   tagValue: String;
   newBldg = true;

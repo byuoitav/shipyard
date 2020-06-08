@@ -1,0 +1,29 @@
+<div class="content-wrapper">
+    <mat-card class="device-content">
+        <mat-card-header>
+            <mat-card-title>Devices</mat-card-title>
+            <button mat-raised-button color="primary">
+                <mat-icon>add</mat-icon>
+                Add Device
+            </button>
+        </mat-card-header>
+        <mat-card-content class="device-list">
+            <table mat-table [dataSource]="devices">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>ID</th>
+                    <td mat-cell *matCellDef="let dev"> {{dev.ID}} </td>
+                </ng-container>
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef>Type</th>
+                    <td mat-cell *matCellDef="let dev"> {{dev.Type}} </td>
+                </ng-container>
+                <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef>Address</th>
+                    <td mat-cell *matCellDef="let dev"> {{dev.Address}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="deviceTableAttributes"></tr>
+                <tr mat-row *matRowDef="let device; columns: deviceTableAttributes"></tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>

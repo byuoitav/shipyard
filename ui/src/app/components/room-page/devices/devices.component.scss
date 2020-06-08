@@ -1,0 +1,22 @@
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.device-content {
+    width: 80%;
+}
+
+mat-card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-card-title {
+    padding-left: 10px;
+    font-size: 32pt;
+}
+
+table {
+    width: 100%;
+}
