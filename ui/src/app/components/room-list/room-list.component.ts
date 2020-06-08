@@ -35,8 +35,10 @@ export class RoomListComponent implements OnInit {
     const roomDialog = this.dialog.open(RoomDialogComponent, {data: r});
 
     roomDialog.afterClosed().subscribe(result => {
-      if (result != null) {
-        console.log(result.ID);
+      if (result == "delete") {
+        console.log("deleting");
+      } else if (result != null) {
+        this.api.setRoom(result);
       }
     });
   }

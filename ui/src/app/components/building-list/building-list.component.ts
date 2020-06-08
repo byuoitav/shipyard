@@ -39,7 +39,7 @@ export class BuildingListComponent implements OnInit {
       if (result == "delete") {
         console.log("deleting");
       } else if (result != null) {
-        console.log("updating building list");
+        this.api.setBuilding(result);
       }
     });
   }
