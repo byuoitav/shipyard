@@ -22,6 +22,7 @@ import { RoomListComponent } from './components/room-list/room-list.component';
 import { BuildingDialogComponent } from './components/building-dialog/building-dialog.component';
 import { RoomDialogComponent } from './components/room-dialog/room-dialog.component';
 import { DevicesComponent } from './components/room-page/devices/devices.component';
+import { DevicesDialogComponent } from './components/room-page/devices-dialog/devices-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DevicesComponent } from './components/room-page/devices/devices.compone
     RoomListComponent,
     BuildingDialogComponent,
     RoomDialogComponent,
-    DevicesComponent
+    DevicesComponent,
+    DevicesDialogComponent
   ],
   imports: [
     BrowserModule,

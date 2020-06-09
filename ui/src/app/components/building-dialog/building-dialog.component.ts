@@ -8,7 +8,7 @@ import { Building } from 'src/app/services/api.service';
   styleUrls: ['./building-dialog.component.scss']
 })
 export class BuildingDialogComponent implements OnInit {
-  bldg = new Building();
+  bldg = new Building(null);
   tagKey: String;
   tagValue: String;
   newBldg = true;
@@ -16,10 +16,7 @@ export class BuildingDialogComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<BuildingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Building) {
       if (data != null) {
-        this.bldg.ID = data.ID;
-        data.Tags.forEach((value, key) => {
-          this.bldg.Tags.set(key, value);
-        });
+        this.bldg = new Building(data);
         this.newBldg = false;
       }
     }

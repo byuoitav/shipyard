@@ -8,7 +8,7 @@ import { Room } from 'src/app/services/api.service';
   styleUrls: ['./room-dialog.component.scss']
 })
 export class RoomDialogComponent implements OnInit {
-  room = new Room();
+  room = new Room(null);
   newRoom = true;
   tagKey: String;
   tagValue: String;
@@ -17,12 +17,7 @@ export class RoomDialogComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<RoomDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Room) {
     if (data != null) {
-      // make a deep copy
-      this.room.ID = data.ID;
-      this.room.Desc = data.Desc;
-      data.Tags.forEach((value, key) => {
-        this.room.Tags.set(key, value);
-      });
+      this.room = new Room(data);
       this.newRoom = false;
     }
   }

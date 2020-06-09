@@ -2,13 +2,13 @@
     <mat-card class="device-content">
         <mat-card-header>
             <mat-card-title>Devices</mat-card-title>
-            <button mat-raised-button color="primary">
+            <button mat-raised-button color="primary" (click)="editDevice()">
                 <mat-icon>add</mat-icon>
                 Add Device
             </button>
         </mat-card-header>
         <mat-card-content class="device-list">
-            <table mat-table [dataSource]="devices">
+            <table mat-table [dataSource]="devicesSource">
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef>ID</th>
                     <td mat-cell *matCellDef="let dev"> {{dev.ID}} </td>
@@ -20,6 +20,18 @@
                 <ng-container matColumnDef="address">
                     <th mat-header-cell *matHeaderCellDef>Address</th>
                     <td mat-cell *matCellDef="let dev"> {{dev.Address}} </td>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef>Description</th>
+                    <td mat-cell *matCellDef="let dev"> {{dev.Tags.get("description")}} </td>
+                </ng-container>
+                <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let dev">
+                        <button mat-icon-button (click)="editDevice(dev)">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="deviceTableAttributes"></tr>
                 <tr mat-row *matRowDef="let device; columns: deviceTableAttributes"></tr>

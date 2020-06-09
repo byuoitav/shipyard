@@ -4,9 +4,16 @@ export class Building {
   ID: String;
   Tags: Map<String, String>;
 
-  constructor() {
-    this.ID = "";
+  constructor(bldg: Building) {
     this.Tags = new Map();
+    if (bldg != null) {
+      this.ID = bldg.ID;
+      bldg.Tags.forEach((value, key) => {
+        this.Tags.set(key, value);
+      });
+    } else {
+      this.ID = "";
+    }
   }
 }
 
@@ -15,10 +22,18 @@ export class Room {
   Desc: String;
   Tags: Map<String, String>;
 
-  constructor() {
-    this.ID = "";
-    this.Desc = "";
+  constructor(rm: Room) {
     this.Tags = new Map();
+    if (rm != null) {
+      this.ID = rm.ID;
+      this.Desc = rm.Desc;
+      rm.Tags.forEach((value, key) => {
+        this.Tags.set(key, value);
+      });
+    } else {
+      this.ID = "";
+      this.Desc = "";
+    }
   }
 }
 
@@ -26,6 +41,23 @@ export class Device {
   ID: String;
   Type: String;
   Address: String;
+  Tags: Map<String, String>
+
+  constructor(dev: Device) {
+    this.Tags = new Map();
+    if (dev != null) {
+      this.ID = dev.ID;
+      this.Type = dev.Type;
+      this.Address = dev.Address;
+      dev.Tags.forEach((value, key) => {
+        this.Tags.set(key, value);
+      });
+    } else {
+      this.ID = "";
+      this.Type = "";
+      this.Address = "";
+    }
+  }
 }
 
 @Injectable({
@@ -108,27 +140,32 @@ export class ApiService {
     {
       ID: "Device-1",
       Type: "Type-1",
-      Address: "Device_1.byu.edu"
+      Address: "Device_1.byu.edu",
+      Tags: new Map().set("description", "this is device 1 blah blah blah blah blah")
     },
     {
       ID: "Device-2",
       Type: "Type-2",
-      Address: "Device_2.byu.edu"
+      Address: "Device_2.byu.edu",
+      Tags: new Map().set("description", "this is device 2")
     },
     {
       ID: "Device-3",
       Type: "Type-3",
-      Address: "Device_3.byu.edu"
+      Address: "Device_3.byu.edu",
+      Tags: new Map().set("description", "this is device 3")
     },
     {
       ID: "Device-4",
       Type: "Type-4",
-      Address: "Device_4.byu.edu"
+      Address: "Device_4.byu.edu",
+      Tags: new Map().set("description", "this is device 4")
     },
     {
       ID: "Device-5",
       Type: "Type-5",
-      Address: "Device_5.byu.edu"
+      Address: "Device_5.byu.edu",
+      Tags: new Map().set("description", "this is device 5")
     },
   ];
 
@@ -176,5 +213,14 @@ export class ApiService {
       }
     }
     this.testDevices.push(device);
+  }
+
+  removeDevice(deviceID: String) {
+    for (var i = 0; i < this.testDevices.length; i++) {
+      if (this.testDevices[i].ID == deviceID) {
+        this.testDevices.splice(i, 1);
+        return;
+      }
+    }
   }
 }
