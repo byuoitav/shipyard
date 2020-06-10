@@ -15,8 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
-import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
 import { BuildingListComponent } from './components/building-list/building-list.component';
@@ -25,6 +25,7 @@ import { BuildingDialogComponent } from './components/building-dialog/building-d
 import { RoomDialogComponent } from './components/room-dialog/room-dialog.component';
 import { DevicesComponent } from './components/room-page/devices/devices.component';
 import { DevicesDialogComponent } from './components/room-page/devices-dialog/devices-dialog.component';
+import { DeviceMenuItemComponent } from './components/room-page/device-menu-item/device-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DevicesDialogComponent } from './components/room-page/devices-dialog/de
     BuildingDialogComponent,
     RoomDialogComponent,
     DevicesComponent,
-    DevicesDialogComponent
+    DevicesDialogComponent,
+    DeviceMenuItemComponent
   ],
   imports: [
     BrowserModule,
@@ -51,8 +53,8 @@ import { DevicesDialogComponent } from './components/room-page/devices-dialog/de
     MatInputModule,
     MatTabsModule,
     MatTableModule,
-    MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

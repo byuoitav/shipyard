@@ -2,7 +2,7 @@
     <mat-card class="device-content">
         <mat-card-header>
             <mat-card-title>{{ roomID }} Devices</mat-card-title>
-            <button mat-raised-button color="primary" (click)="editDevice(null)">
+            <button mat-raised-button color="primary" [matMenuTriggerFor]="deviceTypes.subMenu">
                 <mat-icon>add</mat-icon>
                 Add Device
             </button>
@@ -41,10 +41,6 @@
                         <div class="device-detail" [@rowExpand]="dev == expandedDevice ? 'expanded' : 'collapsed'">
                             <mat-expansion-panel class="tag-panel">
                                 <mat-expansion-panel-header>Tags</mat-expansion-panel-header>
-                                <!-- <section class="tag-row">
-                                    <div>Key</div>
-                                    <div>Value</div>
-                                </section> -->
                                 <section *ngFor="let tag of dev.Tags | keyvalue" class="tag-row">
                                     <div>{{ tag.key }}</div>
                                     <div>{{ tag.value }}</div>
@@ -64,3 +60,5 @@
         </mat-card-content>
     </mat-card>
 </div>
+
+<app-device-menu-item #deviceTypes [nodes]="menuNodes"></app-device-menu-item>

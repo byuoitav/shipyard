@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Device, ApiService } from 'src/app/services/api.service';
+import { Device, ApiService, DeviceTypeNode } from 'src/app/services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DevicesDialogComponent } from '../devices-dialog/devices-dialog.component';
@@ -26,13 +26,17 @@ export class DevicesComponent implements OnInit {
 
   expandedDevice: Device | null;
 
+  menuNodes: DeviceTypeNode[];
+
   constructor(private api: ApiService,
     private dialogRef: MatDialog) {
     this.devicesSource = new MatTableDataSource();
     this.updateTable();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.menuNodes = this.api.getDeviceTypeMenu();
+  }
 
   editDevice(dev: Device) {
     const dialog = this.dialogRef.open(DevicesDialogComponent, {data: dev});

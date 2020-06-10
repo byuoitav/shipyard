@@ -60,6 +60,12 @@ export class Device {
   }
 }
 
+export class DeviceTypeNode {
+  Label: String;
+  Icon: String;
+  SubNodes: DeviceTypeNode[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -222,5 +228,51 @@ export class ApiService {
         return;
       }
     }
+  }
+
+  getDeviceTypeMenu(): DeviceTypeNode[] {
+    return [
+      {
+        Label: "Pis",
+        Icon: "touch_app",
+        SubNodes: [
+          {
+            Label: "AV Touchpanel",
+            Icon: "",
+            SubNodes: null
+          },
+          {
+            Label: "Scheduling Panel",
+            Icon: "",
+            SubNodes: null
+          }
+        ]
+      },
+      {
+        Label: "Displays",
+        Icon: "tv",
+        SubNodes: null
+      },
+      {
+        Label: "Inputs",
+        Icon: "input",
+        SubNodes: null
+      },
+      {
+        Label: "Audio",
+        Icon: "mic",
+        SubNodes: null
+      },
+      {
+        Label: "Video Switchers",
+        Icon: "device_hub",
+        SubNodes: null
+      },
+      {
+        Label: "Network Devices",
+        Icon: "settings_ethernet",
+        SubNodes: null
+      }
+    ]
   }
 }
