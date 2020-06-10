@@ -1,13 +1,21 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Device, ApiService } from 'src/app/services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DevicesDialogComponent } from '../devices-dialog/devices-dialog.component';
+import { trigger, state, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
-  styleUrls: ['./devices.component.scss']
+  styleUrls: ['./devices.component.scss'],
+  animations: [
+    trigger('rowExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class DevicesComponent implements OnInit {
   @Input() roomID: String;
@@ -15,6 +23,8 @@ export class DevicesComponent implements OnInit {
 
   devicesSource: MatTableDataSource<Device>;
   deviceTableAttributes: String[] = ['id', 'type', 'address', 'description', 'edit'];
+
+  expandedDevice: Device | null;
 
   constructor(private api: ApiService,
     private dialogRef: MatDialog) {
