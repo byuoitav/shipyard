@@ -6,7 +6,7 @@
     </mat-tab>
     <mat-tab label="Port Config">
         <ng-template matTabContent>
-            <p>Port Config tab for room: {{ roomID }}</p>
+            <app-ports [roomID]="roomID"></app-ports>
         </ng-template>
     </mat-tab>
     <mat-tab label="UI Config">

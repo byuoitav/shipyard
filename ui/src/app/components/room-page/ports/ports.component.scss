@@ -1,0 +1,10 @@
+.device-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+    margin: 1vw;
+}
+
+.device-card {
+    cursor: pointer;
+}

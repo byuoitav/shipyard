@@ -17,6 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
 import { BuildingListComponent } from './components/building-list/building-list.component';
@@ -26,6 +27,7 @@ import { RoomDialogComponent } from './components/room-dialog/room-dialog.compon
 import { DevicesComponent } from './components/room-page/devices/devices.component';
 import { DevicesDialogComponent } from './components/room-page/devices-dialog/devices-dialog.component';
 import { DeviceMenuItemComponent } from './components/room-page/device-menu-item/device-menu-item.component';
+import { PortsComponent } from './components/room-page/ports/ports.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { DeviceMenuItemComponent } from './components/room-page/device-menu-item
     RoomDialogComponent,
     DevicesComponent,
     DevicesDialogComponent,
-    DeviceMenuItemComponent
+    DeviceMenuItemComponent,
+    PortsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { DeviceMenuItemComponent } from './components/room-page/device-menu-item
     MatTabsModule,
     MatTableModule,
     MatExpansionModule,
-    MatMenuModule
+    MatMenuModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
