@@ -63,6 +63,7 @@ export class Device {
 export class DeviceTypeNode {
   Label: String;
   Icon: String;
+  Value: String;
   SubNodes: DeviceTypeNode[];
 }
 
@@ -235,15 +236,18 @@ export class ApiService {
       {
         Label: "Pis",
         Icon: "touch_app",
+        Value: "",
         SubNodes: [
           {
             Label: "AV Touchpanel",
             Icon: "",
+            Value: "Pi",
             SubNodes: null
           },
           {
             Label: "Scheduling Panel",
             Icon: "",
+            Value: "Pi",
             SubNodes: null
           }
         ]
@@ -251,26 +255,31 @@ export class ApiService {
       {
         Label: "Displays",
         Icon: "tv",
+        Value: "Display",
         SubNodes: null
       },
       {
         Label: "Inputs",
         Icon: "input",
+        Value: "Input",
         SubNodes: null
       },
       {
         Label: "Audio",
         Icon: "mic",
+        Value: "Audio",
         SubNodes: null
       },
       {
         Label: "Video Switchers",
         Icon: "device_hub",
+        Value: "Video Switcher",
         SubNodes: null
       },
       {
         Label: "Network Devices",
         Icon: "settings_ethernet",
+        Value: "Network Device",
         SubNodes: null
       }
     ]

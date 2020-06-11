@@ -60,4 +60,11 @@ export class DevicesComponent implements OnInit {
     this.devicesSource.data = this.devices;
   }
 
+  public test(devType: String) {
+    var dev = new Device(null);
+    dev.Type = devType;
+
+    this.editDevice(dev);
+  }
+
 }

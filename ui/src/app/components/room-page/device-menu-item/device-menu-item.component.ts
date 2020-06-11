@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DeviceTypeNode } from 'src/app/services/api.service';
-import { MatMenu } from '@angular/material/menu';
 
 @Component({
   selector: 'app-device-menu-item',
@@ -9,11 +8,16 @@ import { MatMenu } from '@angular/material/menu';
 })
 export class DeviceMenuItemComponent implements OnInit {
   @Input() nodes: DeviceTypeNode[];
-  @ViewChild('deviceTypeMenu') public subMenu: MatMenu;
+  @Input() parent: any;
+  @ViewChild('deviceTypeMenu') public subMenu;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  createDevice(val: String) {
+    this.parent.test(val);
   }
 
 }

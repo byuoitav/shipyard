@@ -2,10 +2,10 @@
     <ng-container *ngFor="let n of nodes">
         <span *ngIf="n.SubNodes != null">
             <button mat-menu-item [matMenuTriggerFor]="menu.subMenu"><mat-icon>{{ n.Icon }}</mat-icon>{{ n.Label }}</button>
-            <app-device-menu-item #menu [nodes]="n.SubNodes"></app-device-menu-item>
+            <app-device-menu-item #menu [nodes]="n.SubNodes" [parent]="parent"></app-device-menu-item>
         </span>
         <span *ngIf="n.SubNodes == null">
-            <button mat-menu-item><mat-icon>{{ n.Icon }}</mat-icon>{{ n.Label }}</button>
+            <button mat-menu-item (click)="createDevice(n.Value)"><mat-icon>{{ n.Icon }}</mat-icon>{{ n.Label }}</button>
         </span>
     </ng-container>
 </mat-menu>
