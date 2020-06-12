@@ -42,12 +42,9 @@ export class DevicesComponent implements OnInit {
     const dialog = this.dialogRef.open(DevicesDialogComponent, {data: dev});
 
     dialog.afterClosed().subscribe(result => {
-      console.log(typeof result);
       if (result instanceof Device) {
-        console.log(result);
         this.api.setDevice(result);
       } else if (typeof result == "string") {
-        console.log(result);
         this.api.removeDevice(result);
       }
       
@@ -58,6 +55,13 @@ export class DevicesComponent implements OnInit {
   updateTable() {
     this.devices = this.api.getDevices(this.roomID);
     this.devicesSource.data = this.devices;
+  }
+
+  createDevice(devType: String) {
+    var dev = new Device(null);
+    dev.Type = devType;
+
+    this.editDevice(dev);
   }
 
   public test(devType: String) {

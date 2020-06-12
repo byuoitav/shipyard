@@ -2,7 +2,7 @@
     <mat-card class="device-content">
         <mat-card-header>
             <mat-card-title>{{ roomID }} Devices</mat-card-title>
-            <button mat-raised-button color="primary" [matMenuTriggerFor]="deviceTypes.subMenu">
+            <button mat-raised-button color="primary" [matMenuTriggerFor]="deviceTypeMenu">
                 <mat-icon>add</mat-icon>
                 Add Device
             </button>
@@ -61,4 +61,15 @@
     </mat-card>
 </div>
 
-<app-device-menu-item #deviceTypes [nodes]="menuNodes" [parent]="this"></app-device-menu-item>
+<!-- <app-device-menu-item #deviceTypes [nodes]="menuNodes" [parent]="this"></app-device-menu-item> -->
+
+<mat-menu #deviceTypeMenu="matMenu">
+    <ng-container *ngFor="let m of menuNodes">
+        <button mat-menu-item [matMenuTriggerFor]="subMenu"><mat-icon>{{ m.Icon }}</mat-icon>{{ m.Label }}</button>
+        <mat-menu #subMenu="matMenu">
+            <ng-container *ngFor="let n of m.SubNodes">
+                <button mat-menu-item (click)="createDevice(n.Value)"><mat-icon>{{ n.Icon }}</mat-icon>{{ n.Label }}</button>
+            </ng-container> 
+        </mat-menu>
+    </ng-container>
+</mat-menu>

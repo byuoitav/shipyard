@@ -17,7 +17,9 @@ export class DevicesDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: Device) {
       if (data != null) {
         this.device = new Device(data);
-        this.newDevice = false;
+        if (this.device.ID != "") {
+          this.newDevice = false;
+        }
       }
     }
 

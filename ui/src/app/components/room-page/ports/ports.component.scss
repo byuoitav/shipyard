@@ -1,10 +1,25 @@
+mat-horizontal-stepper {
+    margin-top: 5vh;
+}
+
 .device-container {
     display: flex;
     justify-content: space-evenly;
     flex-flow: row wrap;
     margin: 1vw;
+    margin-top: 5vh;
 }
 
 .device-card {
     cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    margin: 5vw;
+
+}
+
+.spacer-right {
+    flex: 1 1 auto;
 }
