@@ -2,6 +2,10 @@ mat-horizontal-stepper {
     margin-top: 5vh;
 }
 
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+    display: none !important;
+}
+
 .device-container {
     display: flex;
     justify-content: space-evenly;
@@ -16,8 +20,7 @@ mat-horizontal-stepper {
 
 .button-container {
     display: flex;
-    margin: 5vw;
-
+    margin-top: 5vw;
 }
 
 .spacer-right {

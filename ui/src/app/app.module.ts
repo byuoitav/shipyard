@@ -28,6 +28,7 @@ import { DevicesComponent } from './components/room-page/devices/devices.compone
 import { DevicesDialogComponent } from './components/room-page/devices-dialog/devices-dialog.component';
 import { DeviceMenuItemComponent } from './components/room-page/device-menu-item/device-menu-item.component';
 import { PortsComponent } from './components/room-page/ports/ports.component';
+import { PortListComponent } from './components/room-page/port-list/port-list.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PortsComponent } from './components/room-page/ports/ports.component';
     DevicesComponent,
     DevicesDialogComponent,
     DeviceMenuItemComponent,
-    PortsComponent
+    PortsComponent,
+    PortListComponent
   ],
   imports: [
     BrowserModule,

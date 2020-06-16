@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <mat-horizontal-stepper #stepper>
         <mat-step>
-            <ng-template matStepLabel>Choose Device 1</ng-template>
+            <ng-template matStepLabel>Device 1</ng-template>
             <div class="device-container">
                 <ng-container *ngFor="let dev of devices">
                     <mat-card class="device-card" (click)="configurePorts(dev)">
@@ -11,32 +11,29 @@
                     </mat-card>
                 </ng-container>
             </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Port 1</ng-template>
+
+            <app-port-list [device]="currentDevice"></app-port-list>
+
             <div class="button-container">
+                <button mat-raised-button matStepperPrevious>Back</button>
                 <div class="spacer-right"></div>
-                <button mat-raised-button matStepperNext>Next</button>
             </div>
         </mat-step>
         <mat-step>
-            <ng-template matStepLabel>Choose Out-going Port</ng-template>
+            <ng-template matStepLabel>Device 2</ng-template>
             <div class="button-container">
-                <div class="spacer-right"></div>
                 <button mat-raised-button matStepperPrevious>Back</button>
-                <button mat-raised-button matStepperNext>Next</button>
+                <div class="spacer-right"></div>
             </div>
         </mat-step>
         <mat-step>
-            <ng-template matStepLabel>Choose Device 2</ng-template>
+            <ng-template matStepLabel>Port 2</ng-template>
             <div class="button-container">
-                <div class="spacer-right"></div>
                 <button mat-raised-button matStepperPrevious>Back</button>
-                <button mat-raised-button matStepperNext>Next</button>
-            </div>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>Choose In-coming Port</ng-template>
-            <div class="button-container">
                 <div class="spacer-right"></div>
-                <button mat-raised-button matStepperPrevious>Back</button>
                 <button mat-raised-button color="primary" (click)="stepper.reset()">Done</button>
             </div>
         </mat-step>

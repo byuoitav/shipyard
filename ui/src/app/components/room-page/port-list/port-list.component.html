@@ -1,0 +1,42 @@
+<h1>{{ device.ID }} port config</h1>
+<div class="content-container">
+    <mat-card>
+        <mat-card-title>Incoming Ports</mat-card-title>
+        <mat-card-content>
+            <table mat-table [dataSource]="incomingPorts">
+                <ng-container matColumnDef="port">
+                    <th mat-header-cell *matHeaderCellDef>Port</th>
+                    <td mat-cell *matCellDef="let port">{{ port.ID }}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="connectedDevice">
+                    <th mat-header-cell *matHeaderCellDef>Connected Device</th>
+                    <td mat-cell *matCellDef="let port"> test </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="portColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: portColumns;"></tr>
+            </table>        
+        </mat-card-content>
+    </mat-card>
+    
+    <mat-card>
+        <mat-card-title>Outgoing Ports</mat-card-title>
+        <mat-card-content>
+            <table mat-table [dataSource]="outgoingPorts">
+                <ng-container matColumnDef="port">
+                    <th mat-header-cell *matHeaderCellDef>Port</th>
+                    <td mat-cell *matCellDef="let port">{{ port.ID }}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="connectedDevice">
+                    <th mat-header-cell *matHeaderCellDef>Connected Device</th>
+                    <td mat-cell *matCellDef="let port"> test </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="portColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: portColumns;"></tr>
+            </table>        
+        </mat-card-content>
+    </mat-card>
+</div>
