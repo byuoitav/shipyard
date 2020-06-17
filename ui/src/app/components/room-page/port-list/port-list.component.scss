@@ -10,3 +10,12 @@ mat-card {
 table {
     width: 100%;
 }
+
+.device-column-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+tr.port-row:hover {
+    background: whitesmoke;
+}

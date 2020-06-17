@@ -1,4 +1,3 @@
-
 <div class="content-wrapper">
     <mat-horizontal-stepper #stepper>
         <mat-step>
@@ -14,13 +13,12 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Port 1</ng-template>
-
-            <app-port-list [device]="currentDevice"></app-port-list>
-
             <div class="button-container">
                 <button mat-raised-button matStepperPrevious>Back</button>
                 <div class="spacer-right"></div>
             </div>
+
+            <app-port-list [device]="currentDevice" (inComing)="onIncoming($event)" (outGoing)="onOutgoing($event)"></app-port-list>
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Device 2</ng-template>
@@ -28,14 +26,22 @@
                 <button mat-raised-button matStepperPrevious>Back</button>
                 <div class="spacer-right"></div>
             </div>
+            <div class="device-container">
+                <ng-container *ngFor="let dev of devices">
+                    <mat-card class="device-card" (click)="configurePorts(dev)">
+                        <mat-card-title>{{ dev.ID }}</mat-card-title>
+                        <mat-card-subtitle>{{ dev.Type }}</mat-card-subtitle>
+                    </mat-card>
+                </ng-container>
+            </div>
         </mat-step>
         <mat-step>
-            <ng-template matStepLabel>Port 2</ng-template>
             <div class="button-container">
                 <button mat-raised-button matStepperPrevious>Back</button>
                 <div class="spacer-right"></div>
                 <button mat-raised-button color="primary" (click)="stepper.reset()">Done</button>
             </div>
+            <ng-template matStepLabel>Port 2</ng-template>
         </mat-step>
     </mat-horizontal-stepper>
 </div>

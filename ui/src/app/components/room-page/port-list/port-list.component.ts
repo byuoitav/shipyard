@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Device } from 'src/app/services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -14,6 +14,8 @@ export class Port {
 })
 export class PortListComponent implements OnInit {
   @Input('device') device: Device;
+  @Output() inComing: EventEmitter<any> = new EventEmitter();
+  @Output() outGoing: EventEmitter<any> = new EventEmitter();
 
   portColumns: String[] = ['port', 'connectedDevice'];
 
@@ -31,18 +33,34 @@ export class PortListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  test(port: Port) {
+    
+  }
+
+  selectIncoming(p: Port) {
+    if (p.Device == "") {
+      this.inComing.emit(p);
+    }
+  }
+
+  selectOutgoing(p: Port) {
+    if (p.Device == "") {
+      this.outGoing.emit(p);
+    }
+  }
+
   incomingPorts: Port[] = [
     {
       ID: '1',
-      Device: 'test'
+      Device: ''
     },
     {
       ID: '2',
-      Device: 'test'
+      Device: ''
     },
     {
       ID: '3',
-      Device: 'test'
+      Device: ''
     },
     {
       ID: '4',
@@ -58,7 +76,7 @@ export class PortListComponent implements OnInit {
     },
     {
       ID: '7',
-      Device: 'test'
+      Device: ''
     },
     {
       ID: '8',
@@ -66,7 +84,7 @@ export class PortListComponent implements OnInit {
     },
     {
       ID: '9',
-      Device: 'test'
+      Device: ''
     }
   ];
   outgoingPorts: Port[] = [
@@ -76,11 +94,11 @@ export class PortListComponent implements OnInit {
     },
     {
       ID: '2',
-      Device: 'test'
+      Device: ''
     },
     {
       ID: '3',
-      Device: 'test'
+      Device: ''
     },
     {
       ID: '4',
@@ -88,7 +106,7 @@ export class PortListComponent implements OnInit {
     },
     {
       ID: '5',
-      Device: 'test'
+      Device: ''
     },
     {
       ID: '6',
@@ -100,11 +118,11 @@ export class PortListComponent implements OnInit {
     },
     {
       ID: '8',
-      Device: 'test'
+      Device: ''
     },
     {
       ID: '9',
-      Device: 'test'
+      Device: ''
     }
   ];
 

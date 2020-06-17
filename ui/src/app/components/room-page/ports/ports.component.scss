@@ -11,16 +11,17 @@ mat-horizontal-stepper {
     justify-content: space-evenly;
     flex-flow: row wrap;
     margin: 1vw;
-    margin-top: 5vh;
 }
 
 .device-card {
     cursor: pointer;
+    width: 20%;
+    margin-top: 5vh;
 }
 
 .button-container {
     display: flex;
-    margin-top: 5vw;
+    justify-content: space-evenly;
 }
 
 .spacer-right {
