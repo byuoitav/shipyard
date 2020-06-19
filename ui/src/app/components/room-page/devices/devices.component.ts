@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Device, ApiService, DeviceTypeNode } from 'src/app/services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,6 +19,8 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 })
 export class DevicesComponent implements OnInit {
   @Input() roomID: String;
+  @Output() currentDev: EventEmitter<any> = new EventEmitter();
+
   devices: Device[];
 
   devicesSource: MatTableDataSource<Device>;
@@ -64,11 +66,9 @@ export class DevicesComponent implements OnInit {
     this.editDevice(dev);
   }
 
-  public test(devType: String) {
-    var dev = new Device(null);
-    dev.Type = devType;
-
-    this.editDevice(dev);
+  test(device: Device) {
+    this.expandedDevice = this.expandedDevice === device ? null : device;
+    this.currentDev.emit(device);
   }
 
 }

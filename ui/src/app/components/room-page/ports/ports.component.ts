@@ -33,6 +33,10 @@ export class PortsComponent implements OnInit {
     this.stepper.next();
   }
 
+  setCurrentDevice(dev: Device) {
+    this.currentDevice = dev;
+  }
+
   onIncoming(p: Port) {
     this.currentPort = p;
     this.stepper.next();

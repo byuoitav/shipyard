@@ -1,8 +1,8 @@
-<h1 style="text-align: center;">{{ device.ID }}</h1>
-<div class="content-container">
-    <mat-card>
-        <mat-card-title>Incoming Ports</mat-card-title>
-        <mat-card-content>
+<mat-card-title style="text-align: center;">{{ device.ID }}</mat-card-title>
+<mat-card-content class="content-container">
+    <mat-expansion-panel class="port-panel">
+        <mat-expansion-panel-header class="panel-header">Incoming Ports</mat-expansion-panel-header>
+        <section>
             <table mat-table [dataSource]="incomingPorts">
                 <ng-container matColumnDef="port">
                     <th mat-header-cell *matHeaderCellDef>Port</th>
@@ -23,13 +23,13 @@
             
                 <tr mat-header-row *matHeaderRowDef="portColumns"></tr>
                 <tr mat-row *matRowDef="let port; columns: portColumns;" class="port-row" (click)="selectIncoming(port)"></tr>
-            </table>        
-        </mat-card-content>
-    </mat-card>
-    
-    <mat-card>
-        <mat-card-title>Outgoing Ports</mat-card-title>
-        <mat-card-content>
+            </table>
+        </section>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="port-panel">
+        <mat-expansion-panel-header class="panel-header">Outgoing Ports</mat-expansion-panel-header>
+        <section>
             <table mat-table [dataSource]="outgoingPorts">
                 <ng-container matColumnDef="port">
                     <th mat-header-cell *matHeaderCellDef>Port</th>
@@ -50,7 +50,7 @@
             
                 <tr mat-header-row *matHeaderRowDef="portColumns"></tr>
                 <tr mat-row *matRowDef="let port; columns: portColumns;" class="port-row" (click)="selectOutgoing(port)"></tr>
-            </table>        
-        </mat-card-content>
-    </mat-card>
-</div>
+            </table>  
+        </section>
+    </mat-expansion-panel>
+</mat-card-content>

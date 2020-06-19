@@ -1,4 +1,20 @@
 <div class="content-wrapper">
+    <mat-card>
+        <app-devices [roomID]="roomID" (currentDev)="setCurrentDevice($event)"></app-devices>
+    </mat-card>
+    <mat-card>
+        <app-port-list [device]="currentDevice"></app-port-list>
+    </mat-card>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="content-wrapper">
     <mat-horizontal-stepper #stepper>
         <mat-step>
             <ng-template matStepLabel>Device 1</ng-template>
@@ -44,4 +60,4 @@
             <ng-template matStepLabel>Port 2</ng-template>
         </mat-step>
     </mat-horizontal-stepper>
-</div>
+</div> -->

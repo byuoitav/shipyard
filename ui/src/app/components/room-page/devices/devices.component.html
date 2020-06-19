@@ -48,10 +48,10 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="deviceTableAttributes"></tr>
-        <tr mat-row *matRowDef="let device; columns: deviceTableAttributes" 
+        <tr mat-row *matRowDef="let device; columns: deviceTableAttributes"
             class="device-row"
             [class.expanded-row]="expandedDevice === device"
-            (click)="expandedDevice = expandedDevice === device ? null : device"></tr>
+            (click)="test(device)"></tr>
         <tr mat-row *matRowDef="let row; columns: ['expanded']" class="detail-row"></tr>
     </table>
 </mat-card-content>
