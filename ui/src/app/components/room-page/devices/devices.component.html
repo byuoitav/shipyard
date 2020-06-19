@@ -1,65 +1,62 @@
-<div class="content-wrapper">
-    <mat-card class="device-content">
-        <mat-card-header>
-            <mat-card-title>{{ roomID }} Devices</mat-card-title>
-            <button mat-raised-button color="primary" [matMenuTriggerFor]="deviceTypeMenu">
-                <mat-icon>add</mat-icon>
-                Add Device
-            </button>
-        </mat-card-header>
-        <mat-card-content class="device-list">
-            <table mat-table [dataSource]="devicesSource" multiTemplateDataRows>
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef>ID</th>
-                    <td mat-cell *matCellDef="let dev"> {{dev.ID}} </td>
-                </ng-container>
-                <ng-container matColumnDef="type">
-                    <th mat-header-cell *matHeaderCellDef>Type</th>
-                    <td mat-cell *matCellDef="let dev"> {{dev.Type}} </td>
-                </ng-container>
-                <ng-container matColumnDef="address">
-                    <th mat-header-cell *matHeaderCellDef>Address</th>
-                    <td mat-cell *matCellDef="let dev"> {{dev.Address}} </td>
-                </ng-container>
-                <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef>Description</th>
-                    <td mat-cell *matCellDef="let dev"> {{dev.Tags.get("description")}} </td>
-                </ng-container>
-                <ng-container matColumnDef="edit">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let dev">
-                        <button mat-icon-button (click)="editDevice(dev)">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
+<mat-card-header>
+    <mat-card-title>{{ roomID }} Devices</mat-card-title>
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="deviceTypeMenu">
+        <mat-icon>add</mat-icon>
+        Add Device
+    </button>
+</mat-card-header>
+<mat-card-content class="device-list">
+    <table mat-table [dataSource]="devicesSource" multiTemplateDataRows>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let dev"> {{dev.ID}} </td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef="let dev"> {{dev.Type}} </td>
+        </ng-container>
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef>Address</th>
+            <td mat-cell *matCellDef="let dev"> {{dev.Address}} </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let dev">
+                <div class="description-container">
+                    <p>{{ dev.Tags.get("description") }}</p>
+                    <button mat-icon-button (click)="editDevice(dev)">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
 
-                <!-- expanded column -->
-                <ng-container matColumnDef="expanded">
-                    <th mat-header-cell *matHeaderCellDef>Tags</th>
-                    <td mat-cell *matCellDef="let dev" [attr.colspan]="deviceTableAttributes.length">
-                        <div class="device-detail" [@rowExpand]="dev == expandedDevice ? 'expanded' : 'collapsed'">
-                            <mat-expansion-panel class="tag-panel">
-                                <mat-expansion-panel-header>Tags</mat-expansion-panel-header>
-                                <section *ngFor="let tag of dev.Tags | keyvalue" class="tag-row">
-                                    <div>{{ tag.key }}</div>
-                                    <div>{{ tag.value }}</div>
-                                </section>
-                            </mat-expansion-panel>
-                        </div>
-                    </td>
-                </ng-container>
+        <!-- expanded column -->
+        <ng-container matColumnDef="expanded">
+            <th mat-header-cell *matHeaderCellDef>Tags</th>
+            <td mat-cell *matCellDef="let dev" [attr.colspan]="deviceTableAttributes.length">
+                <div class="device-detail" [@rowExpand]="dev == expandedDevice ? 'expanded' : 'collapsed'">
+                    <mat-expansion-panel class="tag-panel">
+                        <mat-expansion-panel-header>Tags</mat-expansion-panel-header>
+                        <section *ngFor="let tag of dev.Tags | keyvalue" class="tag-row">
+                            <div>{{ tag.key }}</div>
+                            <div>{{ tag.value }}</div>
+                        </section>
+                    </mat-expansion-panel>
+                </div>
+            </td>
+        </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="deviceTableAttributes"></tr>
-                <tr mat-row *matRowDef="let device; columns: deviceTableAttributes" 
-                    class="device-row"
-                    [class.expanded-row]="expandedDevice === device"
-                    (click)="expandedDevice = expandedDevice === device ? null : device"></tr>
-                <tr mat-row *matRowDef="let row; columns: ['expanded']" class="detail-row"></tr>
-            </table>
-        </mat-card-content>
-    </mat-card>
-</div>
+        <tr mat-header-row *matHeaderRowDef="deviceTableAttributes"></tr>
+        <tr mat-row *matRowDef="let device; columns: deviceTableAttributes" 
+            class="device-row"
+            [class.expanded-row]="expandedDevice === device"
+            (click)="expandedDevice = expandedDevice === device ? null : device"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expanded']" class="detail-row"></tr>
+    </table>
+</mat-card-content>
+
+
 
 <!-- <app-device-menu-item #deviceTypes [nodes]="menuNodes" [parent]="this"></app-device-menu-item> -->
 

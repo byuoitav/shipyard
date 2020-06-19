@@ -18,6 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
 import { BuildingListComponent } from './components/building-list/building-list.component';
@@ -60,7 +61,8 @@ import { PortListComponent } from './components/room-page/port-list/port-list.co
     MatTableModule,
     MatExpansionModule,
     MatMenuModule,
-    MatStepperModule
+    MatStepperModule,
+    TextFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

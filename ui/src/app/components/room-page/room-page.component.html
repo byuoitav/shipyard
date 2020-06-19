@@ -1,7 +1,60 @@
 <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Devices List">
         <ng-template matTabContent>
-            <app-devices [roomID]="roomID"></app-devices>
+            <div class="room-info-container">
+                <mat-card>
+                    <mat-card-title>{{ roomID }}</mat-card-title>
+                    <mat-card-content>
+                        <h4>Public Description</h4>
+                        <mat-form-field class="text-wrapper" appearance="outline">
+                            <textarea matInput rows="4" placeholder="description" [(ngModel)]="description"></textarea>
+                        </mat-form-field>
+                    </mat-card-content>
+                    <mat-card-content>
+                        <h4>Private Notes</h4>
+                        <mat-form-field class="text-wrapper" appearance="outline">
+                            <textarea matInput rows="4" placeholder="notes" [(ngModel)]="notes"></textarea>
+                        </mat-form-field>
+                    </mat-card-content>
+                    <mat-card-content>
+                        <h4>Tags</h4>
+                        <div class="text-row">
+                            <div class="tag-container">
+                                <mat-form-field>
+                                    <mat-label>Key</mat-label>
+                                    <input matInput type="text" [(ngModel)]="tagKey">
+                                </mat-form-field>
+                            </div>
+                            <div class="tag-container">
+                                <mat-form-field>
+                                    <mat-label>Value</mat-label>
+                                    <input matInput type="text" [(ngModel)]="tagValue">
+                                </mat-form-field>
+                            </div>
+                            <button mat-icon-button (click)="addTag()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </div>
+                        
+                        <span *ngFor="let tag of room.Tags | keyvalue">
+                            <div class="text-row">
+                                <div class="tag-container">
+                                    <p class="tag-label">{{ tag.key }}</p>
+                                </div>
+                                <div class="tag-container">
+                                    <p class="tag-label">{{ tag.value }}</p>
+                                </div>
+                                <button mat-icon-button (click)="removeTag(tag.key)">
+                                    <mat-icon>remove</mat-icon>
+                                </button>
+                            </div>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <app-devices [roomID]="roomID"></app-devices>
+                </mat-card>
+            </div>
         </ng-template>
     </mat-tab>
     <mat-tab label="Port Config">

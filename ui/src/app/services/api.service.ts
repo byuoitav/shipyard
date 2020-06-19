@@ -196,6 +196,15 @@ export class ApiService {
     return this.testRooms;
   }
 
+  getRoom(roomID: String): Room {
+    for (let i = 0; i < this.testRooms.length; i++) {
+      if (this.testRooms[i].ID == roomID) {
+        return this.testRooms[i];
+      }
+    }
+    return null;
+  }
+
   setRoom(room: Room) {
     console.log(room);
     for (let i = 0; i < this.testRooms.length; i++) {

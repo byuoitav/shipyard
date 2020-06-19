@@ -22,7 +22,7 @@ export class DevicesComponent implements OnInit {
   devices: Device[];
 
   devicesSource: MatTableDataSource<Device>;
-  deviceTableAttributes: String[] = ['id', 'type', 'address', 'description', 'edit'];
+  deviceTableAttributes: String[] = ['id', 'type', 'address', 'description'];
 
   expandedDevice: Device | null;
 
