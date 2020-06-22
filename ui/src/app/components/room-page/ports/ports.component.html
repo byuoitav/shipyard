@@ -3,7 +3,7 @@
         <app-devices [roomID]="roomID" (currentDev)="setCurrentDevice($event)"></app-devices>
     </mat-card>
     <mat-card>
-        <app-port-list [device]="currentDevice"></app-port-list>
+        <app-port-list [device]="currentDevice" (selected)="test($event)"></app-port-list>
     </mat-card>
 </div>
 

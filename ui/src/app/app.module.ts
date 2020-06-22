@@ -26,10 +26,11 @@ import { RoomListComponent } from './components/room-list/room-list.component';
 import { BuildingDialogComponent } from './components/building-dialog/building-dialog.component';
 import { RoomDialogComponent } from './components/room-dialog/room-dialog.component';
 import { DevicesComponent } from './components/room-page/devices/devices.component';
-import { DevicesDialogComponent } from './components/room-page/devices-dialog/devices-dialog.component';
+import { DevicesDialogComponent } from './components/room-page/devices/devices-dialog/devices-dialog.component';
 import { DeviceMenuItemComponent } from './components/room-page/device-menu-item/device-menu-item.component';
 import { PortsComponent } from './components/room-page/ports/ports.component';
-import { PortListComponent } from './components/room-page/port-list/port-list.component';
+import { PortListComponent } from './components/room-page/ports/port-list/port-list.component';
+import { PortDialogComponent } from './components/room-page/ports/port-dialog/port-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PortListComponent } from './components/room-page/port-list/port-list.co
     DevicesDialogComponent,
     DeviceMenuItemComponent,
     PortsComponent,
-    PortListComponent
+    PortListComponent,
+    PortDialogComponent
   ],
   imports: [
     BrowserModule,

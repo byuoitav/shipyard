@@ -1,8 +1,15 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Device, ApiService } from 'src/app/services/api.service';
 import { MatStepper } from '@angular/material/stepper';
-import { Port } from '../port-list/port-list.component';
+import { Port } from './port-list/port-list.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PortDialogComponent } from './port-dialog/port-dialog.component';
 
+
+export interface PortDialogData {
+  RoomID: String;
+  Port: Port;
+}
 @Component({
   selector: 'app-ports',
   templateUrl: './ports.component.html',
@@ -15,7 +22,8 @@ export class PortsComponent implements OnInit {
   currentDevice: Device;
   currentPort: Port;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService,
+    private dialog: MatDialog) {
     this.devices = this.api.getDevices(this.roomID);
     if (this.devices.length > 0) {
       this.currentDevice = this.devices[0];
@@ -37,14 +45,14 @@ export class PortsComponent implements OnInit {
     this.currentDevice = dev;
   }
 
-  onIncoming(p: Port) {
-    this.currentPort = p;
-    this.stepper.next();
-  }
-
-  onOutgoing(p: Port) {
-    this.currentPort = p;
-    this.stepper.next();
+  test(p: Port) {
+    console.log(p);
+    this.dialog.open(PortDialogComponent, {
+      data: {
+        RoomID: this.roomID,
+        Port: p
+      }
+    })
   }
 
 }

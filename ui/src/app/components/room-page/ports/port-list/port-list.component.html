@@ -3,7 +3,7 @@
     <mat-expansion-panel class="port-panel">
         <mat-expansion-panel-header class="panel-header">Incoming Ports</mat-expansion-panel-header>
         <section>
-            <table mat-table [dataSource]="incomingPorts">
+            <table mat-table [dataSource]="filterPorts(true)">
                 <ng-container matColumnDef="port">
                     <th mat-header-cell *matHeaderCellDef>Port</th>
                     <td mat-cell *matCellDef="let port">{{ port.ID }}</td>
@@ -22,7 +22,7 @@
                 </ng-container>
             
                 <tr mat-header-row *matHeaderRowDef="portColumns"></tr>
-                <tr mat-row *matRowDef="let port; columns: portColumns;" class="port-row" (click)="selectIncoming(port)"></tr>
+                <tr mat-row *matRowDef="let port; columns: portColumns;" class="port-row" (click)="selectPort(port)"></tr>
             </table>
         </section>
     </mat-expansion-panel>
@@ -30,7 +30,7 @@
     <mat-expansion-panel class="port-panel">
         <mat-expansion-panel-header class="panel-header">Outgoing Ports</mat-expansion-panel-header>
         <section>
-            <table mat-table [dataSource]="outgoingPorts">
+            <table mat-table [dataSource]="filterPorts(false)">
                 <ng-container matColumnDef="port">
                     <th mat-header-cell *matHeaderCellDef>Port</th>
                     <td mat-cell *matCellDef="let port">{{ port.ID }}</td>
@@ -49,7 +49,7 @@
                 </ng-container>
             
                 <tr mat-header-row *matHeaderRowDef="portColumns"></tr>
-                <tr mat-row *matRowDef="let port; columns: portColumns;" class="port-row" (click)="selectOutgoing(port)"></tr>
+                <tr mat-row *matRowDef="let port; columns: portColumns;" class="port-row" (click)="selectPort(port)"></tr>
             </table>  
         </section>
     </mat-expansion-panel>

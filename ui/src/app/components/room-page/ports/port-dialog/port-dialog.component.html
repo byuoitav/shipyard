@@ -1,0 +1,35 @@
+<mat-horizontal-stepper #stepper>
+  <mat-step>
+    <table mat-table [dataSource]="devices">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Devices</th>
+        <td mat-cell *matCellDef="let dev"> {{dev.ID}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let dev"> {{dev.Type}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="deviceTableHeaders"></tr>
+      <tr mat-row *matRowDef="let device; columns: deviceTableHeaders;" class="device-row" (click)="test(device)"></tr>
+    </table>
+  </mat-step>
+  <mat-step>
+    <table mat-table [dataSource]="filterPorts()">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Available Ports</th>
+        <td mat-cell *matCellDef="let port"> {{port.ID}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="portTableHeaders"></tr>
+      <tr mat-row *matRowDef="let port; columns: portTableHeaders;" class="device-row"></tr>
+    </table>
+    <div class="button-container">
+      <button mat-raised-button matStepperPrevious>Back</button>
+      <div class="spacer-right"></div>
+  </div>
+  </mat-step>
+</mat-horizontal-stepper>
+

@@ -1,0 +1,16 @@
+table {
+    width: 25vw;
+}
+
+tr.device-row:hover {
+    background: whitesmoke;
+}
+
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+    display: none !important;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
