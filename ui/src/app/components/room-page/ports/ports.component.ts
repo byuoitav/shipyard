@@ -8,6 +8,7 @@ import { PortDialogComponent } from './port-dialog/port-dialog.component';
 
 export interface PortDialogData {
   RoomID: String;
+  SourceDev: String;
   Port: Port;
 }
 @Component({
@@ -46,13 +47,18 @@ export class PortsComponent implements OnInit {
   }
 
   test(p: Port) {
-    console.log(p);
-    this.dialog.open(PortDialogComponent, {
+    const ref = this.dialog.open(PortDialogComponent, {
       data: {
         RoomID: this.roomID,
+        SourceDev: this.currentDevice.ID,
         Port: p
       }
-    })
+    });
+
+    ref.afterClosed().subscribe(data => {
+      if (data != null) {
+      }
+    });
   }
 
 }

@@ -31,6 +31,7 @@ import { DeviceMenuItemComponent } from './components/room-page/device-menu-item
 import { PortsComponent } from './components/room-page/ports/ports.component';
 import { PortListComponent } from './components/room-page/ports/port-list/port-list.component';
 import { PortDialogComponent } from './components/room-page/ports/port-dialog/port-dialog.component';
+import { ConfirmPortDialog } from './components/room-page/ports/port-dialog/confirm-dialog';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { PortDialogComponent } from './components/room-page/ports/port-dialog/po
     DeviceMenuItemComponent,
     PortsComponent,
     PortListComponent,
-    PortDialogComponent
+    PortDialogComponent,
+    ConfirmPortDialog
   ],
   imports: [
     BrowserModule,
