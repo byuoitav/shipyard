@@ -19,7 +19,10 @@ export class Building {
 
 export class Room {
   ID: String;
+  Desig: String;
   Desc: String;
+  Notes: String;
+  ProxyBaseURL: String;
   Tags: Map<String, String>;
 
   constructor(rm: Room) {
@@ -39,9 +42,14 @@ export class Room {
 
 export class Device {
   ID: String;
-  Type: String;
+  Desc: String;
   Address: String;
+  Driver: String;
+  DynamicPorts: boolean;
+  Ports: Port[];
   Tags: Map<String, String>
+
+  Type: String;
 
   constructor(dev: Device) {
     this.Tags = new Map();
@@ -58,6 +66,14 @@ export class Device {
       this.Address = "";
     }
   }
+}
+
+export class Port {
+  ID: String;
+  Name: String;
+  Endpoint: String[];
+  Incoming: boolean;
+  Type: String;
 }
 
 export class DeviceTypeNode {
@@ -98,47 +114,74 @@ export class ApiService {
   testRooms: Room[] = [
     {
       ID: "Room-1",
+      Desig: "designation-1",
       Desc: "this is Room-1",
+      Notes: "notes on room 1",
+      ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "Room-2",
+      Desig: "designation-2",
       Desc: "this is Room-2",
+      Notes: "notes on room 2",
+      ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "Room-3",
+      Desig: "designation-3",
       Desc: "this is Room-3",
+      Notes: "notes on room 3",
+      ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "Room-4",
+      Desig: "designation-4",
       Desc: "this is Room-4",
+      Notes: "notes on room 4",
+      ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "Room-5",
+      Desig: "designation-5",
       Desc: "this is Room-5",
+      Notes: "notes on room 5",
+      ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "Room-6",
+      Desig: "designation-6",
       Desc: "this is Room-6",
+      Notes: "notes on room 6",
+      ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "Room-7",
+      Desig: "designation-7",
       Desc: "this is Room-7",
+      Notes: "notes on room 7",
+      ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "Room-8",
+      Desig: "designation-8",
       Desc: "this is Room-8",
+      Notes: "notes on room 8",
+      ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "Room-9",
+      Desig: "designation-9",
       Desc: "this is Room-9",
+      Notes: "notes on room 9",
+      ProxyBaseURL: "huh...",
       Tags: new Map()
     }
   ];
@@ -146,34 +189,118 @@ export class ApiService {
   testDevices: Device[] = [
     {
       ID: "Device-1",
-      Type: "Type-1",
+      Desc: "description of device 1",
       Address: "Device_1.byu.edu",
-      Tags: new Map().set("description", "this is device 1 blah blah blah blah blah")
+      Driver: "driver 1",
+      DynamicPorts: false,
+      Ports: [
+        {
+          ID: 'Device1-Port1',
+          Name: 'Port1',
+          Endpoint: [],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port2',
+          Name: 'Port2',
+          Endpoint: [],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port3',
+          Name: 'Port3',
+          Endpoint: ['test'],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port4',
+          Name: 'Port4',
+          Endpoint: [],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port5',
+          Name: 'Port5',
+          Endpoint: [],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port6',
+          Name: 'Port6',
+          Endpoint: ['test'],
+          Incoming: false,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port7',
+          Name: 'Port7',
+          Endpoint: [],
+          Incoming: false,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port8',
+          Name: 'Port8',
+          Endpoint: ['test'],
+          Incoming: false,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port9',
+          Name: 'Port9',
+          Endpoint: [],
+          Incoming: false,
+          Type: ''
+        }
+      ],
+      Tags: new Map(),
+      Type: "Type-1",
     },
     {
       ID: "Device-2",
-      Type: "Type-2",
+      Desc: "description of device 2",
       Address: "Device_2.byu.edu",
-      Tags: new Map().set("description", "this is device 2")
+      Driver: "driver 2",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "Type-2",
     },
     {
       ID: "Device-3",
-      Type: "Type-3",
+      Desc: "description of device 3",
       Address: "Device_3.byu.edu",
-      Tags: new Map().set("description", "this is device 3")
+      Driver: "driver 3",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "Type-3",
     },
     {
       ID: "Device-4",
-      Type: "Type-4",
+      Desc: "description of device 4",
       Address: "Device_4.byu.edu",
-      Tags: new Map().set("description", "this is device 4")
+      Driver: "driver 4",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "Type-4",
     },
     {
       ID: "Device-5",
-      Type: "Type-5",
+      Desc: "description of device 5",
       Address: "Device_5.byu.edu",
-      Tags: new Map().set("description", "this is device 5")
-    },
+      Driver: "driver 5",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "Type-5",
+    }
   ];
 
   constructor() { }

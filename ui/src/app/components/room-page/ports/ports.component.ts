@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Device, ApiService } from 'src/app/services/api.service';
+import { Device, ApiService, Port } from 'src/app/services/api.service';
 import { MatStepper } from '@angular/material/stepper';
-import { Port } from './port-list/port-list.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PortDialogComponent } from './port-dialog/port-dialog.component';
 
@@ -55,8 +54,9 @@ export class PortsComponent implements OnInit {
       }
     });
 
-    ref.afterClosed().subscribe(data => {
-      if (data != null) {
+    ref.afterClosed().subscribe(chosenDev => {
+      if (chosenDev != null) {
+        p.Endpoint = [chosenDev];
       }
     });
   }

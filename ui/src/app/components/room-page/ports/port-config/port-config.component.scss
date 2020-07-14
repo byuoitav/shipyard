@@ -1,0 +1,30 @@
+mat-form-field {
+    width: 100%;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 30vw;
+}
+
+.text-row {
+    margin-left: 1vw;
+    margin-right: 1vw;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.actions-container {
+    display: flex;
+}
+
+.spacer-left {
+    flex: 1 1 auto;
+}
+
+button {
+    margin-left: 1vw;
+}

@@ -19,6 +19,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
 import { BuildingListComponent } from './components/building-list/building-list.component';
@@ -32,6 +33,7 @@ import { PortsComponent } from './components/room-page/ports/ports.component';
 import { PortListComponent } from './components/room-page/ports/port-list/port-list.component';
 import { PortDialogComponent } from './components/room-page/ports/port-dialog/port-dialog.component';
 import { ConfirmPortDialog } from './components/room-page/ports/port-dialog/confirm-dialog';
+import { PortConfigComponent } from './components/room-page/ports/port-config/port-config.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { ConfirmPortDialog } from './components/room-page/ports/port-dialog/conf
     PortsComponent,
     PortListComponent,
     PortDialogComponent,
-    ConfirmPortDialog
+    ConfirmPortDialog,
+    PortConfigComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ import { ConfirmPortDialog } from './components/room-page/ports/port-dialog/conf
     MatExpansionModule,
     MatMenuModule,
     MatStepperModule,
-    TextFieldModule
+    TextFieldModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

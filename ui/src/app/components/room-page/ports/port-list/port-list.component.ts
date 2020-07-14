@@ -1,11 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Device } from 'src/app/services/api.service';
-
-export class Port {
-  ID: String;
-  Device: String;
-  Incoming: boolean;
-}
+import { Device, Port } from 'src/app/services/api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PortConfigComponent } from '../port-config/port-config.component';
 
 @Component({
   selector: 'app-port-list',
@@ -20,7 +16,7 @@ export class PortListComponent implements OnInit {
 
   portColumns: String[] = ['port', 'connectedDevice'];
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -31,14 +27,14 @@ export class PortListComponent implements OnInit {
   }
 
   selectPort(p: Port) {
-    if (p.Device == "") {
+    if (p.Endpoint.length == 0) {
       this.selected.emit(p);
     }
   }
 
   filterPorts(incoming: boolean): Port[] {
     var output = [];
-    this.ports.forEach(p => {
+    this.device.Ports.forEach(p => {
       if (p.Incoming == incoming) {
         output.push(p);
       }
@@ -46,52 +42,7 @@ export class PortListComponent implements OnInit {
     return output;
   }
 
-  ports: Port[] = [
-    {
-      ID: '1',
-      Device: '',
-      Incoming: true
-    },
-    {
-      ID: '2',
-      Device: '',
-      Incoming: true
-    },
-    {
-      ID: '3',
-      Device: '',
-      Incoming: true
-    },
-    {
-      ID: '4',
-      Device: 'test',
-      Incoming: true
-    },
-    {
-      ID: '5',
-      Device: 'test',
-      Incoming: true
-    },
-    {
-      ID: '6',
-      Device: 'test',
-      Incoming: false
-    },
-    {
-      ID: '7',
-      Device: '',
-      Incoming: false
-    },
-    {
-      ID: '8',
-      Device: 'test',
-      Incoming: false
-    },
-    {
-      ID: '9',
-      Device: '',
-      Incoming: false
-    }
-  ];
-
+  configurePort(p: Port) {
+    this.dialog.open(PortConfigComponent, {data: p});
+  }
 }
