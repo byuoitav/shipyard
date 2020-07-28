@@ -1,0 +1,22 @@
+<div class="content-wrapper">
+    <mat-card class="section-wrapper">
+        <app-devices [roomID]="roomID"></app-devices>
+    </mat-card>
+    <mat-card class="section-wrapper">
+        <mat-card-header>
+            <mat-card-title>Control Groups</mat-card-title>
+            <button mat-raised-button color="primary" (click)="addGroup()">
+                <mat-icon>add</mat-icon>
+                Add Group
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-expansion-panel class="control-group" *ngFor="let group of controlGroups">
+                <mat-expansion-panel-header>Test</mat-expansion-panel-header>
+                <section>
+                    This do be a test matey.
+                </section>
+            </mat-expansion-panel>
+        </mat-card-content>
+    </mat-card>
+</div>

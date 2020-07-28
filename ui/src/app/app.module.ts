@@ -20,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
 import { BuildingListComponent } from './components/building-list/building-list.component';
@@ -34,6 +35,8 @@ import { PortListComponent } from './components/room-page/ports/port-list/port-l
 import { PortDialogComponent } from './components/room-page/ports/port-dialog/port-dialog.component';
 import { ConfirmPortDialog } from './components/room-page/ports/port-dialog/confirm-dialog';
 import { PortConfigComponent } from './components/room-page/ports/port-config/port-config.component';
+import { UiConfigComponent } from './components/room-page/ui-config/ui-config.component';
+import { UIConfigDialogComponent } from './components/room-page/ui-config/ui-config-dialog/ui-config-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { PortConfigComponent } from './components/room-page/ports/port-config/po
     PortListComponent,
     PortDialogComponent,
     ConfirmPortDialog,
-    PortConfigComponent
+    PortConfigComponent,
+    UiConfigComponent,
+    UIConfigDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +75,8 @@ import { PortConfigComponent } from './components/room-page/ports/port-config/po
     MatMenuModule,
     MatStepperModule,
     TextFieldModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

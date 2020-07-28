@@ -64,7 +64,7 @@
     </mat-tab>
     <mat-tab label="UI Config">
         <ng-template matTabContent>
-            <p>UI Config tab for room: {{ roomID }}</p>
+            <app-ui-config [roomID]="roomID"></app-ui-config>
         </ng-template>
     </mat-tab>
 </mat-tab-group>

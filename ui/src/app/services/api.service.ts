@@ -76,6 +76,22 @@ export class Port {
   Type: String;
 }
 
+export class UIControlGroup {
+  Displays: Map<String, UIDisplay>;
+  Inputs: String[];
+  Microphones: Map<String, String[]>;
+  MasterVolume: MasterVolume;
+}
+
+export class MasterVolume {
+  Device: String;
+  Block: String;
+}
+
+export class UIDisplay {
+  DefaultInput: String;
+}
+
 export class DeviceTypeNode {
   Label: String;
   Icon: String;
@@ -300,6 +316,16 @@ export class ApiService {
       Ports: [],
       Tags: new Map(),
       Type: "Type-5",
+    },
+    {
+      ID: "TEST-0000-CP1",
+      Desc: "description of TEST-0000-CP1",
+      Address: "TEST-0000-CP1.byu.edu",
+      Driver: "driver TEST-0000-CP1",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "???",
     }
   ];
 
@@ -419,5 +445,40 @@ export class ApiService {
         SubNodes: null
       }
     ]
+  }
+
+  getControlGroups(): UIControlGroup[] {
+    return [
+      {
+        Displays: null,
+        Inputs: [],
+        Microphones: null,
+        MasterVolume: null
+      },
+      {
+        Displays: null,
+        Inputs: [],
+        Microphones: null,
+        MasterVolume: null
+      },
+      {
+        Displays: null,
+        Inputs: [],
+        Microphones: null,
+        MasterVolume: null
+      },
+      {
+        Displays: null,
+        Inputs: [],
+        Microphones: null,
+        MasterVolume: null
+      },
+      {
+        Displays: null,
+        Inputs: [],
+        Microphones: null,
+        MasterVolume: null
+      }
+    ];
   }
 }

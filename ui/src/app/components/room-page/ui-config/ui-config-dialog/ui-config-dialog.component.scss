@@ -1,0 +1,36 @@
+mat-tab-group {
+    margin :1vw;
+}
+
+.button-container {
+    display: flex;
+    margin-top: 2vh;
+}
+
+button {
+    margin-right: 1vw;
+}
+
+table {
+    width: 95%;
+    margin: 2.5%;
+}
+
+.device-row:hover {
+    background: whitesmoke;
+}
+
+.selected-row {
+    background: whitesmoke;
+    border: 0px, 0px, 0px, 20px, solid, blue !important;
+}
+
+table, th, td {
+    padding: 2px;
+    border-collapse: collapse;
+}
+
+.tab-content {
+    height: 50vh;
+    overflow-y: auto;
+}
