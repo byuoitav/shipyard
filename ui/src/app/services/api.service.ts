@@ -76,6 +76,12 @@ export class Port {
   Type: String;
 }
 
+export class RoomConfig {
+  ID: String;
+  ControlPanels: Map<String, String>;
+  ControlGroups: Map<String, UIControlGroup>;
+}
+
 export class UIControlGroup {
   Displays: Map<String, UIDisplay>;
   Inputs: String[];
@@ -288,34 +294,34 @@ export class ApiService {
       Type: "Type-2",
     },
     {
-      ID: "Device-3",
-      Desc: "description of device 3",
-      Address: "Device_3.byu.edu",
-      Driver: "driver 3",
+      ID: "TEST-0000-MIC1",
+      Desc: "description of TEST-0000-MIC1",
+      Address: "TEST-0000-MIC1.byu.edu",
+      Driver: "driver TEST-0000-MIC1",
       DynamicPorts: false,
       Ports: [],
       Tags: new Map(),
-      Type: "Type-3",
+      Type: "???",
     },
     {
-      ID: "Device-4",
-      Desc: "description of device 4",
-      Address: "Device_4.byu.edu",
-      Driver: "driver 4",
+      ID: "TEST-0000-MIC2",
+      Desc: "description of TEST-0000-MIC2",
+      Address: "TEST-0000-MIC2.byu.edu",
+      Driver: "driver TEST-0000-MIC2",
       DynamicPorts: false,
       Ports: [],
       Tags: new Map(),
-      Type: "Type-4",
+      Type: "???",
     },
     {
-      ID: "Device-5",
-      Desc: "description of device 5",
-      Address: "Device_5.byu.edu",
-      Driver: "driver 5",
+      ID: "TEST-0000-MIC3",
+      Desc: "description of TEST-0000-MIC3",
+      Address: "TEST-0000-MIC3.byu.edu",
+      Driver: "driver TEST-0000-MIC3",
       DynamicPorts: false,
       Ports: [],
       Tags: new Map(),
-      Type: "Type-5",
+      Type: "???",
     },
     {
       ID: "TEST-0000-CP1",
@@ -447,38 +453,42 @@ export class ApiService {
     ]
   }
 
-  getControlGroups(): UIControlGroup[] {
-    return [
-      {
-        Displays: null,
-        Inputs: [],
-        Microphones: null,
-        MasterVolume: null
-      },
-      {
-        Displays: null,
-        Inputs: [],
-        Microphones: null,
-        MasterVolume: null
-      },
-      {
-        Displays: null,
-        Inputs: [],
-        Microphones: null,
-        MasterVolume: null
-      },
-      {
-        Displays: null,
-        Inputs: [],
-        Microphones: null,
-        MasterVolume: null
-      },
-      {
-        Displays: null,
-        Inputs: [],
-        Microphones: null,
-        MasterVolume: null
-      }
-    ];
+  getRoomConfig(): RoomConfig {
+    return {
+      ID: "Test",
+      ControlPanels: null,
+      ControlGroups: new Map([
+        ["Group-1",{
+          Displays: new Map(),
+          Inputs: [],
+          Microphones: null,
+          MasterVolume: null
+        }],
+        ["Group-2",{
+          Displays: new Map(),
+          Inputs: [],
+          Microphones: null,
+          MasterVolume: null
+        }],
+        ["Group-3",{
+          Displays: new Map(),
+          Inputs: [],
+          Microphones: null,
+          MasterVolume: null
+        }],
+        ["Group-4",{
+          Displays: new Map(),
+          Inputs: [],
+          Microphones: null,
+          MasterVolume: null
+        }],
+        ["Group-5",{
+          Displays: new Map(),
+          Inputs: [],
+          Microphones: null,
+          MasterVolume: null
+        }]
+      ])
+    }
   }
 }

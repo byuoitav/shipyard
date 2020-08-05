@@ -21,6 +21,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
 import { BuildingListComponent } from './components/building-list/building-list.component';
@@ -37,6 +38,7 @@ import { ConfirmPortDialog } from './components/room-page/ports/port-dialog/conf
 import { PortConfigComponent } from './components/room-page/ports/port-config/port-config.component';
 import { UiConfigComponent } from './components/room-page/ui-config/ui-config.component';
 import { UIConfigDialogComponent } from './components/room-page/ui-config/ui-config-dialog/ui-config-dialog.component';
+import { ConfirmConfigComponent } from './components/room-page/ui-config/ui-config-dialog/confirm-config.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { UIConfigDialogComponent } from './components/room-page/ui-config/ui-con
     ConfirmPortDialog,
     PortConfigComponent,
     UiConfigComponent,
-    UIConfigDialogComponent
+    UIConfigDialogComponent,
+    ConfirmConfigComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { UIConfigDialogComponent } from './components/room-page/ui-config/ui-con
     MatStepperModule,
     TextFieldModule,
     MatChipsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Device, ApiService, UIControlGroup } from 'src/app/services/api.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Device, ApiService, UIControlGroup, UIDisplay } from 'src/app/services/api.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { ConfirmConfigComponent } from './confirm-config.component';
 
 @Component({
   selector: 'app-ui-config-dialog',
@@ -9,7 +10,8 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./ui-config-dialog.component.scss']
 })
 export class UIConfigDialogComponent implements OnInit {
-  config: UIControlGroup = new UIControlGroup;
+  config: UIControlGroup;
+  groupID: String;
 
   devices: Device[];
   deviceTableColumns: string[] = ["select", "id", "type"];
@@ -21,15 +23,73 @@ export class UIConfigDialogComponent implements OnInit {
   selected: Device[] = [];
 
   constructor(private refDialog: MatDialogRef<UIConfigDialogComponent>,
-    private api: ApiService) {
+    private api: ApiService,
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private dialog: MatDialog) {
       this.devices = this.api.getDevices("");
+      if (this.data == null) {
+        this.config = new UIControlGroup;
+        this.groupID = "";
+      } else {
+        this.config = data.ControlGroup;
+        this.groupID = data.ID;
+        this.initializeSelectors();
+      }
     }
 
   ngOnInit(): void {
   }
 
   cancel() {
-    this.refDialog.close();
+    this.refDialog.close(null);
+  }
+
+  saveControlGroup() {
+    this.config.Displays = new Map<String, UIDisplay>();
+    this.DisplaySelection.selected.forEach(display => {
+      this.config.Displays.set(display.ID, new UIDisplay());
+    });
+    
+    this.config.Inputs = [];
+    this.InputSelection.selected.forEach(input => {
+      this.config.Inputs.push(input.ID);
+    });
+
+    this.refDialog.close({
+      Config: this.config,
+      ID: this.groupID
+    });
+  }
+
+  confirmSave() {
+    let ref = this.dialog.open(ConfirmConfigComponent, {data: this.groupID});
+    ref.afterClosed().subscribe(data => {
+      if (data != null) {
+        this.groupID = data;
+        this.saveControlGroup();
+      }
+    });
+  }
+
+  initializeSelectors() {
+    this.filterDevicesByID([...this.config.Displays.keys()]).forEach(dev => {
+      this.DisplaySelection.select(dev);
+    });
+    this.filterDevicesByID(this.config.Inputs).forEach(dev => {
+      this.InputSelection.select(dev);
+    });
+  }
+
+  filterDevicesByID(ids: String[]): Device[] {
+    var filteredDevs = []
+    this.devices.forEach(dev => {
+      ids.forEach(id => {
+        if (id === dev.ID) {
+          filteredDevs.push(dev);
+        }
+      });
+    });
+    return filteredDevs;
   }
 
   filterControlPanels(): Device[] {

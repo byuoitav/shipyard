@@ -7,16 +7,30 @@
     width: 50%;
 }
 
-mat-card-header {
+.section-header {
     display: flex;
     justify-content: space-between;
 }
 
-mat-card-title {
-    padding-left: 10px;
-    font-size: 32pt;
+.section-title {
+    padding-left: 8px;
 }
 
 .control-group {
     margin-top: 10px;
+}
+
+.cg-panel {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+.cg-card {
+    width: 28%;
+    margin-bottom: 1vh;
+}
+
+.cg-button {
+    margin-right: 10px;
 }
