@@ -7,7 +7,7 @@ mat-tab-group {
     margin-top: 2vh;
 }
 
-button {
+.action-button {
     margin-right: 1vw;
 }
 
@@ -33,4 +33,25 @@ table, th, td {
 .tab-content {
     height: 50vh;
     overflow-y: auto;
+}
+
+.mic-group-header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.mic-group-header-title {
+    font-weight: bold;
+}
+
+.mic-button {
+    padding: 15px;
+}
+
+.mic-group-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
 }

@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { Device, ApiService, UIControlGroup, UIDisplay } from 'src/app/services/api.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ConfirmConfigComponent } from './confirm-config.component';
+import { MicrophoneGroupComponent } from './microphone-group/microphone-group.component';
 
 @Component({
   selector: 'app-ui-config-dialog',
@@ -80,6 +81,10 @@ export class UIConfigDialogComponent implements OnInit {
     });
   }
 
+  addMicGroup() {
+    this.dialog.open(MicrophoneGroupComponent, {width: '50vw'});
+  }
+
   filterDevicesByID(ids: String[]): Device[] {
     var filteredDevs = []
     this.devices.forEach(dev => {
@@ -92,8 +97,8 @@ export class UIConfigDialogComponent implements OnInit {
     return filteredDevs;
   }
 
-  filterControlPanels(): Device[] {
-    let re = new RegExp('-CP.');
+  filterDevicesByRegularExpression(pattern: string): Device[] {
+    let re = new RegExp(pattern);
     var filteredDevs = []
     this.devices.forEach(dev => {
       if (re.exec(dev.ID.toString()) != null) {

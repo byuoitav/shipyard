@@ -1,7 +1,7 @@
 <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Control Panels">
         <div class="tab-content">
-            <table mat-table [dataSource]="filterControlPanels()" class="mat-elevation-z4">
+            <table mat-table [dataSource]="filterDevicesByRegularExpression('-CP.*')" class="mat-elevation-z4">
 
                 <ng-container matColumnDef="select">
                     <th mat-header-cell *matHeaderCellDef></th>
@@ -31,7 +31,7 @@
 
     <mat-tab label="Displays">
         <div class="tab-content">
-            <table mat-table [dataSource]="devices" class="mat-elevation-z4">
+            <table mat-table [dataSource]="filterDevicesByRegularExpression('-D.*')" class="mat-elevation-z4">
 
                 <ng-container matColumnDef="select">
                     <th mat-header-cell *matHeaderCellDef></th>
@@ -91,6 +91,18 @@
 
     <mat-tab label="Microphones">
         <div class="tab-content">
+            <div class="mic-group-header">
+                <div class="mic-group-header-title">Microphone Groups</div>
+                <button mat-raised-button color="primary" (click)="addMicGroup()">
+                    <mat-icon>add</mat-icon>
+                    Add Group
+                </button>
+            </div>
+            <div class="mic-group-wrapper">
+                <mat-card *ngFor="let micGroup of config.Microphones | keyvalue">
+
+                </mat-card>
+            </div>
         </div>
     </mat-tab>
 
@@ -130,7 +142,7 @@
     </mat-tab>
 </mat-tab-group>
 <div class="button-container">
-    <button mat-stroked-button color="warn" (click)="cancel()">Cancel</button>
-    <button mat-stroked-button color="primary" (click)="confirmSave()">Done</button>
+    <button mat-stroked-button color="warn" class="action-button" (click)="cancel()">Cancel</button>
+    <button mat-stroked-button color="primary" class="action-button" (click)="confirmSave()">Done</button>
     <div class="spacer-right"></div>
 </div>

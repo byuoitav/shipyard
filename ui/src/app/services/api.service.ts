@@ -332,6 +332,56 @@ export class ApiService {
       Ports: [],
       Tags: new Map(),
       Type: "???",
+    },
+    {
+      ID: "TEST-0000-CP2",
+      Desc: "description of TEST-0000-CP2",
+      Address: "TEST-0000-CP2.byu.edu",
+      Driver: "driver TEST-0000-CP2",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "???",
+    },
+    {
+      ID: "TEST-0000-CP3",
+      Desc: "description of TEST-0000-CP3",
+      Address: "TEST-0000-CP3.byu.edu",
+      Driver: "driver TEST-0000-CP3",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "???",
+    },
+    {
+      ID: "TEST-0000-D1",
+      Desc: "description of TEST-0000-D1",
+      Address: "TEST-0000-D1.byu.edu",
+      Driver: "driver TEST-0000-D1",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "???",
+    },
+    {
+      ID: "TEST-0000-D2",
+      Desc: "description of TEST-0000-D2",
+      Address: "TEST-0000-D2.byu.edu",
+      Driver: "driver TEST-0000-D2",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "???",
+    },
+    {
+      ID: "TEST-0000-D3",
+      Desc: "description of TEST-0000-D3",
+      Address: "TEST-0000-D3.byu.edu",
+      Driver: "driver TEST-0000-D3",
+      DynamicPorts: false,
+      Ports: [],
+      Tags: new Map(),
+      Type: "???",
     }
   ];
 
@@ -471,18 +521,6 @@ export class ApiService {
           MasterVolume: null
         }],
         ["Group-3",{
-          Displays: new Map(),
-          Inputs: [],
-          Microphones: null,
-          MasterVolume: null
-        }],
-        ["Group-4",{
-          Displays: new Map(),
-          Inputs: [],
-          Microphones: null,
-          MasterVolume: null
-        }],
-        ["Group-5",{
           Displays: new Map(),
           Inputs: [],
           Microphones: null,

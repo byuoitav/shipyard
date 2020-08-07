@@ -39,6 +39,7 @@ import { PortConfigComponent } from './components/room-page/ports/port-config/po
 import { UiConfigComponent } from './components/room-page/ui-config/ui-config.component';
 import { UIConfigDialogComponent } from './components/room-page/ui-config/ui-config-dialog/ui-config-dialog.component';
 import { ConfirmConfigComponent } from './components/room-page/ui-config/ui-config-dialog/confirm-config.component';
+import { MicrophoneGroupComponent } from './components/room-page/ui-config/ui-config-dialog/microphone-group/microphone-group.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ConfirmConfigComponent } from './components/room-page/ui-config/ui-conf
     PortConfigComponent,
     UiConfigComponent,
     UIConfigDialogComponent,
-    ConfirmConfigComponent
+    ConfirmConfigComponent,
+    MicrophoneGroupComponent
   ],
   imports: [
     BrowserModule,
