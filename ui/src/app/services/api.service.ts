@@ -1,22 +1,5 @@
 import { Injectable } from '@angular/core';
 
-export class Building {
-  ID: String;
-  Tags: Map<String, String>;
-
-  constructor(bldg: Building) {
-    this.Tags = new Map();
-    if (bldg != null) {
-      this.ID = bldg.ID;
-      bldg.Tags.forEach((value, key) => {
-        this.Tags.set(key, value);
-      });
-    } else {
-      this.ID = "";
-    }
-  }
-}
-
 export class Room {
   ID: String;
   Desig: String;
@@ -110,99 +93,92 @@ export class DeviceTypeNode {
 })
 export class ApiService {
 
-  testBuildings: Building[] = [
-    {
-      ID: "ITB",
-      Tags: new Map()
-    },
-    {
-      ID: "HCEB",
-      Tags: new Map()
-    },
-    {
-      ID: "ASB",
-      Tags: new Map()
-    },
-    {
-      ID: "BYUB",
-      Tags: new Map()
-    },
-    {
-      ID: "EB",
-      Tags: new Map()
-    }
-  ];
-
   testRooms: Room[] = [
     {
-      ID: "Room-1",
-      Desig: "designation-1",
-      Desc: "this is Room-1",
-      Notes: "notes on room 1",
+      ID: "ASB-TEST",
+      Desig: "designation ASB-TEST",
+      Desc: "this is ASB-TEST",
+      Notes: "notes on ASB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
-      ID: "Room-2",
-      Desig: "designation-2",
-      Desc: "this is Room-2",
-      Notes: "notes on room 2",
+      ID: "BYUB-TEST",
+      Desig: "designation BYUB-TEST",
+      Desc: "this is BYUB-TEST",
+      Notes: "notes on BYUB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
-      ID: "Room-3",
-      Desig: "designation-3",
-      Desc: "this is Room-3",
-      Notes: "notes on room 3",
+      ID: "EB-TEST",
+      Desig: "designation EB-TEST",
+      Desc: "this is EB-TEST",
+      Notes: "notes on EB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
-      ID: "Room-4",
-      Desig: "designation-4",
-      Desc: "this is Room-4",
-      Notes: "notes on room 4",
+      ID: "HBLL-TEST",
+      Desig: "designation HBLL-TEST",
+      Desc: "this is HBLL-TEST",
+      Notes: "notes on HBLL-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
-      ID: "Room-5",
-      Desig: "designation-5",
-      Desc: "this is Room-5",
-      Notes: "notes on room 5",
+      ID: "ITB-TEST",
+      Desig: "designation ITB-TEST",
+      Desc: "this is ITB-TEST",
+      Notes: "notes on ITB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
-      ID: "Room-6",
-      Desig: "designation-6",
-      Desc: "this is Room-6",
-      Notes: "notes on room 6",
+      ID: "ITB-TEST2",
+      Desig: "designation ITB-TEST2",
+      Desc: "this is ITB-TEST2",
+      Notes: "notes on ITB-TEST2",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
-      ID: "Room-7",
-      Desig: "designation-7",
-      Desc: "this is Room-7",
-      Notes: "notes on room 7",
+      ID: "ITB-TEST3",
+      Desig: "designation ITB-TEST3",
+      Desc: "this is ITB-TEST3",
+      Notes: "notes on ITB-TEST3",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
-      ID: "Room-8",
-      Desig: "designation-8",
-      Desc: "this is Room-8",
-      Notes: "notes on room 8",
+      ID: "JFSB-TEST",
+      Desig: "designation JFSB-TEST",
+      Desc: "this is JFSB-TEST",
+      Notes: "notes on JFSB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
-      ID: "Room-9",
-      Desig: "designation-9",
-      Desc: "this is Room-9",
-      Notes: "notes on room 9",
+      ID: "KMBL-TEST",
+      Desig: "designation KMBL-TEST",
+      Desc: "this is KMBL-TEST",
+      Notes: "notes on KMBL-TEST",
+      ProxyBaseURL: "huh...",
+      Tags: new Map()
+    },
+    {
+      ID: "MARB-TEST",
+      Desig: "designation MARB-TEST",
+      Desc: "this is MARB-TEST",
+      Notes: "notes on MARB-TEST",
+      ProxyBaseURL: "huh...",
+      Tags: new Map()
+    },
+    {
+      ID: "TMCB-TEST",
+      Desig: "designation TMCB-TEST",
+      Desc: "this is TMCB-TEST",
+      Notes: "notes on TMCB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     }
@@ -387,22 +363,15 @@ export class ApiService {
 
   constructor() { }
 
-  getBuildings(): Building[] {
-    return this.testBuildings;
-  }
-
-  setBuilding(bldg: Building) {
-    for (let i = 0; i < this.testBuildings.length; i++) {
-      if (this.testBuildings[i].ID == bldg.ID) {
-        this.testBuildings[i] = bldg;
-        return;
-      }
-    }
-    this.testBuildings.push(bldg);
-  }
-
   getRooms(bldgID: String): Room[] {
-    return this.testRooms;
+    let rooms = [];
+    let re = new RegExp(bldgID.toString());
+    this.testRooms.forEach(rm => {
+      if (re.exec(rm.ID.toString()) != null) {
+        rooms.push(rm);
+      }
+    });
+    return rooms;
   }
 
   getRoom(roomID: String): Room {
