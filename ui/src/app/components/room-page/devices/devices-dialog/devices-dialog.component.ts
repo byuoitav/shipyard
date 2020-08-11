@@ -8,18 +8,24 @@ import { Device } from 'src/app/services/api.service';
   styleUrls: ['./devices-dialog.component.scss']
 })
 export class DevicesDialogComponent implements OnInit {
-  device = new Device(null);
-  newDevice = true;
+  ID: String;
+  Desc: String;
+  Address: String;
+  Driver: String;
+  Tags: Map<String, String>;
   tagKey: String;
   tagValue: String;
 
   constructor(private dialogRef: MatDialogRef<DevicesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Device) {
       if (data != null) {
-        this.device = new Device(data);
-        if (this.device.ID != "") {
-          this.newDevice = false;
-        }
+        this.ID = data.ID;
+        this.Desc = data.Desc;
+        this.Address = data.Address;
+        this.Tags = new Map();
+        data.Tags.forEach((value, key) => {
+          this.Tags.set(key, value);
+        });
       }
     }
 
@@ -27,13 +33,13 @@ export class DevicesDialogComponent implements OnInit {
   }
 
   addTag() {
-    this.device.Tags.set(this.tagKey, this.tagValue);
+    this.Tags.set(this.tagKey, this.tagValue);
     this.tagKey = "";
     this.tagValue = "";
   }
 
   removeTag(key: String) {
-    this.device.Tags.delete(key);
+    this.Tags.delete(key);
   }
 
   onCancel() {
@@ -41,10 +47,14 @@ export class DevicesDialogComponent implements OnInit {
   }
 
   onDelete() {
-    this.dialogRef.close(this.device.ID);
+    this.dialogRef.close(false);
   }
 
   onSave() {
-    this.dialogRef.close(this.device);
+    this.data.ID = this.ID;
+    this.data.Desc = this.Desc;
+    this.data.Address = this.Address;
+    this.data.Tags = this.Tags;
+    this.dialogRef.close(true);
   }
 }

@@ -4,13 +4,13 @@
         <div class="text-row">
             <mat-form-field>
                 <mat-label>ID</mat-label>
-                <input matInput type="text" [(ngModel)]="device.ID">
+                <input matInput type="text" [(ngModel)]="ID">
             </mat-form-field>
         </div>
         <div class="text-row">
             <mat-form-field>
                 <mat-label>Address</mat-label>
-                <input matInput type="text" [(ngModel)]="device.Address">
+                <input matInput type="text" [(ngModel)]="Address">
             </mat-form-field>
         </div>
         <p>Tags</p>
@@ -32,7 +32,7 @@
             </button>
         </div>
         
-        <span *ngFor="let tag of device.Tags | keyvalue">
+        <span *ngFor="let tag of Tags | keyvalue">
             <div class="text-row">
                 <div class="tag-container">
                     <p class="tag-label">{{ tag.key }}</p>
@@ -50,7 +50,7 @@
     <div class="actions-container">
         <span class="spacer-left"></span>
         <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
-        <button mat-stroked-button *ngIf="!newDevice" color="warn" (click)="onDelete()">Delete</button>
+        <button mat-stroked-button color="warn" (click)="onDelete()">Delete</button>
         <button mat-stroked-button color="primary" (click)="onSave()">Save</button>
     </div>
 </mat-dialog-content>

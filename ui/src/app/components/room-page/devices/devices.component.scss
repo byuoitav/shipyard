@@ -19,8 +19,8 @@ tr.device-row:not(.expanded-row):hover {
     background: whitesmoke;
 }
 
-tr.device-row:not(.expanded-row):active {
-    background: #efefef;
+.highlighted-row {
+    background: whitesmoke;
 }
 
 .device-row td {

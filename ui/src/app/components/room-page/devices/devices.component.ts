@@ -19,6 +19,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 })
 export class DevicesComponent implements OnInit {
   @Input() roomID: String;
+  @Input() expandable: boolean;
   @Output() currentDev: EventEmitter<any> = new EventEmitter();
 
   devices: Device[];
@@ -27,6 +28,7 @@ export class DevicesComponent implements OnInit {
   deviceTableAttributes: String[] = ['id', 'type', 'address', 'description'];
 
   expandedDevice: Device | null;
+  highlightedDevice: Device | null;
 
   menuNodes: DeviceTypeNode[];
 
@@ -44,12 +46,13 @@ export class DevicesComponent implements OnInit {
     const dialog = this.dialogRef.open(DevicesDialogComponent, {data: dev});
 
     dialog.afterClosed().subscribe(result => {
-      if (result instanceof Device) {
-        this.api.setDevice(result);
-      } else if (typeof result == "string") {
-        this.api.removeDevice(result);
+      if (result != null) {
+        if (result) {
+          this.api.addDevice(dev);
+        } else {
+          this.api.removeDevice(dev.ID);
+        }
       }
-      
       this.updateTable();
     });
   }
@@ -57,6 +60,9 @@ export class DevicesComponent implements OnInit {
   updateTable() {
     this.devices = this.api.getDevices(this.roomID);
     this.devicesSource.data = this.devices;
+    if(this.expandable === false) {
+      this.highlightedDevice = this.devices[0];
+    }
   }
 
   createDevice(devType: String) {
@@ -67,7 +73,11 @@ export class DevicesComponent implements OnInit {
   }
 
   test(device: Device) {
-    this.expandedDevice = this.expandedDevice === device ? null : device;
+    if (this.expandable) {
+      this.expandedDevice = this.expandedDevice === device ? null : device;
+    } else {
+      this.highlightedDevice = this.highlightedDevice === device ? null : device;
+    }
     this.currentDev.emit(device);
   }
 

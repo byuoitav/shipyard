@@ -430,13 +430,14 @@ export class ApiService {
     return this.testDevices;
   }
 
-  setDevice(device: Device) {
+  addDevice(device: Device) {
+    //Check if device already exists
     for (var i = 0; i < this.testDevices.length; i++) {
       if (this.testDevices[i].ID == device.ID) {
-        this.testDevices[i] = device;
         return;
       }
     }
+    //If not, add it
     this.testDevices.push(device);
   }
 

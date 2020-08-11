@@ -51,6 +51,7 @@
         <tr mat-row *matRowDef="let device; columns: deviceTableAttributes"
             class="device-row"
             [class.expanded-row]="expandedDevice === device"
+            [class.highlighted-row]="highlightedDevice === device"
             (click)="test(device)"></tr>
         <tr mat-row *matRowDef="let row; columns: ['expanded']" class="detail-row"></tr>
     </table>
