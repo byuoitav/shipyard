@@ -1,6 +1,7 @@
 NAME := shipyard
 OWNER := byuoitav
 PKG := github.com/${OWNER}/${NAME}
+BUILD_PKG := ${PKG}/cmd/server
 DOCKER_URL := docker.pkg.github.com
 
 # version:
@@ -43,7 +44,7 @@ build: deps
 
 	@echo
 	@echo Building backend for linux-amd64...
-	@env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ./dist/${NAME}-linux-amd64 ${PKG}
+	@env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ./dist/${NAME}-linux-amd64 ${BUILD_PKG}
 
 	@echo
 	@echo Building UI...
