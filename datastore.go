@@ -24,5 +24,7 @@ type Datastore interface {
 	GetUIConfig(roomID string) (UIConfig, error)
 	SaveUIConfig(config UIConfig) error
 
+	SaveControlDoc(doc RoomControlDoc) error
+
 	GetConfig(configID string) (interface{}, error)
 }
