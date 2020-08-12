@@ -14,13 +14,17 @@ import (
 
 func main() {
 	var (
-		port        int
-		opaURL      string
-		opaToken    string
-		disableAuth bool
-		dbAddress   string
-		dbUsername  string
-		dbPassword  string
+		port             int
+		opaURL           string
+		opaToken         string
+		disableAuth      bool
+		dbAddress        string
+		dbUsername       string
+		dbPassword       string
+		wso2CallbackURL  string
+		wso2ClientID     string
+		wso2ClientSecret string
+		wso2GatewayURL   string
 	)
 
 	// Parameters
@@ -31,6 +35,10 @@ func main() {
 	pflag.StringVar(&dbAddress, "db-address", "", "The address to the couch DB")
 	pflag.StringVar(&dbUsername, "db-username", "", "The username to the couch DB")
 	pflag.StringVar(&dbPassword, "db-password", "", "The password to the couch DB")
+	pflag.StringVar(&wso2CallbackURL, "callback-url", "", "The WSO2 Callback URL for the app")
+	pflag.StringVar(&wso2ClientID, "client-id", "", "The WSO2 client ID")
+	pflag.StringVar(&wso2ClientSecret, "client-secret", "", "The WSO2 client secret")
+	pflag.StringVar(&wso2GatewayURL, "gateway-url", "", "The WSO2 gateway url")
 
 	pflag.Parse()
 
@@ -77,7 +85,12 @@ func main() {
 
 	// HTTP Transport
 	address := fmt.Sprintf(":%d", port)
-	http := echo.New(ds, &control.Service{}, echo.WithAuth(opaURL, opaToken), echo.WithLogger(logger))
+	http := echo.New(
+		ds,
+		&control.Service{},
+		echo.WithAuth(opaURL, opaToken, wso2CallbackURL, wso2ClientID, wso2ClientSecret, wso2GatewayURL),
+		echo.WithLogger(logger),
+	)
 	err = http.Serve(address)
 	if err != nil {
 		log.Fatalf("Failed to start http transport: %s", err)

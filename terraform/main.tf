@@ -41,6 +41,18 @@ data "aws_ssm_parameter" "db_pass" {
   name = "/env/couch-password"
 }
 
+data "aws_ssm_parameter" "client_id" {
+  name = "/env/shipyard/client-id"
+}
+
+data "aws_ssm_parameter" "client_secret" {
+  name = "/env/shipyard/client-secret"
+}
+
+data "aws_ssm_parameter" "gateway_url" {
+  name = "/env/gateway-url"
+}
+
 module "shipyard_prd" {
   source = "github.com/byuoitav/terraform//modules/kubernetes-deployment"
 
@@ -60,5 +72,9 @@ module "shipyard_prd" {
     "--db-address", data.aws_ssm_parameter.db_address.value,
     "--db-username", data.aws_ssm_parameter.db_user.value,
     "--db-password", data.aws_ssm_parameter.db_pass.value,
+    "--callback-url", "https://shipyard.av.byu.edu",
+    "--client-id", data.aws_ssm_parameter.client_id.value,
+    "--client-secret", data.aws_ssm_parameter.client_secret.value,
+    "--gateway-url", data.aws_ssm_parameter.gateway_url.value,
   ]
 }
