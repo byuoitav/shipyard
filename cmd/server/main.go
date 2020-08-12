@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/byuoitav/shipyard/control"
 	"github.com/byuoitav/shipyard/couch"
 	"github.com/byuoitav/shipyard/echo"
 	"github.com/spf13/pflag"
@@ -76,7 +77,7 @@ func main() {
 
 	// HTTP Transport
 	address := fmt.Sprintf(":%d", port)
-	http := echo.New(ds, echo.WithAuth(opaURL, opaToken), echo.WithLogger(logger))
+	http := echo.New(ds, control.Service{}, echo.WithAuth(opaURL, opaToken), echo.WithLogger(logger))
 	err = http.Serve(address)
 	if err != nil {
 		log.Fatalf("Failed to start http transport: %s", err)
