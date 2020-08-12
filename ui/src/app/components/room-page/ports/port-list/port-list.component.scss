@@ -1,0 +1,22 @@
+.port-panel {
+    margin: 1vw;
+    padding: 1vw;
+}
+
+.panel-header {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+table {
+    width: 100%;
+}
+
+.device-column-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+tr.port-row:hover {
+    background: whitesmoke;
+}

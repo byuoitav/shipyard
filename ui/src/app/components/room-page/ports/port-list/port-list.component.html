@@ -1,0 +1,56 @@
+<mat-card-title style="text-align: center;">{{ device.ID }}</mat-card-title>
+<mat-card-content class="content-container">
+    <mat-expansion-panel class="port-panel">
+        <mat-expansion-panel-header class="panel-header">Incoming Ports</mat-expansion-panel-header>
+        <section>
+            <table mat-table [dataSource]="filterPorts(true)">
+                <ng-container matColumnDef="port">
+                    <th mat-header-cell *matHeaderCellDef>Port</th>
+                    <td mat-cell *matCellDef="let port">{{ port.Name }}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="connectedDevice">
+                    <th mat-header-cell *matHeaderCellDef>Connected Device</th>
+                    <td mat-cell *matCellDef="let port">
+                        <div class="device-column-container">
+                            <p>{{ port.Endpoint[0] }}</p>
+                            <button mat-icon-button *ngIf="port.Endpoint.length != 0" (click)="configurePort(port)">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                        </div>
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="portColumns"></tr>
+                <tr mat-row *matRowDef="let port; columns: portColumns;" class="port-row" (click)="selectPort(port)"></tr>
+            </table>
+        </section>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="port-panel">
+        <mat-expansion-panel-header class="panel-header">Outgoing Ports</mat-expansion-panel-header>
+        <section>
+            <table mat-table [dataSource]="filterPorts(false)">
+                <ng-container matColumnDef="port">
+                    <th mat-header-cell *matHeaderCellDef>Port</th>
+                    <td mat-cell *matCellDef="let port">{{ port.Name }}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="connectedDevice">
+                    <th mat-header-cell *matHeaderCellDef>Connected Device</th>
+                    <td mat-cell *matCellDef="let port">
+                        <div class="device-column-container">
+                            <p>{{ port.Endpoint[0] }}</p>
+                            <button mat-icon-button *ngIf="port.Endpoint.length != 0" (click)="configurePort(port)">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                        </div>
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="portColumns"></tr>
+                <tr mat-row *matRowDef="let port; columns: portColumns;" class="port-row" (click)="selectPort(port)"></tr>
+            </table>  
+        </section>
+    </mat-expansion-panel>
+</mat-card-content>

@@ -1,0 +1,8 @@
+<div class="content-wrapper">
+    <mat-card>
+        <app-devices [roomID]="roomID" [expandable]="false" (currentDev)="setCurrentDevice($event)"></app-devices>
+    </mat-card>
+    <mat-card>
+        <app-port-list [device]="currentDevice" (selected)="test($event)"></app-port-list>
+    </mat-card>
+</div>

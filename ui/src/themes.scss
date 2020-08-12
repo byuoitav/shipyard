@@ -1,0 +1,22 @@
+@import "~@angular/material/theming";
+@include mat-core();
+// default (light) theme
+$default-primary: mat-palette($mat-blue, 900, 600, 900);
+$default-accent: mat-palette($mat-grey, 400, 300, 500);
+$default-warn: mat-palette($mat-red, 600, 300, 700);
+$default: mat-light-theme($default-primary, $default-accent, $default-warn);
+@include angular-material-theme($default);
+// theme for status (success/warning/error) colors
+$status-primary: mat-palette($mat-green);
+$status-accent: mat-palette($mat-yellow);
+$status-warn: mat-palette($mat-red);
+$status: mat-light-theme($status-primary, $status-accent, $status-warn);
+.status-theme {
+    @include angular-material-theme($status);
+}
+
+// dark theme :)
+$dark: mat-dark-theme($default-primary, $default-accent, $default-warn);
+.dark-theme {
+    @include angular-material-theme($dark);
+}

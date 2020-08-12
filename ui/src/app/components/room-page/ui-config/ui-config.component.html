@@ -1,0 +1,85 @@
+<div class="content-wrapper">
+    <mat-card class="section-wrapper">
+        <app-devices [roomID]="roomID"></app-devices>
+    </mat-card>
+    <mat-card class="section-wrapper">
+        <mat-card-header class="section-header">
+            <mat-card-title class="section-title">UI Layouts</mat-card-title>
+            <button mat-raised-button color="primary" (click)="addGroup(null, '')">
+                <mat-icon>add</mat-icon>
+                Add Layout
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-expansion-panel class="control-group" *ngFor="let group of roomConf.ControlGroups | keyvalue">
+                <mat-expansion-panel-header>{{ group.key }}</mat-expansion-panel-header>
+                <section>
+                    <div class="cg-panel">
+                        <mat-card class="cg-card">
+                            <mat-card-header>
+                                <mat-card-title>Displays</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <mat-list>
+                                    <mat-list-item *ngFor="let display of group.value.Displays | keyvalue">{{ display.key }}</mat-list-item>
+                                </mat-list>
+                            </mat-card-content>
+                        </mat-card>
+                        <mat-card class="cg-card">
+                            <mat-card-header>
+                                <mat-card-title>Inputs</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <mat-list>
+                                    <mat-list-item *ngFor="let input of group.value.Inputs">{{ input }}</mat-list-item>
+                                </mat-list>
+                            </mat-card-content>
+                        </mat-card>
+                        <mat-card class="cg-card">
+                            <mat-card-header>
+                                <mat-card-title>Microphones</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <!-- <mat-list>
+                                    <mat-list-item *ngFor="let panel of getControlPanels(group.key)">{{ panel }}</mat-list-item>
+                                </mat-list> -->
+                            </mat-card-content>
+                        </mat-card>
+                        <mat-card class="cg-card">
+                            <mat-card-header>
+                                <mat-card-title>Master Volume</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <mat-list>
+                                    <mat-list-item>This-is-a-device</mat-list-item>
+                                </mat-list>
+                            </mat-card-content>
+                        </mat-card>
+                        <mat-card class="cg-card" *ngIf="checkForCameras()">
+                            <mat-card-header>
+                                <mat-card-title>Cameras</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <!-- <mat-list>
+                                    <mat-list-item *ngFor="let panel of getControlPanels(group.key)">{{ panel }}</mat-list-item>
+                                </mat-list> -->
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <button mat-raised-button class="cg-button" color="primary" (click)="addGroup(group.value, group.key)">Edit</button>
+                    <button mat-raised-button class="cg-button" color="warn" (click)="deleteGroup(group.key)">Delete</button>
+                </section>
+            </mat-expansion-panel>
+
+            <hr class="solid">
+
+            <mat-card class="control-panel-assignment">
+                <mat-card-content>
+                    <div *ngFor="let panel of getControlPanels()">
+                        <div>{{ panel.ID }}</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</div>

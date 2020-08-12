@@ -1,0 +1,47 @@
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-wrapper {
+    width: 50%;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-title {
+    padding-left: 8px;
+}
+
+.control-group {
+    margin-top: 10px;
+}
+
+.cg-panel {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+}
+
+.cg-card {
+    width: 28%;
+    margin-bottom: 1vh;
+}
+
+.cg-button {
+    margin-right: 10px;
+}
+
+hr.solid {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    border-top: 1px solid #bbbbbb;
+}
+
+// .control-panel-assignment {
+
+// }
+
