@@ -77,7 +77,7 @@ func main() {
 
 	// HTTP Transport
 	address := fmt.Sprintf(":%d", port)
-	http := echo.New(ds, control.Service{}, echo.WithAuth(opaURL, opaToken), echo.WithLogger(logger))
+	http := echo.New(ds, &control.Service{}, echo.WithAuth(opaURL, opaToken), echo.WithLogger(logger))
 	err = http.Serve(address)
 	if err != nil {
 		log.Fatalf("Failed to start http transport: %s", err)
