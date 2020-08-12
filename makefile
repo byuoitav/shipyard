@@ -47,7 +47,7 @@ build: deps
 
 	@echo
 	@echo Building UI...
-	@cd ui && npm run-script build && mv ./dist/analog ../dist/ && rmdir ./dist
+	@cd ui && npm run-script build && mv ./dist/ui ../dist/ && rmdir ./dist
 
 	@echo
 	@echo Build output is located in ./dist/.
