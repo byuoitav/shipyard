@@ -2,7 +2,9 @@ package echo
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/byuoitav/shipyard"
 	"github.com/labstack/echo"
@@ -71,6 +73,15 @@ func (s *Service) saveDevice(c echo.Context) error {
 	res := response{
 		Success: true,
 	}
+
+	// Update control doc
+	go func() {
+		// Get Room ID from device
+		parts := strings.Split(d.ID, "-")
+		room := fmt.Sprintf("%s-%s", parts[0], parts[1])
+		// Update
+		s.UpdateControlDoc(room)
+	}()
 
 	return c.JSON(http.StatusOK, res)
 }

@@ -19,5 +19,5 @@ type DeviceControl struct {
 // RoomControlCompiler represents the interface that an implementation needs to
 // meet in order to be used as a compiler for a room control doc
 type RoomControlCompiler interface {
-	CompileRoomControlDoc(Room) (RoomControlDoc, error)
+	CompileRoomControlDoc(Room, []Device) (RoomControlDoc, error)
 }
