@@ -476,7 +476,7 @@ export class ApiService {
   getRoomConfig(): RoomConfig {
     return {
       ID: "Test",
-      ControlPanels: null,
+      ControlPanels: new Map(),
       ControlGroups: new Map([
         ["Layout 1",{
           Displays: new Map(),

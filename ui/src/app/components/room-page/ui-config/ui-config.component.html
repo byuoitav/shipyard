@@ -60,9 +60,6 @@
                                 <mat-card-title>Cameras</mat-card-title>
                             </mat-card-header>
                             <mat-card-content>
-                                <!-- <mat-list>
-                                    <mat-list-item *ngFor="let panel of getControlPanels(group.key)">{{ panel }}</mat-list-item>
-                                </mat-list> -->
                             </mat-card-content>
                         </mat-card>
                     </div>
@@ -71,13 +68,26 @@
                 </section>
             </mat-expansion-panel>
 
-            <hr class="solid">
+            <!-- <hr class="solid"> -->
+            <mat-card-title class="control-panel-title">Control Panels</mat-card-title>
 
-            <mat-card class="control-panel-assignment">
+            <mat-card>
                 <mat-card-content>
-                    <div *ngFor="let panel of getControlPanels()">
-                        <div>{{ panel.ID }}</div>
-                    </div>
+                    <mat-list>
+                        <mat-list-item *ngFor="let panel of getControlPanels()" class="control-panel-assignment">
+                            <p>{{ panel.ID }}</p>
+                            <span class="spacing"></span>
+                            <mat-form-field>
+                                <mat-label>UI Layout</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let group of roomConf.ControlGroups | keyvalue" [value]="group.key" (onSelectionChange)="mapControlPanel($event, panel.ID, group.key)">
+                                        {{ group.key }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+                    </mat-list>
                 </mat-card-content>
             </mat-card>
         </mat-card-content>
