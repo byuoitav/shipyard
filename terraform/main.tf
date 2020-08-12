@@ -59,7 +59,7 @@ module "shipyard_prd" {
   // required
   name           = "shipyard-prd"
   image          = "docker.pkg.github.com/byuoitav/shipyard/shipyard-dev"
-  image_version  = "6dc4d8f"
+  image_version  = "679b2c1"
   container_port = 80
   repo_url       = "https://github.com/byuoitav/shipyard"
 
