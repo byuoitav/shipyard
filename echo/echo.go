@@ -89,7 +89,7 @@ func (s *Service) Serve(address string) error {
 	// UI
 	uiRouter.Use(
 		middleware.StaticWithConfig(middleware.StaticConfig{
-			Root:   "dist",
+			Root:   "ui",
 			Index:  "index.html",
 			HTML5:  true,
 			Browse: true,
