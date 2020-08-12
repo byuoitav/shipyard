@@ -69,10 +69,9 @@ func main() {
 	_ = l.Sync()
 
 	// Datastore
-	ds := &couch.Service{
-		Address:  dbAddress,
-		Username: dbUsername,
-		Password: dbPassword,
+	ds, err := couch.New(dbAddress, dbUsername, dbPassword)
+	if err != nil {
+		log.Fatalf("Failed to create couchdb service: %s", err)
 	}
 
 	// HTTP Transport
@@ -80,6 +79,6 @@ func main() {
 	http := echo.New(ds, echo.WithAuth(opaURL, opaToken), echo.WithLogger(logger))
 	err = http.Serve(address)
 	if err != nil {
-		log.Fatalf("Failed to start http transport")
+		log.Fatalf("Failed to start http transport: %s", err)
 	}
 }

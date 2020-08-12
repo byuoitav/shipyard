@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/byuoitav/uapi-translator/log"
 	"github.com/labstack/echo"
 )
 
@@ -43,7 +42,7 @@ func (s *Service) authorize(next echo.HandlerFunc) echo.HandlerFunc {
 			},
 		)
 		if err != nil {
-			log.Log.Errorf("Error trying to create request to OPA: %s\n", err)
+			s.logger.Errorf("Error trying to create request to OPA: %s\n", err)
 			return echo.NewHTTPError(http.StatusInternalServerError, "Error while contacting authorization server")
 		}
 
@@ -52,23 +51,30 @@ func (s *Service) authorize(next echo.HandlerFunc) echo.HandlerFunc {
 			fmt.Sprintf("%s/v1/data/shipyard", s.opaAddress),
 			bytes.NewReader(oReq),
 		)
+		if err != nil {
+			s.logger.Errorf("Error trying to create request to OPA: %s\n", err)
+			return echo.NewHTTPError(http.StatusInternalServerError, "Error while contacting authorization server")
+		}
+
 		req.Header.Set("authorization", fmt.Sprintf("Bearer %s", s.opaToken))
 
 		// Make the request
 		res, err := http.DefaultClient.Do(req)
 		if err != nil {
-			log.Log.Errorf("Error while making request to OPA: %s", err)
+			s.logger.Errorf("Error while making request to OPA: %s", err)
 			return echo.NewHTTPError(http.StatusInternalServerError, "Error while contacting authorization server")
 		}
+		defer res.Body.Close()
+
 		if res.StatusCode != http.StatusOK {
-			log.Log.Errorf("Got back non 200 status from OPA: %d", res.StatusCode)
+			s.logger.Errorf("Got back non 200 status from OPA: %d", res.StatusCode)
 			return echo.NewHTTPError(http.StatusInternalServerError, "Error while contacting authorization server")
 		}
 
 		// Read the body
 		body, err := ioutil.ReadAll(res.Body)
 		if err != nil {
-			log.Log.Errorf("Unable to read body from OPA: %s", err)
+			s.logger.Errorf("Unable to read body from OPA: %s", err)
 			return echo.NewHTTPError(http.StatusInternalServerError, "Error while contacting authorization server")
 		}
 
@@ -76,7 +82,7 @@ func (s *Service) authorize(next echo.HandlerFunc) echo.HandlerFunc {
 		oRes := opaResponse{}
 		err = json.Unmarshal(body, &oRes)
 		if err != nil {
-			log.Log.Errorf("Unable to parse body from OPA: %s", err)
+			s.logger.Errorf("Unable to parse body from OPA: %s", err)
 			return echo.NewHTTPError(http.StatusInternalServerError, "Error while contacting authorization server")
 		}
 

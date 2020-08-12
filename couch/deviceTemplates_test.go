@@ -7,7 +7,9 @@ import (
 	"testing"
 
 	"github.com/byuoitav/shipyard"
-	"github.com/byuoitav/shipyard/mock/couchdb"
+	"github.com/go-kivik/kivik/v3"
+	"github.com/go-kivik/kivik/v3/driver"
+	"github.com/go-kivik/kivikmock/v3"
 	"github.com/matryer/is"
 )
 
@@ -33,62 +35,56 @@ func TestGetDeviceTemplate(t *testing.T) {
 		is := is.New(t)
 
 		// Setup Mock DB
-		db := couchdb.New()
-		db.Expect("GET", "/device-templates/foo", http.StatusNotFound, "Object not found")
-		addr := db.Serve()
-		defer db.Close()
+		client, mock, err := kivikmock.New()
+		if err != nil {
+			panic(err)
+		}
+
+		db := mock.NewDB()
+		mock.ExpectDB().WithName(_templatesDB).WillReturn(db)
+		db.ExpectGet().WithDocID("foo").WillReturnError(&kivik.Error{
+			HTTPStatus: http.StatusNotFound,
+		})
 
 		s := Service{
-			Address: addr,
+			client: client,
 		}
 
 		temp, err := s.GetDeviceTemplate("foo")
 
 		is.True(errors.Is(err, shipyard.ErrNotFound)) // Expected to get ErrNotFound
 		is.True(temp.ID == "")                        // Expected template returned to be empty
-		is.True(db.AsExpected())                      // Expected DB calls to be made
 	})
 
 	t.Run("Should return template for found docs", func(t *testing.T) {
 		is := is.New(t)
 
 		// Setup Mock DB
-		db := couchdb.New()
-		db.Expect("GET", "/device-templates/foo", http.StatusOK, dt)
-		addr := db.Serve()
-		defer db.Close()
+		client, mock, err := kivikmock.New()
+		if err != nil {
+			panic(err)
+		}
+
+		db := mock.NewDB()
+		mock.ExpectDB().WithName(_templatesDB).WillReturn(db)
+		db.ExpectGet().WithDocID("foo").WillReturn(kivikmock.DocumentT(
+			t,
+			dt,
+		))
 
 		s := Service{
-			Address: addr,
+			client: client,
 		}
 
 		temp, err := s.GetDeviceTemplate("foo")
 
 		is.NoErr(err)                              // Expected no errors
 		is.True(reflect.DeepEqual(temp, expected)) // Expected template to match expected
-		is.True(db.AsExpected())                   // Expected DB calls to be made
 	})
 }
 
 func TestListDeviceTemplates(t *testing.T) {
 	is := is.New(t)
-
-	list := docList{
-		Rows: []docDescription{
-			{
-				ID: "foo",
-			},
-			{
-				ID: "bar",
-			},
-			{
-				ID: "baz",
-			},
-			{
-				ID: "foobar",
-			},
-		},
-	}
 
 	expected := []string{
 		"foo",
@@ -101,33 +97,48 @@ func TestListDeviceTemplates(t *testing.T) {
 		is := is.New(t)
 
 		// Setup Mock DB
-		db := couchdb.New()
-		db.Expect("GET", "/device-templates/_all_docs", http.StatusInternalServerError, "whoops")
-		addr := db.Serve()
-		defer db.Close()
+		client, mock, err := kivikmock.New()
+		if err != nil {
+			panic(err)
+		}
+
+		db := mock.NewDB()
+		mock.ExpectDB().WithName(_templatesDB).WillReturn(db)
+		db.ExpectAllDocs().WillReturnError(&kivik.Error{
+			HTTPStatus: http.StatusInternalServerError,
+		})
 
 		s := Service{
-			Address: addr,
+			client: client,
 		}
 
 		tlist, err := s.ListDeviceTemplates()
 
 		is.True(err != nil)      // Expected to get an error
 		is.True(len(tlist) == 0) // Expected empty list
-		is.True(db.AsExpected()) // Expected DB calls to be made
 	})
 
 	t.Run("Should return list of templates on success", func(t *testing.T) {
 		is := is.New(t)
 
 		// Setup Mock DB
-		db := couchdb.New()
-		db.Expect("GET", "/device-templates/_all_docs", http.StatusOK, list)
-		addr := db.Serve()
-		defer db.Close()
+		client, mock, err := kivikmock.New()
+		if err != nil {
+			panic(err)
+		}
+
+		db := mock.NewDB()
+		mock.ExpectDB().WithName(_templatesDB).WillReturn(db)
+		rows := kivikmock.NewRows()
+		for _, id := range expected {
+			rows.AddRow(&driver.Row{
+				ID: id,
+			})
+		}
+		db.ExpectAllDocs().WillReturn(rows)
 
 		s := Service{
-			Address: addr,
+			client: client,
 		}
 
 		tlist, err := s.ListDeviceTemplates()
@@ -135,6 +146,5 @@ func TestListDeviceTemplates(t *testing.T) {
 		is.NoErr(err)                               // Expected no errors
 		is.True(len(tlist) == 4)                    // Expected all templates to be returned
 		is.True(reflect.DeepEqual(expected, tlist)) // Expected list to match expected
-		is.True(db.AsExpected())                    // Expected DB calls to be made
 	})
 }

@@ -1,36 +1,15 @@
 package couch
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
+	"net/url"
 
-	"github.com/byuoitav/shipyard"
+	_ "github.com/go-kivik/couchdb/v3"
+	"github.com/go-kivik/kivik/v3"
 )
 
 type Service struct {
-	Address  string
-	Username string
-	Password string
-}
-
-// docList represents a request to couch for `_all_docs` on a database
-type docList struct {
-	Rows []docDescription `json:"rows"`
-}
-
-// docDescription represents the rows returned from `_all_docs`
-type docDescription struct {
-	ID string `json:"id"`
-}
-
-// putResponse represents the response returned after a put on a document
-type putResponse struct {
-	ID  string `json:"id"`
-	OK  bool   `json:"ok"`
-	Rev string `json:"rev"`
+	client *kivik.Client
 }
 
 // query represents a query body to be sent to couch
@@ -46,52 +25,23 @@ type search struct {
 	Regex string `json:"$regex,omitempty"`
 }
 
-// makeRequest makes the given request to couch and then parses the response
-// into the responseBody pointer passed in
-func (s *Service) makeRequest(method, path string, body []byte, responseBody interface{}) error {
-	url := fmt.Sprintf("%s/%s", s.Address, path)
+// New takes an address, username, and password for the desired couchdb
+// and returns a new service backed by that datastore
+func New(addr, user, pass string) (*Service, error) {
 
-	// Create the request
-	req, err := http.NewRequest(method, url, bytes.NewReader(body))
+	url, err := url.Parse(addr)
 	if err != nil {
-		err = fmt.Errorf("db/makeRequest create couch request: %w", err)
-		return err
+		return nil, fmt.Errorf("Parsing address: %w", err)
 	}
 
-	// Add basic auth
-	req.SetBasicAuth(s.Username, s.Password)
+	dsn := fmt.Sprintf("%s://%s:%s@%s", url.Scheme, user, pass, url.Host)
 
-	req.Header.Add("content-type", "application/json")
-
-	// Execute the request
-	res, err := http.DefaultClient.Do(req)
+	c, err := kivik.New("couch", dsn)
 	if err != nil {
-		err = fmt.Errorf("db/makeRequest make request: %w", err)
-		return err
-	}
-	defer res.Body.Close()
-
-	// Check for 404
-	if res.StatusCode == http.StatusNotFound {
-		return shipyard.ErrNotFound
+		return nil, fmt.Errorf("Creating client: %w", err)
 	}
 
-	// Check for non 200
-	if res.StatusCode < 200 || res.StatusCode > 299 {
-		return fmt.Errorf("db/makeRequest Error response from couch. Code: %d", res.StatusCode)
-	}
-
-	// Read the body
-	b, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return fmt.Errorf("db/makeRequest reading response body: %w", err)
-	}
-
-	// Unmarshal
-	err = json.Unmarshal(b, responseBody)
-	if err != nil {
-		return fmt.Errorf("db/makeRequest json unmarshal: %w", err)
-	}
-
-	return err
+	return &Service{
+		client: c,
+	}, nil
 }

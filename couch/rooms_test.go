@@ -1,4 +1,4 @@
-package couch_test
+package couch
 
 import (
 	"errors"
@@ -7,8 +7,9 @@ import (
 	"testing"
 
 	"github.com/byuoitav/shipyard"
-	"github.com/byuoitav/shipyard/couch"
-	"github.com/byuoitav/shipyard/mock/couchdb"
+	"github.com/go-kivik/kivik/v3"
+	"github.com/go-kivik/kivik/v3/driver"
+	"github.com/go-kivik/kivikmock/v3"
 	"github.com/matryer/is"
 )
 
@@ -23,7 +24,7 @@ func TestGetRoom(t *testing.T) {
 		},
 	}
 
-	couchITB1010 := couch.CouchRoom{
+	couchITB1010 := room{
 		Rev:         "1234",
 		ID:          "ITB-1010",
 		Designation: "production",
@@ -36,97 +37,113 @@ func TestGetRoom(t *testing.T) {
 		is := is.New(t)
 
 		// Setup Mock DB
-		db := couchdb.New()
-		db.Expect("GET", "/rooms/ITB-1111", http.StatusNotFound, "Object not found")
-		addr := db.Serve()
-		defer db.Close()
+		client, mock, err := kivikmock.New()
+		if err != nil {
+			panic(err)
+		}
 
-		s := couch.Service{
-			Address: addr,
+		db := mock.NewDB()
+		mock.ExpectDB().WithName(_roomsDB).WillReturn(db)
+		db.ExpectGet().WithDocID("ITB-1111").WillReturnError(&kivik.Error{
+			HTTPStatus: http.StatusNotFound,
+		})
+
+		s := Service{
+			client: client,
 		}
 
 		r, err := s.GetRoom("ITB-1111")
 
 		is.True(errors.Is(err, shipyard.ErrNotFound)) // Expected ErrNotFound
 		is.True(r.ID == "")                           // Expected room to be empty
-		is.True(db.AsExpected())                      // Expected calls to be made to the DB
 	})
 
 	t.Run("Returns room that exists", func(t *testing.T) {
 		is := is.New(t)
 
 		// Setup Mock DB
-		db := couchdb.New()
-		db.Expect("GET", "/rooms/ITB-1010", http.StatusOK, couchITB1010)
-		addr := db.Serve()
-		defer db.Close()
+		client, mock, err := kivikmock.New()
+		if err != nil {
+			panic(err)
+		}
 
-		s := couch.Service{
-			Address: addr,
+		db := mock.NewDB()
+		mock.ExpectDB().WithName(_roomsDB).WillReturn(db)
+		db.ExpectGet().WithDocID("ITB-1010").WillReturn(
+			kivikmock.DocumentT(t, couchITB1010),
+		)
+
+		s := Service{
+			client: client,
 		}
 
 		r, err := s.GetRoom("ITB-1010")
 
 		is.NoErr(err)                          // Expected no errors
 		is.True(reflect.DeepEqual(r, itb1010)) // Expected room to equal ITB-1010 struct
-		is.True(db.AsExpected())               // Expected calls to be made to the DB
 	})
 }
 
 func TestListAllRooms(t *testing.T) {
 	is := is.New(t)
 
-	listResponse := couch.CouchDocList{
-		Rows: []couch.CouchDocDescription{
-			{
-				ID: "ITB-1010",
-			},
-			{
-				ID: "ITB-1004",
-			},
-			{
-				ID: "ITB-1006",
-			},
-		},
+	listRooms := []string{
+		"ITB-1010",
+		"ITB-1004",
+		"ITB-1006",
 	}
 
 	t.Run("Returns error on unexpected error from couch", func(t *testing.T) {
 		is := is.New(t)
 
 		// Setup Mock DB
-		db := couchdb.New()
-		db.Expect("GET", "/rooms/_all_docs", http.StatusInternalServerError, "")
-		addr := db.Serve()
-		defer db.Close()
+		client, mock, err := kivikmock.New()
+		if err != nil {
+			panic(err)
+		}
 
-		s := couch.Service{
-			Address: addr,
+		db := mock.NewDB()
+		mock.ExpectDB().WithName(_roomsDB).WillReturn(db)
+		db.ExpectAllDocs().WillReturnError(&kivik.Error{
+			HTTPStatus: http.StatusInternalServerError,
+		})
+
+		s := Service{
+			client: client,
 		}
 
 		r, err := s.ListAllRooms()
 
-		is.True(err != nil)      // Expected to get an error
-		is.True(len(r) == 0)     // Expected an empty array
-		is.True(db.AsExpected()) // Expected all db calls to be made
+		is.True(err != nil)  // Expected to get an error
+		is.True(len(r) == 0) // Expected an empty array
 	})
 
 	t.Run("Returns rooms on successful call", func(t *testing.T) {
 		is := is.New(t)
 
 		// Setup Mock DB
-		db := couchdb.New()
-		db.Expect("GET", "/rooms/_all_docs", http.StatusOK, listResponse)
-		addr := db.Serve()
-		defer db.Close()
+		client, mock, err := kivikmock.New()
+		if err != nil {
+			panic(err)
+		}
 
-		s := couch.Service{
-			Address: addr,
+		db := mock.NewDB()
+		mock.ExpectDB().WithName(_roomsDB).WillReturn(db)
+		rows := kivikmock.NewRows()
+		for _, id := range listRooms {
+			rows.AddRow(&driver.Row{
+				ID: id,
+			})
+		}
+		db.ExpectAllDocs().WillReturn(rows)
+
+		s := Service{
+			client: client,
 		}
 
 		r, err := s.ListAllRooms()
 
-		is.NoErr(err)            // Expected no errors
-		is.True(len(r) == 3)     // Expected to get back all rooms
-		is.True(db.AsExpected()) // Expected database calls to be made
+		is.NoErr(err)        // Expected no errors
+		is.True(len(r) == 3) // Expected to get back all rooms
 	})
 }

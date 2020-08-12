@@ -1,49 +1,56 @@
 package couch
 
 import (
-	"encoding/json"
-	"errors"
+	"context"
 	"fmt"
+	"net/http"
 
 	"github.com/byuoitav/shipyard"
+	"github.com/go-kivik/kivik/v3"
 )
 
 // The path for the rooms database
-const _roomsPath = "rooms"
+const _roomsDB = "rooms"
 
 // room is the couch representation of a room
 type room struct {
-	Rev         string            `json:"_rev,omitempty"`
-	ID          string            `json:"_id"`
-	Designation string            `json:"designation"`
-	Tags        map[string]string `json:"tags"`
+	Rev                string            `json:"_rev,omitempty"`
+	ID                 string            `json:"_id"`
+	Designation        string            `json:"designation"`
+	PublicDescription  string            `json:"publicDescription"`
+	PrivateDescription string            `json:"privateDescription"`
+	ProxyBaseURL       string            `json:"proxyBaseURL"`
+	Tags               map[string]string `json:"tags"`
 }
 
 // GetRoom returns the room matching the requested ID
 func (s *Service) GetRoom(roomID string) (shipyard.Room, error) {
-	path := fmt.Sprintf("%s/%s", _roomsPath, roomID)
-
 	room := room{}
-	err := s.makeRequest("GET", path, nil, &room)
+	err := s.client.DB(context.TODO(), _roomsDB).Get(context.TODO(), roomID).ScanDoc(&room)
 	if err != nil {
+		// Not found error
+		if kivik.StatusCode(err) == http.StatusNotFound {
+			return shipyard.Room{}, shipyard.ErrNotFound
+		}
+
 		err = fmt.Errorf("couch/GetRoom make request: %w", err)
 		return shipyard.Room{}, err
 	}
 
 	r := shipyard.Room{
-		ID:          room.ID,
-		Designation: room.Designation,
-		Tags:        room.Tags,
+		ID:                 room.ID,
+		Designation:        room.Designation,
+		PublicDescription:  room.PublicDescription,
+		PrivateDescription: room.PrivateDescription,
+		ProxyBaseURL:       room.ProxyBaseURL,
+		Tags:               room.Tags,
 	}
 	return r, nil
 }
 
 // ListAllRooms returns a list of all the rooms that exist
 func (s *Service) ListAllRooms() ([]string, error) {
-	path := fmt.Sprintf("%s/_all_docs", _roomsPath)
-
-	list := docList{}
-	err := s.makeRequest("GET", path, nil, &list)
+	rows, err := s.client.DB(context.TODO(), _roomsDB).AllDocs(context.TODO())
 	if err != nil {
 		err = fmt.Errorf("couch/ListAllRooms make request: %w", err)
 		return []string{}, err
@@ -51,8 +58,8 @@ func (s *Service) ListAllRooms() ([]string, error) {
 
 	// Pull the list from the docs
 	rooms := []string{}
-	for _, doc := range list.Rows {
-		rooms = append(rooms, doc.ID)
+	for rows.Next() {
+		rooms = append(rooms, rows.ID())
 	}
 
 	return rooms, nil
@@ -63,20 +70,23 @@ func (s *Service) ListAllRooms() ([]string, error) {
 func (s *Service) SaveRoom(r shipyard.Room) error {
 	// Copy given room to couch version
 	cRoom := room{
-		ID:          r.ID,
-		Designation: r.Designation,
-		Tags:        r.Tags,
+		ID:                 r.ID,
+		Designation:        r.Designation,
+		PublicDescription:  r.PublicDescription,
+		PrivateDescription: r.PrivateDescription,
+		ProxyBaseURL:       r.ProxyBaseURL,
+		Tags:               r.Tags,
 	}
 
-	// Check if the room exists
-	path := fmt.Sprintf("%s/%s", _roomsPath, r.ID)
+	db := s.client.DB(context.TODO(), _roomsDB)
 
+	// Check if the room exists
 	exists := true
 	eRoom := room{}
-	err := s.makeRequest("GET", path, nil, &eRoom)
+	err := db.Get(context.TODO(), r.ID).ScanDoc(&eRoom)
 	if err != nil {
 		// Room does not exist
-		if errors.Is(err, shipyard.ErrNotFound) {
+		if kivik.StatusCode(err) == http.StatusNotFound {
 			exists = false
 		} else {
 			return fmt.Errorf("couch/SaveRoom request to check: %w", err)
@@ -89,20 +99,9 @@ func (s *Service) SaveRoom(r shipyard.Room) error {
 	}
 
 	// Save the room
-	body, err := json.Marshal(cRoom)
-	if err != nil {
-		return fmt.Errorf("couch/SaveRoom marshal room: %w", err)
-	}
-
-	res := putResponse{}
-	err = s.makeRequest("PUT", path, body, &res)
+	_, err = db.Put(context.TODO(), cRoom.ID, cRoom)
 	if err != nil {
 		return fmt.Errorf("couch/SaveRoom put room: %w", err)
-	}
-
-	// Check for OK
-	if !res.OK {
-		return fmt.Errorf("couch/SaveRoom did not get ok back from couch")
 	}
 
 	return nil

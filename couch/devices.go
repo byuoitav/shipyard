@@ -1,56 +1,54 @@
 package couch
 
 import (
-	"encoding/json"
-	"errors"
+	"context"
 	"fmt"
+	"net/http"
 
 	"github.com/byuoitav/shipyard"
+	"github.com/go-kivik/kivik/v3"
 )
 
-const _devicesPath = "devices"
-
-// deviceResponse represents the response from couch for a query of devices
-type deviceResponse struct {
-	Docs     []device `json:"docs"`
-	Bookmark string   `json:"bookmark"`
-	Warning  string   `json:"warning"`
-}
+const _devicesDB = "devices"
 
 // device is the couch representation of a device
 type device struct {
-	Rev     string            `json:"_rev,omitempty"`
-	ID      string            `json:"_id"`
-	Address string            `json:"address"`
-	TypeID  string            `json:"typeID"`
-	Proxy   map[string]string `json:"proxy"`
-	Ports   []devicePort      `json:"ports"`
-	Tags    map[string]string `json:"tags"`
+	Rev                string            `json:"_rev,omitempty"`
+	ID                 string            `json:"_id"`
+	Address            string            `json:"address"`
+	Driver             string            `json:"driver"`
+	PublicDescription  string            `json:"publicDescription"`
+	PrivateDescription string            `json:"privateDescription"`
+	Ports              []devicePort      `json:"ports"`
+	Tags               map[string]string `json:"tags"`
 }
 
 // devicePort is the couch representation of a device port
 type devicePort struct {
-	Name     string `json:"name"`
-	Endpoint string `json:"endpoint"`
-	Incoming bool   `json:"incoming"`
-	Type     string `json:"string"`
+	Name     string   `json:"name"`
+	Endpoint []string `json:"endpoint"`
+	Incoming bool     `json:"incoming"`
+	Type     string   `json:"string"`
 }
 
 func (s *Service) GetDevice(deviceID string) (shipyard.Device, error) {
-	path := fmt.Sprintf("%s/%s", _devicesPath, deviceID)
-
+	db := s.client.DB(context.TODO(), _devicesDB)
 	dev := device{}
-	err := s.makeRequest("GET", path, nil, &dev)
+	err := db.Get(context.TODO(), deviceID).ScanDoc(&dev)
 	if err != nil {
-		return shipyard.Device{}, fmt.Errorf("couch/GetDevice make request: %w", err)
+		// Not found error
+		if kivik.StatusCode(err) == http.StatusNotFound {
+			return shipyard.Device{}, shipyard.ErrNotFound
+		}
+
+		return shipyard.Device{}, fmt.Errorf("couch/GetDevice get doc: %w", err)
 	}
 
 	return convertDevice(dev), nil
 }
 
 func (s *Service) GetRoomDevices(roomID string) ([]shipyard.Device, error) {
-	path := fmt.Sprintf("%s/_find", _devicesPath)
-
+	db := s.client.DB(context.TODO(), _devicesDB)
 	// Format query
 	q := query{
 		Selector: map[string]interface{}{
@@ -60,21 +58,21 @@ func (s *Service) GetRoomDevices(roomID string) ([]shipyard.Device, error) {
 		},
 		Limit: 1000,
 	}
-	body, err := json.Marshal(&q)
-	if err != nil {
-		return nil, fmt.Errorf("couch/GetRoomDevices query marshal: %w", err)
-	}
 
 	// Make the request
-	res := deviceResponse{}
-	err = s.makeRequest("POST", path, body, &res)
+	rows, err := db.Find(context.TODO(), q)
 	if err != nil {
 		return nil, fmt.Errorf("couch/GetRoomDevices couch request: %w", err)
 	}
 
 	// Convert all the devices
 	devs := []shipyard.Device{}
-	for _, d := range res.Docs {
+	for rows.Next() {
+		d := device{}
+		err := rows.ScanDoc(&d)
+		if err != nil {
+			return nil, fmt.Errorf("couch/GetRoomDevices unmarshal: %w", err)
+		}
 		devs = append(devs, convertDevice(d))
 	}
 
@@ -96,14 +94,14 @@ func (s *Service) ListRoomDevices(roomID string) ([]string, error) {
 }
 
 func (s *Service) SaveDevice(dev shipyard.Device) error {
-	// Check to see if the device already exists
-	path := fmt.Sprintf("%s/%s", _devicesPath, dev.ID)
+	db := s.client.DB(context.TODO(), _devicesDB)
 
+	// Check to see if the device already exists
 	exDev := device{}
-	err := s.makeRequest("GET", path, nil, &exDev)
+	err := db.Get(context.TODO(), dev.ID).ScanDoc(&exDev)
 	if err != nil {
 		// Some other error than "not found"
-		if !errors.Is(err, shipyard.ErrNotFound) {
+		if kivik.StatusCode(err) != http.StatusNotFound {
 			return fmt.Errorf("couch/SaveDevice request to check: %w", err)
 		}
 	}
@@ -113,20 +111,9 @@ func (s *Service) SaveDevice(dev shipyard.Device) error {
 	cDev := mergeDevice(dev, exDev)
 
 	// Save the room
-	body, err := json.Marshal(cDev)
-	if err != nil {
-		return fmt.Errorf("couch/SaveDevice marshal device: %w", err)
-	}
-
-	res := putResponse{}
-	err = s.makeRequest("PUT", path, body, &res)
+	_, err = db.Put(context.TODO(), cDev.ID, cDev)
 	if err != nil {
 		return fmt.Errorf("couch/SaveDevice put device: %s", err)
-	}
-
-	// Check for OK
-	if !res.OK {
-		return fmt.Errorf("couch/SaveDevice did not get ok back from couch")
 	}
 
 	return nil
@@ -136,8 +123,9 @@ func (s *Service) SaveDevice(dev shipyard.Device) error {
 func mergeDevice(d shipyard.Device, cd device) device {
 	cd.ID = d.ID
 	cd.Address = d.Address
-	cd.TypeID = d.TypeID
-	cd.Proxy = d.Proxy
+	cd.Driver = d.Driver
+	cd.PublicDescription = d.PublicDescription
+	cd.PrivateDescription = d.PrivateDescription
 	cd.Tags = d.Tags
 	cd.Ports = []devicePort{}
 
@@ -156,11 +144,12 @@ func mergeDevice(d shipyard.Device, cd device) device {
 // Convert couch device to shipyard device
 func convertDevice(d device) shipyard.Device {
 	sd := shipyard.Device{
-		ID:      d.ID,
-		Address: d.Address,
-		TypeID:  d.TypeID,
-		Proxy:   d.Proxy,
-		Tags:    d.Tags,
+		ID:                 d.ID,
+		Address:            d.Address,
+		Driver:             d.Driver,
+		PublicDescription:  d.PublicDescription,
+		PrivateDescription: d.PrivateDescription,
+		Tags:               d.Tags,
 	}
 
 	ports := []shipyard.DevicePort{}

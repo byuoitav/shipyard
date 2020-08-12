@@ -21,6 +21,8 @@ type Datastore interface {
 	GetDeviceTemplate(templateID string) (DeviceTemplate, error)
 	ListDeviceTemplates() ([]string, error)
 
-	GetUIConfiguration(roomID string) (UIConfiguration, error)
-	SaveUIConfiguration(config UIConfiguration) error
+	GetUIConfig(roomID string) (UIConfig, error)
+	SaveUIConfig(config UIConfig) error
+
+	GetConfig(configID string) (interface{}, error)
 }

@@ -11,7 +11,7 @@ import (
 // getUIConfig handles requests to `GET /ui_config/:room_id`
 func (s *Service) getUIConfig(c echo.Context) error {
 	// Get the config
-	conf, err := s.datastore.GetUIConfiguration(c.Param("room_id"))
+	conf, err := s.datastore.GetUIConfig(c.Param("room_id"))
 	if err != nil {
 		// Not found
 		if errors.Is(err, shipyard.ErrNotFound) {
@@ -33,7 +33,7 @@ func (s *Service) saveUIConfig(c echo.Context) error {
 	}
 
 	// Parse the request
-	conf := shipyard.UIConfiguration{}
+	conf := shipyard.UIConfig{}
 	err := c.Bind(&conf)
 	if err != nil {
 		s.logger.Errorf("echo/saveUIConfig parse request: %s")
@@ -41,7 +41,7 @@ func (s *Service) saveUIConfig(c echo.Context) error {
 	}
 
 	// Save the UI Config
-	err = s.datastore.SaveUIConfiguration(conf)
+	err = s.datastore.SaveUIConfig(conf)
 	if err != nil {
 		s.logger.Errorf("echo/saveUIConfig save config: %s")
 		return echo.NewHTTPError(http.StatusInternalServerError, "Failed to save UI Config")

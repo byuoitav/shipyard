@@ -1,12 +1,15 @@
 package couch
 
 import (
+	"context"
 	"fmt"
+	"net/http"
 
 	"github.com/byuoitav/shipyard"
+	"github.com/go-kivik/kivik/v3"
 )
 
-const _templatesPath = "device-templates"
+const _templatesDB = "device-templates"
 
 // deviceTemplate is the couch representation of a device template
 type deviceTemplate struct {
@@ -16,11 +19,14 @@ type deviceTemplate struct {
 
 // GetDeviceTemplate returns the requested device template from couch
 func (s *Service) GetDeviceTemplate(id string) (shipyard.DeviceTemplate, error) {
-	path := fmt.Sprintf("%s/%s", _templatesPath, id)
 
 	t := deviceTemplate{}
-	err := s.makeRequest("GET", path, nil, &t)
+	err := s.client.DB(context.TODO(), _templatesDB).Get(context.TODO(), id).ScanDoc(&t)
 	if err != nil {
+		// Not found error
+		if kivik.StatusCode(err) == http.StatusNotFound {
+			return shipyard.DeviceTemplate{}, shipyard.ErrNotFound
+		}
 		return shipyard.DeviceTemplate{}, fmt.Errorf("Couch/GetDeviceTemplate make request: %w", err)
 	}
 
@@ -29,19 +35,16 @@ func (s *Service) GetDeviceTemplate(id string) (shipyard.DeviceTemplate, error) 
 
 // ListDeviceTemplates lists the ids of all the templates currently found in couch
 func (s *Service) ListDeviceTemplates() ([]string, error) {
-	path := fmt.Sprintf("%s/_all_docs", _templatesPath)
-
 	// Make the request
-	list := docList{}
-	err := s.makeRequest("GET", path, nil, &list)
+	rows, err := s.client.DB(context.TODO(), _templatesDB).AllDocs(context.TODO())
 	if err != nil {
 		return []string{}, fmt.Errorf("couch/ListDeviceTemplates: make request: %w", err)
 	}
 
 	// Parse into a slice of strings
 	templates := []string{}
-	for _, doc := range list.Rows {
-		templates = append(templates, doc.ID)
+	for rows.Next() {
+		templates = append(templates, rows.ID())
 	}
 
 	return templates, nil
