@@ -478,19 +478,19 @@ export class ApiService {
       ID: "Test",
       ControlPanels: null,
       ControlGroups: new Map([
-        ["Group-1",{
+        ["Layout 1",{
           Displays: new Map(),
           Inputs: [],
           Microphones: null,
           MasterVolume: null
         }],
-        ["Group-2",{
+        ["Layout 2",{
           Displays: new Map(),
           Inputs: [],
           Microphones: null,
           MasterVolume: null
         }],
-        ["Group-3",{
+        ["Layout 3",{
           Displays: new Map(),
           Inputs: [],
           Microphones: null,

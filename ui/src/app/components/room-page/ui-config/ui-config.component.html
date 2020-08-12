@@ -4,10 +4,10 @@
     </mat-card>
     <mat-card class="section-wrapper">
         <mat-card-header class="section-header">
-            <mat-card-title class="section-title">Control Groups</mat-card-title>
+            <mat-card-title class="section-title">UI Layouts</mat-card-title>
             <button mat-raised-button color="primary" (click)="addGroup(null, '')">
                 <mat-icon>add</mat-icon>
-                Add Group
+                Add Layout
             </button>
         </mat-card-header>
         <mat-card-content>
@@ -65,7 +65,7 @@
                                 </mat-list>
                             </mat-card-content>
                         </mat-card>
-                        <mat-card class="cg-card">
+                        <mat-card class="cg-card" *ngIf="checkForCameras()">
                             <mat-card-header>
                                 <mat-card-title>Cameras</mat-card-title>
                             </mat-card-header>
@@ -80,6 +80,16 @@
                     <button mat-raised-button class="cg-button" color="warn" (click)="deleteGroup(group.key)">Delete</button>
                 </section>
             </mat-expansion-panel>
+
+            <hr class="solid">
+
+            <mat-card class="control-panel-assignment">
+                <mat-card-content>
+                    <div *ngFor="let panel of getControlPanels()">
+                        <div>{{ panel.ID }}</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </mat-card-content>
     </mat-card>
 </div>

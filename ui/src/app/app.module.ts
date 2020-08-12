@@ -22,6 +22,8 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
 import { BuildingListComponent } from './components/building-list/building-list.component';
@@ -82,7 +84,9 @@ import { MicrophoneGroupComponent } from './components/room-page/ui-config/ui-co
     TextFieldModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

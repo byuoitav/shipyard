@@ -109,4 +109,8 @@ export class UIConfigDialogComponent implements OnInit {
     return filteredDevs;
   }
 
+  checkForCameras(): boolean {
+    return false;
+  }
+
 }

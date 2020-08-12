@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UIControlGroup, ApiService, RoomConfig } from 'src/app/services/api.service';
+import { UIControlGroup, ApiService, RoomConfig, Device } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UIConfigDialogComponent } from './ui-config-dialog/ui-config-dialog.component';
 
@@ -12,9 +12,12 @@ export class UiConfigComponent implements OnInit {
   @Input('roomID') roomID: String;
   roomConf: RoomConfig;
 
+  devices: Device[];
+
   constructor(private api: ApiService,
     private dialog: MatDialog) {
     this.roomConf = this.api.getRoomConfig();
+    this.devices = this.api.getDevices(this.roomID);
   }
 
   ngOnInit(): void {
@@ -45,8 +48,20 @@ export class UiConfigComponent implements OnInit {
     this.roomConf.ControlGroups.delete(groupID);
   }
 
-  getControlPanels(group: String): String[] {
-    return ["one", "two", "three"];
+  checkForCameras(): boolean {
+    return false;
+  }
+
+  getControlPanels(): Device[] {
+    let re = new RegExp('-CP.*');
+    var filteredDevs = []
+    this.devices.forEach(dev => {
+      if (re.exec(dev.ID.toString()) != null) {
+        filteredDevs.push(dev);
+      }
+    });
+
+    return filteredDevs;
   }
 
 }

@@ -22,7 +22,7 @@
 
 .cg-panel {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-flow: row wrap;
 }
 
@@ -34,3 +34,14 @@
 .cg-button {
     margin-right: 10px;
 }
+
+hr.solid {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    border-top: 1px solid #bbbbbb;
+}
+
+// .control-panel-assignment {
+
+// }
+
