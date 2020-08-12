@@ -35,7 +35,7 @@ func (s *Service) authorize(next echo.HandlerFunc) echo.HandlerFunc {
 		oReq, err := json.Marshal(
 			opaRequest{
 				Input: requestData{
-					User:   "", // TODO Get user in here (possibly WSO2 token)
+					User:   c.Request().Context().Value("user").(string),
 					Path:   c.Path(),
 					Method: c.Request().Method,
 				},
