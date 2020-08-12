@@ -9,7 +9,7 @@ import (
 	"github.com/go-kivik/kivik/v3"
 )
 
-const _uiConfigDB = "ui-config"
+const _uiConfigDB = "ui-configs"
 
 // The couch representation of a UI Config
 type uiConfig struct {
