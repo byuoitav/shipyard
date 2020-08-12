@@ -30,7 +30,7 @@ data "aws_ssm_parameter" "opa_token" {
 }
 
 data "aws_ssm_parameter" "db_address" {
-  name = "/env/couch-address_new"
+  name = "/env/couch-address-new"
 }
 
 data "aws_ssm_parameter" "db_user" {
