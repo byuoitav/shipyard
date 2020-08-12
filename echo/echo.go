@@ -6,6 +6,7 @@ import (
 	"github.com/byuoitav/auth/wso2"
 	"github.com/byuoitav/shipyard"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 type Service struct {
@@ -39,6 +40,7 @@ func (s *Service) Serve(address string) error {
 
 	router := echo.New()
 	authRouter := router.Group("")
+	uiRouter := router.Group("")
 
 	// Enable auth if it hasn't been disabled
 	if !s.disableAuth {
@@ -54,6 +56,10 @@ func (s *Service) Serve(address string) error {
 		}
 
 		authRouter.Use(
+			echo.WrapMiddleware(client.AuthCodeMiddleware),
+			s.authorize,
+		)
+		uiRouter.Use(
 			echo.WrapMiddleware(client.AuthCodeMiddleware),
 			s.authorize,
 		)
@@ -79,6 +85,16 @@ func (s *Service) Serve(address string) error {
 
 	// Config
 	authRouter.GET("/config/:config_id", s.getConfig)
+
+	// UI
+	uiRouter.Use(
+		middleware.StaticWithConfig(middleware.StaticConfig{
+			Root:   "dist",
+			Index:  "index.html",
+			HTML5:  true,
+			Browse: true,
+		}),
+	)
 
 	err := router.Start(address)
 	if err != nil {
