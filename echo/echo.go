@@ -10,22 +10,24 @@ import (
 )
 
 type Service struct {
-	disableAuth      bool
-	opaAddress       string
-	opaToken         string
-	wso2CallbackURL  string
-	wso2ClientID     string
-	wso2ClientSecret string
-	wso2GatewayURL   string
-	datastore        shipyard.Datastore
-	logger           shipyard.Logger
+	disableAuth        bool
+	opaAddress         string
+	opaToken           string
+	wso2CallbackURL    string
+	wso2ClientID       string
+	wso2ClientSecret   string
+	wso2GatewayURL     string
+	datastore          shipyard.Datastore
+	logger             shipyard.Logger
+	controlDocCompiler shipyard.RoomControlCompiler
 }
 
-func New(ds shipyard.Datastore, opts ...Option) *Service {
+func New(ds shipyard.Datastore, comp shipyard.RoomControlCompiler, opts ...Option) *Service {
 	s := Service{
-		datastore:   ds,
-		disableAuth: true,
-		logger:      &nullLogger{},
+		datastore:          ds,
+		disableAuth:        true,
+		logger:             &nullLogger{},
+		controlDocCompiler: comp,
 	}
 
 	// Apply options

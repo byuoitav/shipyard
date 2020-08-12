@@ -69,5 +69,9 @@ func (s *Service) saveRoom(c echo.Context) error {
 		Success: true,
 	}
 
+	// Update control doc
+	go s.UpdateControlDoc(r.ID)
+
+	// Respond
 	return c.JSON(http.StatusOK, res)
 }
