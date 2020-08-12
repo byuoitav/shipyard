@@ -46,14 +46,14 @@ module "shipyard_prd" {
 
   // required
   name           = "shipyard-prd"
-  image          = "docker.pkg.github.com/byuoitav/shipyard-dev"
+  image          = "docker.pkg.github.com/byuoitav/shipyard/shipyard-dev"
   image_version  = "58ad182"
   container_port = 80
   repo_url       = "https://github.com/byuoitav/shipyard"
 
   // optional
-  image_pull_secrets = "github-docker-registry"
-  public_urls        = ["shipyard.av.byu.edu"]
+  image_pull_secret = "github-docker-registry"
+  public_urls       = ["shipyard.av.byu.edu"]
   container_args = [
     "--opa-url", data.aws_ssm_parameter.opa_url.value,
     "--opa-token", data.aws_ssm_parameter.opa_token.value,
