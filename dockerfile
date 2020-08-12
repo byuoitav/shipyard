@@ -1,4 +1,4 @@
-FROM grc.io/distroless/static
+FROM gcr.io/distroless/static
 LABEL Brayden Winterton <brayden_winterton@byu.edu>
 
 ARG NAME
