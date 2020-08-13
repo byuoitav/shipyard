@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { Device, ApiService, UIControlGroup, UIDisplay } from 'src/app/services/api.service';
+import { Device, ApiService, UIControlGroup, UIDisplay, MasterVolume } from 'src/app/services/api.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ConfirmConfigComponent } from './confirm-config.component';
 import { MicrophoneGroupComponent } from './microphone-group/microphone-group.component';
@@ -21,6 +21,8 @@ export class UIConfigDialogComponent implements OnInit {
   InputSelection = new SelectionModel<Device>(true, []);
   MasterVolSelection = new SelectionModel<Device>(false, []);
 
+  MicrophoneGroups = new Map<String, String[]>();
+
   selected: Device[] = [];
 
   constructor(private refDialog: MatDialogRef<UIConfigDialogComponent>,
@@ -29,7 +31,7 @@ export class UIConfigDialogComponent implements OnInit {
     private dialog: MatDialog) {
       this.devices = this.api.getDevices("");
       if (this.data == null) {
-        this.config = new UIControlGroup;
+        this.config = new UIControlGroup();
         this.groupID = "";
       } else {
         this.config = data.ControlGroup;
@@ -56,6 +58,11 @@ export class UIConfigDialogComponent implements OnInit {
       this.config.Inputs.push(input.ID);
     });
 
+    this.config.Microphones = this.MicrophoneGroups;
+
+    this.config.MasterVolume = new MasterVolume();
+    this.config.MasterVolume.Device = this.MasterVolSelection.selected[0].ID;
+
     this.refDialog.close({
       Config: this.config,
       ID: this.groupID
@@ -79,10 +86,30 @@ export class UIConfigDialogComponent implements OnInit {
     this.filterDevicesByID(this.config.Inputs).forEach(dev => {
       this.InputSelection.select(dev);
     });
+
+    this.MicrophoneGroups = this.config.Microphones;
+
+    if (this.config.MasterVolume != null) {
+      this.filterDevicesByID([this.config.MasterVolume.Device]).forEach(dev => {
+        this.MasterVolSelection.select(dev);
+      });
+    } else {
+      this.MasterVolSelection.select(this.devices[0]);
+    }
   }
 
   addMicGroup() {
-    this.dialog.open(MicrophoneGroupComponent, {width: '50vw'});
+    let ref = this.dialog.open(MicrophoneGroupComponent, {width: '50vw'});
+
+    ref.afterClosed().subscribe(group => {
+      if (group != null) {
+        this.MicrophoneGroups.set(group.ID, group.Microphones);
+      }
+    });
+  }
+
+  deleteMicGroup(id: String) {
+    this.MicrophoneGroups.delete(id);
   }
 
   filterDevicesByID(ids: String[]): Device[] {

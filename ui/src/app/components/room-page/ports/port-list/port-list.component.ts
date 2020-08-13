@@ -12,7 +12,8 @@ export class PortListComponent implements OnInit {
   @Input('device') device: Device;
   @Input('incoming') incoming: boolean;
   @Input('outgoing') outgoing: boolean;
-  @Output() selected: EventEmitter<Port> = new EventEmitter();
+  @Output() selected = new EventEmitter<Port>();
+  @Output() deletePort = new EventEmitter<any>();
 
   portColumns: String[] = ['port', 'connectedDevice'];
 
@@ -43,6 +44,13 @@ export class PortListComponent implements OnInit {
   }
 
   configurePort(p: Port) {
-    this.dialog.open(PortConfigComponent, {data: p});
+    let ref = this.dialog.open(PortConfigComponent, {data: p});
+
+    ref.componentInstance.onDelete.subscribe(data => {
+      this.deletePort.emit({
+        device: data.delete,
+        port: this.device.ID
+      });
+    });
   }
 }
