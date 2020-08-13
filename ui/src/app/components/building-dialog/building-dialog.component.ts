@@ -35,7 +35,7 @@ export class BuildingDialogComponent implements OnInit {
   }
 
   onSave() {
-    this.dialogRef.close(true);
+    this.dialogRef.close(this.ID.toString());
   }
 
   onDelete() {

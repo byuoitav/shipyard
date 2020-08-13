@@ -38,6 +38,7 @@ export class RoomListComponent implements OnInit {
       if (result == "delete") {
         console.log("deleting");
       } else if (result != null) {
+        this.rooms.push(result);
         this.api.setRoom(result);
       }
     });
