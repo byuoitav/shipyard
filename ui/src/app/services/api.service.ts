@@ -481,20 +481,29 @@ export class ApiService {
         ["Layout 1",{
           Displays: new Map(),
           Inputs: [],
-          Microphones: null,
-          MasterVolume: null
+          Microphones: new Map(),
+          MasterVolume: {
+            Device: "Test",
+            Block: ""
+          }
         }],
         ["Layout 2",{
           Displays: new Map(),
           Inputs: [],
-          Microphones: null,
-          MasterVolume: null
+          Microphones: new Map(),
+          MasterVolume: {
+            Device: "Test",
+            Block: ""
+          }
         }],
         ["Layout 3",{
           Displays: new Map(),
           Inputs: [],
-          Microphones: null,
-          MasterVolume: null
+          Microphones: new Map(),
+          MasterVolume: {
+            Device: "Test",
+            Block: ""
+          }
         }]
       ])
     }

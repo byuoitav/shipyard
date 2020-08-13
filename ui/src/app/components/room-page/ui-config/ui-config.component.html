@@ -37,22 +37,27 @@
                         </mat-card>
                         <mat-card class="cg-card">
                             <mat-card-header>
-                                <mat-card-title>Microphones</mat-card-title>
-                            </mat-card-header>
-                            <mat-card-content>
-                                <!-- <mat-list>
-                                    <mat-list-item *ngFor="let panel of getControlPanels(group.key)">{{ panel }}</mat-list-item>
-                                </mat-list> -->
-                            </mat-card-content>
-                        </mat-card>
-                        <mat-card class="cg-card">
-                            <mat-card-header>
                                 <mat-card-title>Master Volume</mat-card-title>
                             </mat-card-header>
                             <mat-card-content>
                                 <mat-list>
-                                    <mat-list-item>This-is-a-device</mat-list-item>
+                                    <mat-list-item>{{ group.value.MasterVolume.Device }}</mat-list-item>
                                 </mat-list>
+                            </mat-card-content>
+                        </mat-card>
+                        <mat-card class="cg-card">
+                            <mat-card-header>
+                                <mat-card-title>Microphones</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <mat-expansion-panel *ngFor="let micGroup of group.value.Microphones | keyvalue">
+                                    <mat-expansion-panel-header>{{ micGroup.key }}</mat-expansion-panel-header>
+                                    <section>
+                                        <mat-list>
+                                            <mat-list-item *ngFor="let mic of micGroup.value">{{ mic.ID }}</mat-list-item>
+                                        </mat-list>
+                                    </section>
+                                </mat-expansion-panel>
                             </mat-card-content>
                         </mat-card>
                         <mat-card class="cg-card" *ngIf="checkForCameras()">
@@ -68,7 +73,6 @@
                 </section>
             </mat-expansion-panel>
 
-            <!-- <hr class="solid"> -->
             <mat-card-title class="control-panel-title">Control Panels</mat-card-title>
 
             <mat-card>
