@@ -38,6 +38,7 @@ export class UIConfigDialogComponent implements OnInit {
         this.groupID = data.ID;
         this.initializeSelectors();
       }
+      this.MasterVolSelection.select(this.devices[0]);
     }
 
   ngOnInit(): void {
