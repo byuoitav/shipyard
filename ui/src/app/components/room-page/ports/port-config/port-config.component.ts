@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Port } from 'src/app/services/api.service';
 import { PortDialogComponent } from '../port-dialog/port-dialog.component';
@@ -9,6 +9,7 @@ import { PortDialogComponent } from '../port-dialog/port-dialog.component';
   styleUrls: ['./port-config.component.scss']
 })
 export class PortConfigComponent implements OnInit {
+  @Output() onDelete = new EventEmitter<any>();
   removable = true;
 
   constructor(private refDialog: MatDialogRef<PortConfigComponent>,
@@ -27,7 +28,15 @@ export class PortConfigComponent implements OnInit {
   }
 
   onRemove(dev: String) {
+    this.onDelete.emit({
+      delete: dev
+    });
 
+    for (var i = 0; i < this.data.Endpoint.length; i++) {
+      if (this.data.Endpoint[i] === dev) {
+        this.data.Endpoint.splice(i, 1);
+      }
+    }
   }
 
   test() {

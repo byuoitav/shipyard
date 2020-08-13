@@ -265,7 +265,71 @@ export class ApiService {
       Address: "Device_2.byu.edu",
       Driver: "driver 2",
       DynamicPorts: false,
-      Ports: [],
+      Ports: [
+        {
+          ID: 'Device1-Port1',
+          Name: 'Port1',
+          Endpoint: [],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port2',
+          Name: 'Port2',
+          Endpoint: [],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port3',
+          Name: 'Port3',
+          Endpoint: ['test'],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port4',
+          Name: 'Port4',
+          Endpoint: [],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port5',
+          Name: 'Port5',
+          Endpoint: [],
+          Incoming: true,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port6',
+          Name: 'Port6',
+          Endpoint: ['test'],
+          Incoming: false,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port7',
+          Name: 'Port7',
+          Endpoint: [],
+          Incoming: false,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port8',
+          Name: 'Port8',
+          Endpoint: ['test'],
+          Incoming: false,
+          Type: ''
+        },
+        {
+          ID: 'Device1-Port9',
+          Name: 'Port9',
+          Endpoint: [],
+          Incoming: false,
+          Type: ''
+        }
+      ],
       Tags: new Map(),
       Type: "Type-2",
     },

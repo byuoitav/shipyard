@@ -61,4 +61,19 @@ export class PortsComponent implements OnInit {
     });
   }
 
+  test2(data: any) {
+    for (var k = 0; k < this.devices.length; k++) {
+      if (this.devices[k].ID === data.device) {
+        for (var i = 0; i < this.devices[k].Ports.length; i++) {
+          for (var j = 0; j < this.devices[k].Ports[i].Endpoint.length; j++) {
+            if (data.port === this.devices[k].Ports[i].Endpoint[j]) {
+              this.devices[k].Ports[i].Endpoint.splice(j, 1);
+              return;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }

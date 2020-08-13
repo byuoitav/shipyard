@@ -19,9 +19,9 @@
             </mat-form-field>
         </div>
         <div class="text-row">
-            <mat-form-field>
+            <mat-form-field (click)="test()">
                 <mat-label>Enpoint</mat-label>
-                <mat-chip-list (click)="test()">
+                <mat-chip-list>
                     <mat-chip *ngFor="let dev of data.Endpoint"
                         [removable]="removable"
                         (removed)="onRemove(dev)">

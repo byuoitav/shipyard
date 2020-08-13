@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Device, ApiService, Port } from 'src/app/services/api.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { PortDialogData } from '../ports.component';
 import { MatStepper } from '@angular/material/stepper';
 import { ConfirmPortDialog, ConfirmData } from './confirm-dialog';
 
@@ -37,7 +36,7 @@ export class PortDialogComponent implements OnInit {
   filterPorts(): Port[] {
     var output = [];
     this.chosenDevice.Ports.forEach(p => {
-      if (p.Endpoint.length == 0 && p.Incoming != this.data.Port.Incoming) {
+      if (p.Incoming != this.data.Port.Incoming) {
         output.push(p);
       }
     });

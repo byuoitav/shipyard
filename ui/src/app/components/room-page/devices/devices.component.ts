@@ -25,7 +25,7 @@ export class DevicesComponent implements OnInit {
   devices: Device[];
 
   devicesSource: MatTableDataSource<Device>;
-  deviceTableAttributes: String[] = ['id', 'type', 'address', 'description'];
+  deviceTableAttributes: String[] = ['id', 'address', 'description'];
 
   expandedDevice: Device | null;
   highlightedDevice: Device | null;
@@ -60,9 +60,6 @@ export class DevicesComponent implements OnInit {
   updateTable() {
     this.devices = this.api.getDevices(this.roomID);
     this.devicesSource.data = this.devices;
-    if(this.expandable === false) {
-      this.highlightedDevice = this.devices[0];
-    }
   }
 
   createDevice(devType: String) {
