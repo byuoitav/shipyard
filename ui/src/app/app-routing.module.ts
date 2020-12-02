@@ -13,10 +13,6 @@ const routes: Routes = [
   },
   {
     path: "campus",
-    component: BuildingListComponent
-  },
-  {
-    path: "campus/:bldgID/roomList",
     component: RoomListComponent
   },
   {

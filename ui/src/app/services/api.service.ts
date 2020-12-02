@@ -427,15 +427,8 @@ export class ApiService {
 
   constructor() { }
 
-  getRooms(bldgID: String): Room[] {
-    let rooms = [];
-    let re = new RegExp(bldgID.toString());
-    this.testRooms.forEach(rm => {
-      if (re.exec(rm.ID.toString()) != null) {
-        rooms.push(rm);
-      }
-    });
-    return rooms;
+  getRooms(): Room[] {
+    return this.testRooms;
   }
 
   getRoom(roomID: String): Room {

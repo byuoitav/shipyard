@@ -22,7 +22,7 @@ export class BuildingListComponent implements OnInit {
   }
 
   genBuildingList() {
-    let rooms = this.api.getRooms("");
+    let rooms = this.api.getRooms();
     let re = new RegExp('[a-zA-Z0-9]*-');
     for (var i = 0; i < rooms.length; i++) {
       let matches = re.exec(rooms[i].ID.toString());

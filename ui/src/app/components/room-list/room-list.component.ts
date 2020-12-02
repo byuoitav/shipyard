@@ -10,18 +10,17 @@ import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
   styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent implements OnInit {
-  bldgID: String;
   rooms: Room[];
-
+  filteredRooms: Room[];
+  filterParam: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private api: ApiService,
     private dialog: MatDialog) {
-    this.route.params.subscribe(params => {
-      this.bldgID = params["bldgID"];
-    });
-    this.rooms = this.api.getRooms(this.bldgID);
+    this.rooms = this.api.getRooms();
+    this.filterParam = "";
+    this.filterRooms();
   }
 
   ngOnInit(): void {
@@ -44,4 +43,14 @@ export class RoomListComponent implements OnInit {
     });
   }
 
+  filterRooms() {
+    console.log(this.filterParam)
+    this.filteredRooms = [];
+    let re = new RegExp(this.filterParam.toLowerCase());
+    this.rooms.forEach(rm => {
+      if (re.exec(rm.ID.toString().toLowerCase()) != null) {
+        this.filteredRooms.push(rm);
+      }
+    });
+  }
 }
