@@ -13,7 +13,7 @@ export class PortDialogComponent implements OnInit {
   @ViewChild('stepper') stepper: MatStepper;
   devices: Device[];
   deviceTableHeaders: string[] =  ["id", "type"];
-  portTableHeaders: string[] = ["id"];
+  portTableHeaders: string[] = ["id", "device"];
 
   chosenDevice: Device;
 
@@ -28,7 +28,7 @@ export class PortDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  test(d: Device) {
+  chooseDevice(d: Device) {
     this.chosenDevice = d;
     this.stepper.next();
   }
@@ -69,5 +69,11 @@ export class PortDialogComponent implements OnInit {
 
   cancel() {
     this.refDialog.close(null);
+  }
+
+  isConnected(p: Port): boolean {
+    let test = (p.Endpoint != null && p.Endpoint.length > 0);
+    console.log(test);
+    return test;
   }
 }

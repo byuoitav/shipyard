@@ -27,9 +27,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
-import { BuildingListComponent } from './components/building-list/building-list.component';
 import { RoomListComponent } from './components/room-list/room-list.component';
-import { BuildingDialogComponent } from './components/building-dialog/building-dialog.component';
 import { RoomDialogComponent } from './components/room-dialog/room-dialog.component';
 import { DevicesComponent } from './components/room-page/devices/devices.component';
 import { DevicesDialogComponent } from './components/room-page/devices/devices-dialog/devices-dialog.component';
@@ -48,9 +46,7 @@ import { MicrophoneGroupComponent } from './components/room-page/ui-config/ui-co
   declarations: [
     AppComponent,
     RoomPageComponent,
-    BuildingListComponent,
     RoomListComponent,
-    BuildingDialogComponent,
     RoomDialogComponent,
     DevicesComponent,
     DevicesDialogComponent,

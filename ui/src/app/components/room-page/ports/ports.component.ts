@@ -51,7 +51,8 @@ export class PortsComponent implements OnInit {
         RoomID: this.roomID,
         SourceDev: this.currentDevice.ID,
         Port: p
-      }
+      },
+      width: "50vw"
     });
 
     ref.afterClosed().subscribe(chosenDev => {

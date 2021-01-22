@@ -10,8 +10,6 @@ import { PortConfigComponent } from '../port-config/port-config.component';
 })
 export class PortListComponent implements OnInit {
   @Input('device') device: Device;
-  @Input('incoming') incoming: boolean;
-  @Input('outgoing') outgoing: boolean;
   @Output() selected = new EventEmitter<Port>();
   @Output() deletePort = new EventEmitter<any>();
 

@@ -44,7 +44,6 @@ export class RoomListComponent implements OnInit {
   }
 
   filterRooms() {
-    console.log(this.filterParam)
     this.filteredRooms = [];
     let re = new RegExp(this.filterParam.toLowerCase());
     this.rooms.forEach(rm => {
