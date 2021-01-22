@@ -1,6 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Room, ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/api.service';
+
+export class Room {
+  ID: String;
+  Desig: String;
+  Desc: String;
+  Notes: String;
+  ProxyBaseURL: String;
+  Tags: Map<String, String>;
+
+  constructor(rm: Room) {
+    this.Tags = new Map();
+    if (rm != null) {
+      this.ID = rm.ID;
+      this.Desc = rm.Desc;
+      rm.Tags.forEach((value, key) => {
+        this.Tags.set(key, value);
+      });
+    } else {
+      this.ID = "";
+      this.Desc = "";
+    }
+  }
+}
 
 @Component({
   selector: 'app-room-page',

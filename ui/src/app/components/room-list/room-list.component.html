@@ -11,9 +11,9 @@
 
 <div class="room-list">
     <ng-container *ngFor="let r of filteredRooms">
-        <mat-card (click)="routeToRoomPage(r.ID)">
+        <mat-card (click)="routeToRoomPage(r)">
             <mat-card-header>
-                <mat-card-title>{{ r.ID }}</mat-card-title>
+                <mat-card-title>{{ r }}</mat-card-title>
                 <span class="spacing"></span>
                 <button mat-icon-button (click)="editRoom(r)">
                     <mat-icon>more_vert</mat-icon>

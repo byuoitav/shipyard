@@ -1,27 +1,5 @@
 import { Injectable } from '@angular/core';
-
-export class Room {
-  ID: String;
-  Desig: String;
-  Desc: String;
-  Notes: String;
-  ProxyBaseURL: String;
-  Tags: Map<String, String>;
-
-  constructor(rm: Room) {
-    this.Tags = new Map();
-    if (rm != null) {
-      this.ID = rm.ID;
-      this.Desc = rm.Desc;
-      rm.Tags.forEach((value, key) => {
-        this.Tags.set(key, value);
-      });
-    } else {
-      this.ID = "";
-      this.Desc = "";
-    }
-  }
-}
+import { Room } from 'src/app/components/room-page/room-page.component';
 
 export class Device {
   ID: String;
@@ -92,6 +70,20 @@ export class DeviceTypeNode {
   providedIn: 'root'
 })
 export class ApiService {
+
+  testRoomList: String[] = [
+    "ASB-TEST",
+    "BYUB-TEST",
+    "EB-TEST",
+    "HBLL-TEST",
+    "ITB-TEST",
+    "ITB-TEST2",
+    "ITB-TEST3",
+    "JFSB-TEST",
+    "KMBL-TEST",
+    "MARB-TEST",
+    "TMCB-TEST"
+  ];
 
   testRooms: Room[] = [
     {
@@ -427,8 +419,15 @@ export class ApiService {
 
   constructor() { }
 
-  getRooms(): Room[] {
-    return this.testRooms;
+  getRooms(): String[] {
+    // let rooms = [];
+    // this.testRoomList.forEach(r => {
+    //   for (let i = 0; i < 300; i++) {
+    //     rooms.push(r);
+    //   }
+    // });
+    // return rooms;
+    return this.testRoomList;
   }
 
   getRoom(roomID: String): Room {

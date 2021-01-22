@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Room, ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
+import { Room } from 'src/app/components/room-page/room-page.component';
+
 
 @Component({
   selector: 'app-room-list',
@@ -10,8 +12,8 @@ import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
   styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent implements OnInit {
-  rooms: Room[];
-  filteredRooms: Room[];
+  rooms: String[]; // Room list will actually be an array of strings
+  filteredRooms: String[];
   filterParam: string;
 
   constructor(private route: ActivatedRoute,
@@ -30,8 +32,9 @@ export class RoomListComponent implements OnInit {
     this.router.navigate(["/campus/" + roomID]);
   }
 
-  editRoom(r: Room) {
-    const roomDialog = this.dialog.open(RoomDialogComponent, {data: r});
+  editRoom(r: String) {
+    let room = this.api.getRoom(r);
+    const roomDialog = this.dialog.open(RoomDialogComponent, {data: room});
 
     roomDialog.afterClosed().subscribe(result => {
       if (result == "delete") {
@@ -47,7 +50,7 @@ export class RoomListComponent implements OnInit {
     this.filteredRooms = [];
     let re = new RegExp(this.filterParam.toLowerCase());
     this.rooms.forEach(rm => {
-      if (re.exec(rm.ID.toString().toLowerCase()) != null) {
+      if (re.exec(rm.toString().toLowerCase()) != null) {
         this.filteredRooms.push(rm);
       }
     });

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Room } from 'src/app/services/api.service';
+import { Room } from 'src/app/components/room-page/room-page.component';
 
 @Component({
   selector: 'app-room-dialog',
