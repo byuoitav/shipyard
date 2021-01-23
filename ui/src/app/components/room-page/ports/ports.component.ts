@@ -1,9 +1,20 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Device, ApiService, Port } from 'src/app/services/api.service';
-import { MatStepper } from '@angular/material/stepper';
+import { Device, ApiService} from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PortDialogComponent } from './port-dialog/port-dialog.component';
 
+export class Port {
+  ID: String;
+  Name: String;
+  Endpoints: Endpoint[];
+  Incoming: boolean;
+  Type: String;
+}
+
+export class Endpoint {
+  Device: String;
+  Port: String;
+}
 
 export interface PortDialogData {
   RoomID: String;
@@ -17,7 +28,6 @@ export interface PortDialogData {
 })
 export class PortsComponent implements OnInit {
   @Input('roomID') roomID: String;
-  @ViewChild('stepper') stepper: MatStepper;
   devices: Device[];
   currentDevice: Device;
   currentPort: Port;
@@ -36,16 +46,11 @@ export class PortsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  configurePorts(dev: Device) {
-    this.currentDevice = dev;
-    this.stepper.next();
-  }
-
   setCurrentDevice(dev: Device) {
     this.currentDevice = dev;
   }
 
-  test(p: Port) {
+  connectPort(p: Port) {
     const ref = this.dialog.open(PortDialogComponent, {
       data: {
         RoomID: this.roomID,
@@ -55,26 +60,31 @@ export class PortsComponent implements OnInit {
       width: "50vw"
     });
 
-    ref.afterClosed().subscribe(chosenDev => {
-      if (chosenDev != null) {
-        p.Endpoint = [chosenDev];
+    ref.afterClosed().subscribe(endpoint => {
+      if (endpoint != null) {
+        // check if already connected and delete connection
+        for(var i = 0; i < p.Endpoints.length; i++) {
+          console.log(p.Endpoints[i]);
+          this.removePortConnection(p.Endpoints[i]);
+        }
+        p.Endpoints = [endpoint];
+        console.log(p.Endpoints);
       }
     });
   }
 
-  test2(data: any) {
+  removePortConnection(endpt: Endpoint) {
+    console.log(endpt);
     for (var k = 0; k < this.devices.length; k++) {
-      if (this.devices[k].ID === data.device) {
+      if (this.devices[k].ID === endpt.Device) {
+        console.log(this.devices[k].ID);
         for (var i = 0; i < this.devices[k].Ports.length; i++) {
-          for (var j = 0; j < this.devices[k].Ports[i].Endpoint.length; j++) {
-            if (data.port === this.devices[k].Ports[i].Endpoint[j]) {
-              this.devices[k].Ports[i].Endpoint.splice(j, 1);
-              return;
-            }
+          for (var j = 0; j < this.devices[k].Ports[i].Endpoints.length; j++) {
+            this.devices[k].Ports[i].Endpoints.splice(j, 1);
+            return;
           }
         }
       }
     }
   }
-
 }

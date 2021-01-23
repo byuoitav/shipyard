@@ -13,8 +13,8 @@
                     <th mat-header-cell *matHeaderCellDef>Connected Device</th>
                     <td mat-cell *matCellDef="let port">
                         <div class="device-column-container">
-                            <p>{{ port.Endpoint[0] }}</p>
-                            <button mat-icon-button *ngIf="port.Endpoint.length != 0" (click)="configurePort(port)">
+                            <div><p *ngIf="port.Endpoints.length > 0">{{ port.Endpoints[0].Device }} : {{ port.Endpoints[0].Port }}</p></div>
+                            <button mat-icon-button (click)="configurePort(port);$event.stopPropagation()">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
                         </div>
@@ -40,8 +40,8 @@
                     <th mat-header-cell *matHeaderCellDef>Connected Device</th>
                     <td mat-cell *matCellDef="let port">
                         <div class="device-column-container">
-                            <p>{{ port.Endpoint[0] }}</p>
-                            <button mat-icon-button *ngIf="port.Endpoint.length != 0" (click)="configurePort(port)">
+                            <div><p *ngIf="port.Endpoints.length > 0">{{ port.Endpoints[0].Device }} : {{ port.Endpoints[0].Port }}</p></div>
+                            <button mat-icon-button (click)="configurePort(port);$event.stopPropagation()">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
                         </div>

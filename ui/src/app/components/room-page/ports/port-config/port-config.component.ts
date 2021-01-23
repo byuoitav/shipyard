@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { Port } from 'src/app/services/api.service';
 import { PortDialogComponent } from '../port-dialog/port-dialog.component';
+import { Port } from '../ports.component';
 
 @Component({
   selector: 'app-port-config',
@@ -32,25 +32,24 @@ export class PortConfigComponent implements OnInit {
       delete: dev
     });
 
-    for (var i = 0; i < this.data.Endpoint.length; i++) {
-      if (this.data.Endpoint[i] === dev) {
-        this.data.Endpoint.splice(i, 1);
+    for (var i = 0; i < this.data.Endpoints.length; i++) {
+      if (this.data.Endpoints[i].Device === dev) {
+        this.data.Endpoints.splice(i, 1);
       }
     }
   }
 
-  test() {
+  connectPort() {
     const ref = this.dialog.open(PortDialogComponent, {
       data: {
-        // RoomID: this.roomID,
-        // SourceDev: this.currentDevice.ID,
         Port: this.data
-      }
+      },
+      width: "50vw"
     });
 
-    ref.afterClosed().subscribe(chosenDev => {
-      if (chosenDev != null) {
-        this.data.Endpoint.push(chosenDev);
+    ref.afterClosed().subscribe(endpt => {
+      if (endpt != null) {
+        this.data.Endpoints.push(endpt);
       }
     });
   }

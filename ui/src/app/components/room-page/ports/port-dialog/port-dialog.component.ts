@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { Device, ApiService, Port } from 'src/app/services/api.service';
+import { Device, ApiService } from 'src/app/services/api.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { ConfirmPortDialog, ConfirmData } from './confirm-dialog';
+import { Port } from '../ports.component';
 
 @Component({
   selector: 'app-port-dialog',
@@ -61,8 +62,16 @@ export class PortDialogComponent implements OnInit {
 
     ref.afterClosed().subscribe(confirm => {
       if (confirm) {
-        p.Endpoint = [this.data.SourceDev];
-        this.refDialog.close(this.chosenDevice.ID);
+        p.Endpoints = [
+          {
+            Device: this.data.SourceDev,
+            Port: this.data.Port.Name
+          }
+        ];
+        this.refDialog.close({
+          Device: this.chosenDevice.ID,
+          Port: p.Name
+        });
       }
     });
   }
@@ -72,8 +81,7 @@ export class PortDialogComponent implements OnInit {
   }
 
   isConnected(p: Port): boolean {
-    let test = (p.Endpoint != null && p.Endpoint.length > 0);
-    console.log(test);
+    let test = (p.Endpoints != null && p.Endpoints.length > 0);
     return test;
   }
 }

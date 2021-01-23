@@ -5,8 +5,8 @@ import { ApiService } from 'src/app/services/api.service';
 export class Room {
   ID: String;
   Desig: String;
-  Desc: String;
-  Notes: String;
+  PublicDesc: String;
+  PrivateDesc: String;
   ProxyBaseURL: String;
   Tags: Map<String, String>;
 
@@ -14,13 +14,13 @@ export class Room {
     this.Tags = new Map();
     if (rm != null) {
       this.ID = rm.ID;
-      this.Desc = rm.Desc;
+      this.PublicDesc = rm.PublicDesc;
       rm.Tags.forEach((value, key) => {
         this.Tags.set(key, value);
       });
     } else {
       this.ID = "";
-      this.Desc = "";
+      this.PublicDesc = "";
     }
   }
 }

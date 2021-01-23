@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Room } from 'src/app/components/room-page/room-page.component';
+import { Port } from '../components/room-page/ports/ports.component';
 
 export class Device {
   ID: String;
@@ -27,14 +28,6 @@ export class Device {
       this.Address = "";
     }
   }
-}
-
-export class Port {
-  ID: String;
-  Name: String;
-  Endpoint: String[];
-  Incoming: boolean;
-  Type: String;
 }
 
 export class RoomConfig {
@@ -89,88 +82,88 @@ export class ApiService {
     {
       ID: "ASB-TEST",
       Desig: "designation ASB-TEST",
-      Desc: "this is ASB-TEST",
-      Notes: "notes on ASB-TEST",
+      PublicDesc: "this is ASB-TEST",
+      PrivateDesc: "notes on ASB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "BYUB-TEST",
       Desig: "designation BYUB-TEST",
-      Desc: "this is BYUB-TEST",
-      Notes: "notes on BYUB-TEST",
+      PublicDesc: "this is BYUB-TEST",
+      PrivateDesc: "notes on BYUB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "EB-TEST",
       Desig: "designation EB-TEST",
-      Desc: "this is EB-TEST",
-      Notes: "notes on EB-TEST",
+      PublicDesc: "this is EB-TEST",
+      PrivateDesc: "notes on EB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "HBLL-TEST",
       Desig: "designation HBLL-TEST",
-      Desc: "this is HBLL-TEST",
-      Notes: "notes on HBLL-TEST",
+      PublicDesc: "this is HBLL-TEST",
+      PrivateDesc: "notes on HBLL-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "ITB-TEST",
       Desig: "designation ITB-TEST",
-      Desc: "this is ITB-TEST",
-      Notes: "notes on ITB-TEST",
+      PublicDesc: "this is ITB-TEST",
+      PrivateDesc: "notes on ITB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "ITB-TEST2",
       Desig: "designation ITB-TEST2",
-      Desc: "this is ITB-TEST2",
-      Notes: "notes on ITB-TEST2",
+      PublicDesc: "this is ITB-TEST2",
+      PrivateDesc: "notes on ITB-TEST2",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "ITB-TEST3",
       Desig: "designation ITB-TEST3",
-      Desc: "this is ITB-TEST3",
-      Notes: "notes on ITB-TEST3",
+      PublicDesc: "this is ITB-TEST3",
+      PrivateDesc: "notes on ITB-TEST3",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "JFSB-TEST",
       Desig: "designation JFSB-TEST",
-      Desc: "this is JFSB-TEST",
-      Notes: "notes on JFSB-TEST",
+      PublicDesc: "this is JFSB-TEST",
+      PrivateDesc: "notes on JFSB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "KMBL-TEST",
       Desig: "designation KMBL-TEST",
-      Desc: "this is KMBL-TEST",
-      Notes: "notes on KMBL-TEST",
+      PublicDesc: "this is KMBL-TEST",
+      PrivateDesc: "notes on KMBL-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "MARB-TEST",
       Desig: "designation MARB-TEST",
-      Desc: "this is MARB-TEST",
-      Notes: "notes on MARB-TEST",
+      PublicDesc: "this is MARB-TEST",
+      PrivateDesc: "notes on MARB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     },
     {
       ID: "TMCB-TEST",
       Desig: "designation TMCB-TEST",
-      Desc: "this is TMCB-TEST",
-      Notes: "notes on TMCB-TEST",
+      PublicDesc: "this is TMCB-TEST",
+      PrivateDesc: "notes on TMCB-TEST",
       ProxyBaseURL: "huh...",
       Tags: new Map()
     }
@@ -185,65 +178,70 @@ export class ApiService {
       DynamicPorts: false,
       Ports: [
         {
-          ID: 'Device1-Port1',
+          ID: 'Port1',
           Name: 'Port1',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port2',
+          ID: 'Port2',
           Name: 'Port2',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port3',
+          ID: 'Port3',
           Name: 'Port3',
-          Endpoint: ['test'],
+          Endpoints: [
+            {
+              Device: 'Device-2',
+              Port: 'Port6'
+            }
+          ],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port4',
+          ID: 'Port4',
           Name: 'Port4',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port5',
+          ID: 'Port5',
           Name: 'Port5',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port6',
+          ID: 'Port6',
           Name: 'Port6',
-          Endpoint: ['test'],
+          Endpoints: [],
           Incoming: false,
           Type: ''
         },
         {
-          ID: 'Device1-Port7',
+          ID: 'Port7',
           Name: 'Port7',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: false,
           Type: ''
         },
         {
-          ID: 'Device1-Port8',
+          ID: 'Port8',
           Name: 'Port8',
-          Endpoint: ['test'],
+          Endpoints: [],
           Incoming: false,
           Type: ''
         },
         {
-          ID: 'Device1-Port9',
+          ID: 'Port9',
           Name: 'Port9',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: false,
           Type: ''
         }
@@ -259,65 +257,70 @@ export class ApiService {
       DynamicPorts: false,
       Ports: [
         {
-          ID: 'Device1-Port1',
+          ID: 'Port1',
           Name: 'Port1',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port2',
+          ID: 'Port2',
           Name: 'Port2',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port3',
+          ID: 'Port3',
           Name: 'Port3',
-          Endpoint: ['test'],
+          Endpoints: [],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port4',
+          ID: 'Port4',
           Name: 'Port4',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port5',
+          ID: 'Port5',
           Name: 'Port5',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: true,
           Type: ''
         },
         {
-          ID: 'Device1-Port6',
+          ID: 'Port6',
           Name: 'Port6',
-          Endpoint: ['test'],
+          Endpoints: [
+            {
+              Device: 'Device-1',
+              Port: 'Port3'
+            }
+          ],
           Incoming: false,
           Type: ''
         },
         {
-          ID: 'Device1-Port7',
+          ID: 'Port7',
           Name: 'Port7',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: false,
           Type: ''
         },
         {
-          ID: 'Device1-Port8',
+          ID: 'Port8',
           Name: 'Port8',
-          Endpoint: ['test'],
+          Endpoints: [],
           Incoming: false,
           Type: ''
         },
         {
-          ID: 'Device1-Port9',
+          ID: 'Port9',
           Name: 'Port9',
-          Endpoint: [],
+          Endpoints: [],
           Incoming: false,
           Type: ''
         }

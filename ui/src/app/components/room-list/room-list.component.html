@@ -15,7 +15,7 @@
             <mat-card-header>
                 <mat-card-title>{{ r }}</mat-card-title>
                 <span class="spacing"></span>
-                <button mat-icon-button (click)="editRoom(r)">
+                <button mat-icon-button (click)="editRoom(r);$event.stopPropagation()">
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </mat-card-header>

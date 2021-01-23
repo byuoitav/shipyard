@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Device, Port } from 'src/app/services/api.service';
+import { Device } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PortConfigComponent } from '../port-config/port-config.component';
+import { Port } from '../ports.component';
 
 @Component({
   selector: 'app-port-list',
@@ -21,14 +22,8 @@ export class PortListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  test(port: Port) {
-    
-  }
-
   selectPort(p: Port) {
-    if (p.Endpoint.length == 0) {
-      this.selected.emit(p);
-    }
+    this.selected.emit(p);
   }
 
   filterPorts(incoming: boolean): Port[] {
@@ -46,8 +41,8 @@ export class PortListComponent implements OnInit {
 
     ref.componentInstance.onDelete.subscribe(data => {
       this.deletePort.emit({
-        device: data.delete,
-        port: this.device.ID
+        Device: data.delete,
+        Port: this.device.ID
       });
     });
   }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Room } from 'src/app/components/room-page/room-page.component';
+import { Device, RoomConfig } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -42,9 +43,9 @@ saveRoom(roomData: Object): boolean {
 }
 
 // Devices
-getRoomDevices(roomID: String): Object {
+getRoomDevices(roomID: String): Device[] {
     this.http.get(this.url + "/rooms/" + roomID.toString() + "/devices").subscribe(
-        data => {
+        (data: Device[]) => {
             return data;
         },
         err => {
@@ -54,9 +55,9 @@ getRoomDevices(roomID: String): Object {
     return null;
 }
 
-getDevice(deviceID: String): Object {
+getDevice(deviceID: String): Device {
     this.http.get(this.url + "/devices" + deviceID.toString()).subscribe(
-        data => {
+        (data: Device) => {
             return data;
         },
         err => {
@@ -71,9 +72,9 @@ saveDevice(deviceData: Object): boolean {
 }
 
 // UIConfig
-getUIConfig(roomID: String): Object {
+getUIConfig(roomID: String): RoomConfig {
     this.http.get(this.url + "/ui_config/" + roomID.toString()).subscribe(
-        data => {
+        (data: RoomConfig) => {
             return data;
         },
         err => {

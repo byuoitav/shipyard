@@ -19,13 +19,13 @@
             </mat-form-field>
         </div>
         <div class="text-row">
-            <mat-form-field (click)="test()">
+            <mat-form-field (click)="connectPort()">
                 <mat-label>Enpoint</mat-label>
                 <mat-chip-list>
-                    <mat-chip *ngFor="let dev of data.Endpoint"
+                    <mat-chip *ngFor="let endpt of data.Endpoints"
                         [removable]="removable"
-                        (removed)="onRemove(dev)">
-                        {{ dev }}
+                        (removed)="onRemove(endpt)">
+                        {{ endpt.Device }} : {{ endpt.Port }}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
                 </mat-chip-list>
