@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { Device, ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { ConfirmPortDialog, ConfirmData } from './confirm-dialog';
-import { Port } from '../ports.component';
+import { Device } from '../../devices/device';
+import { Port } from '../port';
 
 @Component({
   selector: 'app-port-dialog',
@@ -14,7 +15,7 @@ export class PortDialogComponent implements OnInit {
   @ViewChild('stepper') stepper: MatStepper;
   devices: Device[];
   deviceTableHeaders: string[] =  ["id", "type"];
-  portTableHeaders: string[] = ["id", "device"];
+  portTableHeaders: string[] = ["id", "connection"];
 
   chosenDevice: Device;
 

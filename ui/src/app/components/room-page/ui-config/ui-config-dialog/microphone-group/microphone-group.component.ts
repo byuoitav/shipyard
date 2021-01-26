@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Device, ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/api.service';
+import { Device } from '../../../devices/device';
 
 @Component({
   selector: 'app-microphone-group',

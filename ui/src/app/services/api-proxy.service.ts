@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Room } from 'src/app/components/room-page/room-page.component';
-import { Device, RoomConfig } from './api.service';
+import { Device } from '../components/room-page/devices/device';
+import { RoomConfig } from '../components/room-page/ui-config/ui-config';
 
 @Injectable({
   providedIn: 'root'

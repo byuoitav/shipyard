@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Device, ApiService, DeviceTypeNode } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DevicesDialogComponent } from './devices-dialog/devices-dialog.component';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { Device } from './device';
+import { DeviceTypeNode } from './device-type-menu';
 
 @Component({
   selector: 'app-devices',

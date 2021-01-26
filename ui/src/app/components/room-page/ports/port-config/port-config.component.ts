@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Port } from '../port';
 import { PortDialogComponent } from '../port-dialog/port-dialog.component';
-import { Port } from '../ports.component';
 
 @Component({
   selector: 'app-port-config',

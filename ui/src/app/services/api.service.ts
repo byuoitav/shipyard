@@ -1,63 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Room } from 'src/app/components/room-page/room-page.component';
-import { Port } from '../components/room-page/ports/ports.component';
-
-export class Device {
-  ID: String;
-  Desc: String;
-  Address: String;
-  Driver: String;
-  DynamicPorts: boolean;
-  Ports: Port[];
-  Tags: Map<String, String>
-
-  Type: String;
-
-  constructor(dev: Device) {
-    this.Tags = new Map();
-    if (dev != null) {
-      this.ID = dev.ID;
-      this.Type = dev.Type;
-      this.Address = dev.Address;
-      dev.Tags.forEach((value, key) => {
-        this.Tags.set(key, value);
-      });
-    } else {
-      this.ID = "";
-      this.Type = "";
-      this.Address = "";
-    }
-  }
-}
-
-export class RoomConfig {
-  ID: String;
-  ControlPanels: Map<String, String>;
-  ControlGroups: Map<String, UIControlGroup>;
-}
-
-export class UIControlGroup {
-  Displays: Map<String, UIDisplay>;
-  Inputs: String[];
-  Microphones: Map<String, String[]>;
-  MasterVolume: MasterVolume;
-}
-
-export class MasterVolume {
-  Device: String;
-  Block: String;
-}
-
-export class UIDisplay {
-  DefaultInput: String;
-}
-
-export class DeviceTypeNode {
-  Label: String;
-  Icon: String;
-  Value: String;
-  SubNodes: DeviceTypeNode[];
-}
+import { Device } from 'src/app/components/room-page/devices/device';
+import { RoomConfig } from '../components/room-page/ui-config/ui-config';
+import { DeviceTypeNode } from '../components/room-page/devices/device-type-menu';
 
 @Injectable({
   providedIn: 'root'

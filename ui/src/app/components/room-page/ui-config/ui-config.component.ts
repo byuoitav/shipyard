@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UIControlGroup, ApiService, RoomConfig, Device } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UIConfigDialogComponent } from './ui-config-dialog/ui-config-dialog.component';
+import { Device } from '../devices/device';
+import { ApiService } from 'src/app/services/api.service';
+import { RoomConfig, UIControlGroup } from './ui-config';
 
 @Component({
   selector: 'app-ui-config',

@@ -1,9 +1,11 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { Device, ApiService, UIControlGroup, UIDisplay, MasterVolume } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ConfirmConfigComponent } from './confirm-config.component';
 import { MicrophoneGroupComponent } from './microphone-group/microphone-group.component';
+import { Device } from '../../devices/device';
+import { MasterVolume, UIControlGroup, UIDisplay } from '../ui-config';
 
 @Component({
   selector: 'app-ui-config-dialog',

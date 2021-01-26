@@ -1,20 +1,9 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Device, ApiService} from 'src/app/services/api.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { ApiService} from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PortDialogComponent } from './port-dialog/port-dialog.component';
-
-export class Port {
-  ID: String;
-  Name: String;
-  Endpoints: Endpoint[];
-  Incoming: boolean;
-  Type: String;
-}
-
-export class Endpoint {
-  Device: String;
-  Port: String;
-}
+import { Device } from '../devices/device';
+import { Endpoint, Port } from './port';
 
 export interface PortDialogData {
   RoomID: String;

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Device } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Device } from '../../devices/device';
+import { Port } from '../port';
 import { PortConfigComponent } from '../port-config/port-config.component';
-import { Port } from '../ports.component';
 
 @Component({
   selector: 'app-port-list',
