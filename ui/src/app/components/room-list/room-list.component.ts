@@ -3,7 +3,6 @@ import { ApiService } from 'src/app/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
-import { Room } from 'src/app/components/room-page/room-page.component';
 
 
 @Component({

@@ -52,7 +52,7 @@ export class DevicesComponent implements OnInit {
         if (result) {
           this.api.addDevice(dev);
         } else {
-          this.api.removeDevice(dev.ID);
+          this.api.removeDevice(dev.id);
         }
       }
       this.updateTable();

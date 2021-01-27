@@ -53,18 +53,18 @@ export class UIConfigDialogComponent implements OnInit {
   saveControlGroup() {
     this.config.Displays = new Map<String, UIDisplay>();
     this.DisplaySelection.selected.forEach(display => {
-      this.config.Displays.set(display.ID, new UIDisplay());
+      this.config.Displays.set(display.id, new UIDisplay());
     });
     
     this.config.Inputs = [];
     this.InputSelection.selected.forEach(input => {
-      this.config.Inputs.push(input.ID);
+      this.config.Inputs.push(input.id);
     });
 
     this.config.Microphones = this.MicrophoneGroups;
 
     this.config.MasterVolume = new MasterVolume();
-    this.config.MasterVolume.Device = this.MasterVolSelection.selected[0].ID;
+    this.config.MasterVolume.Device = this.MasterVolSelection.selected[0].id;
 
     this.refDialog.close({
       Config: this.config,
@@ -119,7 +119,7 @@ export class UIConfigDialogComponent implements OnInit {
     var filteredDevs = []
     this.devices.forEach(dev => {
       ids.forEach(id => {
-        if (id === dev.ID) {
+        if (id === dev.id) {
           filteredDevs.push(dev);
         }
       });
@@ -131,7 +131,7 @@ export class UIConfigDialogComponent implements OnInit {
     let re = new RegExp(pattern);
     var filteredDevs = []
     this.devices.forEach(dev => {
-      if (re.exec(dev.ID.toString()) != null) {
+      if (re.exec(dev.id.toString()) != null) {
         filteredDevs.push(dev);
       }
     });

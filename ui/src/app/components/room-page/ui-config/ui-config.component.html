@@ -79,12 +79,12 @@
                 <mat-card-content>
                     <mat-list>
                         <mat-list-item *ngFor="let panel of getControlPanels()" class="control-panel-assignment">
-                            <p>{{ panel.ID }}</p>
+                            <p>{{ panel.id }}</p>
                             <span class="spacing"></span>
                             <mat-form-field>
                                 <mat-label>UI Layout</mat-label>
                                 <mat-select>
-                                    <mat-option *ngFor="let group of roomConf.ControlGroups | keyvalue" [value]="group.key" (onSelectionChange)="mapControlPanel($event, panel.ID, group.key)">
+                                    <mat-option *ngFor="let group of roomConf.ControlGroups | keyvalue" [value]="group.key" (onSelectionChange)="mapControlPanel($event, panel.id, group.key)">
                                         {{ group.key }}
                                     </mat-option>
                                 </mat-select>

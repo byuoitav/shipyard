@@ -58,7 +58,7 @@ export class UiConfigComponent implements OnInit {
     let re = new RegExp('-CP.*');
     var filteredDevs = []
     this.devices.forEach(dev => {
-      if (re.exec(dev.ID.toString()) != null) {
+      if (re.exec(dev.id.toString()) != null) {
         filteredDevs.push(dev);
       }
     });

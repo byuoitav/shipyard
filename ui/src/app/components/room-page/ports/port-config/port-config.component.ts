@@ -32,9 +32,9 @@ export class PortConfigComponent implements OnInit {
       delete: dev
     });
 
-    for (var i = 0; i < this.data.Endpoints.length; i++) {
-      if (this.data.Endpoints[i].Device === dev) {
-        this.data.Endpoints.splice(i, 1);
+    for (var i = 0; i < this.data.endpoint.length; i++) {
+      if (this.data.endpoint[i].device === dev) {
+        this.data.endpoint.splice(i, 1);
       }
     }
   }
@@ -49,7 +49,7 @@ export class PortConfigComponent implements OnInit {
 
     ref.afterClosed().subscribe(endpt => {
       if (endpt != null) {
-        this.data.Endpoints.push(endpt);
+        this.data.endpoint.push(endpt);
       }
     });
   }

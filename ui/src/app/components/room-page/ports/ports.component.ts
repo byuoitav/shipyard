@@ -43,7 +43,7 @@ export class PortsComponent implements OnInit {
     const ref = this.dialog.open(PortDialogComponent, {
       data: {
         RoomID: this.roomID,
-        SourceDev: this.currentDevice.ID,
+        SourceDev: this.currentDevice.id,
         Port: p
       },
       width: "50vw"
@@ -52,12 +52,12 @@ export class PortsComponent implements OnInit {
     ref.afterClosed().subscribe(endpoint => {
       if (endpoint != null) {
         // check if already connected and delete connection
-        for(var i = 0; i < p.Endpoints.length; i++) {
-          console.log(p.Endpoints[i]);
-          this.removePortConnection(p.Endpoints[i]);
+        for(var i = 0; i < p.endpoint.length; i++) {
+          console.log(p.endpoint[i]);
+          this.removePortConnection(p.endpoint[i]);
         }
-        p.Endpoints = [endpoint];
-        console.log(p.Endpoints);
+        p.endpoint = [endpoint];
+        console.log(p.endpoint);
       }
     });
   }
@@ -65,11 +65,11 @@ export class PortsComponent implements OnInit {
   removePortConnection(endpt: Endpoint) {
     console.log(endpt);
     for (var k = 0; k < this.devices.length; k++) {
-      if (this.devices[k].ID === endpt.Device) {
-        console.log(this.devices[k].ID);
-        for (var i = 0; i < this.devices[k].Ports.length; i++) {
-          for (var j = 0; j < this.devices[k].Ports[i].Endpoints.length; j++) {
-            this.devices[k].Ports[i].Endpoints.splice(j, 1);
+      if (this.devices[k].id === endpt.device) {
+        console.log(this.devices[k].id);
+        for (var i = 0; i < this.devices[k].ports.length; i++) {
+          for (var j = 0; j < this.devices[k].ports[i].endpoint.length; j++) {
+            this.devices[k].ports[i].endpoint.splice(j, 1);
             return;
           }
         }

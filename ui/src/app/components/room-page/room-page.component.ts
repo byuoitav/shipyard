@@ -1,29 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
-
-export class Room {
-  ID: String;
-  Desig: String;
-  PublicDesc: String;
-  PrivateDesc: String;
-  ProxyBaseURL: String;
-  Tags: Map<String, String>;
-
-  constructor(rm: Room) {
-    this.Tags = new Map();
-    if (rm != null) {
-      this.ID = rm.ID;
-      this.PublicDesc = rm.PublicDesc;
-      rm.Tags.forEach((value, key) => {
-        this.Tags.set(key, value);
-      });
-    } else {
-      this.ID = "";
-      this.PublicDesc = "";
-    }
-  }
-}
+import { Room } from './room';
 
 @Component({
   selector: 'app-room-page',
@@ -53,13 +31,13 @@ export class RoomPageComponent implements OnInit {
   }
 
   addTag() {
-    this.room.Tags.set(this.tagKey, this.tagValue);
+    this.room.tags.set(this.tagKey, this.tagValue);
     this.tagKey = "";
     this.tagValue = "";
   }
 
   removeTag(key: String) {
-    this.room.Tags.delete(key);
+    this.room.tags.delete(key);
   }
 
 }

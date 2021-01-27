@@ -37,8 +37,8 @@ export class PortDialogComponent implements OnInit {
 
   filterPorts(): Port[] {
     var output = [];
-    this.chosenDevice.Ports.forEach(p => {
-      if (p.Incoming != this.data.Port.Incoming) {
+    this.chosenDevice.ports.forEach(p => {
+      if (p.incoming != this.data.Port.incoming) {
         output.push(p);
       }
     });
@@ -47,31 +47,31 @@ export class PortDialogComponent implements OnInit {
 
   confirmSelection(p: Port) {
     let data = new ConfirmData;
-    if (p.Incoming) {
-      data.Incoming = this.chosenDevice.ID;
-      data.IncomingPort = p.Name;
+    if (p.incoming) {
+      data.Incoming = this.chosenDevice.id;
+      data.IncomingPort = p.name;
       data.Outgoing = this.data.SourceDev;
       data.OutgoingPort = this.data.Port.Name;
     } else {
       data.Incoming = this.data.SourceDev;
       data.IncomingPort = this.data.Port.Name;
-      data.Outgoing = this.chosenDevice.ID;
-      data.OutgoingPort = p.Name;
+      data.Outgoing = this.chosenDevice.id;
+      data.OutgoingPort = p.name;
     }
 
     const ref = this.dialog.open(ConfirmPortDialog, {data: data});
 
     ref.afterClosed().subscribe(confirm => {
       if (confirm) {
-        p.Endpoints = [
+        p.endpoint = [
           {
-            Device: this.data.SourceDev,
-            Port: this.data.Port.Name
+            device: this.data.SourceDev,
+            port: this.data.Port.name
           }
         ];
         this.refDialog.close({
-          Device: this.chosenDevice.ID,
-          Port: p.Name
+          Device: this.chosenDevice.id,
+          Port: p.name
         });
       }
     });
@@ -82,7 +82,7 @@ export class PortDialogComponent implements OnInit {
   }
 
   isConnected(p: Port): boolean {
-    let test = (p.Endpoints != null && p.Endpoints.length > 0);
+    let test = (p.endpoint != null && p.endpoint.length > 0);
     return test;
   }
 }

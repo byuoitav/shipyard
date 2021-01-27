@@ -7,13 +7,13 @@
                     <mat-card-content>
                         <h4>Public Description</h4>
                         <mat-form-field class="text-wrapper" appearance="outline">
-                            <textarea matInput rows="4" placeholder="description" [(ngModel)]="room.PublicDesc"></textarea>
+                            <textarea matInput rows="4" placeholder="description" [(ngModel)]="room.publicDescription"></textarea>
                         </mat-form-field>
                     </mat-card-content>
                     <mat-card-content>
                         <h4>Private Description</h4>
                         <mat-form-field class="text-wrapper" appearance="outline">
-                            <textarea matInput rows="4" placeholder="description" [(ngModel)]="room.PrivateDesc"></textarea>
+                            <textarea matInput rows="4" placeholder="description" [(ngModel)]="room.privateDescription"></textarea>
                         </mat-form-field>
                     </mat-card-content>
                     <mat-card-content>
@@ -36,7 +36,7 @@
                             </button>
                         </div>
                         
-                        <span *ngFor="let tag of room.Tags | keyvalue">
+                        <span *ngFor="let tag of room.tags | keyvalue">
                             <div class="text-row">
                                 <div class="tag-container">
                                     <p class="tag-label">{{ tag.key }}</p>

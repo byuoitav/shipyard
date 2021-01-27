@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Room } from 'src/app/components/room-page/room-page.component';
+import { Room } from '../room-page/room';
 
 @Component({
   selector: 'app-room-dialog',
@@ -26,13 +26,13 @@ export class RoomDialogComponent implements OnInit {
   }
 
   addTag() {
-    this.room.Tags.set(this.tagKey, this.tagValue);
+    this.room.tags.set(this.tagKey, this.tagValue);
     this.tagKey = "";
     this.tagValue = "";
   }
 
   removeTag(key: String) {
-    this.room.Tags.delete(key);
+    this.room.tags.delete(key);
   }
 
   onCancel() {

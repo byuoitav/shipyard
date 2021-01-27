@@ -28,8 +28,8 @@ export class PortListComponent implements OnInit {
 
   filterPorts(incoming: boolean): Port[] {
     var output = [];
-    this.device.Ports.forEach(p => {
-      if (p.Incoming == incoming) {
+    this.device.ports.forEach(p => {
+      if (p.incoming == incoming) {
         output.push(p);
       }
     });
@@ -42,7 +42,7 @@ export class PortListComponent implements OnInit {
     ref.componentInstance.onDelete.subscribe(data => {
       this.deletePort.emit({
         Device: data.delete,
-        Port: this.device.ID
+        Port: this.device.id
       });
     });
   }

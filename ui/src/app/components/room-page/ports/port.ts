@@ -1,12 +1,12 @@
 export class Port {
-    ID: String;
-    Name: String;
-    Endpoints: Endpoint[];
-    Incoming: boolean;
-    Type: String;
+    id: String;
+    name: String;
+    endpoint: Endpoint[];
+    incoming: boolean;
+    type: String;
 }
   
 export class Endpoint {
-    Device: String;
-    Port: String;
+    device: String;
+    port: String;
 }
