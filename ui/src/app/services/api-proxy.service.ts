@@ -14,9 +14,9 @@ export class ApiProxyService {
     // Rooms
     getRoomList(): String[] {
         this.http.get(this.url + "/rooms").subscribe(
-            (data: String[]) => {
+            (resp: String[]) => {
                 console.log("retrieved room list");
-                return data;
+                return resp;
             },
             err => {
                 console.log("failed to retrieve room list");
@@ -29,9 +29,9 @@ export class ApiProxyService {
 
     getRoom(roomID: String): Room {
         this.http.get(this.url + "/rooms/" + roomID.toString()).subscribe(
-            data => {
+            resp => {
                 console.log("retrieved data for room: " + roomID);
-                return data;
+                return resp;
             },
             err => {
                 console.log("failed to retrieve data for room: " + roomID);
@@ -42,16 +42,29 @@ export class ApiProxyService {
         return null;
     }
 
-    saveRoom(roomData: Object): boolean {
+    saveRoom(roomData: Room): boolean {
+        this.http.post(this.url + "/rooms/" + roomData.id.toString(), roomData).subscribe(
+            resp => {
+                if (resp["success"]) {
+                    console.log("");
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            err => {
+                return false;
+            }
+        );
         return null;
     }
 
     // Devices
     getRoomDevices(roomID: String): Device[] {
         this.http.get(this.url + "/rooms/" + roomID.toString() + "/devices").subscribe(
-            (data: Device[]) => {
+            (resp: Device[]) => {
                 console.log("retrieved device list for room: " + roomID);
-                return data;
+                return resp;
             },
             err => {
                 console.log("failed to retrieve device list for room: " + roomID);
@@ -64,9 +77,9 @@ export class ApiProxyService {
 
     getDevice(deviceID: String): Device {
         this.http.get(this.url + "/devices" + deviceID.toString()).subscribe(
-            (data: Device) => {
+            (resp: Device) => {
                 console.log("retrieved data for device: " + deviceID);
-                return data;
+                return resp;
             },
             err => {
                 console.log("failed to retrieve data for device: " + deviceID);
@@ -77,16 +90,29 @@ export class ApiProxyService {
         return null;
     }
 
-    saveDevice(deviceData: Object): boolean {
+    saveDevice(deviceData: Device): boolean {
+        this.http.post(this.url + "/devices/" + deviceData.id.toString(), deviceData).subscribe(
+            resp => {
+                if (resp["success"]) {
+                    console.log("");
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            err => {
+                return false;
+            }
+        );
         return null;
     }
 
     // UIConfig
     getUIConfig(roomID: String): RoomConfig {
         this.http.get(this.url + "/ui_config/" + roomID.toString()).subscribe(
-            (data: RoomConfig) => {
+            (resp: RoomConfig) => {
                 console.log("retrieved ui config for room: " + roomID);
-                return data;
+                return resp;
             },
             err => {
                 console.log("failed to retrieve ui config for room: " + roomID);
@@ -97,7 +123,20 @@ export class ApiProxyService {
         return null;
     }
 
-    saveUIConfig(UIConfigData: Object): boolean {
+    saveUIConfig(UIConfigData: RoomConfig): boolean {
+        this.http.post(this.url + "/ui_config/" + UIConfigData.ID.toString(), UIConfigData).subscribe(
+            resp => {
+                if (resp["success"]) {
+                    console.log("");
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            err => {
+                return false;
+            }
+        );
         return null;
     }
 }
