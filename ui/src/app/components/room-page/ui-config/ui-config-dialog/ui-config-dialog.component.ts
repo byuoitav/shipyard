@@ -51,20 +51,20 @@ export class UIConfigDialogComponent implements OnInit {
   }
 
   saveControlGroup() {
-    this.config.Displays = new Map<String, UIDisplay>();
+    this.config.displays = new Map<String, UIDisplay>();
     this.DisplaySelection.selected.forEach(display => {
-      this.config.Displays.set(display.id, new UIDisplay());
+      this.config.displays.set(display.id, new UIDisplay());
     });
     
-    this.config.Inputs = [];
+    this.config.inputs = [];
     this.InputSelection.selected.forEach(input => {
-      this.config.Inputs.push(input.id);
+      this.config.inputs.push(input.id);
     });
 
-    this.config.Microphones = this.MicrophoneGroups;
+    this.config.microphones = this.MicrophoneGroups;
 
-    this.config.MasterVolume = new MasterVolume();
-    this.config.MasterVolume.Device = this.MasterVolSelection.selected[0].id;
+    this.config.masterVolume = new MasterVolume();
+    this.config.masterVolume.device = this.MasterVolSelection.selected[0].id;
 
     this.refDialog.close({
       Config: this.config,
@@ -83,17 +83,17 @@ export class UIConfigDialogComponent implements OnInit {
   }
 
   initializeSelectors() {
-    this.filterDevicesByID([...this.config.Displays.keys()]).forEach(dev => {
+    this.filterDevicesByID([...this.config.displays.keys()]).forEach(dev => {
       this.DisplaySelection.select(dev);
     });
-    this.filterDevicesByID(this.config.Inputs).forEach(dev => {
+    this.filterDevicesByID(this.config.inputs).forEach(dev => {
       this.InputSelection.select(dev);
     });
 
-    this.MicrophoneGroups = this.config.Microphones;
+    this.MicrophoneGroups = this.config.microphones;
 
-    if (this.config.MasterVolume != null) {
-      this.filterDevicesByID([this.config.MasterVolume.Device]).forEach(dev => {
+    if (this.config.masterVolume != null) {
+      this.filterDevicesByID([this.config.masterVolume.device]).forEach(dev => {
         this.MasterVolSelection.select(dev);
       });
     } else {

@@ -124,7 +124,7 @@ export class ApiProxyService {
     }
 
     saveUIConfig(UIConfigData: RoomConfig): boolean {
-        this.http.post(this.url + "/ui_config/" + UIConfigData.ID.toString(), UIConfigData).subscribe(
+        this.http.post(this.url + "/ui_config/" + UIConfigData.id.toString(), UIConfigData).subscribe(
             resp => {
                 if (resp["success"]) {
                     console.log("");

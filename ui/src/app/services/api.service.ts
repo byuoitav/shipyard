@@ -479,34 +479,34 @@ export class ApiService {
 
   getRoomConfig(): RoomConfig {
     return {
-      ID: "Test",
-      ControlPanels: new Map(),
-      ControlGroups: new Map([
+      id: "Test",
+      controlPanels: new Map(),
+      controlGroups: new Map([
         ["Layout 1",{
-          Displays: new Map(),
-          Inputs: [],
-          Microphones: new Map(),
-          MasterVolume: {
-            Device: "Test",
-            Block: ""
+          displays: new Map(),
+          inputs: [],
+          microphones: new Map(),
+          masterVolume: {
+            device: "Test",
+            block: ""
           }
         }],
         ["Layout 2",{
-          Displays: new Map(),
-          Inputs: [],
-          Microphones: new Map(),
-          MasterVolume: {
-            Device: "Test",
-            Block: ""
+          displays: new Map(),
+          inputs: [],
+          microphones: new Map(),
+          masterVolume: {
+            device: "Test",
+            block: ""
           }
         }],
         ["Layout 3",{
-          Displays: new Map(),
-          Inputs: [],
-          Microphones: new Map(),
-          MasterVolume: {
-            Device: "Test",
-            Block: ""
+          displays: new Map(),
+          inputs: [],
+          microphones: new Map(),
+          masterVolume: {
+            device: "Test",
+            block: ""
           }
         }]
       ])

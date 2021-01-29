@@ -1,21 +1,21 @@
 export class RoomConfig {
-    ID: String;
-    ControlPanels: Map<String, String>;
-    ControlGroups: Map<String, UIControlGroup>;
+    id: String;
+    controlPanels: Map<String, String>;
+    controlGroups: Map<String, UIControlGroup>;
 }
   
 export class UIControlGroup {
-    Displays: Map<String, UIDisplay>;
-    Inputs: String[];
-    Microphones: Map<String, String[]>;
-    MasterVolume: MasterVolume;
+    displays: Map<String, UIDisplay>;
+    inputs: String[];
+    microphones: Map<String, String[]>;
+    masterVolume: MasterVolume;
 }
   
 export class MasterVolume {
-    Device: String;
-    Block: String;
+    device: String;
+    block: String;
 }
   
 export class UIDisplay {
-    DefaultInput: String;
+    defaultInput: String;
 }

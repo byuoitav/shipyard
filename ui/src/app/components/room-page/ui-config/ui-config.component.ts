@@ -38,7 +38,7 @@ export class UiConfigComponent implements OnInit {
 
     cgDialogRef.afterClosed().subscribe(data => {
       if (data != null) {
-        this.roomConf.ControlGroups.set(data.ID, data.Config);
+        this.roomConf.controlGroups.set(data.ID, data.Config);
         if (id !== data.ID) {
           this.deleteGroup(id);
         }
@@ -47,7 +47,7 @@ export class UiConfigComponent implements OnInit {
   }
 
   deleteGroup(groupID: String) {
-    this.roomConf.ControlGroups.delete(groupID);
+    this.roomConf.controlGroups.delete(groupID);
   }
 
   checkForCameras(): boolean {
@@ -68,7 +68,7 @@ export class UiConfigComponent implements OnInit {
 
   mapControlPanel(event: any, panel: String, group: String) {
     if (event.source.selected) {
-      this.roomConf.ControlPanels.set(panel, group);
+      this.roomConf.controlPanels.set(panel, group);
     }
   }
 
