@@ -64,4 +64,10 @@ export class UiConfigComponent implements OnInit {
     return filteredDevs;
   }
 
+  mapControlPanel(event: any, panel: String, group: String) {
+    if (event.source.selected) {
+      this.roomConf.ControlPanels.set(panel, group);
+    }
+  }
+
 }

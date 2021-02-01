@@ -42,7 +42,10 @@ export class MicrophoneGroupComponent implements OnInit {
   }
 
   saveGroup() {
-    
+    this.refDialog.close({
+      ID: this.groupID,
+      Microphones: this.MicSelection.selected
+    });
   }
 
 }

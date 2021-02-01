@@ -3,14 +3,14 @@
         <p>Info</p>
         <div class="text-row">
             <mat-form-field>
-                <mat-label>ID</mat-label>
+                <mat-label>Room Name</mat-label>
                 <input matInput type="text" [(ngModel)]="room.ID">
             </mat-form-field>
         </div>
         <div class="text-row">
-            <mat-form-field>
-                <mat-label>Description</mat-label>
-                <input matInput type="text" [(ngModel)]="room.Desc">
+            <mat-form-field class="text-wrapper" appearance="outline">
+                <mat-label>Public Description</mat-label>
+                <textarea matInput rows="4" type="text" [(ngModel)]="room.Desc"></textarea>
             </mat-form-field>
         </div>
         <p>Tags</p>

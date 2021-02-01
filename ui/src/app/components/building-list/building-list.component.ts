@@ -65,8 +65,8 @@ export class BuildingListComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result != null) {
-        if (result) {
-          this.addBuilding(bldg);
+        if (typeof result == "string") {
+          this.addBuilding(result);
         } else {
           this.removeBuilding(bldg);
         }

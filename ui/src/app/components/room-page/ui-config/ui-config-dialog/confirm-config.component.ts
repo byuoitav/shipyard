@@ -4,10 +4,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
     selector: 'app-ui-config-dialog',
     template: `
-        <h1 mat-dialog-title>Confirm Control Group Title</h1>
+        <h1 mat-dialog-title>Confirm Layout Name</h1>
 
         <mat-form-field>
-            <mat-label>Title</mat-label>
+            <mat-label>Name</mat-label>
             <input matInput type="text" [(ngModel)]="id">
         </mat-form-field>
         <button mat-stroked-button color="primary" (click)="saveGroupID()">Done</button>
