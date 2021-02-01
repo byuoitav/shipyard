@@ -9,7 +9,7 @@ import (
 	"github.com/go-kivik/kivik/v3"
 )
 
-const _devicesDB = "devices"
+const _devicesDB = "shipyard-devices"
 
 // device is the couch representation of a device
 type device struct {

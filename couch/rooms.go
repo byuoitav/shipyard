@@ -10,7 +10,7 @@ import (
 )
 
 // The path for the rooms database
-const _roomsDB = "rooms"
+const _roomsDB = "shipyard-rooms"
 
 // room is the couch representation of a room
 type room struct {
