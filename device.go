@@ -3,6 +3,7 @@ package shipyard
 // Device represents a physical AV device and its configuration
 type Device struct {
 	ID                 string                           `json:"id"`
+	Room               string                           `json:"room"`
 	APIControllable    bool                             `json:"api_controllable"`
 	PublicDescription  string                           `json:"publicDescription"`
 	PrivateDescription string                           `json:"privateDescription"`

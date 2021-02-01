@@ -15,6 +15,7 @@ const _devicesDB = "devices"
 type device struct {
 	Rev                string            `json:"_rev,omitempty"`
 	ID                 string            `json:"_id"`
+	Room               string            `json:"room"`
 	Address            string            `json:"address"`
 	Driver             string            `json:"driver"`
 	PublicDescription  string            `json:"publicDescription"`
@@ -127,6 +128,7 @@ func (s *Service) SaveDevice(dev shipyard.Device) error {
 // Merge a given shipyard.Device into an existing device
 func mergeDevice(d shipyard.Device, cd device) device {
 	cd.ID = d.ID
+	cd.Room = d.Room
 	cd.Address = d.Address
 	cd.Driver = d.Driver
 	cd.PublicDescription = d.PublicDescription
@@ -159,6 +161,7 @@ func mergeDevice(d shipyard.Device, cd device) device {
 func convertDevice(d device) shipyard.Device {
 	sd := shipyard.Device{
 		ID:                 d.ID,
+		Room:               d.Room,
 		Address:            d.Address,
 		Driver:             d.Driver,
 		PublicDescription:  d.PublicDescription,
