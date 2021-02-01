@@ -25,10 +25,15 @@ type device struct {
 
 // devicePort is the couch representation of a device port
 type devicePort struct {
-	Name     string   `json:"name"`
-	Endpoint []string `json:"endpoint"`
-	Incoming bool     `json:"incoming"`
-	Type     string   `json:"string"`
+	Name      string         `json:"name"`
+	Endpoints []portEndpoint `json:"endpoint"`
+	Incoming  bool           `json:"incoming"`
+	Type      string         `json:"string"`
+}
+
+type portEndpoint struct {
+	Device string `json:"device"`
+	Port   string `json:"port"`
 }
 
 func (s *Service) GetDevice(deviceID string) (shipyard.Device, error) {
@@ -130,12 +135,21 @@ func mergeDevice(d shipyard.Device, cd device) device {
 	cd.Ports = []devicePort{}
 
 	for _, p := range d.Ports {
-		cd.Ports = append(cd.Ports, devicePort{
-			Name:     p.Name,
-			Endpoint: p.Endpoint,
-			Incoming: p.Incoming,
-			Type:     p.Type,
-		})
+		port := devicePort{
+			Name:      p.Name,
+			Endpoints: []portEndpoint{},
+			Incoming:  p.Incoming,
+			Type:      p.Type,
+		}
+
+		for _, e := range p.Endpoints {
+			port.Endpoints = append(port.Endpoints, portEndpoint{
+				Device: e.Device,
+				Port:   e.Port,
+			})
+		}
+
+		cd.Ports = append(cd.Ports, port)
 	}
 
 	return cd
@@ -155,12 +169,21 @@ func convertDevice(d device) shipyard.Device {
 	ports := []shipyard.DevicePort{}
 
 	for _, p := range d.Ports {
-		ports = append(ports, shipyard.DevicePort{
-			Name:     p.Name,
-			Endpoint: p.Endpoint,
-			Incoming: p.Incoming,
-			Type:     p.Type,
-		})
+		port := shipyard.DevicePort{
+			Name:      p.Name,
+			Endpoints: []shipyard.PortEndpoint{},
+			Incoming:  p.Incoming,
+			Type:      p.Type,
+		}
+
+		for _, e := range p.Endpoints {
+			port.Endpoints = append(port.Endpoints, shipyard.PortEndpoint{
+				Device: e.Device,
+				Port:   e.Port,
+			})
+		}
+
+		ports = append(ports, port)
 	}
 
 	sd.Ports = ports

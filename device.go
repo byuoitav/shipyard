@@ -23,11 +23,16 @@ type DeviceTemplate struct {
 
 // DevicePort represents a port on a physical device
 type DevicePort struct {
-	ID       string   `json:"id"`
-	Name     string   `json:"name"`
-	Endpoint []string `json:"endpoint"`
-	Incoming bool     `json:"incoming"`
-	Type     string   `json:"type"`
+	ID        string         `json:"id"`
+	Name      string         `json:"name"`
+	Endpoints []PortEndpoint `json:"endpoints"`
+	Incoming  bool           `json:"incoming"`
+	Type      string         `json:"type"`
+}
+
+type PortEndpoint struct {
+	Device string `json:"device"`
+	Port   string `json:"port"`
 }
 
 // Tags are a set of arbitrary key value pairs used for storing extra information
