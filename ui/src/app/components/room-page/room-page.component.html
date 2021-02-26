@@ -3,7 +3,10 @@
         <ng-template matTabContent>
             <div class="room-info-container">
                 <mat-card>
-                    <mat-card-title>{{ roomID }}</mat-card-title>
+                    <mat-card-header>
+                        <mat-card-title>{{ roomID }}</mat-card-title>
+                        <button mat-raised-button color="primary" (click)="save()">Save</button>
+                    </mat-card-header>
                     <mat-card-content>
                         <h4>Public Description</h4>
                         <mat-form-field class="text-wrapper" appearance="outline">

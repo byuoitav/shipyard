@@ -12,18 +12,14 @@
             <td mat-cell *matCellDef="let dev"> {{dev.id}} </td>
         </ng-container>
         <ng-container matColumnDef="type">
-            <th mat-header-cell *matHeaderCellDef>Type</th>
+            <th mat-header-cell *matHeaderCellDef>Type (upcoming feature)</th>
             <td mat-cell *matCellDef="let dev"> {{dev.Type}} </td>
         </ng-container>
         <ng-container matColumnDef="address">
             <th mat-header-cell *matHeaderCellDef>Address</th>
-            <td mat-cell *matCellDef="let dev"> {{dev.address}} </td>
-        </ng-container>
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef>Public Description</th>
-            <td mat-cell *matCellDef="let dev">
-                <div class="description-container">
-                    <p>{{ dev.Desc }}</p>
+            <td mat-cell *matCellDef="let dev"> 
+                <div class="address-container">
+                    <p>{{dev.address}}</p>
                     <button mat-icon-button (click)="editDevice(dev)">
                         <mat-icon>more_vert</mat-icon>
                     </button>

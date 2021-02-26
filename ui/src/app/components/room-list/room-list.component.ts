@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
+import { ApiProxyService } from 'src/app/services/api-proxy.service';
 
 
 @Component({
@@ -11,20 +12,21 @@ import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
   styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent implements OnInit {
-  rooms: String[]; // Room list will actually be an array of strings
+  rooms: String[] = []; // Room list will actually be an array of strings
   filteredRooms: String[];
   filterParam: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private api: ApiService,
+    private proxy: ApiProxyService,
     private dialog: MatDialog) {
-    this.rooms = this.api.getRooms();
-    this.filterParam = "";
-    this.filterRooms();
   }
 
   ngOnInit(): void {
+    this.rooms = this.route.snapshot.data.rooms;
+    this.filterParam = "";
+    this.filterRooms();
   }
 
   routeToRoomPage(roomID: String) {
@@ -32,7 +34,7 @@ export class RoomListComponent implements OnInit {
   }
 
   editRoom(r: String) {
-    let room = this.api.getRoom(r);
+    let room = this.proxy.getRoom(r);
     const roomDialog = this.dialog.open(RoomDialogComponent, {data: room});
 
     roomDialog.afterClosed().subscribe(result => {

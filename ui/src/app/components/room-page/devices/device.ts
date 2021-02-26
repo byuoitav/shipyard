@@ -9,7 +9,7 @@ export class Device {
     driver: String;
     dynamicPorts: boolean;
     ports: Port[];
-    tags: Map<String, String>
+    tags: Map<String, String>;
   
     Type: String;
   
