@@ -6,6 +6,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 import { Device } from './device';
 import { DeviceTypeNode } from './device-type-menu';
 import { ApiProxyService } from 'src/app/services/api-proxy.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-devices',
@@ -35,14 +36,13 @@ export class DevicesComponent implements OnInit {
   menuNodes: DeviceTypeNode[];
 
   constructor(private proxy: ApiProxyService,
+    private api: ApiService,
     private dialogRef: MatDialog) {
     this.devicesSource = new MatTableDataSource();
   }
 
   ngOnInit(): void {
-    this.proxy.getDeviceMenu().subscribe((data: DeviceTypeNode[]) => {
-      this.menuNodes = data;
-    });
+    this.menuNodes = this.api.getDeviceTypeMenu();
     this.updateTable();
   }
 
