@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PortDialogComponent } from './port-dialog/port-dialog.component';
 import { Device } from '../devices/device';
 import { Endpoint, Port } from './port';
+import { ApiProxyService } from 'src/app/services/api-proxy.service';
 
 export interface PortDialogData {
   RoomID: String;
@@ -16,23 +17,28 @@ export interface PortDialogData {
   styleUrls: ['./ports.component.scss']
 })
 export class PortsComponent implements OnInit {
-  @Input('roomID') roomID: String;
-  devices: Device[];
+  @Input('roomID') roomID: String = "";
+  @Input('devices-test') devices: Device[] = [];
+  // devices: Device[];
   currentDevice: Device;
   currentPort: Port;
 
-  constructor(private api: ApiService,
+  constructor(private proxy: ApiProxyService,
+    private api: ApiService,
     private dialog: MatDialog) {
-    this.devices = this.api.getDevices(this.roomID);
-    if (this.devices.length > 0) {
-      this.currentDevice = this.devices[0];
-    } else {
-      this.currentDevice = null;
-    }
-
+    // this.devices = this.api.getDevices(this.roomID);
   }
 
   ngOnInit(): void {
+    // this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
+    //   this.devices = data;
+    //   if (this.devices.length > 0) {
+    //     this.currentDevice = this.devices[0];
+    //   }
+    // });
+    if (this.devices.length > 0) {
+      this.currentDevice = this.devices[0];
+    }
   }
 
   setCurrentDevice(dev: Device) {

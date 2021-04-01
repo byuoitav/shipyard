@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiProxyService } from 'src/app/services/api-proxy.service';
+import { Device } from './devices/device';
 import { Room } from './room';
 
 @Component({
@@ -12,6 +13,8 @@ import { Room } from './room';
 export class RoomPageComponent implements OnInit {
   roomID: String = "";
   room: Room;
+
+  devices: Device[];
 
   tagKey: String;
   tagValue: String;
@@ -24,14 +27,14 @@ export class RoomPageComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.roomID = params["roomID"];
     });
-    // this.proxy.getRoom(this.roomID).subscribe((data: Room) => {
-    //   console.log(data);
-    //   this.room = data;
-    // });
   }
 
   ngOnInit(): void {
     this.room = this.route.snapshot.data.room;
+
+    this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
+      this.devices = data;
+    });
   }
 
   addTag() {

@@ -35,7 +35,7 @@ export class ApiProxyService {
     }
 
     saveDevice(deviceData: Device) {
-        return this.http.post(this.url + "/devices/" + deviceData.id.toString(), deviceData);
+        return this.http.put(this.url + "/devices/" + deviceData.id.toString(), deviceData);
     }
 
     // UIConfig
@@ -44,6 +44,11 @@ export class ApiProxyService {
     }
 
     saveUIConfig(UIConfigData: RoomConfig) {
-        return this.http.post(this.url + "/ui_config/" + UIConfigData.id.toString(), UIConfigData);
+        return this.http.put(this.url + "/ui_config/" + UIConfigData.id.toString(), UIConfigData);
+    }
+
+    // Device Menu ---- for current convenience, will be deleted. Device menu will probably be generated from list of device types
+    getDeviceMenu() {
+        return this.http.get(this.url + "/menu");
     }
 }

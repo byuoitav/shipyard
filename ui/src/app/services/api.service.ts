@@ -426,53 +426,53 @@ export class ApiService {
   getDeviceTypeMenu(): DeviceTypeNode[] {
     return [
       {
-        Label: "Pis",
-        Icon: "touch_app",
-        Value: "",
-        SubNodes: [
+        label: "Pis",
+        icon: "touch_app",
+        value: "",
+        subNodes: [
           {
-            Label: "AV Touchpanel",
-            Icon: "",
-            Value: "Pi",
-            SubNodes: null
+            label: "AV Touchpanel",
+            icon: "",
+            value: "Pi",
+            subNodes: null
           },
           {
-            Label: "Scheduling Panel",
-            Icon: "",
-            Value: "Pi",
-            SubNodes: null
+            label: "Scheduling Panel",
+            icon: "",
+            value: "Pi",
+            subNodes: null
           }
         ]
       },
       {
-        Label: "Displays",
-        Icon: "tv",
-        Value: "Display",
-        SubNodes: null
+        label: "Displays",
+        icon: "tv",
+        value: "Display",
+        subNodes: null
       },
       {
-        Label: "Inputs",
-        Icon: "input",
-        Value: "Input",
-        SubNodes: null
+        label: "Inputs",
+        icon: "input",
+        value: "Input",
+        subNodes: null
       },
       {
-        Label: "Audio",
-        Icon: "mic",
-        Value: "Audio",
-        SubNodes: null
+        label: "Audio",
+        icon: "mic",
+        value: "Audio",
+        subNodes: null
       },
       {
-        Label: "Video Switchers",
-        Icon: "device_hub",
-        Value: "Video Switcher",
-        SubNodes: null
+        label: "Video Switchers",
+        icon: "device_hub",
+        value: "Video Switcher",
+        subNodes: null
       },
       {
-        Label: "Network Devices",
-        Icon: "settings_ethernet",
-        Value: "Network Device",
-        SubNodes: null
+        label: "Network Devices",
+        icon: "settings_ethernet",
+        value: "Network Device",
+        subNodes: null
       }
     ]
   }

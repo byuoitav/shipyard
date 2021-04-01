@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DevicesDialogComponent } from './devices-dialog/devices-dialog.component';
@@ -35,14 +34,15 @@ export class DevicesComponent implements OnInit {
 
   menuNodes: DeviceTypeNode[];
 
-  constructor(private api: ApiService,
-    private proxy: ApiProxyService,
+  constructor(private proxy: ApiProxyService,
     private dialogRef: MatDialog) {
     this.devicesSource = new MatTableDataSource();
   }
 
   ngOnInit(): void {
-    this.menuNodes = this.api.getDeviceTypeMenu();
+    this.proxy.getDeviceMenu().subscribe((data: DeviceTypeNode[]) => {
+      this.menuNodes = data;
+    });
     this.updateTable();
   }
 
@@ -52,9 +52,9 @@ export class DevicesComponent implements OnInit {
     dialog.afterClosed().subscribe(result => {
       if (result != null) {
         if (result) {
-          this.api.addDevice(dev);
+          this.proxy.saveDevice(dev);
         } else {
-          this.api.removeDevice(dev.id);
+          //Todo: delete device?
         }
       }
       this.updateTable();
@@ -87,7 +87,7 @@ export class DevicesComponent implements OnInit {
     this.editDevice(dev);
   }
 
-  test(device: Device) {
+  expandRow(device: Device) {
     if (this.expandable) {
       this.expandedDevice = this.expandedDevice === device ? null : device;
     } else {

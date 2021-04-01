@@ -1,6 +1,6 @@
 export class DeviceTypeNode {
-    Label: String;
-    Icon: String;
-    Value: String;
-    SubNodes: DeviceTypeNode[];
+    label: String;
+    icon: String;
+    value: String;
+    subNodes: DeviceTypeNode[];
 }

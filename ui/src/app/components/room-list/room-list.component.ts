@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
@@ -18,7 +17,6 @@ export class RoomListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private api: ApiService,
     private proxy: ApiProxyService,
     private dialog: MatDialog) {
   }
@@ -42,7 +40,7 @@ export class RoomListComponent implements OnInit {
         console.log("deleting");
       } else if (result != null) {
         this.rooms.push(result);
-        this.api.setRoom(result);
+        this.proxy.saveRoom(result);
       }
     });
   }

@@ -48,7 +48,7 @@
             class="device-row"
             [class.expanded-row]="expandedDevice === device"
             [class.highlighted-row]="highlightedDevice === device"
-            (click)="test(device)"></tr>
+            (click)="expandRow(device)"></tr>
         <tr mat-row *matRowDef="let row; columns: ['expanded']" class="detail-row"></tr>
     </table>
 </mat-card-content>
@@ -59,10 +59,10 @@
 
 <mat-menu #deviceTypeMenu="matMenu">
     <ng-container *ngFor="let m of menuNodes">
-        <button mat-menu-item [matMenuTriggerFor]="subMenu"><mat-icon>{{ m.Icon }}</mat-icon>{{ m.Label }}</button>
+        <button mat-menu-item [matMenuTriggerFor]="subMenu"><mat-icon>{{ m.icon }}</mat-icon>{{ m.label }}</button>
         <mat-menu #subMenu="matMenu">
-            <ng-container *ngFor="let n of m.SubNodes">
-                <button mat-menu-item (click)="createDevice(n.Value)"><mat-icon>{{ n.Icon }}</mat-icon>{{ n.Label }}</button>
+            <ng-container *ngFor="let n of m.subNodes">
+                <button mat-menu-item (click)="createDevice(n.value)"><mat-icon>{{ n.icon }}</mat-icon>{{ n.label }}</button>
             </ng-container> 
         </mat-menu>
     </ng-container>
