@@ -1,0 +1,20 @@
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+#object-list {
+  width: 95%;
+  float: left;
+  height: 90%;
+}
+
+#object-view {
+  width: 95%;
+  float: right;
+  height: 90%;
+}
+
+mat-grid-list {
+  height: calc(100% - 3rem);
+}

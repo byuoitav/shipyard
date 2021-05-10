@@ -1,0 +1,38 @@
+h1, h2 {
+  text-align: center;
+}
+
+.full-width-field {
+  width: 100%;
+  font-size: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.header-buttons {
+  right: 1rem;
+  position: absolute;
+}
+
+.inner-divider {
+  width: 96%;
+  left: 2%;
+  margin-bottom: 1rem;
+}
+
+.data-table {
+  width: 100%;
+}
+
+.mat-header-cell{
+  font-size: .8rem;
+  background-color: #ececec;
+}
+
+.highlight {
+  background-color: #3f51b536;
+}
+

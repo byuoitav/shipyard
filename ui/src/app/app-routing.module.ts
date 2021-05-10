@@ -1,27 +1,37 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { BuildingListComponent } from './components/building-list/building-list.component';
-import { RoomListComponent } from './components/room-list/room-list.component';
-import { RoomPageComponent } from './components/room-page/room-page.component';
+import { RouterModule, Routes } from '@angular/router';
 
+import { ListViewComponent } from './list-view/list-view.component';
+import { BuildingsComponent } from './buildings/buildings.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { SystemsComponent } from './systems/systems.component';
+import { DevicesComponent } from './devices/devices.component';
 
 const routes: Routes = [
   {
-    path: "",
-    redirectTo: "campus",
-    pathMatch: "full"
+    path: '',
+    redirectTo: 'campuses',
+    pathMatch: 'full'
   },
   {
-    path: "campus",
-    component: BuildingListComponent
+    path: 'campuses',
+    component: ListViewComponent
   },
   {
-    path: "campus/:bldgID/roomList",
-    component: RoomListComponent
+    path: 'buildings',
+    component: BuildingsComponent
   },
   {
-    path: "campus/:roomID",
-    component: RoomPageComponent
+    path: 'rooms',
+    component: RoomsComponent,
+  },
+  {
+    path: 'systems',
+    component: SystemsComponent,
+  },
+  {
+    path: 'devices',
+    component: DevicesComponent,
   }
 ];
 

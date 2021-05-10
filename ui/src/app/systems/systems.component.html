@@ -1,0 +1,16 @@
+<h1>AV Systems</h1>
+
+<mat-grid-list cols="2" rowHeight="fit">
+  <mat-grid-tile>
+    <mat-card id="object-list">
+      <app-systems-list (selectedEvent)="selectedMessage($event)">
+      </app-systems-list>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card id="object-view">
+      <app-systems-view [selectedID]="selectedID">
+      </app-systems-view>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

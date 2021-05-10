@@ -1,0 +1,16 @@
+<h1>Buildings</h1>
+
+<mat-grid-list cols="2" rowHeight="fit">
+  <mat-grid-tile>
+    <mat-card id="object-list">
+      <app-buildings-list (selectedEvent)="selectedMessage($event)">
+      </app-buildings-list>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card id="object-view">
+      <app-buildings-view [selectedID]="selectedID">
+      </app-buildings-view>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

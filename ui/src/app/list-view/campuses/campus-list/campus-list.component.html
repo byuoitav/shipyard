@@ -1,0 +1,31 @@
+<form class="search-form">
+  <mat-form-field class="search-field">
+    <mat-label>Search</mat-label>
+    <input type="text" matInput>
+  </mat-form-field>
+</form>
+
+<table mat-table [dataSource]="campusData" class="data-table">
+
+  <!-- Abbreviation Column -->
+  <ng-container matColumnDef="abbreviation">
+    <th mat-header-cell *matHeaderCellDef> Campus Abbreviation </th>
+    <td mat-cell *matCellDef="let element"> {{element.abbreviation}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Campus Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="select(row.abbreviation)"
+      [ngClass]="{'highlight': selectedRowIndex == row.abbreviation}">
+
+  </tr>
+</table>
+
+
+

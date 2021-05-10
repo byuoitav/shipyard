@@ -35,7 +35,7 @@
                                 <mat-icon>add</mat-icon>
                             </button>
                         </div>
-                        
+
                         <span *ngFor="let tag of room.Tags | keyvalue">
                             <div class="text-row">
                                 <div class="tag-container">
@@ -52,7 +52,7 @@
                     </mat-card-content>
                 </mat-card>
                 <mat-card>
-                    <app-devices [roomID]="roomID" [expandable]="true"></app-devices>
+                    <app-room-devices [roomID]="roomID" [expandable]="true"></app-room-devices>
                 </mat-card>
             </div>
         </ng-template>

@@ -1,0 +1,35 @@
+<div class="header">
+  <h1>{{ campus.name }}</h1>
+  <div class="header-buttons">
+    <button mat-raised-button color="primary">Edit</button>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<br/>
+<mat-form-field class="full-width-field">
+  <mat-label>Abbreviation</mat-label>
+  <input matInput disabled value="{{ campus.abbreviation }}">
+</mat-form-field>
+
+<h2>Buildings</h2>
+<mat-divider class="inner-divider"></mat-divider>
+<table mat-table [dataSource]="campusBuildings" class="data-table">
+
+  <!-- Abbreviation Column -->
+  <ng-container matColumnDef="abbreviation">
+    <th mat-header-cell *matHeaderCellDef> Building Abbreviation </th>
+    <td mat-cell *matCellDef="let element"> {{element.abbreviation}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Building Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      [routerLink]="'/buildings'" [queryParams]="{id: row.id}">
+
+  </tr>
+</table>

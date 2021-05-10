@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
 export class Room {
-  ID: String;
-  Desig: String;
-  Desc: String;
-  Notes: String;
-  ProxyBaseURL: String;
-  Tags: Map<String, String>;
+  ID: string;
+  Desig: string;
+  Desc: string;
+  Notes: string;
+  ProxyBaseURL: string;
+  Tags: Map<string, string>;
 
-  constructor(rm: Room) {
+  constructor(rm: Room | null) {
     this.Tags = new Map();
     if (rm != null) {
       this.ID = rm.ID;
@@ -24,15 +24,15 @@ export class Room {
 }
 
 export class Device {
-  ID: String;
-  Desc: String;
-  Address: String;
-  Driver: String;
+  ID: string;
+  Desc: string;
+  Address: string;
+  Driver: string;
   DynamicPorts: boolean;
   Ports: Port[];
-  Tags: Map<String, String>
+  Tags: Map<string, string>
 
-  Type: String;
+  Type: string;
 
   constructor(dev: Device) {
     this.Tags = new Map();
@@ -52,39 +52,39 @@ export class Device {
 }
 
 export class Port {
-  ID: String;
-  Name: String;
-  Endpoint: String[];
+  ID: string;
+  Name: string;
+  Endpoint: string[];
   Incoming: boolean;
-  Type: String;
+  Type: string;
 }
 
 export class RoomConfig {
-  ID: String;
-  ControlPanels: Map<String, String>;
-  ControlGroups: Map<String, UIControlGroup>;
+  ID: string;
+  ControlPanels: Map<string, string>;
+  ControlGroups: Map<string, UIControlGroup>;
 }
 
 export class UIControlGroup {
-  Displays: Map<String, UIDisplay>;
-  Inputs: String[];
-  Microphones: Map<String, String[]>;
+  Displays: Map<string, UIDisplay>;
+  Inputs: string[];
+  Microphones: Map<string, string[]>;
   MasterVolume: MasterVolume;
 }
 
 export class MasterVolume {
-  Device: String;
-  Block: String;
+  Device: string;
+  Block: string;
 }
 
 export class UIDisplay {
-  DefaultInput: String;
+  DefaultInput: string;
 }
 
 export class DeviceTypeNode {
-  Label: String;
-  Icon: String;
-  Value: String;
+  Label: string;
+  Icon: string;
+  Value: string;
   SubNodes: DeviceTypeNode[];
 }
 
@@ -427,7 +427,7 @@ export class ApiService {
 
   constructor() { }
 
-  getRooms(bldgID: String): Room[] {
+  getRooms(bldgID: string): Room[] {
     let rooms = [];
     let re = new RegExp(bldgID.toString());
     this.testRooms.forEach(rm => {
@@ -438,7 +438,7 @@ export class ApiService {
     return rooms;
   }
 
-  getRoom(roomID: String): Room {
+  getRoom(roomID: string): Room {
     for (let i = 0; i < this.testRooms.length; i++) {
       if (this.testRooms[i].ID == roomID) {
         return this.testRooms[i];
@@ -459,7 +459,7 @@ export class ApiService {
     this.testRooms.push(room);
   }
 
-  getDevices(roomID: String): Device[] {
+  getDevices(roomID: string): Device[] {
     return this.testDevices;
   }
 
@@ -474,7 +474,7 @@ export class ApiService {
     this.testDevices.push(device);
   }
 
-  removeDevice(deviceID: String) {
+  removeDevice(deviceID: string) {
     for (var i = 0; i < this.testDevices.length; i++) {
       if (this.testDevices[i].ID == deviceID) {
         this.testDevices.splice(i, 1);

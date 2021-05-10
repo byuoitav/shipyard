@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ui';
+  title = 'shipyard';
+
+  selectedRole: string;
+
+  roles: string[] = [
+    "Install",
+    "Inventory",
+  ];
+
+  constructor() {
+    this.selectedRole = "Inventory";
+  }
 }

@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>BYU OIT AV Config</span>
+  <div fxShow="true" fxHide.lt-md="true">
+
+      <a href="/campuses" mat-button>Campuses</a>
+
+      <a href="/buildings" mat-button>Buildings</a>
+
+      <a href="/rooms" mat-button>Rooms</a>
+
+      <a href="/systems" mat-button>Systems</a>
+
+      <a href="/devices" mat-button>Devices</a>
+
+      <a href="/admin" mat-button>Admin</a>
+
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="main-content-container">
+  <router-outlet></router-outlet>
+</div>

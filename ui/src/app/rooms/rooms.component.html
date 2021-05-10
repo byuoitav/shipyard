@@ -1,0 +1,16 @@
+<h1>Rooms</h1>
+
+<mat-grid-list cols="2" rowHeight="fit">
+  <mat-grid-tile>
+    <mat-card id="object-list">
+      <app-rooms-list (selectedEvent)="selectedMessage($event)">
+      </app-rooms-list>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card id="object-view">
+      <app-rooms-view [selectedID]="selectedID">
+      </app-rooms-view>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

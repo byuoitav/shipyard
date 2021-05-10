@@ -1,0 +1,73 @@
+<div class="header">
+  <h1>{{ device.name }}</h1>
+  <div class="header-buttons">
+    <button mat-raised-button color="primary">Edit</button>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<br/>
+<mat-form-field class="full-width-field">
+  <mat-label>Room</mat-label>
+  <input matInput disabled value="{{ getRoomNumber(device.roomID) }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Building</mat-label>
+  <input matInput disabled value="{{ getRoomBuilding(device.roomID) }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Model</mat-label>
+  <input matInput disabled value="{{ getDeviceModelNumber(device.modelID) }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Manufacturer</mat-label>
+  <input matInput disabled value="{{ getDeviceModelManu(device.modelID) }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Install Date</mat-label>
+  <input matInput disabled value="{{ device.installDate }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Warranty Date</mat-label>
+  <input matInput disabled value="{{ device.warrantyDate }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Serial Number</mat-label>
+  <input matInput disabled value="{{ device.serialNumber }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Funding Type</mat-label>
+  <input matInput disabled value="{{ device.fundingType }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Notes</mat-label>
+  <input matInput disabled value="{{ device.notes }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Address</mat-label>
+  <input matInput disabled value="{{ device.address }}">
+</mat-form-field>
+
+<h2>Systems</h2>
+<mat-divider class="inner-divider"></mat-divider>
+<table mat-table [dataSource]="deviceSystems" class="data-table">
+
+  <!-- Abbreviation Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> System Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="designation">
+    <th mat-header-cell *matHeaderCellDef> System Designation </th>
+    <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="systemDisplayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: systemDisplayedColumns;"
+      [routerLink]="'/systems'" [queryParams]="{id: row.id}">
+
+  </tr>
+</table>
+
+

@@ -1,0 +1,14 @@
+<h1>{{ objectType | titlecase }}</h1>
+
+<mat-grid-list cols="2" rowHeight="fit">
+  <mat-grid-tile>
+    <mat-card id="object-list">
+      <app-campus-list (selectedEvent)="selectedMessage($event)"></app-campus-list>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card id="object-view">
+      <app-campus-view [selectedID]="selectedID"></app-campus-view>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

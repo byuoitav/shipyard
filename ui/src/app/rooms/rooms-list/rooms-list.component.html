@@ -1,0 +1,43 @@
+<form class="search-form">
+  <mat-form-field class="search-field">
+    <mat-label>Search</mat-label>
+    <input type="text" matInput>
+  </mat-form-field>
+</form>
+
+<table mat-table [dataSource]="roomData" class="data-table">
+
+  <!-- Abbreviation Column -->
+  <ng-container matColumnDef="buildingAbbr">
+    <th mat-header-cell *matHeaderCellDef> Building Abbreviation </th>
+    <td mat-cell *matCellDef="let element"> {{getBuildingAbbr(element.buildingID)}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="number">
+    <th mat-header-cell *matHeaderCellDef> Room Number </th>
+    <td mat-cell *matCellDef="let element"> {{element.roomNumber}} </td>
+  </ng-container>
+
+  <!-- Type Column -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Room Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+
+  <!-- Campus Abbreviation Column -->
+  <ng-container matColumnDef="campusAbbreviation">
+    <th mat-header-cell *matHeaderCellDef> Campus Abbreviation </th>
+    <td mat-cell *matCellDef="let element"> {{getBuildingCampus(element.buildingID)}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="select(row.id)"
+      [ngClass]="{'highlight': selectedRowIndex == row.id}">
+
+  </tr>
+</table>
+
+
+

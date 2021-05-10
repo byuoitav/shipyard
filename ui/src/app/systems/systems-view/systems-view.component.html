@@ -1,0 +1,80 @@
+<div class="header">
+  <h1>{{ system.name }}</h1>
+  <div class="header-buttons">
+    <button mat-raised-button color="primary">Edit</button>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<br/>
+<mat-form-field class="full-width-field">
+  <mat-label>Designation</mat-label>
+  <input matInput disabled value="{{ system.designation }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Install Date</mat-label>
+  <input matInput disabled value="{{ system.installDate }}">
+</mat-form-field>
+<mat-form-field class="full-width-field">
+  <mat-label>Check Date</mat-label>
+  <input matInput disabled value="{{ system.checkDate }}">
+</mat-form-field>
+
+<h2>Rooms</h2>
+<mat-divider class="inner-divider"></mat-divider>
+<table mat-table [dataSource]="systemRooms" class="data-table">
+
+  <!-- Building Abbreviation Column -->
+  <ng-container matColumnDef="buildingAbbr">
+    <th mat-header-cell *matHeaderCellDef> Building </th>
+    <td mat-cell *matCellDef="let element"> {{getBuildingAbbr(element.buildingID)}} </td>
+  </ng-container>
+
+  <!-- Room Number Column -->
+  <ng-container matColumnDef="roomNumber">
+    <th mat-header-cell *matHeaderCellDef> Room Number </th>
+    <td mat-cell *matCellDef="let element"> {{element.roomNumber}} </td>
+  </ng-container>
+
+  <!-- Type Column -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Room Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="roomDisplayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: roomDisplayedColumns;"
+      [routerLink]="'/rooms'" [queryParams]="{id: row.id}">
+
+  </tr>
+</table>
+
+<br/>
+
+<h2>Devices</h2>
+<mat-divider class="inner-divider"></mat-divider>
+<table mat-table [dataSource]="systemDevices" class="data-table">
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Device Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Model Column -->
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef> Device Model </th>
+    <td mat-cell *matCellDef="let element"> {{getDeviceModelNumber(element.modelID)}} </td>
+  </ng-container>
+
+  <!-- Manufacturer Column -->
+  <ng-container matColumnDef="manufacturer">
+    <th mat-header-cell *matHeaderCellDef> Device Manufacturer </th>
+    <td mat-cell *matCellDef="let element"> {{getDeviceModelManu(element.modelID)}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="deviceDisplayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: deviceDisplayedColumns;"
+      [routerLink]="'/devices'" [queryParams]="{id: row.id}">
+
+  </tr>
+</table>

@@ -1,0 +1,22 @@
+<div class="action-container">
+    <button mat-raised-button color="primary" (click)="editBuilding(null)">
+        <mat-icon>add</mat-icon>
+        Add New
+    </button>
+    <!-- filter buildings -->
+</div>
+
+<div class="building-list">
+    <ng-container *ngFor="let b of buildings">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title (click)="routeToRoomList(b)">{{ b }}</mat-card-title>
+                <span class="spacing" (click)="routeToRoomList(b)"></span>
+                <button mat-icon-button (click)="editBuilding(b)">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </mat-card-header>
+            <img mat-card-image [src]="getImage(b)" alt="A cool image of the {{ b }}" class="image" (click)="routeToRoomList(b)">
+        </mat-card>
+    </ng-container>
+</div>

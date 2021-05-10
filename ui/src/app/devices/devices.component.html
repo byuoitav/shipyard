@@ -1,0 +1,16 @@
+<h1>Devices</h1>
+
+<mat-grid-list cols="2" rowHeight="fit">
+  <mat-grid-tile>
+    <mat-card id="object-list">
+      <app-devices-list (selectedEvent)="selectedMessage($event)">
+      </app-devices-list>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card id="object-view">
+      <app-devices-view [selectedID]="selectedID">
+      </app-devices-view>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

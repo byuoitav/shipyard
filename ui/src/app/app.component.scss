@@ -1,4 +1,33 @@
-.main-content-container {
-    padding-left: 2vw;
-    padding-right: 2vw;
+mat-toolbar {
+}
+
+.menu-spacer {
+  margin: 1rem;
+}
+
+a {
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 1.4rem;
+}
+
+.content-wrapper {
+  padding-left: 4rem;
+  padding-right: 4rem;
+  padding-top: 1rem;
+  height: calc(100% - 64px);
+}
+
+.footer {
+}
+
+#role-picker {
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.big-menu-spacer {
+  flex: 1 1 auto;
 }

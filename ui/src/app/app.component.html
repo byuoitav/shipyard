@@ -1,9 +1,30 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>BYU OIT AV Config</span>
+    <h1>Shipyard</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/campuses'"> Campuses </a>
+      <a mat-button [routerLink]="'/buildings'"> Buildings </a>
+      <a mat-button [routerLink]="'/rooms'"> Rooms </a>
+      <a mat-button [routerLink]="'/systems'"> AV Systems </a>
+      <a mat-button [routerLink]="'/devices'"> Devices </a>
+      <a mat-button [routerLink]="'/admin'"> Admin </a>
+    </div>
+    <span class="big-menu-spacer"></span>
+    <mat-form-field appearance="fill" id="role-picker">
+      <mat-label>Role</mat-label>
+      <mat-select [ngModel]="selectedRole" name="role">
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{role}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="main-content-container">
+<div class="content-wrapper">
   <router-outlet></router-outlet>
+</div>
+
+<div class="footer">
 </div>

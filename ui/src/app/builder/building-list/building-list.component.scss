@@ -1,0 +1,41 @@
+$card-width: 325px;
+.action-container {
+    padding-top: 2vh;
+    padding-bottom: 4vh;
+    margin-left: 4vw;
+    margin-right: 4vw;
+}
+
+.building-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+
+mat-card {
+    min-width: $card-width;
+    min-height: 270px;
+    width: $card-width;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+mat-card-title {
+    padding-top: 25%;
+}
+
+.spacing {
+    flex: 1 1 auto;
+}
+
+.image {
+    height: 203px;
+    min-height: 203px;
+    width: $card-width;
+    min-width: $card-width;
+    margin: auto;
+}
