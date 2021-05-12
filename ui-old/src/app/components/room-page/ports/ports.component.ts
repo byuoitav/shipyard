@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Device, ApiService, Port } from 'src/app/services/api.service';
-import { MatStepper } from '@angular/material/stepper';
+import { Component, OnInit, Input } from '@angular/core';
+import { ApiService} from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PortDialogComponent } from './port-dialog/port-dialog.component';
-
+import { Device } from '../devices/device';
+import { Endpoint, Port } from './port';
+import { ApiProxyService } from 'src/app/services/api-proxy.service';
 
 export interface PortDialogData {
   RoomID: String;
@@ -16,64 +17,69 @@ export interface PortDialogData {
   styleUrls: ['./ports.component.scss']
 })
 export class PortsComponent implements OnInit {
-  @Input('roomID') roomID: String;
-  @ViewChild('stepper') stepper: MatStepper;
-  devices: Device[];
+  @Input('roomID') roomID: String = "";
+  @Input('devices-test') devices: Device[] = [];
+  // devices: Device[];
   currentDevice: Device;
   currentPort: Port;
 
-  constructor(private api: ApiService,
+  constructor(private proxy: ApiProxyService,
+    private api: ApiService,
     private dialog: MatDialog) {
-    this.devices = this.api.getDevices(this.roomID);
-    if (this.devices.length > 0) {
-      this.currentDevice = this.devices[0];
-    } else {
-      this.currentDevice = null;
-    }
-
+    // this.devices = this.api.getDevices(this.roomID);
   }
 
   ngOnInit(): void {
-  }
-
-  configurePorts(dev: Device) {
-    this.currentDevice = dev;
-    this.stepper.next();
+    // this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
+    //   this.devices = data;
+    //   if (this.devices.length > 0) {
+    //     this.currentDevice = this.devices[0];
+    //   }
+    // });
+    if (this.devices.length > 0) {
+      this.currentDevice = this.devices[0];
+    }
   }
 
   setCurrentDevice(dev: Device) {
     this.currentDevice = dev;
   }
 
-  test(p: Port) {
+  connectPort(p: Port) {
     const ref = this.dialog.open(PortDialogComponent, {
       data: {
         RoomID: this.roomID,
-        SourceDev: this.currentDevice.ID,
+        SourceDev: this.currentDevice.id,
         Port: p
-      }
+      },
+      width: "50vw"
     });
 
-    ref.afterClosed().subscribe(chosenDev => {
-      if (chosenDev != null) {
-        p.Endpoint = [chosenDev];
+    ref.afterClosed().subscribe(endpoint => {
+      if (endpoint != null) {
+        // check if already connected and delete connection
+        for(var i = 0; i < p.endpoint.length; i++) {
+          console.log(p.endpoint[i]);
+          this.removePortConnection(p.endpoint[i]);
+        }
+        p.endpoint = [endpoint];
+        console.log(p.endpoint);
       }
     });
   }
 
-  test2(data: any) {
+  removePortConnection(endpt: Endpoint) {
+    console.log(endpt);
     for (var k = 0; k < this.devices.length; k++) {
-      if (this.devices[k].ID === data.device) {
-        for (var i = 0; i < this.devices[k].Ports.length; i++) {
-          for (var j = 0; j < this.devices[k].Ports[i].Endpoint.length; j++) {
-            if (data.port === this.devices[k].Ports[i].Endpoint[j]) {
-              this.devices[k].Ports[i].Endpoint.splice(j, 1);
-              return;
-            }
+      if (this.devices[k].id === endpt.device) {
+        console.log(this.devices[k].id);
+        for (var i = 0; i < this.devices[k].ports.length; i++) {
+          for (var j = 0; j < this.devices[k].ports[i].endpoint.length; j++) {
+            this.devices[k].ports[i].endpoint.splice(j, 1);
+            return;
           }
         }
       }
     }
   }
-
 }

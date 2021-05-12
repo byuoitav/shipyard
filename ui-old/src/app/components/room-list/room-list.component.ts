@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Room, ApiService } from 'src/app/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
+import { ApiProxyService } from 'src/app/services/api-proxy.service';
+
 
 @Component({
   selector: 'app-room-list',
@@ -10,38 +11,47 @@ import { RoomDialogComponent } from '../room-dialog/room-dialog.component';
   styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent implements OnInit {
-  bldgID: String;
-  rooms: Room[];
-
+  rooms: String[] = []; // Room list will actually be an array of strings
+  filteredRooms: String[];
+  filterParam: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private api: ApiService,
+    private proxy: ApiProxyService,
     private dialog: MatDialog) {
-    this.route.params.subscribe(params => {
-      this.bldgID = params["bldgID"];
-    });
-    this.rooms = this.api.getRooms(this.bldgID);
   }
 
   ngOnInit(): void {
+    this.rooms = this.route.snapshot.data.rooms;
+    this.filterParam = "";
+    this.filterRooms();
   }
 
   routeToRoomPage(roomID: String) {
     this.router.navigate(["/campus/" + roomID]);
   }
 
-  editRoom(r: Room) {
-    const roomDialog = this.dialog.open(RoomDialogComponent, {data: r});
+  editRoom(r: String) {
+    let room = this.proxy.getRoom(r);
+    const roomDialog = this.dialog.open(RoomDialogComponent, {data: room});
 
     roomDialog.afterClosed().subscribe(result => {
       if (result == "delete") {
         console.log("deleting");
       } else if (result != null) {
         this.rooms.push(result);
-        this.api.setRoom(result);
+        this.proxy.saveRoom(result);
       }
     });
   }
 
+  filterRooms() {
+    this.filteredRooms = [];
+    let re = new RegExp(this.filterParam.toLowerCase());
+    this.rooms.forEach(rm => {
+      if (re.exec(rm.toString().toLowerCase()) != null) {
+        this.filteredRooms.push(rm);
+      }
+    });
+  }
 }

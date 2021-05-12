@@ -3,16 +3,19 @@
         <mat-icon>add</mat-icon>
         Add New
     </button>
-    <!-- filter rooms -->
+    <mat-form-field class="filter-field">
+        <mat-label>Filter Rooms</mat-label>
+        <input matInput [(ngModel)]="filterParam" (keyup)="filterRooms()">
+    </mat-form-field>
 </div>
 
 <div class="room-list">
-    <ng-container *ngFor="let r of rooms">
-        <mat-card>
+    <ng-container *ngFor="let r of filteredRooms">
+        <mat-card (click)="routeToRoomPage(r)">
             <mat-card-header>
-                <mat-card-title (click)="routeToRoomPage(r.ID)">{{ r.ID }}</mat-card-title>
-                <span class="spacing" (click)="routeToRoomPage(r.ID)"></span>
-                <button mat-icon-button (click)="editRoom(r)">
+                <mat-card-title>{{ r }}</mat-card-title>
+                <span class="spacing"></span>
+                <button mat-icon-button (click)="editRoom(r);$event.stopPropagation()">
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </mat-card-header>

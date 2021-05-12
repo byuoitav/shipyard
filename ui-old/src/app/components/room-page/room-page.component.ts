@@ -1,6 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Room, ApiService } from 'src/app/services/api.service';
+import { ApiProxyService } from 'src/app/services/api-proxy.service';
+import { Device } from './devices/device';
+import { Room } from './room';
 
 @Component({
   selector: 'app-room-page',
@@ -8,8 +11,10 @@ import { Room, ApiService } from 'src/app/services/api.service';
   styleUrls: ['./room-page.component.scss']
 })
 export class RoomPageComponent implements OnInit {
-  roomID: String;
+  roomID: String = "";
   room: Room;
+
+  devices: Device[];
 
   tagKey: String;
   tagValue: String;
@@ -18,25 +23,44 @@ export class RoomPageComponent implements OnInit {
   notes: String = "the test will consist of three stages";
 
   constructor(private route: ActivatedRoute,
-    private api: ApiService) {
+    private proxy: ApiProxyService,) {
     this.route.params.subscribe(params => {
       this.roomID = params["roomID"];
     });
-
-    this.room = this.api.getRoom(this.roomID);
   }
 
   ngOnInit(): void {
+    this.room = this.route.snapshot.data.room;
+
+    this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
+      this.devices = data;
+    });
   }
 
   addTag() {
-    this.room.Tags.set(this.tagKey, this.tagValue);
+    this.room.tags.set(this.tagKey, this.tagValue);
     this.tagKey = "";
     this.tagValue = "";
   }
 
   removeTag(key: String) {
-    this.room.Tags.delete(key);
+    this.room.tags.delete(key);
+  }
+
+  save() {
+    this.proxy.saveRoom(this.room).subscribe(
+      resp => {
+          if (resp["success"]) {
+              console.log(true);
+          } else {
+              console.log(false);
+          }
+      },
+      err => {
+          console.log(err);
+      }
+    );
+
   }
 
 }

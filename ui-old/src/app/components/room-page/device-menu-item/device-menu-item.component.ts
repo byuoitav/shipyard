@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { DeviceTypeNode } from 'src/app/services/api.service';
+import { DeviceTypeNode } from '../devices/device-type-menu';
 
 @Component({
   selector: 'app-device-menu-item',

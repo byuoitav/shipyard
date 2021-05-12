@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Device, ApiService, DeviceTypeNode } from 'src/app/services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DevicesDialogComponent } from './devices-dialog/devices-dialog.component';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { Device } from './device';
+import { DeviceTypeNode } from './device-type-menu';
+import { ApiProxyService } from 'src/app/services/api-proxy.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-devices',
@@ -18,28 +21,30 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
   ],
 })
 export class DevicesComponent implements OnInit {
-  @Input() roomID: String;
+  @Input() roomID: String = "";
   @Input() expandable: boolean;
   @Output() currentDev: EventEmitter<any> = new EventEmitter();
 
   devices: Device[];
 
   devicesSource: MatTableDataSource<Device>;
-  deviceTableAttributes: String[] = ['id', 'address', 'description'];
+  deviceTableAttributes: String[] = ['id', 'type', 'address'];
 
   expandedDevice: Device | null;
   highlightedDevice: Device | null;
 
   menuNodes: DeviceTypeNode[];
 
-  constructor(private api: ApiService,
+  constructor(private proxy: ApiProxyService,
     private dialogRef: MatDialog) {
     this.devicesSource = new MatTableDataSource();
-    this.updateTable();
   }
 
   ngOnInit(): void {
-    this.menuNodes = this.api.getDeviceTypeMenu();
+    this.proxy.getDeviceMenu().subscribe((data: DeviceTypeNode[]) => {
+      this.menuNodes = data;
+    });
+    this.updateTable();
   }
 
   editDevice(dev: Device) {
@@ -48,9 +53,9 @@ export class DevicesComponent implements OnInit {
     dialog.afterClosed().subscribe(result => {
       if (result != null) {
         if (result) {
-          this.api.addDevice(dev);
+          this.proxy.saveDevice(dev);
         } else {
-          this.api.removeDevice(dev.ID);
+          //Todo: delete device?
         }
       }
       this.updateTable();
@@ -58,8 +63,22 @@ export class DevicesComponent implements OnInit {
   }
 
   updateTable() {
-    this.devices = this.api.getDevices(this.roomID);
-    this.devicesSource.data = this.devices;
+    this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
+      this.devices = data;
+      this.createMaps(this.devices);
+      this.devicesSource.data = this.devices;
+    });
+  }
+
+  createMaps(devices: Device[]) {
+    devices.forEach(dev => {
+      let map = new Map<string, string>();
+      let jsonMap = dev.tags;
+      for (var val in jsonMap) {
+        map.set(val, jsonMap[val]);
+      }
+      dev.tags = map;
+    });
   }
 
   createDevice(devType: String) {
@@ -69,7 +88,7 @@ export class DevicesComponent implements OnInit {
     this.editDevice(dev);
   }
 
-  test(device: Device) {
+  expandRow(device: Device) {
     if (this.expandable) {
       this.expandedDevice = this.expandedDevice === device ? null : device;
     } else {

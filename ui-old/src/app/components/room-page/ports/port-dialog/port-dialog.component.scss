@@ -1,5 +1,13 @@
 table {
-    width: 25vw;
+    width: 100%;
+}
+
+.selected-port {
+    color: grey;
+}
+
+.unselected-port {
+    color: black;
 }
 
 tr.device-row:hover {

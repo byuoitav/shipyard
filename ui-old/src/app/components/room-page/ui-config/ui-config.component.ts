@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UIControlGroup, ApiService, RoomConfig, Device } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UIConfigDialogComponent } from './ui-config-dialog/ui-config-dialog.component';
+import { Device } from '../devices/device';
+import { ApiService } from 'src/app/services/api.service';
+import { RoomConfig, UIControlGroup } from './ui-config';
 
 @Component({
   selector: 'app-ui-config',
@@ -36,7 +38,7 @@ export class UiConfigComponent implements OnInit {
 
     cgDialogRef.afterClosed().subscribe(data => {
       if (data != null) {
-        this.roomConf.ControlGroups.set(data.ID, data.Config);
+        this.roomConf.controlGroups.set(data.ID, data.Config);
         if (id !== data.ID) {
           this.deleteGroup(id);
         }
@@ -45,7 +47,7 @@ export class UiConfigComponent implements OnInit {
   }
 
   deleteGroup(groupID: String) {
-    this.roomConf.ControlGroups.delete(groupID);
+    this.roomConf.controlGroups.delete(groupID);
   }
 
   checkForCameras(): boolean {
@@ -56,7 +58,7 @@ export class UiConfigComponent implements OnInit {
     let re = new RegExp('-CP.*');
     var filteredDevs = []
     this.devices.forEach(dev => {
-      if (re.exec(dev.ID.toString()) != null) {
+      if (re.exec(dev.id.toString()) != null) {
         filteredDevs.push(dev);
       }
     });
@@ -66,7 +68,7 @@ export class UiConfigComponent implements OnInit {
 
   mapControlPanel(event: any, panel: String, group: String) {
     if (event.source.selected) {
-      this.roomConf.ControlPanels.set(panel, group);
+      this.roomConf.controlPanels.set(panel, group);
     }
   }
 
