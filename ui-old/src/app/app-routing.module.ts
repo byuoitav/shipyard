@@ -14,17 +14,17 @@ const routes: Routes = [
   },
   {
     path: "campus",
-    component: RoomListComponent,
-    resolve: {
-      rooms: RoomListResolver
-    }
+    component: RoomListComponent
+    // resolve: {
+    //   rooms: RoomListResolver
+    // }
   },
   {
     path: "campus/:roomID",
-    component: RoomPageComponent,
-    resolve: {
-      room: RoomPageResolver
-    }
+    component: RoomPageComponent
+    // resolve: {
+    //   room: RoomPageResolver
+    // }
   }
 ];
 

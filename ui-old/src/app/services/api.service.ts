@@ -125,21 +125,21 @@ export class ApiService {
         {
           id: 'Port1',
           name: 'Port1',
-          endpoint: [],
+          endpoints: [],
           incoming: true,
           type: ''
         },
         {
           id: 'Port2',
           name: 'Port2',
-          endpoint: [],
+          endpoints: [],
           incoming: true,
           type: ''
         },
         {
           id: 'Port3',
           name: 'Port3',
-          endpoint: [
+          endpoints: [
             {
               device: 'Device-2',
               port: 'Port6'
@@ -151,42 +151,42 @@ export class ApiService {
         {
           id: 'Port4',
           name: 'Port4',
-          endpoint: [],
+          endpoints: [],
           incoming: true,
           type: ''
         },
         {
           id: 'Port5',
           name: 'Port5',
-          endpoint: [],
+          endpoints: [],
           incoming: true,
           type: ''
         },
         {
           id: 'Port6',
           name: 'Port6',
-          endpoint: [],
+          endpoints: [],
           incoming: false,
           type: ''
         },
         {
           id: 'Port7',
           name: 'Port7',
-          endpoint: [],
+          endpoints: [],
           incoming: false,
           type: ''
         },
         {
           id: 'Port8',
           name: 'Port8',
-          endpoint: [],
+          endpoints: [],
           incoming: false,
           type: ''
         },
         {
           id: 'Port9',
           name: 'Port9',
-          endpoint: [],
+          endpoints: [],
           incoming: false,
           type: ''
         }
@@ -204,42 +204,42 @@ export class ApiService {
         {
           id: 'Port1',
           name: 'Port1',
-          endpoint: [],
+          endpoints: [],
           incoming: true,
           type: ''
         },
         {
           id: 'Port2',
           name: 'Port2',
-          endpoint: [],
+          endpoints: [],
           incoming: true,
           type: ''
         },
         {
           id: 'Port3',
           name: 'Port3',
-          endpoint: [],
+          endpoints: [],
           incoming: true,
           type: ''
         },
         {
           id: 'Port4',
           name: 'Port4',
-          endpoint: [],
+          endpoints: [],
           incoming: true,
           type: ''
         },
         {
           id: 'Port5',
           name: 'Port5',
-          endpoint: [],
+          endpoints: [],
           incoming: true,
           type: ''
         },
         {
           id: 'Port6',
           name: 'Port6',
-          endpoint: [
+          endpoints: [
             {
               device: 'Device-1',
               port: 'Port3'
@@ -251,21 +251,21 @@ export class ApiService {
         {
           id: 'Port7',
           name: 'Port7',
-          endpoint: [],
+          endpoints: [],
           incoming: false,
           type: ''
         },
         {
           id: 'Port8',
           name: 'Port8',
-          endpoint: [],
+          endpoints: [],
           incoming: false,
           type: ''
         },
         {
           id: 'Port9',
           name: 'Port9',
-          endpoint: [],
+          endpoints: [],
           incoming: false,
           type: ''
         }

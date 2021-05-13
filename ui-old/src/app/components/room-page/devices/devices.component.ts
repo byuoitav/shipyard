@@ -36,14 +36,16 @@ export class DevicesComponent implements OnInit {
   menuNodes: DeviceTypeNode[];
 
   constructor(private proxy: ApiProxyService,
+    private api: ApiService,
     private dialogRef: MatDialog) {
     this.devicesSource = new MatTableDataSource();
   }
 
   ngOnInit(): void {
-    this.proxy.getDeviceMenu().subscribe((data: DeviceTypeNode[]) => {
-      this.menuNodes = data;
-    });
+    // this.proxy.getDeviceMenu().subscribe((data: DeviceTypeNode[]) => {
+    //   this.menuNodes = data;
+    // });
+    this.menuNodes = this.api.getDeviceTypeMenu();
     this.updateTable();
   }
 
@@ -53,7 +55,7 @@ export class DevicesComponent implements OnInit {
     dialog.afterClosed().subscribe(result => {
       if (result != null) {
         if (result) {
-          this.proxy.saveDevice(dev);
+          // this.proxy.saveDevice(dev);
         } else {
           //Todo: delete device?
         }
@@ -63,11 +65,13 @@ export class DevicesComponent implements OnInit {
   }
 
   updateTable() {
-    this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
-      this.devices = data;
-      this.createMaps(this.devices);
-      this.devicesSource.data = this.devices;
-    });
+    // this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
+    //   this.devices = data;
+    //   this.createMaps(this.devices);
+    //   this.devicesSource.data = this.devices;
+    // });
+    this.devices = this.api.getDevices(this.roomID);
+    this.devicesSource.data = this.devices;
   }
 
   createMaps(devices: Device[]) {

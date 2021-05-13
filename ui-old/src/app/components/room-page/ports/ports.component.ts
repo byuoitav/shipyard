@@ -58,12 +58,12 @@ export class PortsComponent implements OnInit {
     ref.afterClosed().subscribe(endpoint => {
       if (endpoint != null) {
         // check if already connected and delete connection
-        for(var i = 0; i < p.endpoint.length; i++) {
-          console.log(p.endpoint[i]);
-          this.removePortConnection(p.endpoint[i]);
+        for(var i = 0; i < p.endpoints.length; i++) {
+          console.log(p.endpoints[i]);
+          this.removePortConnection(p.endpoints[i]);
         }
-        p.endpoint = [endpoint];
-        console.log(p.endpoint);
+        p.endpoints = [endpoint];
+        console.log(p.endpoints);
       }
     });
   }
@@ -74,8 +74,8 @@ export class PortsComponent implements OnInit {
       if (this.devices[k].id === endpt.device) {
         console.log(this.devices[k].id);
         for (var i = 0; i < this.devices[k].ports.length; i++) {
-          for (var j = 0; j < this.devices[k].ports[i].endpoint.length; j++) {
-            this.devices[k].ports[i].endpoint.splice(j, 1);
+          for (var j = 0; j < this.devices[k].ports[i].endpoints.length; j++) {
+            this.devices[k].ports[i].endpoints.splice(j, 1);
             return;
           }
         }

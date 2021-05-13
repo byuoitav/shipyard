@@ -51,10 +51,10 @@ export class PortDialogComponent implements OnInit {
       data.Incoming = this.chosenDevice.id;
       data.IncomingPort = p.name;
       data.Outgoing = this.data.SourceDev;
-      data.OutgoingPort = this.data.Port.Name;
+      data.OutgoingPort = this.data.name;
     } else {
       data.Incoming = this.data.SourceDev;
-      data.IncomingPort = this.data.Port.Name;
+      data.IncomingPort = this.data.name;
       data.Outgoing = this.chosenDevice.id;
       data.OutgoingPort = p.name;
     }
