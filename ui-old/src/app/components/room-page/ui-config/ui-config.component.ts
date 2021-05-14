@@ -11,10 +11,10 @@ import { RoomConfig, UIControlGroup } from './ui-config';
   styleUrls: ['./ui-config.component.scss']
 })
 export class UiConfigComponent implements OnInit {
-  @Input('roomID') roomID: String;
+  @Input('roomID') roomID: string = '';
   roomConf: RoomConfig;
 
-  devices: Device[];
+  devices: Device[] = [];
 
   constructor(private api: ApiService,
     private dialog: MatDialog) {
@@ -25,7 +25,7 @@ export class UiConfigComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addGroup(group: UIControlGroup, id: String) {
+  addGroup(group: UIControlGroup | null, id: string) {
     var cgDialogRef;
     if (group == null) {
       cgDialogRef = this.dialog.open(UIConfigDialogComponent, {width: '60vw'});
@@ -46,7 +46,7 @@ export class UiConfigComponent implements OnInit {
     });
   }
 
-  deleteGroup(groupID: String) {
+  deleteGroup(groupID: string) {
     this.roomConf.controlGroups.delete(groupID);
   }
 
@@ -56,9 +56,9 @@ export class UiConfigComponent implements OnInit {
 
   getControlPanels(): Device[] {
     let re = new RegExp('-CP.*');
-    var filteredDevs = []
+    var filteredDevs: Device[] = [];
     this.devices.forEach(dev => {
-      if (re.exec(dev.id.toString()) != null) {
+      if (re.exec(dev.id) != null) {
         filteredDevs.push(dev);
       }
     });
@@ -66,7 +66,7 @@ export class UiConfigComponent implements OnInit {
     return filteredDevs;
   }
 
-  mapControlPanel(event: any, panel: String, group: String) {
+  mapControlPanel(event: any, panel: string, group: string) {
     if (event.source.selected) {
       this.roomConf.controlPanels.set(panel, group);
     }

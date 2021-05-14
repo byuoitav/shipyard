@@ -7,9 +7,9 @@ import { DeviceTypeNode } from '../devices/device-type-menu';
   styleUrls: ['./device-menu-item.component.scss']
 })
 export class DeviceMenuItemComponent implements OnInit {
-  @Input() nodes: DeviceTypeNode[];
+  @Input() nodes: DeviceTypeNode[] = [];
   @Input() parent: any;
-  @ViewChild('deviceTypeMenu') public subMenu;
+  @ViewChild('deviceTypeMenu') public subMenu: any;
 
   constructor() { }
 

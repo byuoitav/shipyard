@@ -12,9 +12,9 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent implements OnInit {
-  rooms: String[] = []; // Room list will actually be an array of strings
-  filteredRooms: String[];
-  filterParam: string;
+  rooms: string[] = [];
+  filteredRooms: string[] = [];
+  filterParam: string = "";
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -24,17 +24,16 @@ export class RoomListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.rooms = this.route.snapshot.data.rooms;
+    // this.rooms = this.route.snapshot.data.rooms; // resolver loads data before page load
     this.rooms = this.api.getRooms();
-    this.filterParam = "";
     this.filterRooms();
   }
 
-  routeToRoomPage(roomID: String) {
+  routeToRoomPage(roomID: string) {
     this.router.navigate(["/campus/" + roomID]);
   }
 
-  editRoom(r: String) {
+  editRoom(r: string) {
     // let room = this.proxy.getRoom(r);
     let room = this.api.getRoom(r);
     const roomDialog = this.dialog.open(RoomDialogComponent, {data: room});
@@ -53,7 +52,7 @@ export class RoomListComponent implements OnInit {
     this.filteredRooms = [];
     let re = new RegExp(this.filterParam.toLowerCase());
     this.rooms.forEach(rm => {
-      if (re.exec(rm.toString().toLowerCase()) != null) {
+      if (re.exec(rm.toLowerCase()) != null) {
         this.filteredRooms.push(rm);
       }
     });

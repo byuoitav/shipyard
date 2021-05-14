@@ -1,31 +1,26 @@
 import { Port } from "../ports/port";
 
 export class Device {
-    id: String;
+    id: string;
     // api_controllable: boolean;
-    publicDescription: String;
-    // privateDescription: String;
-    address: String;
-    driver: String;
+    publicDescription: string;
+    // privateDescription: string;
+    address: string;
+    driver: string;
     dynamicPorts: boolean;
     ports: Port[];
-    tags: Map<String, String>;
+    tags: Map<string, string>;
   
-    Type: String;
-  
-    constructor(dev: Device) {
+    Type: string;
+
+    constructor() {
         this.tags = new Map();
-        if (dev != null) {
-            this.id = dev.id;
-            this.Type = dev.Type;
-            this.address = dev.address;
-            dev.tags.forEach((value, key) => {
-            this.tags.set(key, value);
-            });
-        } else {
-            this.id = "";
-            this.Type = "";
-            this.address = "";
-        }
+        this.id = "";
+        this.publicDescription = "";
+        this.address = "";
+        this.driver = "";
+        this.dynamicPorts = true;
+        this.ports = [];
+        this.Type = "";
     }
 }

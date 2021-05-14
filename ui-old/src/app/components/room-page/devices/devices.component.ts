@@ -21,19 +21,19 @@ import { ApiService } from 'src/app/services/api.service';
   ],
 })
 export class DevicesComponent implements OnInit {
-  @Input() roomID: String = "";
-  @Input() expandable: boolean;
+  @Input() roomID: string = "";
+  @Input() expandable: boolean = true;
   @Output() currentDev: EventEmitter<any> = new EventEmitter();
 
-  devices: Device[];
+  devices: Device[] = [];
 
   devicesSource: MatTableDataSource<Device>;
-  deviceTableAttributes: String[] = ['id', 'type', 'address'];
+  deviceTableAttributes: string[] = ['id', 'type', 'address'];
 
-  expandedDevice: Device | null;
-  highlightedDevice: Device | null;
+  expandedDevice: Device | null = null;
+  highlightedDevice: Device | null = null;
 
-  menuNodes: DeviceTypeNode[];
+  menuNodes: DeviceTypeNode[] = [];
 
   constructor(private proxy: ApiProxyService,
     private api: ApiService,
@@ -79,14 +79,14 @@ export class DevicesComponent implements OnInit {
       let map = new Map<string, string>();
       let jsonMap = dev.tags;
       for (var val in jsonMap) {
-        map.set(val, jsonMap[val]);
+        map.set(val, jsonMap.get(val) as string);
       }
       dev.tags = map;
     });
   }
 
-  createDevice(devType: String) {
-    var dev = new Device(null);
+  createDevice(devType: string) {
+    var dev = new Device();
     dev.Type = devType;
 
     this.editDevice(dev);

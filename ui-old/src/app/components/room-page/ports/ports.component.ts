@@ -7,8 +7,8 @@ import { Endpoint, Port } from './port';
 import { ApiProxyService } from 'src/app/services/api-proxy.service';
 
 export interface PortDialogData {
-  RoomID: String;
-  SourceDev: String;
+  RoomID: string;
+  SourceDev: string;
   Port: Port;
 }
 @Component({
@@ -17,11 +17,11 @@ export interface PortDialogData {
   styleUrls: ['./ports.component.scss']
 })
 export class PortsComponent implements OnInit {
-  @Input('roomID') roomID: String = "";
+  @Input('roomID') roomID: string = "";
   @Input('devices-test') devices: Device[] = [];
   // devices: Device[];
-  currentDevice: Device;
-  currentPort: Port;
+  currentDevice: Device = new Device();
+  currentPort: Port = new Port();
 
   constructor(private proxy: ApiProxyService,
     private api: ApiService,

@@ -9,7 +9,7 @@ import { Room } from '../components/room-page/room';
 })
 export class ApiService {
 
-  testRoomList: String[] = [
+  testRoomList: string[] = [
     "ASB-TEST",
     "BYUB-TEST",
     "EB-TEST",
@@ -367,7 +367,7 @@ export class ApiService {
 
   constructor() { }
 
-  getRooms(): String[] {
+  getRooms(): string[] {
     // let rooms = [];
     // this.testRoomList.forEach(r => {
     //   for (let i = 0; i < 300; i++) {
@@ -378,13 +378,13 @@ export class ApiService {
     return this.testRoomList;
   }
 
-  getRoom(roomid: String): Room {
+  getRoom(roomid: string): Room {
     for (let i = 0; i < this.testRooms.length; i++) {
       if (this.testRooms[i].id == roomid) {
         return this.testRooms[i];
       }
     }
-    return null;
+    return null as any;
   }
 
   setRoom(room: Room) {
@@ -399,7 +399,7 @@ export class ApiService {
     this.testRooms.push(room);
   }
 
-  getDevices(roomid: String): Device[] {
+  getDevices(roomid: string): Device[] {
     return this.testDevices;
   }
 
@@ -414,7 +414,7 @@ export class ApiService {
     this.testDevices.push(device);
   }
 
-  removeDevice(deviceid: String) {
+  removeDevice(deviceid: string) {
     for (var i = 0; i < this.testDevices.length; i++) {
       if (this.testDevices[i].id == deviceid) {
         this.testDevices.splice(i, 1);
@@ -434,13 +434,13 @@ export class ApiService {
             label: "AV Touchpanel",
             icon: "",
             value: "Pi",
-            subNodes: null
+            subNodes: []
           },
           {
             label: "Scheduling Panel",
             icon: "",
             value: "Pi",
-            subNodes: null
+            subNodes: []
           }
         ]
       },
@@ -448,31 +448,31 @@ export class ApiService {
         label: "Displays",
         icon: "tv",
         value: "Display",
-        subNodes: null
+        subNodes: []
       },
       {
         label: "Inputs",
         icon: "input",
         value: "Input",
-        subNodes: null
+        subNodes: []
       },
       {
         label: "Audio",
         icon: "mic",
         value: "Audio",
-        subNodes: null
+        subNodes: []
       },
       {
         label: "Video Switchers",
         icon: "device_hub",
         value: "Video Switcher",
-        subNodes: null
+        subNodes: []
       },
       {
         label: "Network Devices",
         icon: "settings_ethernet",
         value: "Network Device",
-        subNodes: null
+        subNodes: []
       }
     ]
   }

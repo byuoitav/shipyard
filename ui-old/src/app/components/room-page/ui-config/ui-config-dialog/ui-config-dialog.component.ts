@@ -14,7 +14,7 @@ import { MasterVolume, UIControlGroup, UIDisplay } from '../ui-config';
 })
 export class UIConfigDialogComponent implements OnInit {
   config: UIControlGroup;
-  groupID: String;
+  groupID: string;
 
   devices: Device[];
   deviceTableColumns: string[] = ["select", "id", "type"];
@@ -23,7 +23,7 @@ export class UIConfigDialogComponent implements OnInit {
   InputSelection = new SelectionModel<Device>(true, []);
   MasterVolSelection = new SelectionModel<Device>(false, []);
 
-  MicrophoneGroups = new Map<String, String[]>();
+  MicrophoneGroups = new Map<string, string[]>();
 
   selected: Device[] = [];
 
@@ -51,7 +51,7 @@ export class UIConfigDialogComponent implements OnInit {
   }
 
   saveControlGroup() {
-    this.config.displays = new Map<String, UIDisplay>();
+    this.config.displays = new Map<string, UIDisplay>();
     this.DisplaySelection.selected.forEach(display => {
       this.config.displays.set(display.id, new UIDisplay());
     });
@@ -111,12 +111,12 @@ export class UIConfigDialogComponent implements OnInit {
     });
   }
 
-  deleteMicGroup(id: String) {
+  deleteMicGroup(id: string) {
     this.MicrophoneGroups.delete(id);
   }
 
-  filterDevicesByID(ids: String[]): Device[] {
-    var filteredDevs = []
+  filterDevicesByID(ids: string[]): Device[] {
+    var filteredDevs: Device[] = [];
     this.devices.forEach(dev => {
       ids.forEach(id => {
         if (id === dev.id) {
@@ -129,9 +129,9 @@ export class UIConfigDialogComponent implements OnInit {
 
   filterDevicesByRegularExpression(pattern: string): Device[] {
     let re = new RegExp(pattern);
-    var filteredDevs = []
+    var filteredDevs: Device[] = [];
     this.devices.forEach(dev => {
-      if (re.exec(dev.id.toString()) != null) {
+      if (re.exec(dev.id) != null) {
         filteredDevs.push(dev);
       }
     });

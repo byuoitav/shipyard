@@ -24,7 +24,7 @@
                 <mat-chip-list>
                     <mat-chip *ngFor="let endpt of data.endpoints"
                         [removable]="removable"
-                        (removed)="onRemove(endpt)">
+                        (removed)="onRemove(endpt.device)">
                         {{ endpt.device }} : {{ endpt.port }}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>

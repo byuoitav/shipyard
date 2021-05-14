@@ -27,7 +27,7 @@ export class PortConfigComponent implements OnInit {
     this.refDialog.close(true);
   }
 
-  onRemove(dev: String) {
+  onRemove(dev: string) {
     this.onDelete.emit({
       delete: dev
     });

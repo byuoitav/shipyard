@@ -15,10 +15,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     `
   })
   export class ConfirmConfigComponent implements OnInit {
-    id: String;
+    id: string;
 
     constructor(private refDialog: MatDialogRef<ConfirmConfigComponent>,
-        @Inject(MAT_DIALOG_DATA) private data: String) {
+        @Inject(MAT_DIALOG_DATA) private data: string) {
             this.id = this.data;
         }
     

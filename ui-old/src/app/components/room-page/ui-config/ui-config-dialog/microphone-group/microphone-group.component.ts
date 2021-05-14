@@ -11,9 +11,9 @@ import { Device } from '../../../devices/device';
 })
 export class MicrophoneGroupComponent implements OnInit {
   MicSelection = new SelectionModel<Device>(true, []);
-  groupID: String;
+  groupID: string = '';
 
-  devices: Device[];
+  devices: Device[] = [];
   deviceTableColumns: string[] = ["select", "id", "type"];
 
 
@@ -28,9 +28,9 @@ export class MicrophoneGroupComponent implements OnInit {
 
   filterDevicesByRegularExpression(pattern: string): Device[] {
     let re = new RegExp(pattern);
-    var filteredDevs = []
+    var filteredDevs: Device[] = [];
     this.devices.forEach(dev => {
-      if (re.exec(dev.id.toString()) != null) {
+      if (re.exec(dev.id) != null) {
         filteredDevs.push(dev);
       }
     });

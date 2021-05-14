@@ -8,13 +8,13 @@ import { Device } from '../device';
   styleUrls: ['./devices-dialog.component.scss']
 })
 export class DevicesDialogComponent implements OnInit {
-  id: String;
-  publicDescription: String;
-  address: String;
-  driver: String;
-  tags: Map<String, String>;
-  tagKey: String;
-  tagValue: String;
+  id: string = "";
+  publicDescription: string = "";
+  address: string = "";
+  driver: string = "";
+  tags: Map<string, string> = new Map();
+  tagKey: string = "";
+  tagValue: string = "";
 
   constructor(private dialogRef: MatDialogRef<DevicesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Device) {
@@ -22,7 +22,6 @@ export class DevicesDialogComponent implements OnInit {
         this.id = data.id;
         this.publicDescription = data.publicDescription;
         this.address = data.address;
-        this.tags = new Map();
         data.tags.forEach((value, key) => {
           this.tags.set(key, value);
         });
@@ -38,7 +37,7 @@ export class DevicesDialogComponent implements OnInit {
     this.tagValue = "";
   }
 
-  removeTag(key: String) {
+  removeTag(key: string) {
     this.tags.delete(key);
   }
 

@@ -12,12 +12,12 @@ import { Port } from '../port';
   styleUrls: ['./port-dialog.component.scss']
 })
 export class PortDialogComponent implements OnInit {
-  @ViewChild('stepper') stepper: MatStepper;
-  devices: Device[];
+  @ViewChild('stepper') stepper: MatStepper | null = null;
+  devices: Device[] = [];
   deviceTableHeaders: string[] =  ["id", "type"];
   portTableHeaders: string[] = ["id", "connection"];
 
-  chosenDevice: Device;
+  chosenDevice: Device = new Device();
 
   constructor(private api: ApiService,
     private dialog: MatDialog,
@@ -32,11 +32,13 @@ export class PortDialogComponent implements OnInit {
 
   chooseDevice(d: Device) {
     this.chosenDevice = d;
-    this.stepper.next();
+    if (this.stepper) {
+      this.stepper.next();
+    }
   }
 
   filterPorts(): Port[] {
-    var output = [];
+    var output: Port[] = [];
     this.chosenDevice.ports.forEach(p => {
       if (p.incoming != this.data.Port.incoming) {
         output.push(p);
@@ -46,7 +48,7 @@ export class PortDialogComponent implements OnInit {
   }
 
   confirmSelection(p: Port) {
-    let data = new ConfirmData;
+    var data: ConfirmData = new ConfirmData;
     if (p.incoming) {
       data.Incoming = this.chosenDevice.id;
       data.IncomingPort = p.name;

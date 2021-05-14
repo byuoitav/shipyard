@@ -12,16 +12,16 @@ import { Room } from './room';
   styleUrls: ['./room-page.component.scss']
 })
 export class RoomPageComponent implements OnInit {
-  roomID: String = "";
-  room: Room;
+  roomID: string = "";
+  room: Room = new Room();
 
-  devices: Device[];
+  devices: Device[] = [];
 
-  tagKey: String;
-  tagValue: String;
+  tagKey: string = "";
+  tagValue: string = "";
 
-  description: String = "this is a test of the emergency broadcast system";
-  notes: String = "the test will consist of three stages";
+  description: string = "this is a test of the emergency broadcast system";
+  notes: string = "the test will consist of three stages";
 
   constructor(private route: ActivatedRoute,
     private proxy: ApiProxyService,
@@ -47,7 +47,7 @@ export class RoomPageComponent implements OnInit {
     this.tagValue = "";
   }
 
-  removeTag(key: String) {
+  removeTag(key: string) {
     this.room.tags.delete(key);
   }
 

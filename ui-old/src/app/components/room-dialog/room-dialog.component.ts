@@ -8,21 +8,33 @@ import { Room } from '../room-page/room';
   styleUrls: ['./room-dialog.component.scss']
 })
 export class RoomDialogComponent implements OnInit {
-  room = new Room(null);
+  room = new Room();
   newRoom = true;
-  tagKey: String;
-  tagValue: String;
+  tagKey: string = "";
+  tagValue: string = "";
 
 
   constructor(private dialogRef: MatDialogRef<RoomDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Room) {
     if (data != null) {
-      this.room = new Room(data);
+      this.copyRoom(data);
       this.newRoom = false;
     }
   }
 
   ngOnInit(): void {
+  }
+
+  copyRoom(rm: Room) {
+      if (rm != null) {
+        this.room.id = rm.id;
+        this.room.privateDescription = rm.privateDescription;
+        this.room.publicDescription = rm.publicDescription;
+        this.room.proxyBaseURL = rm.proxyBaseURL;
+        rm.tags.forEach((value, key) => {
+            this.room.tags.set(key, value);
+        });
+    }
   }
 
   addTag() {
@@ -31,7 +43,7 @@ export class RoomDialogComponent implements OnInit {
     this.tagValue = "";
   }
 
-  removeTag(key: String) {
+  removeTag(key: string) {
     this.room.tags.delete(key);
   }
 
