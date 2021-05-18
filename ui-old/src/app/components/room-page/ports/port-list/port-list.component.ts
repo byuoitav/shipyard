@@ -17,11 +17,9 @@ export class PortListComponent implements OnInit {
   portColumns: string[] = ['port', 'connectedDevice'];
 
   constructor(private dialog: MatDialog) {
-    console.log(this.device);
   }
 
   ngOnInit(): void {
-    console.log(this.device);
   }
 
   selectPort(p: Port) {

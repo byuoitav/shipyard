@@ -48,20 +48,20 @@ export class PortDialogComponent implements OnInit {
   }
 
   confirmSelection(p: Port) {
-    var data: ConfirmData = new ConfirmData;
+    var confirmData: ConfirmData = new ConfirmData();
     if (p.incoming) {
-      data.Incoming = this.chosenDevice.id;
-      data.IncomingPort = p.name;
-      data.Outgoing = this.data.SourceDev;
-      data.OutgoingPort = this.data.name;
+      confirmData.Incoming = this.chosenDevice.id;
+      confirmData.IncomingPort = p.name;
+      confirmData.Outgoing = this.data.SourceDev;
+      confirmData.OutgoingPort = this.data.Port.name;
     } else {
-      data.Incoming = this.data.SourceDev;
-      data.IncomingPort = this.data.name;
-      data.Outgoing = this.chosenDevice.id;
-      data.OutgoingPort = p.name;
+      confirmData.Incoming = this.data.SourceDev;
+      confirmData.IncomingPort = this.data.Port.name;
+      confirmData.Outgoing = this.chosenDevice.id;
+      confirmData.OutgoingPort = p.name;
     }
 
-    const ref = this.dialog.open(ConfirmPortDialog, {data: data});
+    const ref = this.dialog.open(ConfirmPortDialog, {data: confirmData});
 
     ref.afterClosed().subscribe(confirm => {
       if (confirm) {
@@ -72,8 +72,8 @@ export class PortDialogComponent implements OnInit {
           }
         ];
         this.refDialog.close({
-          Device: this.chosenDevice.id,
-          Port: p.name
+          device: this.chosenDevice.id,
+          port: p.name
         });
       }
     });

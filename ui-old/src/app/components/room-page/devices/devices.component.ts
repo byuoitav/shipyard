@@ -47,6 +47,9 @@ export class DevicesComponent implements OnInit {
     // });
     this.menuNodes = this.api.getDeviceTypeMenu();
     this.updateTable();
+    if (this.devices.length > 0 && !this.expandable) { // if there is a device and the viewer is on the port tab then preselect the first device
+      this.expandRow(this.devices[0]);
+    }
   }
 
   editDevice(dev: Device) {
