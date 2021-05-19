@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Material Components
 import { MatButtonModule } from '@angular/material/button';
@@ -69,13 +70,14 @@ import { RoomConfigComponent } from './room-config/room-config.component';
     DevicesViewComponent,
 
     RoomListComponent,
-     RoomConfigComponent,
+    RoomConfigComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    NgbModule,
 
     MatButtonModule,
     MatToolbarModule,
