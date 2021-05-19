@@ -1,3 +1,8 @@
+mat-card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .room-info-container {
     display: flex;
     justify-content: space-between;
@@ -5,6 +10,7 @@
 
 mat-card {
     width: 50%;
+    box-shadow: none !important;
 }
 
 mat-card-content {

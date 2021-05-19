@@ -42,26 +42,9 @@ import { DevicesComponent } from './devices/devices.component';
 import { DevicesListComponent } from './devices/devices-list/devices-list.component';
 import { DevicesViewComponent } from './devices/devices-view/devices-view.component';
 
-// Builder
-import { RoomPageComponent } from './builder/room-page/room-page.component';
-import { BuildingListComponent } from './builder/building-list/building-list.component';
-import { RoomListComponent } from './builder/room-list/room-list.component';
-import { BuildingDialogComponent } from './builder/building-dialog/building-dialog.component';
-import { RoomDialogComponent } from './builder/room-dialog/room-dialog.component';
-import { RoomDevicesComponent } from './builder/room-page/devices/devices.component';
-import { DevicesDialogComponent } from './builder/room-page/devices/devices-dialog/devices-dialog.component';
-import { DeviceMenuItemComponent } from './builder/room-page/device-menu-item/device-menu-item.component';
-import { PortsComponent } from './builder/room-page/ports/ports.component';
-import { PortListComponent } from './builder/room-page/ports/port-list/port-list.component';
-import { PortDialogComponent } from './builder/room-page/ports/port-dialog/port-dialog.component';
-import { ConfirmPortDialog } from './builder/room-page/ports/port-dialog/confirm-dialog';
-import { PortConfigComponent } from './builder/room-page/ports/port-config/port-config.component';
-import { UiConfigComponent } from './builder/room-page/ui-config/ui-config.component';
-import { UIConfigDialogComponent } from './builder/room-page/ui-config/ui-config-dialog/ui-config-dialog.component';
-import { ConfirmConfigComponent } from './builder/room-page/ui-config/ui-config-dialog/confirm-config.component';
-import { MicrophoneGroupComponent } from './builder/room-page/ui-config/ui-config-dialog/microphone-group/microphone-group.component';
-import { CampusesComponent } from './builder/campuses/campuses.component';
-
+// New stuff
+import { RoomListComponent } from './room-list/room-list.component';
+import { RoomConfigComponent } from './room-config/room-config.component';
 
 
 
@@ -85,24 +68,8 @@ import { CampusesComponent } from './builder/campuses/campuses.component';
     DevicesListComponent,
     DevicesViewComponent,
 
-    RoomPageComponent,
-    BuildingListComponent,
     RoomListComponent,
-    BuildingDialogComponent,
-    RoomDialogComponent,
-    RoomDevicesComponent,
-    DevicesDialogComponent,
-    DeviceMenuItemComponent,
-    PortsComponent,
-    PortListComponent,
-    PortDialogComponent,
-    ConfirmPortDialog,
-    PortConfigComponent,
-    UiConfigComponent,
-    UIConfigDialogComponent,
-    ConfirmConfigComponent,
-    MicrophoneGroupComponent,
-    CampusesComponent,
+     RoomConfigComponent,
   ],
   imports: [
     BrowserModule,

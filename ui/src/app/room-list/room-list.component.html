@@ -1,0 +1,24 @@
+<div class="action-container">
+    <button mat-raised-button color="primary" (click)="editRoom('')">
+        <mat-icon>add</mat-icon>
+        Add New
+    </button>
+    <mat-form-field class="filter-field">
+        <mat-label>Filter Rooms</mat-label>
+        <input matInput [(ngModel)]="filterParam" (keyup)="filterRooms()">
+    </mat-form-field>
+</div>
+
+<div class="room-list">
+    <ng-container *ngFor="let r of filteredRooms">
+        <mat-card (click)="routeToRoomPage(r)">
+            <mat-card-header>
+                <mat-card-title>{{ r }}</mat-card-title>
+                <span class="spacing"></span>
+                <button mat-icon-button (click)="editRoom(r);$event.stopPropagation()">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </mat-card-header>
+        </mat-card>
+    </ng-container>
+</div>

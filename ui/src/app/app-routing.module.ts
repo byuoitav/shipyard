@@ -6,12 +6,22 @@ import { BuildingsComponent } from './buildings/buildings.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { SystemsComponent } from './systems/systems.component';
 import { DevicesComponent } from './devices/devices.component';
+import { RoomListComponent } from './room-list/room-list.component';
+import { RoomConfigComponent } from './room-config/room-config.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'campuses',
+    redirectTo: 'rooms',
     pathMatch: 'full'
+  },
+  {
+    path: 'rooms',
+    component: RoomListComponent
+  },
+  {
+    path: 'room-config/:roomID',
+    component: RoomConfigComponent
   },
   {
     path: 'campuses',
@@ -21,10 +31,10 @@ const routes: Routes = [
     path: 'buildings',
     component: BuildingsComponent
   },
-  {
-    path: 'rooms',
-    component: RoomsComponent,
-  },
+  // {
+  //   path: 'rooms',
+  //   component: RoomsComponent,
+  // },
   {
     path: 'systems',
     component: SystemsComponent,

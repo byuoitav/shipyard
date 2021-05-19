@@ -1,4 +1,4 @@
-$card-width: 325px;
+$card-width: 275px;
 .action-container {
     padding-top: 2vh;
     padding-bottom: 4vh;
@@ -6,7 +6,12 @@ $card-width: 325px;
     margin-right: 4vw;
 }
 
-.building-list {
+.filter-field {
+    width: 30vw;
+    padding-left: 5vw;
+}
+
+.room-list {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -16,7 +21,6 @@ $card-width: 325px;
 
 mat-card {
     min-width: $card-width;
-    min-height: 270px;
     width: $card-width;
     margin-bottom: 1vh;
     margin-top: 1vh;
@@ -25,17 +29,9 @@ mat-card {
 }
 
 mat-card-title {
-    padding-top: 25%;
+    padding-top: 15%;
 }
 
 .spacing {
     flex: 1 1 auto;
-}
-
-.image {
-    height: 203px;
-    min-height: 203px;
-    width: $card-width;
-    min-width: $card-width;
-    margin: auto;
 }
