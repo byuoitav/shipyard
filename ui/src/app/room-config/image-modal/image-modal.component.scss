@@ -16,6 +16,12 @@ h2 {
     height: 80%;
 }
 
+.upload-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .image-upload {
     text-align: center;
     border: 1px solid black;

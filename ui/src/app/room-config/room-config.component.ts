@@ -6,6 +6,7 @@ import { Room } from '../services/room';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
+import { DeleteModal } from './delete-modal';
 
 @Component({
   selector: 'app-room-config',
@@ -31,6 +32,13 @@ export class RoomConfigComponent implements OnInit {
   pauseOnHover = true;
   pauseOnFocus = true;
 
+  furniture: Map<string, boolean> = new Map();
+  roomTypes: string[] = [];
+  roomType: string = '';
+  fundingTypes: string[] = [];
+  fundingType: string = '';
+
+  systems: any[] = [];
 
   constructor(private route: ActivatedRoute,
     private api: ApiService,
@@ -50,6 +58,9 @@ export class RoomConfigComponent implements OnInit {
     this.devices = this.api.getDevices(this.roomID);
 
     this.images = this.getTestImages();
+    this.initializeFurnitureList();
+    this.roomTypes = this.getRoomTypes();
+    this.fundingTypes = this.getFundingTypes();
   }
 
   addImage() {
@@ -57,9 +68,16 @@ export class RoomConfigComponent implements OnInit {
     const imageDialog = this.dialog.open(ImageModalComponent);
   }
 
-  deleteImage() {
+  deleteImage(index: number) {
     console.log("image clicked");
     // open delete dialog
+    const deleteModal = this.dialog.open(DeleteModal);
+    deleteModal.afterClosed().subscribe(confirm => {
+      if (confirm) {
+        // delete the image
+        this.images.splice(index, 1);
+      }
+    });
   }
 
   addTag() {
@@ -121,6 +139,34 @@ export class RoomConfigComponent implements OnInit {
       header + "MCKB.jpg",
       header + "TMCB.jpg",
       header + "WSC.jpg",
+    ];
+  }
+
+  initializeFurnitureList() {
+    if (this.furniture.keys.length == 0) {
+      this.furniture.set("Podium", false);
+      this.furniture.set("MMC", false);
+      this.furniture.set("Ergotron", false);
+      this.furniture.set("Ceiling Box", false);
+      this.furniture.set("Rack", false);
+    }
+  }
+
+  getRoomTypes(): string[] {
+    return [
+      "Type 1",
+      "Type 2",
+      "Type 3",
+      "Type 4",
+      "Type 5"
+    ];
+  }
+
+  getFundingTypes(): string[] {
+    return [
+      "Type 1",
+      "Type 2",
+      "Type 3"
     ];
   }
 }
