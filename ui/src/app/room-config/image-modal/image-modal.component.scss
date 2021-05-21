@@ -1,0 +1,32 @@
+mat-dialog-content {
+    width: 500px;
+    height: 250px;
+}
+
+h2 { 
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+}
+
+.image-upload {
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.upload-button {
+    width: 25%;
+}
+
+.url-input {
+    width: 95%;
+}

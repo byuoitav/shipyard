@@ -46,6 +46,7 @@ import { DevicesViewComponent } from './devices/devices-view/devices-view.compon
 // New stuff
 import { RoomListComponent } from './room-list/room-list.component';
 import { RoomConfigComponent } from './room-config/room-config.component';
+import { ImageModalComponent } from './room-config/image-modal/image-modal.component';
 
 
 
@@ -71,6 +72,7 @@ import { RoomConfigComponent } from './room-config/room-config.component';
 
     RoomListComponent,
     RoomConfigComponent,
+    ImageModalComponent,
   ],
   imports: [
     BrowserModule,

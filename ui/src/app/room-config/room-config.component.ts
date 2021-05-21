@@ -4,6 +4,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { Device } from '../services/device';
 import { Room } from '../services/room';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageModalComponent } from './image-modal/image-modal.component';
 
 @Component({
   selector: 'app-room-config',
@@ -31,7 +33,8 @@ export class RoomConfigComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
-    private api: ApiService) {
+    private api: ApiService,
+    private dialog: MatDialog) {
     this.route.params.subscribe(params => {
       this.roomID = params["roomID"];
     });
@@ -47,6 +50,16 @@ export class RoomConfigComponent implements OnInit {
     this.devices = this.api.getDevices(this.roomID);
 
     this.images = this.getTestImages();
+  }
+
+  addImage() {
+    // open image dialog
+    const imageDialog = this.dialog.open(ImageModalComponent);
+  }
+
+  deleteImage() {
+    console.log("image clicked");
+    // open delete dialog
   }
 
   addTag() {

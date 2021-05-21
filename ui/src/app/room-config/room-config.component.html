@@ -1,15 +1,18 @@
 <div>
     <div class="room-info-container">
         <mat-card>
-            <mat-card-content>
+            <mat-card-content class="images-contianer">
                 <div class="carousel-wrapper">
                     <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
                         <ng-template ngbSlide *ngFor="let img of images; index as i">
                             <div class="picsum-img-wrapper">
-                                <img class="room-img" [src]="img" alt="Image {{i + 1}}">
+                                <img class="room-img" [src]="img" alt="Image {{i + 1}}" (click)="deleteImage()">
                             </div>
                         </ng-template>
                     </ngb-carousel>
+                </div>
+                <div class="button-wrapper">
+                    <button mat-fab color="primary" class="img-add-button" (click)="addImage()"><mat-icon class="add-icon">add</mat-icon></button>
                 </div>
             </mat-card-content>
             <mat-card-content>
