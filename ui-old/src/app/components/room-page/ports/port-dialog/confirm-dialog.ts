@@ -2,10 +2,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Component, Inject } from "@angular/core";
 
 export class ConfirmData {
-    Incoming: String;
-    IncomingPort: String;
-    Outgoing: String;
-    OutgoingPort: String;
+    Incoming: string;
+    IncomingPort: string;
+    Outgoing: string;
+    OutgoingPort: string;
+
+    constructor() {
+      this.Incoming = '';
+      this.IncomingPort = '';
+      this.Outgoing = '';
+      this.OutgoingPort = '';
+    }
 }
 
 @Component({

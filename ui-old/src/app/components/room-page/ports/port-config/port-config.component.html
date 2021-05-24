@@ -3,29 +3,29 @@
         <div class="text-row">
             <mat-form-field>
                 <mat-label>ID</mat-label>
-                <input matInput type="text" [(ngModel)]="data.ID">
+                <input matInput type="text" [(ngModel)]="data.id">
             </mat-form-field>
         </div>
         <div class="text-row">
             <mat-form-field>
                 <mat-label>Name</mat-label>
-                <input matInput type="text" [(ngModel)]="data.Name">
+                <input matInput type="text" [(ngModel)]="data.name">
             </mat-form-field>
         </div>
         <div class="text-row">
             <mat-form-field>
                 <mat-label>Type</mat-label>
-                <input matInput type="text" [(ngModel)]="data.Type">
+                <input matInput type="text" [(ngModel)]="data.type">
             </mat-form-field>
         </div>
         <div class="text-row">
-            <mat-form-field (click)="test()">
+            <mat-form-field (click)="connectPort()">
                 <mat-label>Enpoint</mat-label>
                 <mat-chip-list>
-                    <mat-chip *ngFor="let dev of data.Endpoint"
+                    <mat-chip *ngFor="let endpt of data.endpoints"
                         [removable]="removable"
-                        (removed)="onRemove(dev)">
-                        {{ dev }}
+                        (removed)="onRemove(endpt.device)">
+                        {{ endpt.device }} : {{ endpt.port }}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
                 </mat-chip-list>

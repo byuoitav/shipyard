@@ -9,21 +9,17 @@
     <table mat-table [dataSource]="devicesSource" multiTemplateDataRows>
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ID</th>
-            <td mat-cell *matCellDef="let dev"> {{dev.ID}} </td>
+            <td mat-cell *matCellDef="let dev"> {{dev.id}} </td>
         </ng-container>
         <ng-container matColumnDef="type">
-            <th mat-header-cell *matHeaderCellDef>Type</th>
+            <th mat-header-cell *matHeaderCellDef>Type (upcoming feature)</th>
             <td mat-cell *matCellDef="let dev"> {{dev.Type}} </td>
         </ng-container>
         <ng-container matColumnDef="address">
             <th mat-header-cell *matHeaderCellDef>Address</th>
-            <td mat-cell *matCellDef="let dev"> {{dev.Address}} </td>
-        </ng-container>
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef>Public Description</th>
-            <td mat-cell *matCellDef="let dev">
-                <div class="description-container">
-                    <p>{{ dev.Desc }}</p>
+            <td mat-cell *matCellDef="let dev"> 
+                <div class="address-container">
+                    <p>{{dev.address}}</p>
                     <button mat-icon-button (click)="editDevice(dev)">
                         <mat-icon>more_vert</mat-icon>
                     </button>
@@ -38,7 +34,7 @@
                 <div class="device-detail" [@rowExpand]="dev == expandedDevice ? 'expanded' : 'collapsed'">
                     <mat-expansion-panel class="tag-panel">
                         <mat-expansion-panel-header>Tags</mat-expansion-panel-header>
-                        <section *ngFor="let tag of dev.Tags | keyvalue" class="tag-row">
+                        <section *ngFor="let tag of dev.tags | keyvalue" class="tag-row">
                             <div>{{ tag.key }}</div>
                             <div>{{ tag.value }}</div>
                         </section>
@@ -52,7 +48,7 @@
             class="device-row"
             [class.expanded-row]="expandedDevice === device"
             [class.highlighted-row]="highlightedDevice === device"
-            (click)="test(device)"></tr>
+            (click)="expandRow(device)"></tr>
         <tr mat-row *matRowDef="let row; columns: ['expanded']" class="detail-row"></tr>
     </table>
 </mat-card-content>
@@ -63,10 +59,10 @@
 
 <mat-menu #deviceTypeMenu="matMenu">
     <ng-container *ngFor="let m of menuNodes">
-        <button mat-menu-item [matMenuTriggerFor]="subMenu"><mat-icon>{{ m.Icon }}</mat-icon>{{ m.Label }}</button>
+        <button mat-menu-item [matMenuTriggerFor]="subMenu"><mat-icon>{{ m.icon }}</mat-icon>{{ m.label }}</button>
         <mat-menu #subMenu="matMenu">
-            <ng-container *ngFor="let n of m.SubNodes">
-                <button mat-menu-item (click)="createDevice(n.Value)"><mat-icon>{{ n.Icon }}</mat-icon>{{ n.Label }}</button>
+            <ng-container *ngFor="let n of m.subNodes">
+                <button mat-menu-item (click)="createDevice(n.value)"><mat-icon>{{ n.icon }}</mat-icon>{{ n.label }}</button>
             </ng-container> 
         </mat-menu>
     </ng-container>

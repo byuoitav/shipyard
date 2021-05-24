@@ -11,7 +11,7 @@
             </button>
         </mat-card-header>
         <mat-card-content>
-            <mat-expansion-panel class="control-group" *ngFor="let group of roomConf.ControlGroups | keyvalue">
+            <mat-expansion-panel class="control-group" *ngFor="let group of roomConf.controlGroups | keyvalue">
                 <mat-expansion-panel-header>{{ group.key }}</mat-expansion-panel-header>
                 <section>
                     <div class="cg-panel">
@@ -21,7 +21,7 @@
                             </mat-card-header>
                             <mat-card-content>
                                 <mat-list>
-                                    <mat-list-item *ngFor="let display of group.value.Displays | keyvalue">{{ display.key }}</mat-list-item>
+                                    <mat-list-item *ngFor="let display of group.value.displays | keyvalue">{{ display.key }}</mat-list-item>
                                 </mat-list>
                             </mat-card-content>
                         </mat-card>
@@ -31,7 +31,7 @@
                             </mat-card-header>
                             <mat-card-content>
                                 <mat-list>
-                                    <mat-list-item *ngFor="let input of group.value.Inputs">{{ input }}</mat-list-item>
+                                    <mat-list-item *ngFor="let input of group.value.inputs">{{ input }}</mat-list-item>
                                 </mat-list>
                             </mat-card-content>
                         </mat-card>
@@ -41,7 +41,7 @@
                             </mat-card-header>
                             <mat-card-content>
                                 <mat-list>
-                                    <mat-list-item>{{ group.value.MasterVolume.Device }}</mat-list-item>
+                                    <mat-list-item>{{ group.value.masterVolume.device }}</mat-list-item>
                                 </mat-list>
                             </mat-card-content>
                         </mat-card>
@@ -50,11 +50,11 @@
                                 <mat-card-title>Microphones</mat-card-title>
                             </mat-card-header>
                             <mat-card-content>
-                                <mat-expansion-panel *ngFor="let micGroup of group.value.Microphones | keyvalue">
+                                <mat-expansion-panel *ngFor="let micGroup of group.value.microphones | keyvalue">
                                     <mat-expansion-panel-header>{{ micGroup.key }}</mat-expansion-panel-header>
                                     <section>
                                         <mat-list>
-                                            <mat-list-item *ngFor="let mic of micGroup.value">{{ mic.ID }}</mat-list-item>
+                                            <mat-list-item *ngFor="let mic of micGroup.value">{{ mic }}</mat-list-item>
                                         </mat-list>
                                     </section>
                                 </mat-expansion-panel>
@@ -79,12 +79,12 @@
                 <mat-card-content>
                     <mat-list>
                         <mat-list-item *ngFor="let panel of getControlPanels()" class="control-panel-assignment">
-                            <p>{{ panel.ID }}</p>
+                            <p>{{ panel.id }}</p>
                             <span class="spacing"></span>
                             <mat-form-field>
                                 <mat-label>UI Layout</mat-label>
                                 <mat-select>
-                                    <mat-option *ngFor="let group of roomConf.ControlGroups | keyvalue" [value]="group.key" (onSelectionChange)="mapControlPanel($event, panel.ID, group.key)">
+                                    <mat-option *ngFor="let group of roomConf.controlGroups | keyvalue" [value]="group.key" (onSelectionChange)="mapControlPanel($event, panel.id, group.key)">
                                         {{ group.key }}
                                     </mat-option>
                                 </mat-select>

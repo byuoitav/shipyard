@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,9 +28,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 
 import { RoomPageComponent } from './components/room-page/room-page.component';
-import { BuildingListComponent } from './components/building-list/building-list.component';
 import { RoomListComponent } from './components/room-list/room-list.component';
-import { BuildingDialogComponent } from './components/building-dialog/building-dialog.component';
 import { RoomDialogComponent } from './components/room-dialog/room-dialog.component';
 import { DevicesComponent } from './components/room-page/devices/devices.component';
 import { DevicesDialogComponent } from './components/room-page/devices/devices-dialog/devices-dialog.component';
@@ -43,15 +42,12 @@ import { UiConfigComponent } from './components/room-page/ui-config/ui-config.co
 import { UIConfigDialogComponent } from './components/room-page/ui-config/ui-config-dialog/ui-config-dialog.component';
 import { ConfirmConfigComponent } from './components/room-page/ui-config/ui-config-dialog/confirm-config.component';
 import { MicrophoneGroupComponent } from './components/room-page/ui-config/ui-config-dialog/microphone-group/microphone-group.component';
-import { CampusesComponent } from './components/campuses/campuses.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoomPageComponent,
-    BuildingListComponent,
     RoomListComponent,
-    BuildingDialogComponent,
     RoomDialogComponent,
     DevicesComponent,
     DevicesDialogComponent,
@@ -64,14 +60,14 @@ import { CampusesComponent } from './components/campuses/campuses.component';
     UiConfigComponent,
     UIConfigDialogComponent,
     ConfirmConfigComponent,
-    MicrophoneGroupComponent,
-	CampusesComponent
+    MicrophoneGroupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,

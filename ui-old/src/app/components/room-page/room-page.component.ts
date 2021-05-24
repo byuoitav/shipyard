@@ -1,6 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Room, ApiService } from 'src/app/services/api.service';
+import { ApiProxyService } from 'src/app/services/api-proxy.service';
+import { ApiService } from 'src/app/services/api.service';
+import { Device } from './devices/device';
+import { Room } from './room';
 
 @Component({
   selector: 'app-room-page',
@@ -8,35 +12,59 @@ import { Room, ApiService } from 'src/app/services/api.service';
   styleUrls: ['./room-page.component.scss']
 })
 export class RoomPageComponent implements OnInit {
-  roomID: String;
-  room: Room;
+  roomID: string = "";
+  room: Room = new Room();
 
-  tagKey: String;
-  tagValue: String;
+  devices: Device[] = [];
 
-  description: String = "this is a test of the emergency broadcast system";
-  notes: String = "the test will consist of three stages";
+  tagKey: string = "";
+  tagValue: string = "";
+
+  description: string = "this is a test of the emergency broadcast system";
+  notes: string = "the test will consist of three stages";
 
   constructor(private route: ActivatedRoute,
+    private proxy: ApiProxyService,
     private api: ApiService) {
     this.route.params.subscribe(params => {
       this.roomID = params["roomID"];
     });
-
-    this.room = this.api.getRoom(this.roomID);
   }
 
   ngOnInit(): void {
+    // this.room = this.route.snapshot.data.room;
+    this.room = this.api.getRoom(this.roomID);
+
+    // this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
+    //   this.devices = data;
+    // });
+    this.devices = this.api.getDevices(this.roomID);
   }
 
   addTag() {
-    this.room.Tags.set(this.tagKey, this.tagValue);
+    this.room.tags.set(this.tagKey, this.tagValue);
     this.tagKey = "";
     this.tagValue = "";
   }
 
-  removeTag(key: String) {
-    this.room.Tags.delete(key);
+  removeTag(key: string) {
+    this.room.tags.delete(key);
+  }
+
+  save() {
+    // this.proxy.saveRoom(this.room).subscribe(
+    //   resp => {
+    //       if (resp["success"]) {
+    //           console.log(true);
+    //       } else {
+    //           console.log(false);
+    //       }
+    //   },
+    //   err => {
+    //       console.log(err);
+    //   }
+    // );
+
   }
 
 }

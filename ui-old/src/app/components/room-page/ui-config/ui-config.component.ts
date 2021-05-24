@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UIControlGroup, ApiService, RoomConfig, Device } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UIConfigDialogComponent } from './ui-config-dialog/ui-config-dialog.component';
+import { Device } from '../devices/device';
+import { ApiService } from 'src/app/services/api.service';
+import { RoomConfig, UIControlGroup } from './ui-config';
 
 @Component({
   selector: 'app-ui-config',
@@ -9,10 +11,10 @@ import { UIConfigDialogComponent } from './ui-config-dialog/ui-config-dialog.com
   styleUrls: ['./ui-config.component.scss']
 })
 export class UiConfigComponent implements OnInit {
-  @Input('roomID') roomID: String;
+  @Input('roomID') roomID: string = '';
   roomConf: RoomConfig;
 
-  devices: Device[];
+  devices: Device[] = [];
 
   constructor(private api: ApiService,
     private dialog: MatDialog) {
@@ -23,7 +25,7 @@ export class UiConfigComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addGroup(group: UIControlGroup, id: String) {
+  addGroup(group: UIControlGroup | null, id: string) {
     var cgDialogRef;
     if (group == null) {
       cgDialogRef = this.dialog.open(UIConfigDialogComponent, {width: '60vw'});
@@ -36,7 +38,7 @@ export class UiConfigComponent implements OnInit {
 
     cgDialogRef.afterClosed().subscribe(data => {
       if (data != null) {
-        this.roomConf.ControlGroups.set(data.ID, data.Config);
+        this.roomConf.controlGroups.set(data.ID, data.Config);
         if (id !== data.ID) {
           this.deleteGroup(id);
         }
@@ -44,8 +46,8 @@ export class UiConfigComponent implements OnInit {
     });
   }
 
-  deleteGroup(groupID: String) {
-    this.roomConf.ControlGroups.delete(groupID);
+  deleteGroup(groupID: string) {
+    this.roomConf.controlGroups.delete(groupID);
   }
 
   checkForCameras(): boolean {
@@ -54,9 +56,9 @@ export class UiConfigComponent implements OnInit {
 
   getControlPanels(): Device[] {
     let re = new RegExp('-CP.*');
-    var filteredDevs = []
+    var filteredDevs: Device[] = [];
     this.devices.forEach(dev => {
-      if (re.exec(dev.ID.toString()) != null) {
+      if (re.exec(dev.id) != null) {
         filteredDevs.push(dev);
       }
     });
@@ -64,9 +66,9 @@ export class UiConfigComponent implements OnInit {
     return filteredDevs;
   }
 
-  mapControlPanel(event: any, panel: String, group: String) {
+  mapControlPanel(event: any, panel: string, group: string) {
     if (event.source.selected) {
-      this.roomConf.ControlPanels.set(panel, group);
+      this.roomConf.controlPanels.set(panel, group);
     }
   }
 

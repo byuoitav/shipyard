@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Device, ApiService, DeviceTypeNode } from 'src/app/services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DevicesDialogComponent } from './devices-dialog/devices-dialog.component';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { Device } from './device';
+import { DeviceTypeNode } from './device-type-menu';
+import { ApiProxyService } from 'src/app/services/api-proxy.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-devices',
@@ -18,28 +21,35 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
   ],
 })
 export class DevicesComponent implements OnInit {
-  @Input() roomID: String;
-  @Input() expandable: boolean;
+  @Input() roomID: string = "";
+  @Input() expandable: boolean = true;
   @Output() currentDev: EventEmitter<any> = new EventEmitter();
 
-  devices: Device[];
+  devices: Device[] = [];
 
   devicesSource: MatTableDataSource<Device>;
-  deviceTableAttributes: String[] = ['id', 'address', 'description'];
+  deviceTableAttributes: string[] = ['id', 'type', 'address'];
 
-  expandedDevice: Device | null;
-  highlightedDevice: Device | null;
+  expandedDevice: Device | null = null;
+  highlightedDevice: Device | null = null;
 
-  menuNodes: DeviceTypeNode[];
+  menuNodes: DeviceTypeNode[] = [];
 
-  constructor(private api: ApiService,
+  constructor(private proxy: ApiProxyService,
+    private api: ApiService,
     private dialogRef: MatDialog) {
     this.devicesSource = new MatTableDataSource();
-    this.updateTable();
   }
 
   ngOnInit(): void {
+    // this.proxy.getDeviceMenu().subscribe((data: DeviceTypeNode[]) => {
+    //   this.menuNodes = data;
+    // });
     this.menuNodes = this.api.getDeviceTypeMenu();
+    this.updateTable();
+    if (this.devices.length > 0 && !this.expandable) { // if there is a device and the viewer is on the port tab then preselect the first device
+      this.expandRow(this.devices[0]);
+    }
   }
 
   editDevice(dev: Device) {
@@ -48,9 +58,9 @@ export class DevicesComponent implements OnInit {
     dialog.afterClosed().subscribe(result => {
       if (result != null) {
         if (result) {
-          this.api.addDevice(dev);
+          // this.proxy.saveDevice(dev);
         } else {
-          this.api.removeDevice(dev.ID);
+          //Todo: delete device?
         }
       }
       this.updateTable();
@@ -58,18 +68,34 @@ export class DevicesComponent implements OnInit {
   }
 
   updateTable() {
+    // this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
+    //   this.devices = data;
+    //   this.createMaps(this.devices);
+    //   this.devicesSource.data = this.devices;
+    // });
     this.devices = this.api.getDevices(this.roomID);
     this.devicesSource.data = this.devices;
   }
 
-  createDevice(devType: String) {
-    var dev = new Device(null);
+  createMaps(devices: Device[]) {
+    devices.forEach(dev => {
+      let map = new Map<string, string>();
+      let jsonMap = dev.tags;
+      for (var val in jsonMap) {
+        map.set(val, jsonMap.get(val) as string);
+      }
+      dev.tags = map;
+    });
+  }
+
+  createDevice(devType: string) {
+    var dev = new Device();
     dev.Type = devType;
 
     this.editDevice(dev);
   }
 
-  test(device: Device) {
+  expandRow(device: Device) {
     if (this.expandable) {
       this.expandedDevice = this.expandedDevice === device ? null : device;
     } else {

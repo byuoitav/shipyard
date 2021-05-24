@@ -44,7 +44,13 @@ tr.device-row:not(.expanded-row):hover {
     padding-bottom: 5px;
 }
 
-.description-container {
+.address-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.address-container p {
+    padding: 0;
+    margin: 0;
 }

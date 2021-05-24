@@ -1,8 +1,10 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { Device, ApiService, Port } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { ConfirmPortDialog, ConfirmData } from './confirm-dialog';
+import { Device } from '../../devices/device';
+import { Port } from '../port';
 
 @Component({
   selector: 'app-port-dialog',
@@ -10,12 +12,12 @@ import { ConfirmPortDialog, ConfirmData } from './confirm-dialog';
   styleUrls: ['./port-dialog.component.scss']
 })
 export class PortDialogComponent implements OnInit {
-  @ViewChild('stepper') stepper: MatStepper;
-  devices: Device[];
+  @ViewChild('stepper') stepper: MatStepper | null = null;
+  devices: Device[] = [];
   deviceTableHeaders: string[] =  ["id", "type"];
-  portTableHeaders: string[] = ["id"];
+  portTableHeaders: string[] = ["id", "connection"];
 
-  chosenDevice: Device;
+  chosenDevice: Device = new Device();
 
   constructor(private api: ApiService,
     private dialog: MatDialog,
@@ -28,15 +30,17 @@ export class PortDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  test(d: Device) {
+  chooseDevice(d: Device) {
     this.chosenDevice = d;
-    this.stepper.next();
+    if (this.stepper) {
+      this.stepper.next();
+    }
   }
 
   filterPorts(): Port[] {
-    var output = [];
-    this.chosenDevice.Ports.forEach(p => {
-      if (p.Incoming != this.data.Port.Incoming) {
+    var output: Port[] = [];
+    this.chosenDevice.ports.forEach(p => {
+      if (p.incoming != this.data.Port.incoming) {
         output.push(p);
       }
     });
@@ -44,30 +48,43 @@ export class PortDialogComponent implements OnInit {
   }
 
   confirmSelection(p: Port) {
-    let data = new ConfirmData;
-    if (p.Incoming) {
-      data.Incoming = this.chosenDevice.ID;
-      data.IncomingPort = p.Name;
-      data.Outgoing = this.data.SourceDev;
-      data.OutgoingPort = this.data.Port.Name;
+    var confirmData: ConfirmData = new ConfirmData();
+    if (p.incoming) {
+      confirmData.Incoming = this.chosenDevice.id;
+      confirmData.IncomingPort = p.name;
+      confirmData.Outgoing = this.data.SourceDev;
+      confirmData.OutgoingPort = this.data.Port.name;
     } else {
-      data.Incoming = this.data.SourceDev;
-      data.IncomingPort = this.data.Port.Name;
-      data.Outgoing = this.chosenDevice.ID;
-      data.OutgoingPort = p.Name;
+      confirmData.Incoming = this.data.SourceDev;
+      confirmData.IncomingPort = this.data.Port.name;
+      confirmData.Outgoing = this.chosenDevice.id;
+      confirmData.OutgoingPort = p.name;
     }
 
-    const ref = this.dialog.open(ConfirmPortDialog, {data: data});
+    const ref = this.dialog.open(ConfirmPortDialog, {data: confirmData});
 
     ref.afterClosed().subscribe(confirm => {
       if (confirm) {
-        p.Endpoint = [this.data.SourceDev];
-        this.refDialog.close(this.chosenDevice.ID);
+        p.endpoints = [
+          {
+            device: this.data.SourceDev,
+            port: this.data.Port.name
+          }
+        ];
+        this.refDialog.close({
+          device: this.chosenDevice.id,
+          port: p.name
+        });
       }
     });
   }
 
   cancel() {
     this.refDialog.close(null);
+  }
+
+  isConnected(p: Port): boolean {
+    let test = (p.endpoints != null && p.endpoints.length > 0);
+    return test;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Room } from 'src/app/services/api.service';
+import { Room } from '../room-page/room';
 
 @Component({
   selector: 'app-room-dialog',
@@ -8,16 +8,16 @@ import { Room } from 'src/app/services/api.service';
   styleUrls: ['./room-dialog.component.scss']
 })
 export class RoomDialogComponent implements OnInit {
-  room = new Room(null);
+  room = new Room();
   newRoom = true;
-  tagKey: String;
-  tagValue: String;
+  tagKey: string = "";
+  tagValue: string = "";
 
 
   constructor(private dialogRef: MatDialogRef<RoomDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Room) {
     if (data != null) {
-      this.room = new Room(data);
+      this.copyRoom(data);
       this.newRoom = false;
     }
   }
@@ -25,14 +25,26 @@ export class RoomDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  copyRoom(rm: Room) {
+      if (rm != null) {
+        this.room.id = rm.id;
+        this.room.privateDescription = rm.privateDescription;
+        this.room.publicDescription = rm.publicDescription;
+        this.room.proxyBaseURL = rm.proxyBaseURL;
+        rm.tags.forEach((value, key) => {
+            this.room.tags.set(key, value);
+        });
+    }
+  }
+
   addTag() {
-    this.room.Tags.set(this.tagKey, this.tagValue);
+    this.room.tags.set(this.tagKey, this.tagValue);
     this.tagKey = "";
     this.tagValue = "";
   }
 
-  removeTag(key: String) {
-    this.room.Tags.delete(key);
+  removeTag(key: string) {
+    this.room.tags.delete(key);
   }
 
   onCancel() {

@@ -1,0 +1,13 @@
+<mat-dialog-content>
+    <h2>Upload an Image or use URL</h2>
+    <div class="input-container">
+        <div class="upload-container">
+            <input type="file" class="image-upload" (change)="onUploadFile($event)">
+            <button mat-raised-button color="primary" class="upload-button">Upload </button>
+        </div>
+        <mat-form-field  class="url-input">
+            <mat-label>URL</mat-label>
+            <input matInput type="url" [ngModel]="url">
+        </mat-form-field>
+    </div>
+</mat-dialog-content>

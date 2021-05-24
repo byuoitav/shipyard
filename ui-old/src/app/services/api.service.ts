@@ -1,456 +1,396 @@
 import { Injectable } from '@angular/core';
-
-export class Room {
-  ID: String;
-  Desig: String;
-  Desc: String;
-  Notes: String;
-  ProxyBaseURL: String;
-  Tags: Map<String, String>;
-
-  constructor(rm: Room) {
-    this.Tags = new Map();
-    if (rm != null) {
-      this.ID = rm.ID;
-      this.Desc = rm.Desc;
-      rm.Tags.forEach((value, key) => {
-        this.Tags.set(key, value);
-      });
-    } else {
-      this.ID = "";
-      this.Desc = "";
-    }
-  }
-}
-
-export class Device {
-  ID: String;
-  Desc: String;
-  Address: String;
-  Driver: String;
-  DynamicPorts: boolean;
-  Ports: Port[];
-  Tags: Map<String, String>
-
-  Type: String;
-
-  constructor(dev: Device) {
-    this.Tags = new Map();
-    if (dev != null) {
-      this.ID = dev.ID;
-      this.Type = dev.Type;
-      this.Address = dev.Address;
-      dev.Tags.forEach((value, key) => {
-        this.Tags.set(key, value);
-      });
-    } else {
-      this.ID = "";
-      this.Type = "";
-      this.Address = "";
-    }
-  }
-}
-
-export class Port {
-  ID: String;
-  Name: String;
-  Endpoint: String[];
-  Incoming: boolean;
-  Type: String;
-}
-
-export class RoomConfig {
-  ID: String;
-  ControlPanels: Map<String, String>;
-  ControlGroups: Map<String, UIControlGroup>;
-}
-
-export class UIControlGroup {
-  Displays: Map<String, UIDisplay>;
-  Inputs: String[];
-  Microphones: Map<String, String[]>;
-  MasterVolume: MasterVolume;
-}
-
-export class MasterVolume {
-  Device: String;
-  Block: String;
-}
-
-export class UIDisplay {
-  DefaultInput: String;
-}
-
-export class DeviceTypeNode {
-  Label: String;
-  Icon: String;
-  Value: String;
-  SubNodes: DeviceTypeNode[];
-}
+import { Device } from 'src/app/components/room-page/devices/device';
+import { RoomConfig } from '../components/room-page/ui-config/ui-config';
+import { DeviceTypeNode } from '../components/room-page/devices/device-type-menu';
+import { Room } from '../components/room-page/room';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
+  testRoomList: string[] = [
+    "ASB-TEST",
+    "BYUB-TEST",
+    "EB-TEST",
+    "HBLL-TEST",
+    "ITB-TEST",
+    "ITB-TEST2",
+    "ITB-TEST3",
+    "JFSB-TEST",
+    "KMBL-TEST",
+    "MARB-TEST",
+    "TMCB-TEST"
+  ];
+
   testRooms: Room[] = [
     {
-      ID: "ASB-TEST",
-      Desig: "designation ASB-TEST",
-      Desc: "this is ASB-TEST",
-      Notes: "notes on ASB-TEST",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "ASB-TEST",
+      designation: "designation ASB-TEST",
+      publicDescription: "this is ASB-TEST",
+      privateDescription: "notes on ASB-TEST",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "BYUB-TEST",
-      Desig: "designation BYUB-TEST",
-      Desc: "this is BYUB-TEST",
-      Notes: "notes on BYUB-TEST",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "BYUB-TEST",
+      designation: "designation BYUB-TEST",
+      publicDescription: "this is BYUB-TEST",
+      privateDescription: "notes on BYUB-TEST",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "EB-TEST",
-      Desig: "designation EB-TEST",
-      Desc: "this is EB-TEST",
-      Notes: "notes on EB-TEST",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "EB-TEST",
+      designation: "designation EB-TEST",
+      publicDescription: "this is EB-TEST",
+      privateDescription: "notes on EB-TEST",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "HBLL-TEST",
-      Desig: "designation HBLL-TEST",
-      Desc: "this is HBLL-TEST",
-      Notes: "notes on HBLL-TEST",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "HBLL-TEST",
+      designation: "designation HBLL-TEST",
+      publicDescription: "this is HBLL-TEST",
+      privateDescription: "notes on HBLL-TEST",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "ITB-TEST",
-      Desig: "designation ITB-TEST",
-      Desc: "this is ITB-TEST",
-      Notes: "notes on ITB-TEST",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "ITB-TEST",
+      designation: "designation ITB-TEST",
+      publicDescription: "this is ITB-TEST",
+      privateDescription: "notes on ITB-TEST",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "ITB-TEST2",
-      Desig: "designation ITB-TEST2",
-      Desc: "this is ITB-TEST2",
-      Notes: "notes on ITB-TEST2",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "ITB-TEST2",
+      designation: "designation ITB-TEST2",
+      publicDescription: "this is ITB-TEST2",
+      privateDescription: "notes on ITB-TEST2",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "ITB-TEST3",
-      Desig: "designation ITB-TEST3",
-      Desc: "this is ITB-TEST3",
-      Notes: "notes on ITB-TEST3",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "ITB-TEST3",
+      designation: "designation ITB-TEST3",
+      publicDescription: "this is ITB-TEST3",
+      privateDescription: "notes on ITB-TEST3",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "JFSB-TEST",
-      Desig: "designation JFSB-TEST",
-      Desc: "this is JFSB-TEST",
-      Notes: "notes on JFSB-TEST",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "JFSB-TEST",
+      designation: "designation JFSB-TEST",
+      publicDescription: "this is JFSB-TEST",
+      privateDescription: "notes on JFSB-TEST",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "KMBL-TEST",
-      Desig: "designation KMBL-TEST",
-      Desc: "this is KMBL-TEST",
-      Notes: "notes on KMBL-TEST",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "KMBL-TEST",
+      designation: "designation KMBL-TEST",
+      publicDescription: "this is KMBL-TEST",
+      privateDescription: "notes on KMBL-TEST",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "MARB-TEST",
-      Desig: "designation MARB-TEST",
-      Desc: "this is MARB-TEST",
-      Notes: "notes on MARB-TEST",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "MARB-TEST",
+      designation: "designation MARB-TEST",
+      publicDescription: "this is MARB-TEST",
+      privateDescription: "notes on MARB-TEST",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     },
     {
-      ID: "TMCB-TEST",
-      Desig: "designation TMCB-TEST",
-      Desc: "this is TMCB-TEST",
-      Notes: "notes on TMCB-TEST",
-      ProxyBaseURL: "huh...",
-      Tags: new Map()
+      id: "TMCB-TEST",
+      designation: "designation TMCB-TEST",
+      publicDescription: "this is TMCB-TEST",
+      privateDescription: "notes on TMCB-TEST",
+      proxyBaseURL: "huh...",
+      tags: new Map()
     }
   ];
 
   testDevices: Device[] = [
     {
-      ID: "Device-1",
-      Desc: "description of device 1",
-      Address: "Device_1.byu.edu",
-      Driver: "driver 1",
-      DynamicPorts: false,
-      Ports: [
+      id: "Device-1",
+      publicDescription: "description of device 1",
+      address: "Device_1.byu.edu",
+      driver: "driver 1",
+      dynamicPorts: false,
+      ports: [
         {
-          ID: 'Device1-Port1',
-          Name: 'Port1',
-          Endpoint: [],
-          Incoming: true,
-          Type: ''
+          id: 'Port1',
+          name: 'Port1',
+          endpoints: [],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port2',
-          Name: 'Port2',
-          Endpoint: [],
-          Incoming: true,
-          Type: ''
+          id: 'Port2',
+          name: 'Port2',
+          endpoints: [],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port3',
-          Name: 'Port3',
-          Endpoint: ['test'],
-          Incoming: true,
-          Type: ''
+          id: 'Port3',
+          name: 'Port3',
+          endpoints: [
+            {
+              device: 'Device-2',
+              port: 'Port6'
+            }
+          ],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port4',
-          Name: 'Port4',
-          Endpoint: [],
-          Incoming: true,
-          Type: ''
+          id: 'Port4',
+          name: 'Port4',
+          endpoints: [],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port5',
-          Name: 'Port5',
-          Endpoint: [],
-          Incoming: true,
-          Type: ''
+          id: 'Port5',
+          name: 'Port5',
+          endpoints: [],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port6',
-          Name: 'Port6',
-          Endpoint: ['test'],
-          Incoming: false,
-          Type: ''
+          id: 'Port6',
+          name: 'Port6',
+          endpoints: [],
+          incoming: false,
+          type: ''
         },
         {
-          ID: 'Device1-Port7',
-          Name: 'Port7',
-          Endpoint: [],
-          Incoming: false,
-          Type: ''
+          id: 'Port7',
+          name: 'Port7',
+          endpoints: [],
+          incoming: false,
+          type: ''
         },
         {
-          ID: 'Device1-Port8',
-          Name: 'Port8',
-          Endpoint: ['test'],
-          Incoming: false,
-          Type: ''
+          id: 'Port8',
+          name: 'Port8',
+          endpoints: [],
+          incoming: false,
+          type: ''
         },
         {
-          ID: 'Device1-Port9',
-          Name: 'Port9',
-          Endpoint: [],
-          Incoming: false,
-          Type: ''
+          id: 'Port9',
+          name: 'Port9',
+          endpoints: [],
+          incoming: false,
+          type: ''
         }
       ],
-      Tags: new Map(),
+      tags: new Map(),
       Type: "Type-1",
     },
     {
-      ID: "Device-2",
-      Desc: "description of device 2",
-      Address: "Device_2.byu.edu",
-      Driver: "driver 2",
-      DynamicPorts: false,
-      Ports: [
+      id: "Device-2",
+      publicDescription: "description of device 2",
+      address: "Device_2.byu.edu",
+      driver: "driver 2",
+      dynamicPorts: false,
+      ports: [
         {
-          ID: 'Device1-Port1',
-          Name: 'Port1',
-          Endpoint: [],
-          Incoming: true,
-          Type: ''
+          id: 'Port1',
+          name: 'Port1',
+          endpoints: [],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port2',
-          Name: 'Port2',
-          Endpoint: [],
-          Incoming: true,
-          Type: ''
+          id: 'Port2',
+          name: 'Port2',
+          endpoints: [],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port3',
-          Name: 'Port3',
-          Endpoint: ['test'],
-          Incoming: true,
-          Type: ''
+          id: 'Port3',
+          name: 'Port3',
+          endpoints: [],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port4',
-          Name: 'Port4',
-          Endpoint: [],
-          Incoming: true,
-          Type: ''
+          id: 'Port4',
+          name: 'Port4',
+          endpoints: [],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port5',
-          Name: 'Port5',
-          Endpoint: [],
-          Incoming: true,
-          Type: ''
+          id: 'Port5',
+          name: 'Port5',
+          endpoints: [],
+          incoming: true,
+          type: ''
         },
         {
-          ID: 'Device1-Port6',
-          Name: 'Port6',
-          Endpoint: ['test'],
-          Incoming: false,
-          Type: ''
+          id: 'Port6',
+          name: 'Port6',
+          endpoints: [
+            {
+              device: 'Device-1',
+              port: 'Port3'
+            }
+          ],
+          incoming: false,
+          type: ''
         },
         {
-          ID: 'Device1-Port7',
-          Name: 'Port7',
-          Endpoint: [],
-          Incoming: false,
-          Type: ''
+          id: 'Port7',
+          name: 'Port7',
+          endpoints: [],
+          incoming: false,
+          type: ''
         },
         {
-          ID: 'Device1-Port8',
-          Name: 'Port8',
-          Endpoint: ['test'],
-          Incoming: false,
-          Type: ''
+          id: 'Port8',
+          name: 'Port8',
+          endpoints: [],
+          incoming: false,
+          type: ''
         },
         {
-          ID: 'Device1-Port9',
-          Name: 'Port9',
-          Endpoint: [],
-          Incoming: false,
-          Type: ''
+          id: 'Port9',
+          name: 'Port9',
+          endpoints: [],
+          incoming: false,
+          type: ''
         }
       ],
-      Tags: new Map(),
+      tags: new Map(),
       Type: "Type-2",
     },
     {
-      ID: "TEST-0000-MIC1",
-      Desc: "description of TEST-0000-MIC1",
-      Address: "TEST-0000-MIC1.byu.edu",
-      Driver: "driver TEST-0000-MIC1",
-      DynamicPorts: false,
-      Ports: [],
-      Tags: new Map(),
+      id: "TEST-0000-MIC1",
+      publicDescription: "description of TEST-0000-MIC1",
+      address: "TEST-0000-MIC1.byu.edu",
+      driver: "driver TEST-0000-MIC1",
+      dynamicPorts: false,
+      ports: [],
+      tags: new Map(),
       Type: "???",
     },
     {
-      ID: "TEST-0000-MIC2",
-      Desc: "description of TEST-0000-MIC2",
-      Address: "TEST-0000-MIC2.byu.edu",
-      Driver: "driver TEST-0000-MIC2",
-      DynamicPorts: false,
-      Ports: [],
-      Tags: new Map(),
+      id: "TEST-0000-MIC2",
+      publicDescription: "description of TEST-0000-MIC2",
+      address: "TEST-0000-MIC2.byu.edu",
+      driver: "driver TEST-0000-MIC2",
+      dynamicPorts: false,
+      ports: [],
+      tags: new Map(),
       Type: "???",
     },
     {
-      ID: "TEST-0000-MIC3",
-      Desc: "description of TEST-0000-MIC3",
-      Address: "TEST-0000-MIC3.byu.edu",
-      Driver: "driver TEST-0000-MIC3",
-      DynamicPorts: false,
-      Ports: [],
-      Tags: new Map(),
+      id: "TEST-0000-MIC3",
+      publicDescription: "description of TEST-0000-MIC3",
+      address: "TEST-0000-MIC3.byu.edu",
+      driver: "driver TEST-0000-MIC3",
+      dynamicPorts: false,
+      ports: [],
+      tags: new Map(),
       Type: "???",
     },
     {
-      ID: "TEST-0000-CP1",
-      Desc: "description of TEST-0000-CP1",
-      Address: "TEST-0000-CP1.byu.edu",
-      Driver: "driver TEST-0000-CP1",
-      DynamicPorts: false,
-      Ports: [],
-      Tags: new Map(),
+      id: "TEST-0000-CP1",
+      publicDescription: "description of TEST-0000-CP1",
+      address: "TEST-0000-CP1.byu.edu",
+      driver: "driver TEST-0000-CP1",
+      dynamicPorts: false,
+      ports: [],
+      tags: new Map(),
       Type: "???",
     },
     {
-      ID: "TEST-0000-CP2",
-      Desc: "description of TEST-0000-CP2",
-      Address: "TEST-0000-CP2.byu.edu",
-      Driver: "driver TEST-0000-CP2",
-      DynamicPorts: false,
-      Ports: [],
-      Tags: new Map(),
+      id: "TEST-0000-CP2",
+      publicDescription: "description of TEST-0000-CP2",
+      address: "TEST-0000-CP2.byu.edu",
+      driver: "driver TEST-0000-CP2",
+      dynamicPorts: false,
+      ports: [],
+      tags: new Map(),
       Type: "???",
     },
     {
-      ID: "TEST-0000-CP3",
-      Desc: "description of TEST-0000-CP3",
-      Address: "TEST-0000-CP3.byu.edu",
-      Driver: "driver TEST-0000-CP3",
-      DynamicPorts: false,
-      Ports: [],
-      Tags: new Map(),
+      id: "TEST-0000-CP3",
+      publicDescription: "description of TEST-0000-CP3",
+      address: "TEST-0000-CP3.byu.edu",
+      driver: "driver TEST-0000-CP3",
+      dynamicPorts: false,
+      ports: [],
+      tags: new Map(),
       Type: "???",
     },
     {
-      ID: "TEST-0000-D1",
-      Desc: "description of TEST-0000-D1",
-      Address: "TEST-0000-D1.byu.edu",
-      Driver: "driver TEST-0000-D1",
-      DynamicPorts: false,
-      Ports: [],
-      Tags: new Map(),
+      id: "TEST-0000-D1",
+      publicDescription: "description of TEST-0000-D1",
+      address: "TEST-0000-D1.byu.edu",
+      driver: "driver TEST-0000-D1",
+      dynamicPorts: false,
+      ports: [],
+      tags: new Map(),
       Type: "???",
     },
     {
-      ID: "TEST-0000-D2",
-      Desc: "description of TEST-0000-D2",
-      Address: "TEST-0000-D2.byu.edu",
-      Driver: "driver TEST-0000-D2",
-      DynamicPorts: false,
-      Ports: [],
-      Tags: new Map(),
+      id: "TEST-0000-D2",
+      publicDescription: "description of TEST-0000-D2",
+      address: "TEST-0000-D2.byu.edu",
+      driver: "driver TEST-0000-D2",
+      dynamicPorts: false,
+      ports: [],
+      tags: new Map(),
       Type: "???",
     },
     {
-      ID: "TEST-0000-D3",
-      Desc: "description of TEST-0000-D3",
-      Address: "TEST-0000-D3.byu.edu",
-      Driver: "driver TEST-0000-D3",
-      DynamicPorts: false,
-      Ports: [],
-      Tags: new Map(),
+      id: "TEST-0000-D3",
+      publicDescription: "description of TEST-0000-D3",
+      address: "TEST-0000-D3.byu.edu",
+      driver: "driver TEST-0000-D3",
+      dynamicPorts: false,
+      ports: [],
+      tags: new Map(),
       Type: "???",
     }
   ];
 
   constructor() { }
 
-  getRooms(bldgID: String): Room[] {
-    let rooms = [];
-    let re = new RegExp(bldgID.toString());
-    this.testRooms.forEach(rm => {
-      if (re.exec(rm.ID.toString()) != null) {
-        rooms.push(rm);
-      }
-    });
-    return rooms;
+  getRooms(): string[] {
+    // let rooms = [];
+    // this.testRoomList.forEach(r => {
+    //   for (let i = 0; i < 300; i++) {
+    //     rooms.push(r);
+    //   }
+    // });
+    // return rooms;
+    return this.testRoomList;
   }
 
-  getRoom(roomID: String): Room {
+  getRoom(roomid: string): Room {
     for (let i = 0; i < this.testRooms.length; i++) {
-      if (this.testRooms[i].ID == roomID) {
+      if (this.testRooms[i].id == roomid) {
         return this.testRooms[i];
       }
     }
-    return null;
+    return null as any;
   }
 
   setRoom(room: Room) {
     console.log(room);
     for (let i = 0; i < this.testRooms.length; i++) {
-      if (this.testRooms[i].ID == room.ID) {
+      if (this.testRooms[i].id == room.id) {
         this.testRooms[i] = room;
         console.log(this.testRooms[i]);
         return;
@@ -459,14 +399,14 @@ export class ApiService {
     this.testRooms.push(room);
   }
 
-  getDevices(roomID: String): Device[] {
+  getDevices(roomid: string): Device[] {
     return this.testDevices;
   }
 
   addDevice(device: Device) {
     //Check if device already exists
     for (var i = 0; i < this.testDevices.length; i++) {
-      if (this.testDevices[i].ID == device.ID) {
+      if (this.testDevices[i].id == device.id) {
         return;
       }
     }
@@ -474,9 +414,9 @@ export class ApiService {
     this.testDevices.push(device);
   }
 
-  removeDevice(deviceID: String) {
+  removeDevice(deviceid: string) {
     for (var i = 0; i < this.testDevices.length; i++) {
-      if (this.testDevices[i].ID == deviceID) {
+      if (this.testDevices[i].id == deviceid) {
         this.testDevices.splice(i, 1);
         return;
       }
@@ -486,87 +426,87 @@ export class ApiService {
   getDeviceTypeMenu(): DeviceTypeNode[] {
     return [
       {
-        Label: "Pis",
-        Icon: "touch_app",
-        Value: "",
-        SubNodes: [
+        label: "Pis",
+        icon: "touch_app",
+        value: "",
+        subNodes: [
           {
-            Label: "AV Touchpanel",
-            Icon: "",
-            Value: "Pi",
-            SubNodes: null
+            label: "AV Touchpanel",
+            icon: "",
+            value: "Pi",
+            subNodes: []
           },
           {
-            Label: "Scheduling Panel",
-            Icon: "",
-            Value: "Pi",
-            SubNodes: null
+            label: "Scheduling Panel",
+            icon: "",
+            value: "Pi",
+            subNodes: []
           }
         ]
       },
       {
-        Label: "Displays",
-        Icon: "tv",
-        Value: "Display",
-        SubNodes: null
+        label: "Displays",
+        icon: "tv",
+        value: "Display",
+        subNodes: []
       },
       {
-        Label: "Inputs",
-        Icon: "input",
-        Value: "Input",
-        SubNodes: null
+        label: "Inputs",
+        icon: "input",
+        value: "Input",
+        subNodes: []
       },
       {
-        Label: "Audio",
-        Icon: "mic",
-        Value: "Audio",
-        SubNodes: null
+        label: "Audio",
+        icon: "mic",
+        value: "Audio",
+        subNodes: []
       },
       {
-        Label: "Video Switchers",
-        Icon: "device_hub",
-        Value: "Video Switcher",
-        SubNodes: null
+        label: "Video Switchers",
+        icon: "device_hub",
+        value: "Video Switcher",
+        subNodes: []
       },
       {
-        Label: "Network Devices",
-        Icon: "settings_ethernet",
-        Value: "Network Device",
-        SubNodes: null
+        label: "Network Devices",
+        icon: "settings_ethernet",
+        value: "Network Device",
+        subNodes: []
       }
     ]
   }
 
   getRoomConfig(): RoomConfig {
     return {
-      ID: "Test",
-      ControlPanels: new Map(),
-      ControlGroups: new Map([
+      id: "Test",
+      controlPanels: new Map(),
+      controlGroups: new Map([
         ["Layout 1",{
-          Displays: new Map(),
-          Inputs: [],
-          Microphones: new Map(),
-          MasterVolume: {
-            Device: "Test",
-            Block: ""
+          displays: new Map(),
+          inputs: [],
+          microphones: new Map(),
+          masterVolume: {
+            device: "Test",
+            block: ""
           }
         }],
         ["Layout 2",{
-          Displays: new Map(),
-          Inputs: [],
-          Microphones: new Map(),
-          MasterVolume: {
-            Device: "Test",
-            Block: ""
+          displays: new Map(),
+          inputs: [],
+          microphones: new Map(),
+          masterVolume: {
+            device: "Test",
+            block: ""
           }
         }],
         ["Layout 3",{
-          Displays: new Map(),
-          Inputs: [],
-          Microphones: new Map(),
-          MasterVolume: {
-            Device: "Test",
-            Block: ""
+          displays: new Map(),
+          inputs: [],
+          microphones: new Map(),
+          masterVolume: {
+            device: "Test",
+            block: ""
           }
         }]
       ])

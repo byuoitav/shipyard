@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Device, ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/api.service';
+import { Device } from '../../../devices/device';
 
 @Component({
   selector: 'app-microphone-group',
@@ -10,9 +11,9 @@ import { Device, ApiService } from 'src/app/services/api.service';
 })
 export class MicrophoneGroupComponent implements OnInit {
   MicSelection = new SelectionModel<Device>(true, []);
-  groupID: String;
+  groupID: string = '';
 
-  devices: Device[];
+  devices: Device[] = [];
   deviceTableColumns: string[] = ["select", "id", "type"];
 
 
@@ -27,9 +28,9 @@ export class MicrophoneGroupComponent implements OnInit {
 
   filterDevicesByRegularExpression(pattern: string): Device[] {
     let re = new RegExp(pattern);
-    var filteredDevs = []
+    var filteredDevs: Device[] = [];
     this.devices.forEach(dev => {
-      if (re.exec(dev.ID.toString()) != null) {
+      if (re.exec(dev.id) != null) {
         filteredDevs.push(dev);
       }
     });

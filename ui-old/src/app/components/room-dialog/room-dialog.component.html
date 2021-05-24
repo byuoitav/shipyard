@@ -4,13 +4,13 @@
         <div class="text-row">
             <mat-form-field>
                 <mat-label>Room Name</mat-label>
-                <input matInput type="text" [(ngModel)]="room.ID">
+                <input matInput type="text" [(ngModel)]="room.id">
             </mat-form-field>
         </div>
         <div class="text-row">
             <mat-form-field class="text-wrapper" appearance="outline">
                 <mat-label>Public Description</mat-label>
-                <textarea matInput rows="4" type="text" [(ngModel)]="room.Desc"></textarea>
+                <textarea matInput rows="4" type="text" [(ngModel)]="room.publicDescription"></textarea>
             </mat-form-field>
         </div>
         <p>Tags</p>
@@ -32,7 +32,7 @@
             </button>
         </div>
         
-        <span *ngFor="let tag of room.Tags | keyvalue">
+        <span *ngFor="let tag of room.tags | keyvalue">
             <div class="text-row">
                 <div class="tag-container">
                     <p class="tag-label">{{ tag.key }}</p>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { DeviceTypeNode } from 'src/app/services/api.service';
+import { DeviceTypeNode } from '../devices/device-type-menu';
 
 @Component({
   selector: 'app-device-menu-item',
@@ -7,9 +7,9 @@ import { DeviceTypeNode } from 'src/app/services/api.service';
   styleUrls: ['./device-menu-item.component.scss']
 })
 export class DeviceMenuItemComponent implements OnInit {
-  @Input() nodes: DeviceTypeNode[];
+  @Input() nodes: DeviceTypeNode[] = [];
   @Input() parent: any;
-  @ViewChild('deviceTypeMenu') public subMenu;
+  @ViewChild('deviceTypeMenu') public subMenu: any;
 
   constructor() { }
 

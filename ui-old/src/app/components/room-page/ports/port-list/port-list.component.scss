@@ -8,6 +8,10 @@
     font-weight: 500;
 }
 
+::ng-deep mat-expansion-panel-header span {
+    padding: 5px;
+}
+
 table {
     width: 100%;
 }
@@ -15,6 +19,12 @@ table {
 .device-column-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.device-column-container div p {
+    padding: 0;
+    margin: 0;
 }
 
 tr.port-row:hover {
