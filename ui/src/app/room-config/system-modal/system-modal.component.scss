@@ -1,0 +1,17 @@
+.system-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-width: 500px;
+    min-height: 250px;
+}
+
+.date-picker-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}

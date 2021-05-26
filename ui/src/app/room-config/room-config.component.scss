@@ -8,7 +8,7 @@ mat-card-header {
     justify-content: space-between;
 }
 
-mat-card {
+.main-card {
     width: 50%;
     box-shadow: none !important;
 }
@@ -81,8 +81,8 @@ mat-form-field {
 
 .img-add-button {
     color: gray;
-    height: 60px;
-    width: 60px;
+    height: 80px;
+    width: 80px;
 }
 
 .img-add-button:hover {
@@ -100,4 +100,39 @@ ul {
 
 .config-section {
     height: 50%;
+}
+
+.systems-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.systems-list-wrapper {
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0 20px 20px 20px;
+}
+
+.system {
+    margin-bottom: 25px;
+    margin-top: 2px;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    overflow-y: scroll;
+    background: none;
+    // box-shadow: inset 0 0 3px #707070;
+}
+
+::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 10px;
+}
+
+.system-button {
+    margin-top: 20px;
+    width: 50%;
+    margin: 20px auto 0 auto;
 }

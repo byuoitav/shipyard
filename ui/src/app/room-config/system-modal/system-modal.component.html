@@ -1,0 +1,35 @@
+<!-- 
+        Name
+        Designation
+        InstallDate
+        CheckDate
+        ConnectedRooms??? - uneditable list?
+     -->
+<mat-dialog-content class="system-container">
+    <mat-form-field>
+        <mat-label>System Name</mat-label>
+        <input matInput [(ngModel)]="system.name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Designation</mat-label>
+        <input matInput [(ngModel)]="system.designation">
+    </mat-form-field>
+    <div class="date-picker-container">
+        <mat-form-field>
+            <mat-label>Install Date</mat-label>
+            <input matInput [(ngModel)]="system.installDate" [matDatepicker]="installPicker">
+            <mat-datepicker-toggle matSuffix [for]="installPicker"></mat-datepicker-toggle>
+            <mat-datepicker #installPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Check Date</mat-label>
+            <input matInput [(ngModel)]="system.checkDate" [matDatepicker]="checkPicker">
+            <mat-datepicker-toggle matSuffix [for]="checkPicker"></mat-datepicker-toggle>
+            <mat-datepicker #checkPicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="button-container">
+        <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+    </div>
+</mat-dialog-content>

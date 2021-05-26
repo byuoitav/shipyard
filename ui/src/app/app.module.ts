@@ -25,6 +25,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatNativeDateModule } from '@angular/material/core';
 
 // Internal
 import { CampusListComponent } from './list-view/campuses/campus-list/campus-list.component';
@@ -48,6 +51,7 @@ import { RoomListComponent } from './room-list/room-list.component';
 import { RoomConfigComponent } from './room-config/room-config.component';
 import { ImageModalComponent } from './room-config/image-modal/image-modal.component';
 import { DeleteModal } from './room-config/delete-modal';
+import { SystemModalComponent } from './room-config/system-modal/system-modal.component';
 
 
 
@@ -75,6 +79,7 @@ import { DeleteModal } from './room-config/delete-modal';
     RoomConfigComponent,
     ImageModalComponent,
     DeleteModal,
+    SystemModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,8 +104,12 @@ import { DeleteModal } from './room-config/delete-modal';
     MatIconModule,
     MatDialogModule,
     MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [],
+  providers: [
+    MatDatepickerModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

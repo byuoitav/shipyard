@@ -1,6 +1,6 @@
 <div>
     <div class="room-info-container">
-        <mat-card style="border-right: 1px solid lightgray; border-radius: 0px;">
+        <mat-card style="border-right: 1px solid lightgray; border-radius: 0px;" class="main-card">
             <mat-card-content class="images-contianer">
                 <div class="carousel-wrapper">
                     <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
@@ -52,12 +52,15 @@
                 </div>
             </mat-card-content>
         </mat-card>
-        <mat-card>
-            <mat-card-content class="config-section">
+        <mat-card class="main-card">
+            <mat-card-content class="config-section systems-section">
                 <h3>Connected Systems</h3>
                 <div class="systems-list-wrapper">
-                    <div class="system" *ngFor="let sys of systems"></div>
+                    <mat-card class="system mat-elevation-z4" *ngFor="let sys of systems" (click)="addSystem(sys)">
+                        <mat-card-title>{{ sys.name }}</mat-card-title>
+                    </mat-card>
                 </div>
+                <button mat-stroked-button color="primary" class="system-button" (click)="addSystem(null)">Add System</button>
             </mat-card-content>
             <mat-card-content class="config-section">
                 <h3>Devices</h3>

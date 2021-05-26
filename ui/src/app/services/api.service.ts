@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Device } from './device';
 // import { RoomConfig } from '../components/room-page/ui-config/ui-config';
 import { Room } from './room';
+import { System } from './system';
 
 @Injectable({
   providedIn: 'root'
@@ -364,7 +365,63 @@ export class ApiService {
     }
   ];
 
+  testSystems: System[] = [
+    {
+      id: "System1",
+      name: "Test System 1",
+      designation: "asdf",
+      installDate: new Date("1820-04-01T00:00:00-0700"),
+      checkDate: new Date("1830-04-06T00:00:00-0700"),
+    },
+    {
+      id: "System2",
+      name: "Test System 2",
+      designation: "asdf",
+      installDate: new Date("1820-04-01T00:00:00-0700"),
+      checkDate: new Date("1830-04-06T00:00:00-0700"),
+    },
+    {
+      id: "System3",
+      name: "Test System 3",
+      designation: "asdf",
+      installDate: new Date("1820-04-01T00:00:00-0700"),
+      checkDate: new Date("1830-04-06T00:00:00-0700"),
+    },
+    {
+      id: "System4",
+      name: "Test System 4",
+      designation: "asdf",
+      installDate: new Date("1820-04-01T00:00:00-0700"),
+      checkDate: new Date("1830-04-06T00:00:00-0700"),
+    },
+    {
+      id: "System5",
+      name: "Test System 5",
+      designation: "asdf",
+      installDate: new Date("1820-04-01T00:00:00-0700"),
+      checkDate: new Date("1830-04-06T00:00:00-0700"),
+    },
+    {
+      id: "System6",
+      name: "Test System 6",
+      designation: "asdf",
+      installDate: new Date("1820-04-01T00:00:00-0700"),
+      checkDate: new Date("1830-04-06T00:00:00-0700"),
+    },
+    {
+      id: "System7",
+      name: "Test System 7",
+      designation: "asdf",
+      installDate: new Date("1820-04-20T00:00:00-0700"),
+      checkDate: new Date("1830-04-06T00:00:00-0700"),
+    },
+  ];
+
   constructor() { }
+
+  getSystems(roomId: string): System[] {
+    return this.testSystems;
+  }
 
   getRooms(): string[] {
     // let rooms = [];

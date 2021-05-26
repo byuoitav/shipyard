@@ -7,6 +7,8 @@ import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/n
 import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
 import { DeleteModal } from './delete-modal';
+import { System } from '../services/system';
+import { SystemModalComponent } from './system-modal/system-modal.component';
 
 @Component({
   selector: 'app-room-config',
@@ -38,7 +40,7 @@ export class RoomConfigComponent implements OnInit {
   fundingTypes: string[] = [];
   fundingType: string = '';
 
-  systems: any[] = [];
+  systems: System[] = [];
 
   constructor(private route: ActivatedRoute,
     private api: ApiService,
@@ -56,6 +58,7 @@ export class RoomConfigComponent implements OnInit {
     //   this.devices = data;
     // });
     this.devices = this.api.getDevices(this.roomID);
+    this.systems = this.api.getSystems(this.roomID);
 
     this.images = this.getTestImages();
     this.initializeFurnitureList();
@@ -78,6 +81,10 @@ export class RoomConfigComponent implements OnInit {
         this.images.splice(index, 1);
       }
     });
+  }
+
+  addSystem(s: System | null) {
+    const systemDialog = this.dialog.open(SystemModalComponent, {data: s});
   }
 
   addTag() {
