@@ -99,19 +99,24 @@ ul {
 }
 
 .config-section {
-    height: 50%;
-}
-
-.systems-section {
+    height: 40vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.systems-list-wrapper {
+.list-wrapper {
     height: 100%;
     overflow-y: scroll;
     padding: 0 20px 20px 20px;
+}
+
+table {
+    width: 100%;
+}
+
+.table-row:hover {
+    background-color: whitesmoke;
 }
 
 .system {

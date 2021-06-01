@@ -9,6 +9,7 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
 import { DeleteModal } from './delete-modal';
 import { System } from '../services/system';
 import { SystemModalComponent } from './system-modal/system-modal.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-room-config',
@@ -18,8 +19,6 @@ import { SystemModalComponent } from './system-modal/system-modal.component';
 export class RoomConfigComponent implements OnInit {
   roomID: string = "";
   room: Room = new Room();
-
-  devices: Device[] = [];
 
   tagKey: string = "";
   tagValue: string = "";
@@ -41,6 +40,14 @@ export class RoomConfigComponent implements OnInit {
   fundingType: string = '';
 
   systems: System[] = [];
+  systemsData: MatTableDataSource<System> = new MatTableDataSource();
+
+  deviceColumns: string[] = [
+    'name'
+  ];
+
+  deviceData: MatTableDataSource<Device> = new MatTableDataSource();
+  devices: Device[] = [];
 
   constructor(private route: ActivatedRoute,
     private api: ApiService,
@@ -57,8 +64,8 @@ export class RoomConfigComponent implements OnInit {
     // this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
     //   this.devices = data;
     // });
-    this.devices = this.api.getDevices(this.roomID);
-    this.systems = this.api.getSystems(this.roomID);
+    this.updateDeviceTable();
+    this.updateSystemTable();
 
     this.images = this.getTestImages();
     this.initializeFurnitureList();
@@ -111,6 +118,16 @@ export class RoomConfigComponent implements OnInit {
     //   }
     // );
 
+  }
+
+  updateDeviceTable() {
+    this.devices = this.api.getDevices(this.roomID);
+    this.deviceData.data = this.devices;
+  }
+
+  updateSystemTable() {
+    this.systems = this.api.getSystems(this.roomID);
+    this.systemsData.data = this.systems;
   }
 
   togglePaused() {

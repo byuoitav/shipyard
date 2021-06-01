@@ -2,6 +2,8 @@ import { Port } from "./port";
 
 export class Device {
     id: string;
+    // roomId: string;
+    name: string;
     // api_controllable: boolean;
     publicDescription: string;
     // privateDescription: string;
@@ -16,6 +18,7 @@ export class Device {
     constructor() {
         this.tags = new Map();
         this.id = "";
+        this.name = "";
         this.publicDescription = "";
         this.address = "";
         this.driver = "";

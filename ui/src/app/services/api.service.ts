@@ -117,6 +117,7 @@ export class ApiService {
   testDevices: Device[] = [
     {
       id: "Device-1",
+      name: "Device 1",
       publicDescription: "description of device 1",
       address: "Device_1.byu.edu",
       driver: "driver 1",
@@ -196,6 +197,7 @@ export class ApiService {
     },
     {
       id: "Device-2",
+      name: "Device 2",
       publicDescription: "description of device 2",
       address: "Device_2.byu.edu",
       driver: "driver 2",
@@ -275,6 +277,7 @@ export class ApiService {
     },
     {
       id: "TEST-0000-MIC1",
+      name: "Test Mic 1",
       publicDescription: "description of TEST-0000-MIC1",
       address: "TEST-0000-MIC1.byu.edu",
       driver: "driver TEST-0000-MIC1",
@@ -285,6 +288,7 @@ export class ApiService {
     },
     {
       id: "TEST-0000-MIC2",
+      name: "Test Mic 2",
       publicDescription: "description of TEST-0000-MIC2",
       address: "TEST-0000-MIC2.byu.edu",
       driver: "driver TEST-0000-MIC2",
@@ -295,6 +299,7 @@ export class ApiService {
     },
     {
       id: "TEST-0000-MIC3",
+      name: "Test Mic 3",
       publicDescription: "description of TEST-0000-MIC3",
       address: "TEST-0000-MIC3.byu.edu",
       driver: "driver TEST-0000-MIC3",
@@ -305,6 +310,7 @@ export class ApiService {
     },
     {
       id: "TEST-0000-CP1",
+      name: "Test CP 1",
       publicDescription: "description of TEST-0000-CP1",
       address: "TEST-0000-CP1.byu.edu",
       driver: "driver TEST-0000-CP1",
@@ -315,6 +321,7 @@ export class ApiService {
     },
     {
       id: "TEST-0000-CP2",
+      name: "Test CP 2",
       publicDescription: "description of TEST-0000-CP2",
       address: "TEST-0000-CP2.byu.edu",
       driver: "driver TEST-0000-CP2",
@@ -325,6 +332,7 @@ export class ApiService {
     },
     {
       id: "TEST-0000-CP3",
+      name: "Test CP 3",
       publicDescription: "description of TEST-0000-CP3",
       address: "TEST-0000-CP3.byu.edu",
       driver: "driver TEST-0000-CP3",
@@ -335,6 +343,7 @@ export class ApiService {
     },
     {
       id: "TEST-0000-D1",
+      name: "Test Display 1",
       publicDescription: "description of TEST-0000-D1",
       address: "TEST-0000-D1.byu.edu",
       driver: "driver TEST-0000-D1",
@@ -345,6 +354,7 @@ export class ApiService {
     },
     {
       id: "TEST-0000-D2",
+      name: "Test Display 2",
       publicDescription: "description of TEST-0000-D2",
       address: "TEST-0000-D2.byu.edu",
       driver: "driver TEST-0000-D2",
@@ -355,6 +365,7 @@ export class ApiService {
     },
     {
       id: "TEST-0000-D3",
+      name: "Test Display 3",
       publicDescription: "description of TEST-0000-D3",
       address: "TEST-0000-D3.byu.edu",
       driver: "driver TEST-0000-D3",
