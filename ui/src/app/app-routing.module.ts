@@ -8,6 +8,7 @@ import { SystemsComponent } from './systems/systems.component';
 import { DevicesComponent } from './devices/devices.component';
 import { RoomListComponent } from './room-list/room-list.component';
 import { RoomConfigComponent } from './room-config/room-config.component';
+import { SystemConfigComponent } from './system-config/system-config.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'room-config/:roomID',
     component: RoomConfigComponent
+  },
+  {
+    path: 'system/:systemID',
+    component: SystemConfigComponent
   },
   {
     path: 'campuses',

@@ -52,6 +52,7 @@ import { RoomConfigComponent } from './room-config/room-config.component';
 import { ImageModalComponent } from './room-config/image-modal/image-modal.component';
 import { DeleteModal } from './room-config/delete-modal';
 import { SystemModalComponent } from './room-config/system-modal/system-modal.component';
+import { SystemConfigComponent } from './system-config/system-config.component';
 
 
 
@@ -80,6 +81,7 @@ import { SystemModalComponent } from './room-config/system-modal/system-modal.co
     ImageModalComponent,
     DeleteModal,
     SystemModalComponent,
+    SystemConfigComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,50 @@
+.system-config-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-card {
+    width: 50%;
+    box-shadow: none !important;
+    min-height: 90vh;
+    max-height: 90vh;
+}
+
+table {
+    width: 100%;
+}
+
+.table-row:hover {
+    background-color: whitesmoke;
+}
+
+.highlighted-row {
+    background: rgb(236, 236, 236);
+}
+
+.list-wrapper {
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0 20px 20px 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.button-container button {
+    width: 45%;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    overflow-y: scroll;
+    background: none;
+    // box-shadow: inset 0 0 3px #707070;
+}
+
+::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 10px;
+}

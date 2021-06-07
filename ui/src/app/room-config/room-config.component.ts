@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { Device } from '../services/device';
 import { Room } from '../services/room';
@@ -41,15 +41,20 @@ export class RoomConfigComponent implements OnInit {
 
   systems: System[] = [];
   systemsData: MatTableDataSource<System> = new MatTableDataSource();
-
-  deviceColumns: string[] = [
-    'name'
+  systemColumns: string[] = [
+    'name',
+    'install',
+    'check'
   ];
 
   deviceData: MatTableDataSource<Device> = new MatTableDataSource();
   devices: Device[] = [];
+  deviceColumns: string[] = [
+    'name'
+  ];
 
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private api: ApiService,
     private dialog: MatDialog) {
     this.route.params.subscribe(params => {
@@ -74,17 +79,14 @@ export class RoomConfigComponent implements OnInit {
   }
 
   addImage() {
-    // open image dialog
     const imageDialog = this.dialog.open(ImageModalComponent);
   }
 
   deleteImage(index: number) {
-    console.log("image clicked");
-    // open delete dialog
     const deleteModal = this.dialog.open(DeleteModal);
     deleteModal.afterClosed().subscribe(confirm => {
       if (confirm) {
-        // delete the image
+        // delete the image from memory
         this.images.splice(index, 1);
       }
     });
@@ -94,30 +96,9 @@ export class RoomConfigComponent implements OnInit {
     const systemDialog = this.dialog.open(SystemModalComponent, {data: s});
   }
 
-  addTag() {
-    this.room.tags.set(this.tagKey, this.tagValue);
-    this.tagKey = "";
-    this.tagValue = "";
-  }
-
-  removeTag(key: string) {
-    this.room.tags.delete(key);
-  }
-
-  save() {
-    // this.proxy.saveRoom(this.room).subscribe(
-    //   resp => {
-    //       if (resp["success"]) {
-    //           console.log(true);
-    //       } else {
-    //           console.log(false);
-    //       }
-    //   },
-    //   err => {
-    //       console.log(err);
-    //   }
-    // );
-
+  navigateToSystem(e: any, sys: System) {
+    e.stopPropagation();
+    this.router.navigate(["/system/" + sys.id]);
   }
 
   updateDeviceTable() {
