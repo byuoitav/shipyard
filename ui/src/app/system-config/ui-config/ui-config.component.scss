@@ -1,4 +1,4 @@
-.system-config-container {
+.ui-config-container {
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
@@ -17,10 +17,6 @@ table {
 
 .table-row:hover {
     background-color: whitesmoke;
-}
-
-.highlighted-row {
-    background: rgb(236, 236, 236);
 }
 
 .list-wrapper {

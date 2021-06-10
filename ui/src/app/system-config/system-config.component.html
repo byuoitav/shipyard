@@ -1,47 +1,8 @@
-<div class="system-config-container">
-    <mat-card class="main-card"  style="border-right: 1px solid lightgray; border-radius: 0px;">
-        <mat-card-content>
-            <h3>Devices</h3>
-            <div class="list-wrapper">
-                <table mat-table [dataSource]="deviceData">
-
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef> Device Name </th>
-                        <td mat-cell *matCellDef="let dev"> {{dev.name}} </td>
-                    </ng-container>
-                    
-                    <tr mat-header-row *matHeaderRowDef="deviceColumns;"></tr>
-                    <tr mat-row *matRowDef="let device; columns: deviceColumns;" class="table-row" [class.highlighted-row]="selectedDevice === device" (click)="selectDevice(device)"></tr>
-                </table>
-            </div>
-        </mat-card-content>
-        <mat-card-footer>
-            <div class="button-container">
-                <button mat-stroked-button color="primary">Add Device</button>
-                <button mat-stroked-button color="primary">Add Existing Device</button>
-            </div>
-        </mat-card-footer>
-    </mat-card>
-    <mat-card class="main-card">
-        <mat-card-content>
-            <h3>Ports</h3>
-            <div class="list-wrapper">
-                <table mat-table [dataSource]="getPortList()">
-
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef> Port Name </th>
-                        <td mat-cell *matCellDef="let port"> {{port.name}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="connection">
-                        <th mat-header-cell *matHeaderCellDef> Connected Port </th>
-                        <td mat-cell *matCellDef="let port"> <div *ngIf="port.endpoints.length > 0">{{port.endpoints[0].device}} : {{port.endpoints[0].port}}</div> </td>
-                    </ng-container>
-                    
-                    <tr mat-header-row *matHeaderRowDef="portColumns;"></tr>
-                    <tr mat-row *matRowDef="let row; columns: portColumns;" class="table-row"></tr>
-                </table>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+<mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Port Configuration">
+        <app-port-config></app-port-config>
+    </mat-tab>
+    <mat-tab label="UI Configuration">
+        <app-ui-config></app-ui-config>
+    </mat-tab>
+</mat-tab-group>

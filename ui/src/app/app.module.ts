@@ -28,6 +28,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatStepperModule } from '@angular/material/stepper';
 
 // Internal
 import { CampusListComponent } from './list-view/campuses/campus-list/campus-list.component';
@@ -53,6 +54,9 @@ import { ImageModalComponent } from './room-config/image-modal/image-modal.compo
 import { DeleteModal } from './room-config/delete-modal';
 import { SystemModalComponent } from './room-config/system-modal/system-modal.component';
 import { SystemConfigComponent } from './system-config/system-config.component';
+import { PortConfigComponent } from './system-config/port-config/port-config.component';
+import { UiConfigComponent } from './system-config/ui-config/ui-config.component';
+import { PortModalComponent } from './system-config/port-modal/port-modal.component';
 
 
 
@@ -82,6 +86,9 @@ import { SystemConfigComponent } from './system-config/system-config.component';
     DeleteModal,
     SystemModalComponent,
     SystemConfigComponent,
+    PortConfigComponent,
+    UiConfigComponent,
+    PortModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,6 +115,7 @@ import { SystemConfigComponent } from './system-config/system-config.component';
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatStepperModule,
   ],
   providers: [
     MatDatepickerModule
