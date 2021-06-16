@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { Device } from 'src/app/services/device';
-import { Port } from 'src/app/services/port';
+import { Endpoint, Port } from 'src/app/services/port';
 import { PortModalComponent } from '../port-modal/port-modal.component';
 
 @Component({
@@ -61,13 +61,41 @@ export class PortConfigComponent implements OnInit {
   }
 
   connectPort(port: Port) {
-    const portModalRef = this.dialog.open(PortModalComponent, {data: { deviceID: this.selectedDevice.id }});
+    const portModalRef = this.dialog.open(PortModalComponent, {data: { 
+      device: this.selectedDevice,
+      port: port
+    }});
 
     portModalRef.afterClosed().subscribe(conn => {
       if (conn) {
         // make the connection
+          // add endpoint to 'port'
+        if (port.endpoints.length > 0) this.removePortEndpoint(port.endpoints[0]);
+        port.endpoints = [];
+        port.endpoints.push({
+          device: conn.device.name,
+          port: conn.port.name
+        });
+          // find other device and add endpoint to that port
+        if (conn.port.endpoints.length > 0) this.removePortEndpoint(conn.port.endpoints[0]);
+        conn.port.endpoints = [];
+        conn.port.endpoints.push({
+          device: this.selectedDevice.name,
+          port: port.name
+        })
       }
     });
   }
 
+  removePortEndpoint(e: Endpoint) {
+    this.devices.forEach(d => {
+      if (d.name === e.device) {
+        d.ports.forEach(p => {
+          if (p.name === e.port) {
+            p.endpoints = [];
+          }
+        });
+      }
+    });
+  }
 }

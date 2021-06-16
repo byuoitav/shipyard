@@ -142,7 +142,7 @@ export class ApiService {
           name: 'Port3',
           endpoints: [
             {
-              device: 'Device-2',
+              device: 'Device 2',
               port: 'Port6'
             }
           ],
@@ -243,7 +243,7 @@ export class ApiService {
           name: 'Port6',
           endpoints: [
             {
-              device: 'Device-1',
+              device: 'Device 1',
               port: 'Port3'
             }
           ],

@@ -3,7 +3,7 @@
         <mat-step class="content-container">
             <h3>Select Device</h3>
             <div class="list-wrapper">
-                <table mat-table [dataSource]="devices">
+                <table mat-table [dataSource]="filterDevices()">
         
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Device Name </th>
