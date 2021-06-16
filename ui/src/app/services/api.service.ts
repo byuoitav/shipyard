@@ -3,6 +3,7 @@ import { Device } from './device';
 // import { RoomConfig } from '../components/room-page/ui-config/ui-config';
 import { Room } from './room';
 import { System } from './system';
+import { SystemUIConfig } from './ui-config';
 
 @Injectable({
   providedIn: 'root'
@@ -544,39 +545,39 @@ export class ApiService {
   //   ]
   // }
 
-  // getRoomConfig(): RoomConfig {
-  //   return {
-  //     id: "Test",
-  //     controlPanels: new Map(),
-  //     controlGroups: new Map([
-  //       ["Layout 1",{
-  //         displays: new Map(),
-  //         inputs: [],
-  //         microphones: new Map(),
-  //         masterVolume: {
-  //           device: "Test",
-  //           block: ""
-  //         }
-  //       }],
-  //       ["Layout 2",{
-  //         displays: new Map(),
-  //         inputs: [],
-  //         microphones: new Map(),
-  //         masterVolume: {
-  //           device: "Test",
-  //           block: ""
-  //         }
-  //       }],
-  //       ["Layout 3",{
-  //         displays: new Map(),
-  //         inputs: [],
-  //         microphones: new Map(),
-  //         masterVolume: {
-  //           device: "Test",
-  //           block: ""
-  //         }
-  //       }]
-  //     ])
-  //   }
-  // }
+  getRoomConfig(): SystemUIConfig {
+    return {
+      id: "Test",
+      controlPanels: new Map(),
+      controlGroups: new Map([
+        ["Layout 1",{
+          displays: new Map(),
+          inputs: [],
+          microphones: new Map(),
+          masterVolume: {
+            device: "Test",
+            block: ""
+          }
+        }],
+        ["Layout 2",{
+          displays: new Map(),
+          inputs: [],
+          microphones: new Map(),
+          masterVolume: {
+            device: "Test",
+            block: ""
+          }
+        }],
+        ["Layout 3",{
+          displays: new Map(),
+          inputs: [],
+          microphones: new Map(),
+          masterVolume: {
+            device: "Test",
+            block: ""
+          }
+        }]
+      ])
+    }
+  }
 }

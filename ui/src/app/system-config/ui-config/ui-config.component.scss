@@ -34,14 +34,48 @@ table {
     width: 40%;
 }
 
-::-webkit-scrollbar {
-    width: 4px;
-    overflow-y: scroll;
-    background: none;
-    // box-shadow: inset 0 0 3px #707070;
+
+.config-section {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
 }
 
-::-webkit-scrollbar-thumb {
-    background: lightgray;
-    border-radius: 10px;
+.ui-button {
+    padding-top: 25px;
+}
+
+.control-group {
+    margin-top: 10px;
+}
+
+.cg-panel {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+}
+
+.cg-card {
+    width: 28%;
+    margin-bottom: 1vh;
+}
+
+.cg-button {
+    margin-right: 10px;
+}
+
+.control-panel-title {
+    padding-left: 2.5%;
+    padding-top: 3vh;
+    font-size: 16pt;
+}
+
+.control-panel-assignment {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2vh;
+}
+
+.spacing {
+    flex: 1 1 auto;
 }

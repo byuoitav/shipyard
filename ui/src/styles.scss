@@ -3,6 +3,17 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+::-webkit-scrollbar {
+  width: 5px;
+  overflow-y: scroll;
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: lightgray;
+  border-radius: 10px;
+}
+
 app-root {
   display: flex;
   flex-flow: column;
