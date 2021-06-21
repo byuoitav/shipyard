@@ -1,0 +1,44 @@
+<mat-dialog-content class="system-container">
+    <h2>Device Details</h2>
+    <div class="field-pair">
+        <mat-form-field>
+            <mat-label>Device Name</mat-label>
+            <input matInput [(ngModel)]="device.name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Model</mat-label>
+            <mat-select [(value)]="device.modelID">
+                <mat-option *ngFor="let m of getDeviceModelList()" [value]="m">{{m}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="field-pair">
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput [(ngModel)]="device.address">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Location</mat-label>
+            <input matInput [(ngModel)]="device.location">
+        </mat-form-field>
+    </div>
+    <div class="field-pair">
+        <mat-form-field>
+            <mat-label>Install Date</mat-label>
+            <input matInput [(ngModel)]="device.installDate" [matDatepicker]="installPicker">
+            <mat-datepicker-toggle matSuffix [for]="installPicker"></mat-datepicker-toggle>
+            <mat-datepicker #installPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Warranty Date</mat-label>
+            <input matInput [(ngModel)]="device.warrantyDate" [matDatepicker]="checkPicker">
+            <mat-datepicker-toggle matSuffix [for]="checkPicker"></mat-datepicker-toggle>
+            <mat-datepicker #checkPicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="button-container">
+        <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+    </div>
+</mat-dialog-content>

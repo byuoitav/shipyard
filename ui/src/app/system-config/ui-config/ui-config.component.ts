@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { DeviceModalComponent } from 'src/app/device-modal/device-modal.component';
 import { ApiService } from 'src/app/services/api.service';
 import { Device } from 'src/app/services/device';
 import { SystemUIConfig, UIControlGroup } from 'src/app/services/ui-config';
@@ -15,10 +17,13 @@ export class UiConfigComponent implements OnInit {
   deviceData: MatTableDataSource<Device> = new MatTableDataSource();
   devices: Device[] = [];
   deviceColumns: string[] = [
-    'name'
+    'name',
+    'install',
+    'address'
   ];
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService,
+    private dialog: MatDialog) {
     this.roomConf = this.api.getRoomConfig();
 
     this.updateDeviceTable();
@@ -32,11 +37,19 @@ export class UiConfigComponent implements OnInit {
     this.deviceData.data = this.devices;
   }
 
+  addDevice(dev: Device | null) {
+    const deviceModal = this.dialog.open(DeviceModalComponent, {data: dev});
+
+    deviceModal.afterClosed().subscribe(resp => {
+      
+    });
+  }
+
   getControlPanels(): Device[] {
     let re = new RegExp('-CP.*');
     var filteredDevs: Device[] = [];
     this.devices.forEach(dev => {
-      if (re.exec(dev.id) != null) {
+      if (re.exec(dev.name) != null) {
         filteredDevs.push(dev);
       }
     });

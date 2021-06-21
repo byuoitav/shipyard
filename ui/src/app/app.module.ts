@@ -58,6 +58,7 @@ import { PortConfigComponent } from './system-config/port-config/port-config.com
 import { UiConfigComponent } from './system-config/ui-config/ui-config.component';
 import { PortModalComponent } from './system-config/port-modal/port-modal.component';
 import { ConfirmPortDialog } from './system-config/port-modal/confirm-dialog';
+import { DeviceModalComponent } from './device-modal/device-modal.component';
 
 
 
@@ -91,6 +92,7 @@ import { ConfirmPortDialog } from './system-config/port-modal/confirm-dialog';
     UiConfigComponent,
     PortModalComponent,
     ConfirmPortDialog,
+    DeviceModalComponent,
   ],
   imports: [
     BrowserModule,

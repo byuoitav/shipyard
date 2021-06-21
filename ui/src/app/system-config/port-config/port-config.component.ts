@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { DeviceModalComponent } from 'src/app/device-modal/device-modal.component';
 import { ApiService } from 'src/app/services/api.service';
 import { Device } from 'src/app/services/device';
 import { Endpoint, Port } from 'src/app/services/port';
@@ -16,7 +17,9 @@ export class PortConfigComponent implements OnInit {
   deviceData: MatTableDataSource<Device> = new MatTableDataSource();
   devices: Device[] = [];
   deviceColumns: string[] = [
-    'name'
+    'name',
+    'install',
+    'address'
   ];
 
   selectedDevice: Device = new Device();
@@ -40,6 +43,14 @@ export class PortConfigComponent implements OnInit {
   updateDeviceTable() {
     this.devices = this.api.getDevices("test");
     this.deviceData.data = this.devices;
+  }
+
+  addDevice(dev: Device | null) {
+    const deviceModal = this.dialog.open(DeviceModalComponent, {data: dev});
+
+    deviceModal.afterClosed().subscribe(resp => {
+
+    });
   }
 
   getPortList() {

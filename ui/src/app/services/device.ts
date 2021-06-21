@@ -1,29 +1,42 @@
 import { Port } from "./port";
 
 export class Device {
-    id: string;
-    // roomId: string;
+
+    id: number;
     name: string;
-    // api_controllable: boolean;
-    publicDescription: string;
-    // privateDescription: string;
+    roomID: number;
+    modelID: number;
+    installDate: Date;
+    warrantyDate: Date;
+    location: string;
+    serialNumber: string;
+    icon: string;
+    fundingType: string;
+    proxyBaseURL: string;
+    notes: string;
     address: string;
-    driver: string;
-    dynamicPorts: boolean;
+    presets: Map<string, string>;
     ports: Port[];
+    systemIDs: number[];
     tags: Map<string, string>;
-  
-    Type: string;
 
     constructor() {
-        this.tags = new Map();
-        this.id = "";
+        this.id = 0;
         this.name = "";
-        this.publicDescription = "";
+        this.roomID = 0;
+        this.modelID = 0;
+        this.installDate = new Date();
+        this.warrantyDate = new Date();
+        this.location = "";
+        this.serialNumber = "";
+        this.icon = "";
+        this.fundingType = "";
+        this.proxyBaseURL = "";
+        this.notes = "";
         this.address = "";
-        this.driver = "";
-        this.dynamicPorts = true;
+        this.presets = new Map();
         this.ports = [];
-        this.Type = "";
+        this.systemIDs = [];
+        this.tags = new Map();
     }
 }

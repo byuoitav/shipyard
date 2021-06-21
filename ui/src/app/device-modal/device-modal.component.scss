@@ -1,0 +1,26 @@
+.system-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-width: 700px;
+    min-height: 250px;
+}
+
+mat-form-field {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.field-pair {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.field-pair mat-form-field, .field-pair div {
+    width: 50%;
+}

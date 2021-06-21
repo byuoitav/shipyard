@@ -10,6 +10,7 @@ import { DeleteModal } from './delete-modal';
 import { System } from '../services/system';
 import { SystemModalComponent } from './system-modal/system-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { DeviceModalComponent } from '../device-modal/device-modal.component';
 
 @Component({
   selector: 'app-room-config',
@@ -50,7 +51,9 @@ export class RoomConfigComponent implements OnInit {
   deviceData: MatTableDataSource<Device> = new MatTableDataSource();
   devices: Device[] = [];
   deviceColumns: string[] = [
-    'name'
+    'name',
+    'install',
+    'address'
   ];
 
   constructor(private route: ActivatedRoute,
@@ -99,6 +102,14 @@ export class RoomConfigComponent implements OnInit {
   navigateToSystem(e: any, sys: System) {
     e.stopPropagation();
     this.router.navigate(["/system/" + sys.id]);
+  }
+
+  addDevice(dev: Device | null) {
+    const deviceModal = this.dialog.open(DeviceModalComponent, {data: dev});
+
+    deviceModal.afterClosed().subscribe(resp => {
+      
+    });
   }
 
   updateDeviceTable() {
