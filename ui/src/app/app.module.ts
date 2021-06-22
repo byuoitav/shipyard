@@ -26,9 +26,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
 
 // Internal
 import { CampusListComponent } from './list-view/campuses/campus-list/campus-list.component';
@@ -59,6 +59,8 @@ import { UiConfigComponent } from './system-config/ui-config/ui-config.component
 import { PortModalComponent } from './system-config/port-modal/port-modal.component';
 import { ConfirmPortDialog } from './system-config/port-modal/confirm-dialog';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
+import { UiModalComponent } from './system-config/ui-modal/ui-modal.component';
+import { MicrophoneGroupComponent } from './system-config/microphone-group/microphone-group.component';
 
 
 
@@ -93,6 +95,8 @@ import { DeviceModalComponent } from './device-modal/device-modal.component';
     PortModalComponent,
     ConfirmPortDialog,
     DeviceModalComponent,
+    UiModalComponent,
+    MicrophoneGroupComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,6 +124,7 @@ import { DeviceModalComponent } from './device-modal/device-modal.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatStepperModule,
+    MatRadioModule,
   ],
   providers: [
     MatDatepickerModule

@@ -5,6 +5,7 @@ import { DeviceModalComponent } from 'src/app/device-modal/device-modal.componen
 import { ApiService } from 'src/app/services/api.service';
 import { Device } from 'src/app/services/device';
 import { SystemUIConfig, UIControlGroup } from 'src/app/services/ui-config';
+import { UiModalComponent } from '../ui-modal/ui-modal.component';
 
 @Component({
   selector: 'app-ui-config',
@@ -64,7 +65,11 @@ export class UiConfigComponent implements OnInit {
   }
 
   addGroup(group: UIControlGroup | null, id: string) {
+    const uiModal = this.dialog.open(UiModalComponent, {data: {ControlGroup: group, ID: id}, width: "800px"});
 
+    uiModal.afterClosed().subscribe(resp => {
+
+    });
   }
 
   checkForCameras(): boolean {

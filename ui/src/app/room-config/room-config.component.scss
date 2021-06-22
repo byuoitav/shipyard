@@ -119,6 +119,27 @@ table {
     background-color: whitesmoke;
 }
 
+.device-name-container {
+    align-content: center;
+    display: flex;
+    justify-content: left;
+    height: 100%;
+}
+
+.device-name-container mat-icon, p {
+    height: 25px;
+}
+
+.device-name-container mat-icon{
+    margin: 0;
+    padding: 0;
+}
+
+.device-name-container p {
+    padding: 2px 0 0 0;
+    margin: 0 0 0 15px;
+}
+
 .system {
     margin-bottom: 25px;
     margin-top: 2px;

@@ -7,7 +7,7 @@
 
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Device Name </th>
-                        <td mat-cell *matCellDef="let dev"> {{dev.name}} </td>
+                        <td mat-cell *matCellDef="let dev"><div class="device-name-container"><mat-icon>{{dev.icon}}</mat-icon><p>{{dev.name}}</p></div></td>
                     </ng-container>
 
                     <ng-container matColumnDef="install">
@@ -92,8 +92,8 @@
                             </mat-card-content>
                         </mat-card>
                     </div>
-                    <!-- (click)="addGroup(group.value, group.key)";  (click)="deleteGroup(group.key)" -->
-                    <button mat-raised-button class="cg-button" color="primary" >Edit</button>
+                    <!--   (click)="deleteGroup(group.key)" -->
+                    <button mat-raised-button class="cg-button" color="primary" (click)="addGroup(group.value, group.key)">Edit</button>
                     <button mat-raised-button class="cg-button" color="warn" >Delete</button>
                 </section>
             </mat-expansion-panel>
