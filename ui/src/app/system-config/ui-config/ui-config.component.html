@@ -1,7 +1,7 @@
 <div class="ui-config-container">
     <mat-card class="main-card"  style="border-right: 1px solid lightgray; border-radius: 0px;">
         <mat-card-content>
-            <h3>Devices</h3>
+            <h1>Devices</h1>
             <div class="list-wrapper">
                 <table mat-table [dataSource]="deviceData">
 
@@ -34,7 +34,8 @@
     </mat-card>
     <mat-card class="main-card">
         <mat-card-content class="config-section">
-            <h3>UI Configuration</h3>
+            <h1>UI Configuration</h1>
+            <p style="text-align: center;">Create UI layouts for the control panels in the system</p>
             <mat-expansion-panel class="control-group" *ngFor="let group of roomConf.controlGroups | keyvalue">
                 <mat-expansion-panel-header>{{ group.key }}</mat-expansion-panel-header>
                 <section>
@@ -103,7 +104,8 @@
             </div>
         </mat-card-content>
         <mat-card-content class="config-section">
-            <h3>Control Panels</h3>
+            <h1>Control Panels</h1>
+            <p style="text-align: center;">Assign UI layouts to the control panels in the system</p>
             <mat-list>
                 <mat-list-item *ngFor="let panel of getControlPanels()" class="control-panel-assignment">
                     <p>{{ panel.name }}</p>

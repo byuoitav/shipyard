@@ -2,14 +2,14 @@ export class Port {
     id: string;
     name: string;
     endpoints: Endpoint[];
-    incoming: boolean;
+    direction: string;
     type: string;
 
     constructor() {
         this.id = '';
         this.name = '';
         this.endpoints = [];
-        this.incoming = true;
+        this.direction = 'bi-directional';
         this.type = '';
     }
 }

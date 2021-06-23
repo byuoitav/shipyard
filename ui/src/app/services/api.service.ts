@@ -136,14 +136,14 @@ export class ApiService {
           id: 'Port1',
           name: 'Port1',
           endpoints: [],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
           id: 'Port2',
           name: 'Port2',
           endpoints: [],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
@@ -155,53 +155,53 @@ export class ApiService {
               port: 'Port6'
             }
           ],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
           id: 'Port4',
           name: 'Port4',
           endpoints: [],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
           id: 'Port5',
           name: 'Port5',
           endpoints: [],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
           id: 'Port6',
           name: 'Port6',
           endpoints: [],
-          incoming: false,
+          direction: 'outgoing',
           type: ''
         },
         {
           id: 'Port7',
           name: 'Port7',
           endpoints: [],
-          incoming: false,
+          direction: 'outgoing',
           type: ''
         },
         {
           id: 'Port8',
           name: 'Port8',
           endpoints: [],
-          incoming: false,
+          direction: 'outgoing',
           type: ''
         },
         {
           id: 'Port9',
           name: 'Port9',
           endpoints: [],
-          incoming: false,
+          direction: 'outgoing',
           type: ''
         }
       ],
-      systemIDs: [],
+      systemIDs: [1,2,3],
       tags: new Map(),
     },
     {
@@ -224,35 +224,35 @@ export class ApiService {
           id: 'Port1',
           name: 'Port1',
           endpoints: [],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
           id: 'Port2',
           name: 'Port2',
           endpoints: [],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
           id: 'Port3',
           name: 'Port3',
           endpoints: [],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
           id: 'Port4',
           name: 'Port4',
           endpoints: [],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
           id: 'Port5',
           name: 'Port5',
           endpoints: [],
-          incoming: true,
+          direction: 'incoming',
           type: ''
         },
         {
@@ -264,32 +264,32 @@ export class ApiService {
               port: 'Port3'
             }
           ],
-          incoming: false,
+          direction: 'outgoing',
           type: ''
         },
         {
           id: 'Port7',
           name: 'Port7',
           endpoints: [],
-          incoming: false,
+          direction: 'outgoing',
           type: ''
         },
         {
           id: 'Port8',
           name: 'Port8',
           endpoints: [],
-          incoming: false,
+          direction: 'outgoing',
           type: ''
         },
         {
           id: 'Port9',
           name: 'Port9',
           endpoints: [],
-          incoming: false,
+          direction: 'outgoing',
           type: ''
         }
       ],
-      systemIDs: [],
+      systemIDs: [4,5,6],
       tags: new Map(),
     },
     {
@@ -308,7 +308,7 @@ export class ApiService {
       address: "TEST-0000-MIC1.byu.edu",
       presets: new Map(),
       ports: [],
-      systemIDs: [],
+      systemIDs: [1],
       tags: new Map()
     },
     {
@@ -327,7 +327,7 @@ export class ApiService {
       address: "TEST-0000-MIC2.byu.edu",
       presets: new Map(),
       ports: [],
-      systemIDs: [],
+      systemIDs: [2],
       tags: new Map()
     },
     {
@@ -346,7 +346,7 @@ export class ApiService {
       address: "TEST-0000-MIC3.byu.edu",
       presets: new Map(),
       ports: [],
-      systemIDs: [],
+      systemIDs: [3],
       tags: new Map()
     },
     {
@@ -365,7 +365,7 @@ export class ApiService {
       address: "TEST-0000-CP1.byu.edu",
       presets: new Map(),
       ports: [],
-      systemIDs: [],
+      systemIDs: [4],
       tags: new Map()
     },
     {
@@ -384,7 +384,7 @@ export class ApiService {
       address: "TEST-0000-CP2.byu.edu",
       presets: new Map(),
       ports: [],
-      systemIDs: [],
+      systemIDs: [5],
       tags: new Map()
     },
     {
@@ -403,7 +403,7 @@ export class ApiService {
       address: "TEST-0000-CP3.byu.edu",
       presets: new Map(),
       ports: [],
-      systemIDs: [],
+      systemIDs: [6],
       tags: new Map()
     },
     {
@@ -422,7 +422,7 @@ export class ApiService {
       address: "TEST-0000-D1.byu.edu",
       presets: new Map(),
       ports: [],
-      systemIDs: [],
+      systemIDs: [7],
       tags: new Map()
     },
     {
@@ -441,7 +441,7 @@ export class ApiService {
       address: "TEST-0000-D2.byu.edu",
       presets: new Map(),
       ports: [],
-      systemIDs: [],
+      systemIDs: [6],
       tags: new Map()
     },
     {
@@ -460,56 +460,56 @@ export class ApiService {
       address: "TEST-0000-D3.byu.edu",
       presets: new Map(),
       ports: [],
-      systemIDs: [],
+      systemIDs: [5],
       tags: new Map()
     }
   ];
 
   testSystems: System[] = [
     {
-      id: "System1",
+      id: 1,
       name: "Test System 1",
       designation: "asdf",
       installDate: new Date("1820-04-01T00:00:00-0700"),
       checkDate: new Date("1830-04-06T00:00:00-0700"),
     },
     {
-      id: "System2",
+      id: 2,
       name: "Test System 2",
       designation: "asdf",
       installDate: new Date("1820-04-01T00:00:00-0700"),
       checkDate: new Date("1830-04-06T00:00:00-0700"),
     },
     {
-      id: "System3",
+      id: 3,
       name: "Test System 3",
       designation: "asdf",
       installDate: new Date("1820-04-01T00:00:00-0700"),
       checkDate: new Date("1830-04-06T00:00:00-0700"),
     },
     {
-      id: "System4",
+      id: 4,
       name: "Test System 4",
       designation: "asdf",
       installDate: new Date("1820-04-01T00:00:00-0700"),
       checkDate: new Date("1830-04-06T00:00:00-0700"),
     },
     {
-      id: "System5",
+      id: 5,
       name: "Test System 5",
       designation: "asdf",
       installDate: new Date("1820-04-01T00:00:00-0700"),
       checkDate: new Date("1830-04-06T00:00:00-0700"),
     },
     {
-      id: "System6",
+      id: 6,
       name: "Test System 6",
       designation: "asdf",
       installDate: new Date("1820-04-01T00:00:00-0700"),
       checkDate: new Date("1830-04-06T00:00:00-0700"),
     },
     {
-      id: "System7",
+      id: 7,
       name: "Test System 7",
       designation: "asdf",
       installDate: new Date("1820-04-20T00:00:00-0700"),
@@ -521,6 +521,13 @@ export class ApiService {
 
   getSystems(roomId: string): System[] {
     return this.testSystems;
+  }
+
+  getSystemByID(s: number): System {
+    for(var i = 0; i < this.testSystems.length; i++) {
+      if(s === this.testSystems[i].id) return this.testSystems[i];
+    }
+    return this.testSystems[0];
   }
 
   getRooms(): string[] {

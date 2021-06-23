@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 @Component({
     selector: "confirm-port",
     template: `
-        <h1>{{ data.path }}</h1>
+        <h1>Connect {{ data.path }}?</h1>
         <div class="button-container">
             <button mat-stroked-button color="warn" (click)="cancel()">Cancel</button>
             <button mat-stroked-button color="primary" (click)="confirm()">Confirm</button>

@@ -26,24 +26,6 @@ textarea {
     width: 100%;
 }
 
-.text-row {
-    margin-left: 1vw;
-    margin-right: 1vw;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.tag-container {
-    width: 40%;
-}
-
-.tag-label {
-    font-size: 20px;
-    margin-top: 10px;
-}
-
 mat-form-field {
     width: 100%;
 }
@@ -138,6 +120,28 @@ table {
 .device-name-container p {
     padding: 2px 0 0 0;
     margin: 0 0 0 15px;
+}
+
+.final-device-column {
+    padding: 19px 0 0 0;
+    margin-bottom: 20px;
+}
+
+mat-chip-list {
+    float: right;
+}
+
+mat-basic-chip {
+    font-size: smaller;
+    padding: 1px 5px 1px 5px;
+    border-radius: 25px;
+    background-color: #e7e7e7;
+    color: gray;
+    margin: 0 0 0 5px;
+}
+
+mat-basic-chip:hover {
+    background-color: lightgray;
 }
 
 .system {

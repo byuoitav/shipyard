@@ -29,6 +29,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule } from '@angular/material/chips';
 
 // Internal
 import { CampusListComponent } from './list-view/campuses/campus-list/campus-list.component';
@@ -125,6 +126,7 @@ import { MicrophoneGroupComponent } from './system-config/microphone-group/micro
     MatNativeDateModule,
     MatStepperModule,
     MatRadioModule,
+    MatChipsModule,
   ],
   providers: [
     MatDatepickerModule

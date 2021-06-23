@@ -48,15 +48,25 @@ export class PortModalComponent implements OnInit {
 
   selectDevice(dev: Device) {
     this.selectedDevice = dev;
-    this.ports = dev.ports;
+    this.ports = this.filterPorts(dev.ports, this.data.port.direction);
 
     if (this.stepper) this.stepper.next();
+  }
+
+  filterPorts(ports: Port[], type: string) {
+    var filtered = [];
+    for (var i = 0; i < ports.length; i++) {
+      if (ports[i].direction != type) {
+        filtered.push(ports[i]);
+      }
+    }
+    return filtered;
   }
 
   connectPort(port: Port) {
     // confirm
     const confirmDialogRef = this.dialog.open(ConfirmPortDialog, {data: {
-      path: this.data.device.name + ":" + this.data.port.name + " --- " + this.selectedDevice.name + ":" + port.name
+      path: this.data.device.name + " : " + this.data.port.name + " to " + this.selectedDevice.name + " : " + port.name
     }});
 
     confirmDialogRef.afterClosed().subscribe(resp => {

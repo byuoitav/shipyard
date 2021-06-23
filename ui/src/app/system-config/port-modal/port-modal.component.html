@@ -1,7 +1,7 @@
 <mat-dialog-content class="main-container">
     <mat-horizontal-stepper #stepper>
         <mat-step class="content-container">
-            <h3>Select Device</h3>
+            <h1>Select a device to connect to {{ data.device.name }} : {{ data.port.name }}</h1>
             <div class="list-wrapper">
                 <table mat-table [dataSource]="filterDevices()">
         
@@ -19,13 +19,18 @@
             </div>
         </mat-step>
         <mat-step>
-            <h3>Select Port</h3>
+            <h1>Select a port to connect to {{ data.device.name }} : {{ data.port.name }}</h1>
             <div class="list-wrapper">
                 <table mat-table [dataSource]="ports">
 
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Port Name </th>
                         <td mat-cell *matCellDef="let port"><div>  {{port.name}} </div></td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dir">
+                        <th mat-header-cell *matHeaderCellDef> Direction (temp)</th>
+                        <td mat-cell *matCellDef="let port"> {{port.direction}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="connection">

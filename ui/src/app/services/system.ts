@@ -1,12 +1,12 @@
 export class System {
-    id: string;
+    id: number;
     name: string;
     designation: string;
     installDate: Date;
     checkDate: Date;
 
     constructor() {
-        this.id = "";
+        this.id = 0;
         this.name = "";
         this.designation = "";
         this.installDate = new Date();

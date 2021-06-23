@@ -27,7 +27,7 @@ export class RoomConfigComponent implements OnInit {
   description: string = "this is a test of the emergency broadcast system";
   notes: string = "the test will consist of three stages";
 
-  @ViewChild('carousel', {static : true}) carousel: NgbCarousel | null = null;
+  @ViewChild('carousel', { static: true }) carousel: NgbCarousel | null = null;
   images: string[] = [];
   paused = false;
   unpauseOnArrow = false;
@@ -96,7 +96,7 @@ export class RoomConfigComponent implements OnInit {
   }
 
   addSystem(s: System | null) {
-    const systemDialog = this.dialog.open(SystemModalComponent, {data: s});
+    const systemDialog = this.dialog.open(SystemModalComponent, { data: s });
   }
 
   navigateToSystem(e: any, sys: System) {
@@ -105,11 +105,19 @@ export class RoomConfigComponent implements OnInit {
   }
 
   addDevice(dev: Device | null) {
-    const deviceModal = this.dialog.open(DeviceModalComponent, {data: dev});
+    const deviceModal = this.dialog.open(DeviceModalComponent, { data: dev });
 
     deviceModal.afterClosed().subscribe(resp => {
-      
+
     });
+  }
+
+  getDeviceSystemNames(dev: Device) {
+    var systems: any[] = [];
+    dev.systemIDs.forEach(s => {
+      systems.push(this.api.getSystemByID(s).name);
+    });
+    return systems;
   }
 
   updateDeviceTable() {
