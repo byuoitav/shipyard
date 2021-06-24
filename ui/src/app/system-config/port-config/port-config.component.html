@@ -1,6 +1,6 @@
-<div class="port-config-container">
-    <mat-card class="main-card"  style="border-right: 1px solid lightgray; border-radius: 0px;">
-        <mat-card-content>
+<mat-grid-list cols="2" rowHeight="fit">
+    <mat-grid-tile>
+        <div class="devices-wrapper">
             <h1>Devices</h1>
             <p style="text-align: center;">Select a device to configure its ports</p>
             <div class="list-wrapper">
@@ -32,16 +32,15 @@
                     <tr mat-row *matRowDef="let device; columns: deviceColumns;" class="table-row" [class.highlighted-row]="selectedDevice === device" (click)="selectDevice(device)"></tr>
                 </table>
             </div>
-        </mat-card-content>
-        <mat-card-footer>
             <div class="button-container">
                 <button mat-stroked-button color="primary" (click)="addDevice(null)">Add Device</button>
                 <button mat-stroked-button color="primary">Add Existing Device</button>
             </div>
-        </mat-card-footer>
-    </mat-card>
-    <mat-card class="main-card">
-        <mat-card-content>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <div class="devices-wrapper">
             <h1>Ports<ng-container *ngIf="selectedDevice != null"> on {{ getDeviceName() }}</ng-container></h1>
             <p style="text-align: center;">Select a port to configure its connection</p>
             <div class="list-wrapper">
@@ -66,6 +65,6 @@
                     <tr mat-row *matRowDef="let port; columns: portColumns;" class="table-row" (click)="connectPort(port)"></tr>
                 </table>
             </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

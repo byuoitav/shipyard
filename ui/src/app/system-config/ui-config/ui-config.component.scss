@@ -1,18 +1,16 @@
-.ui-config-container {
+.column-section {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
-}
-
-.main-card {
-    width: 50%;
-    box-shadow: none !important;
-    min-height: 85vh;
-    max-height: 85vh;
+    flex-direction: column;
+    margin: 0 20px 0 20px;
+    overflow-y: scroll;
 }
 
 h1 {
     text-align: center;
+    margin-top: 20px;
 }
 
 table {
@@ -53,15 +51,15 @@ table {
 .button-container {
     display: flex;
     justify-content: space-evenly;
+    padding-top: 20px;
 }
 
 .button-container button {
     width: 40%;
 }
 
-
 .config-section {
-    min-height: 40vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -126,4 +124,9 @@ mat-basic-chip {
 
 mat-basic-chip:hover {
     background-color: lightgray;
+}
+
+mat-grid-list {
+    width: 100%;
+    height: 77vh;
 }

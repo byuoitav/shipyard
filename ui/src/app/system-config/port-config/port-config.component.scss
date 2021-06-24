@@ -1,18 +1,6 @@
-.port-config-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-
-.main-card {
-    width: 50%;
-    box-shadow: none !important;
-    min-height: 85vh;
-    max-height: 85vh;
-}
-
 h1 {
     text-align: center;
+    margin-top: 20px;
 }
 
 table {
@@ -50,29 +38,18 @@ table {
 
 .list-wrapper {
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     padding: 0 20px 20px 20px;
 }
 
 .button-container {
     display: flex;
     justify-content: space-evenly;
+    padding-top: 20px;
 }
 
 .button-container button {
     width: 40%;
-}
-
-::-webkit-scrollbar {
-    width: 4px;
-    overflow-y: scroll;
-    background: none;
-    // box-shadow: inset 0 0 3px #707070;
-}
-
-::-webkit-scrollbar-thumb {
-    background: lightgray;
-    border-radius: 10px;
 }
 
 .final-device-column {
@@ -96,4 +73,18 @@ mat-basic-chip {
 
 mat-basic-chip:hover {
     background-color: lightgray;
+}
+
+mat-grid-list {
+    width: 100%;
+    height: 77vh;
+}
+
+.devices-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 0 20px 0 20px;
 }
