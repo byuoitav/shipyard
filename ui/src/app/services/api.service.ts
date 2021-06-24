@@ -120,7 +120,7 @@ export class ApiService {
       id: 1,
       name: "Device 1",
       roomID: 12,
-      modelID: 12,
+      modelID: 1,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -201,14 +201,14 @@ export class ApiService {
           type: ''
         }
       ],
-      systemIDs: [1,2,3],
+      systemIDs: [1, 2, 3, 4, 5, 6, 7],
       tags: new Map(),
     },
     {
       id: 2,
       name: "Device 2",
       roomID: 12,
-      modelID: 12,
+      modelID: 2,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -289,14 +289,14 @@ export class ApiService {
           type: ''
         }
       ],
-      systemIDs: [4,5,6],
+      systemIDs: [4, 5, 6],
       tags: new Map(),
     },
     {
       id: 3,
       name: "TEST-0000-MIC1",
       roomID: 12,
-      modelID: 12,
+      modelID: 3,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -315,7 +315,7 @@ export class ApiService {
       id: 4,
       name: "TEST-0000-MIC2",
       roomID: 12,
-      modelID: 12,
+      modelID: 4,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -334,7 +334,7 @@ export class ApiService {
       id: 5,
       name: "TEST-0000-MIC3",
       roomID: 12,
-      modelID: 12,
+      modelID: 5,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -353,7 +353,7 @@ export class ApiService {
       id: 6,
       name: "TEST-0000-CP1",
       roomID: 12,
-      modelID: 12,
+      modelID: 6,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -372,7 +372,7 @@ export class ApiService {
       id: 7,
       name: "TEST-0000-CP2",
       roomID: 12,
-      modelID: 12,
+      modelID: 7,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -391,7 +391,7 @@ export class ApiService {
       id: 8,
       name: "TEST-0000-CP3",
       roomID: 12,
-      modelID: 12,
+      modelID: 8,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -410,7 +410,7 @@ export class ApiService {
       id: 9,
       name: "TEST-0000-D1",
       roomID: 12,
-      modelID: 12,
+      modelID: 5,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -429,7 +429,7 @@ export class ApiService {
       id: 10,
       name: "TEST-0000-D2",
       roomID: 12,
-      modelID: 12,
+      modelID: 3,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -448,7 +448,7 @@ export class ApiService {
       id: 11,
       name: "TEST-0000-D3",
       roomID: 12,
-      modelID: 12,
+      modelID: 7,
       installDate: new Date(),
       warrantyDate: new Date(),
       location: "in a cupboard under the stairs",
@@ -517,6 +517,49 @@ export class ApiService {
     },
   ];
 
+  testModelList = [
+    {
+      id: 1,
+      name: "Model 1",
+      manufacturer: "Manufacturer 1"
+    },
+    {
+      id: 2,
+      name: "Model 2",
+      manufacturer: "Manufacturer 2"
+    },
+    {
+      id: 3,
+      name: "Model 3",
+      manufacturer: "Manufacturer 3"
+    },
+    {
+      id: 4,
+      name: "Model 4",
+      manufacturer: "Manufacturer 4"
+    },
+    {
+      id: 5,
+      name: "Model 5",
+      manufacturer: "Manufacturer 5"
+    },
+    {
+      id: 6,
+      name: "Model 6",
+      manufacturer: "Manufacturer 6"
+    },
+    {
+      id: 7,
+      name: "Model 7",
+      manufacturer: "Manufacturer 7"
+    },
+    {
+      id: 8,
+      name: "Model 8",
+      manufacturer: "Manufacturer 8"
+    }
+  ];
+
   constructor() { }
 
   getSystems(roomId: string): System[] {
@@ -524,8 +567,8 @@ export class ApiService {
   }
 
   getSystemByID(s: number): System {
-    for(var i = 0; i < this.testSystems.length; i++) {
-      if(s === this.testSystems[i].id) return this.testSystems[i];
+    for (var i = 0; i < this.testSystems.length; i++) {
+      if (s === this.testSystems[i].id) return this.testSystems[i];
     }
     return this.testSystems[0];
   }
@@ -539,6 +582,15 @@ export class ApiService {
     // });
     // return rooms;
     return this.testRoomList;
+  }
+
+  getRoomByID(id: number): Room {
+    // for (let i = 0; i < this.testRooms.length; i++) {
+    //   if (this.testRooms[i].id == id) {
+    //     return this.testRooms[i];
+    //   }
+    // }
+    return this.testRooms[0];
   }
 
   getRoom(roomid: string): Room {
@@ -565,6 +617,16 @@ export class ApiService {
   getDevices(roomid: string): Device[] {
     return this.testDevices;
   }
+
+  getModelByID(id: number) {
+    for (var i = 0; i < this.testModelList.length; i++) {
+      if (id == this.testModelList[i].id) {
+        return this.testModelList[i];
+      }
+    }
+    return this.testModelList[0];
+  }
+
 
   addDevice(device: Device) {
     //Check if device already exists
@@ -645,7 +707,7 @@ export class ApiService {
       id: "Test",
       controlPanels: new Map(),
       controlGroups: new Map([
-        ["Layout 1",{
+        ["Layout 1", {
           displays: new Map(),
           inputs: [],
           microphones: new Map(),
@@ -654,7 +716,7 @@ export class ApiService {
             block: ""
           }
         }],
-        ["Layout 2",{
+        ["Layout 2", {
           displays: new Map(),
           inputs: [],
           microphones: new Map(),
@@ -663,7 +725,7 @@ export class ApiService {
             block: ""
           }
         }],
-        ["Layout 3",{
+        ["Layout 3", {
           displays: new Map(),
           inputs: [],
           microphones: new Map(),

@@ -1,38 +1,8 @@
-mat-card-header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.room-info-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.main-card {
-    width: 50%;
-    box-shadow: none !important;
-}
-
-mat-card-content {
-    margin: 1vw;
-}
-
-.text-wrapper {
-    width: 95%;
-    margin-left: 1vw;
-}
-
-textarea {
-    width: 100%;
-}
-
-mat-form-field {
-    width: 100%;
-}
-
+// Image Section
 .images-contianer {
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
 }
 
 .carousel-wrapper {
@@ -71,17 +41,23 @@ mat-form-field {
     background-color: whitesmoke;
 }
 
-ul {
-    list-style-type: none;
+
+// Systems
+.system-button {
+    margin-top: 20px;
+    width: 50%;
+    margin: 20px auto 0 auto;
 }
 
-.select-field {
-    width: 80%;
-    margin: auto;
+.final-column-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .config-section {
-    height: 40vh;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -101,27 +77,7 @@ table {
     background-color: whitesmoke;
 }
 
-.device-name-container {
-    align-content: center;
-    display: flex;
-    justify-content: left;
-    height: 100%;
-}
-
-.device-name-container mat-icon, p {
-    height: 25px;
-}
-
-.device-name-container mat-icon{
-    margin: 0;
-    padding: 0;
-}
-
-.device-name-container p {
-    padding: 2px 0 0 0;
-    margin: 0 0 0 15px;
-}
-
+// Devices
 .final-device-column {
     padding: 19px 0 0 0;
     margin-bottom: 20px;
@@ -145,19 +101,59 @@ mat-basic-chip:hover {
     background-color: lightgray;
 }
 
-.system {
-    margin-bottom: 25px;
-    margin-top: 2px;
-}
-
-.system-button {
-    margin-top: 20px;
-    width: 50%;
-    margin: 20px auto 0 auto;
-}
-
-.final-column-container {
+.device-name-container {
+    align-content: center;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: left;
+    height: 100%;
+}
+
+.device-name-container mat-icon, p {
+    height: 25px;
+}
+
+.device-name-container mat-icon{
+    margin: 0;
+    padding: 0;
+}
+
+.device-name-container p {
+    padding: 2px 0 0 0;
+    margin: 0 0 0 15px;
+}
+
+//Notes section
+.notes-section-wrapper {
+    width: 100%;
+}
+
+.text-wrapper {
+    width: 95%;
+    margin-left: 1vw;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+// Room Details Section
+.room-details {
+    width: 100%;
+}
+
+h3 {
+    margin: 0;
+}
+
+.list-section {
+    margin: 3vh;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.select-field {
+    width: 80%;
+    margin: auto;
 }

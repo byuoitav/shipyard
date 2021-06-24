@@ -104,3 +104,26 @@ table {
 .spacing {
     flex: 1 1 auto;
 }
+
+.final-device-column {
+    padding: 19px 0 0 0;
+    margin-bottom: 20px;
+}
+
+mat-chip-list {
+    float: right;
+    overflow: wrap;
+}
+
+mat-basic-chip {
+    font-size: smaller;
+    padding: 1px 5px 1px 5px;
+    border-radius: 25px;
+    background-color: #e7e7e7;
+    color: dimgray;
+    margin: 0 0 0 5px;
+}
+
+mat-basic-chip:hover {
+    background-color: lightgray;
+}

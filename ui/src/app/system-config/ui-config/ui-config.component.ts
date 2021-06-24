@@ -19,8 +19,8 @@ export class UiConfigComponent implements OnInit {
   devices: Device[] = [];
   deviceColumns: string[] = [
     'name',
-    'install',
-    'address'
+    'manufacturer',
+    'model'
   ];
 
   constructor(private api: ApiService,
@@ -44,6 +44,21 @@ export class UiConfigComponent implements OnInit {
     deviceModal.afterClosed().subscribe(resp => {
       
     });
+  }
+
+  getRoomFromID(id: number) {
+    var room = this.api.getRoomByID(id);
+    return room.id;
+  }
+
+  getModelNameFromID(id: number) {
+    var model = this.api.getModelByID(id);
+    return model.name;
+  }
+
+  getManufacturerFromModelID(id: number) {
+    var model = this.api.getModelByID(id);
+    return model.manufacturer;
   }
 
   getControlPanels(): Device[] {

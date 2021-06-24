@@ -44,8 +44,7 @@ export class RoomConfigComponent implements OnInit {
   systemsData: MatTableDataSource<System> = new MatTableDataSource();
   systemColumns: string[] = [
     'name',
-    'install',
-    'check'
+    'designation'
   ];
 
   deviceData: MatTableDataSource<Device> = new MatTableDataSource();
@@ -117,7 +116,22 @@ export class RoomConfigComponent implements OnInit {
     dev.systemIDs.forEach(s => {
       systems.push(this.api.getSystemByID(s).name);
     });
+    if (systems.length > 3) {
+      var remainder = systems.length - 3;
+      systems = systems.slice(0, 3);
+      systems.push("+" + remainder.toString() + " More");
+    }
     return systems;
+  }
+
+  getModelNameFromID(id: number) {
+    var model = this.api.getModelByID(id);
+    return model.name;
+  }
+
+  getManufacturerFromModelID(id: number) {
+    var model = this.api.getModelByID(id);
+    return model.manufacturer;
   }
 
   updateDeviceTable() {

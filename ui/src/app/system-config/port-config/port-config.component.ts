@@ -18,8 +18,8 @@ export class PortConfigComponent implements OnInit {
   devices: Device[] = [];
   deviceColumns: string[] = [
     'name',
-    'install',
-    'address'
+    'manufacturer',
+    'model'
   ];
 
   selectedDevice: Device = new Device();
@@ -69,6 +69,21 @@ export class PortConfigComponent implements OnInit {
       return this.selectedDevice.name;
     }
     return "";
+  }
+
+  getRoomFromID(id: number) {
+    var room = this.api.getRoomByID(id);
+    return room.id;
+  }
+
+  getModelNameFromID(id: number) {
+    var model = this.api.getModelByID(id);
+    return model.name;
+  }
+
+  getManufacturerFromModelID(id: number) {
+    var model = this.api.getModelByID(id);
+    return model.manufacturer;
   }
 
   connectPort(port: Port) {
