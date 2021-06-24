@@ -11,6 +11,7 @@ import { Device } from '../services/device';
 export class DeviceModalComponent implements OnInit {
   device: Device = new Device()
   modelList: any[] = [];
+  manufacturerList: any[] = [];
 
   constructor(private api: ApiService,
     private dialogRef: MatDialogRef<DeviceModalComponent>,
@@ -18,6 +19,7 @@ export class DeviceModalComponent implements OnInit {
       if (data) {
         this.device = data;
       }
+      this.manufacturerList = this.getDeviceManufacturerList();
       this.modelList = this.getDeviceModelList();
     }
 
@@ -32,6 +34,17 @@ export class DeviceModalComponent implements OnInit {
       {id: "4", name: "Device Model 4"},
       {id: "5", name: "Device Model 5"},
       {id: "6", name: "Device Model 6"}
+    ];
+  }
+
+  getDeviceManufacturerList() {
+    return [
+      "Manufacturer 1",
+      "Manufacturer 2",
+      "Manufacturer 3",
+      "Manufacturer 4",
+      "Manufacturer 5",
+      "Manufacturer 6"
     ];
   }
 

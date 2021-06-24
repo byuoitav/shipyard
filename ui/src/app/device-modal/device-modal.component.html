@@ -1,44 +1,74 @@
 <mat-dialog-content class="system-container">
-    <h2>Device Details</h2>
-    <div class="field-pair">
-        <mat-form-field>
-            <mat-label>Device Name</mat-label>
-            <input matInput [(ngModel)]="device.name">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Model</mat-label>
-            <mat-select [(value)]="device.modelID">
-                <mat-option *ngFor="let m of modelList" [value]="m.id">{{m.name}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <div class="field-pair">
-        <mat-form-field>
-            <mat-label>Address</mat-label>
-            <input matInput [(ngModel)]="device.address">
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Location</mat-label>
-            <input matInput [(ngModel)]="device.location">
-        </mat-form-field>
-    </div>
-    <div class="field-pair">
-        <mat-form-field>
-            <mat-label>Install Date</mat-label>
-            <input matInput [(ngModel)]="device.installDate" [matDatepicker]="installPicker">
-            <mat-datepicker-toggle matSuffix [for]="installPicker"></mat-datepicker-toggle>
-            <mat-datepicker #installPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Warranty Date</mat-label>
-            <input matInput [(ngModel)]="device.warrantyDate" [matDatepicker]="warrantyPicker">
-            <mat-datepicker-toggle matSuffix [for]="warrantyPicker"></mat-datepicker-toggle>
-            <mat-datepicker #warrantyPicker></mat-datepicker>
-        </mat-form-field>
-    </div>
-    <div class="button-container">
-        <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
-        <button mat-raised-button color="primary" (click)="onSave()">Save</button>
-    </div>
+    <h2>Input Device Details</h2>
+    <mat-grid-list cols="2" rowHeight="70px">
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>Device Name</mat-label>
+                <input matInput [(ngModel)]="device.name">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput [(ngModel)]="device.address">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>Manufacturer</mat-label>
+                <mat-select [(value)]="device.modelID">
+                    <mat-option *ngFor="let m of manufacturerList" [value]="m">{{m}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>Model</mat-label>
+                <mat-select [(value)]="device.modelID">
+                    <mat-option *ngFor="let m of modelList" [value]="m.id">{{m.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>Install Date</mat-label>
+                <input matInput [(ngModel)]="device.installDate" [matDatepicker]="installPicker">
+                <mat-datepicker-toggle matSuffix [for]="installPicker"></mat-datepicker-toggle>
+                <mat-datepicker #installPicker></mat-datepicker>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>Warranty Date</mat-label>
+                <input matInput [(ngModel)]="device.warrantyDate" [matDatepicker]="warrantyPicker">
+                <mat-datepicker-toggle matSuffix [for]="warrantyPicker"></mat-datepicker-toggle>
+                <mat-datepicker #warrantyPicker></mat-datepicker>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>Location</mat-label>
+                <input matInput [(ngModel)]="device.location">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>FundingType</mat-label>
+                <input matInput [(ngModel)]="device.location">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="2">
+            <mat-form-field appearance="outline">
+                <mat-label>Notes</mat-label>
+                <textarea matInput [(ngModel)]="device.notes" rows="3"></textarea>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+            <div class="button-container">
+                <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
+                <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
 </mat-dialog-content>

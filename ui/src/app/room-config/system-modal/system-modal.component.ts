@@ -12,6 +12,7 @@ export class SystemModalComponent implements OnInit {
   system: System = new System();
   installDate = new FormControl(this.system.installDate);
   checkDate = new FormControl(this.system.checkDate);
+  designations: any[] = [];
 
   constructor(private dialogRef: MatDialogRef<SystemModalComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any) {
@@ -22,9 +23,21 @@ export class SystemModalComponent implements OnInit {
         this.system.installDate = data.installDate;
         this.system.checkDate = data.checkDate;
       }
+      this.designations = this.getDesignationList();
     }
 
   ngOnInit(): void {
+  }
+
+  getDesignationList() {
+    return [
+      "Designation 1",
+      "Designation 2",
+      "Designation 3",
+      "Designation 4",
+      "Designation 5",
+      "Designation 6"
+    ];
   }
 
   onSave() {

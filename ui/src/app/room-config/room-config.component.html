@@ -74,7 +74,7 @@
                         <td mat-cell *matCellDef="let sys">
                             <div class="final-column-container">
                                 {{sys.checkDate | date:'MM-dd-yyyy'}}
-                                <button mat-icon-button (click)="navigateToSystem($event, sys)"><mat-icon>navigate_next</mat-icon></button>
+                                <button mat-stroked-button color="primary" (click)="navigateToSystem($event, sys)">Configure</button>
                             </div>
                         </td>
                     </ng-container>

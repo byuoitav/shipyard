@@ -129,6 +129,7 @@ table {
 
 mat-chip-list {
     float: right;
+    overflow: wrap;
 }
 
 mat-basic-chip {
@@ -136,7 +137,7 @@ mat-basic-chip {
     padding: 1px 5px 1px 5px;
     border-radius: 25px;
     background-color: #e7e7e7;
-    color: gray;
+    color: dimgray;
     margin: 0 0 0 5px;
 }
 
