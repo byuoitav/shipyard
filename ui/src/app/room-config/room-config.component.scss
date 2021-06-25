@@ -101,6 +101,10 @@ mat-basic-chip:hover {
     background-color: lightgray;
 }
 
+mat-basic-chip {
+    cursor: pointer;
+}
+
 .device-name-container {
     align-content: center;
     display: flex;

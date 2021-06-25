@@ -1,13 +1,11 @@
 .system-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
     min-width: 700px;
-    min-height: 250px;
+    min-height: 600px;
 }
 
 mat-grid-list {
-    min-height: 250px;
+    // min-height: 600px;
+    margin: 20px 0 0 0;
 }
 
 mat-form-field {
@@ -19,4 +17,5 @@ mat-form-field {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-content: flex-end;
 }

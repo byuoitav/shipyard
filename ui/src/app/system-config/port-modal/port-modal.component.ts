@@ -33,7 +33,7 @@ export class PortModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.devices = this.api.getDevices("");  //Todo: get the list of devices in the system
+    this.devices = this.api.getDevices(0);  //Todo: get the list of devices in the system
   }
 
   filterDevices() {

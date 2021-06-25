@@ -1,5 +1,6 @@
 export class Room {
-    id: string;
+    id: number;
+    name: string;
     designation: string;
     publicDescription: string;
     privateDescription: string;
@@ -7,11 +8,12 @@ export class Room {
     tags: Map<string, string>;
 
     constructor() {
-        this.tags = new Map();
-        this.id = "";
+        this.id = 0;
+        this.name = "";
         this.designation = "";
         this.privateDescription = "";
         this.publicDescription = "";
         this.proxyBaseURL = "";
+        this.tags = new Map();
     }
 }

@@ -20,7 +20,7 @@ export class MicrophoneGroupComponent implements OnInit {
   constructor(private refDialog: MatDialogRef<MicrophoneGroupComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private api: ApiService) {
-      this.devices = this.api.getDevices("");
+      this.devices = this.api.getDevices(0);
       console.log(this.data);
       if (this.data) this.groupID = "Group " + this.data;
       else this.groupID = "Group 1";

@@ -18,7 +18,7 @@ import { DeviceModalComponent } from '../device-modal/device-modal.component';
   styleUrls: ['./room-config.component.scss']
 })
 export class RoomConfigComponent implements OnInit {
-  roomID: string = "";
+  roomID: number = 0;
   room: Room = new Room();
 
   tagKey: string = "";
@@ -51,8 +51,9 @@ export class RoomConfigComponent implements OnInit {
   devices: Device[] = [];
   deviceColumns: string[] = [
     'name',
-    'install',
-    'address'
+    'manufacturer',
+    'model',
+    'systems'
   ];
 
   constructor(private route: ActivatedRoute,
@@ -60,7 +61,7 @@ export class RoomConfigComponent implements OnInit {
     private api: ApiService,
     private dialog: MatDialog) {
     this.route.params.subscribe(params => {
-      this.roomID = params["roomID"];
+      this.roomID = Number(params["roomID"]);
     });
   }
 
@@ -98,9 +99,9 @@ export class RoomConfigComponent implements OnInit {
     const systemDialog = this.dialog.open(SystemModalComponent, { data: s });
   }
 
-  navigateToSystem(e: any, sys: System) {
-    e.stopPropagation();
-    this.router.navigate(["/system/" + sys.id]);
+  navigateToSystem(e: any, sysID: number) {
+    if (e) e.stopPropagation();
+    this.router.navigate(["/system/" + sysID]);
   }
 
   addDevice(dev: Device | null) {
@@ -111,14 +112,19 @@ export class RoomConfigComponent implements OnInit {
     });
   }
 
+  getSystemName(id: number) {
+    var system = this.api.getSystemByID(id);
+    return system.name;
+  }
+
   getDeviceSystemNames(dev: Device) {
     var systems: any[] = [];
     dev.systemIDs.forEach(s => {
       systems.push(this.api.getSystemByID(s).name);
     });
-    if (systems.length > 3) {
-      var remainder = systems.length - 3;
-      systems = systems.slice(0, 3);
+    if (systems.length > 1) {
+      var remainder = systems.length - 1;
+      systems = systems.slice(0, 1);
       systems.push("+" + remainder.toString() + " More");
     }
     return systems;
@@ -163,7 +169,7 @@ export class RoomConfigComponent implements OnInit {
   }
 
   getTestImages(): string[] {
-    let header = "assets/bldgImages/"
+    let header = "assets/bldgImages/";
     return [
       header + "ASB.jpg",
       header + "BNSN.jpg",

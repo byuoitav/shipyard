@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { DeviceModalComponent } from 'src/app/device-modal/device-modal.component';
 import { ApiService } from 'src/app/services/api.service';
 import { Device } from 'src/app/services/device';
@@ -20,11 +21,13 @@ export class UiConfigComponent implements OnInit {
   deviceColumns: string[] = [
     'name',
     'manufacturer',
-    'model'
+    'model',
+    'systems'
   ];
 
   constructor(private api: ApiService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private router: Router) {
     this.roomConf = this.api.getRoomConfig();
 
     this.updateDeviceTable();
@@ -34,7 +37,7 @@ export class UiConfigComponent implements OnInit {
   }
 
   updateDeviceTable() {
-    this.devices = this.api.getDevices("test");
+    this.devices = this.api.getDevices(0);
     this.deviceData.data = this.devices;
   }
 
@@ -48,7 +51,7 @@ export class UiConfigComponent implements OnInit {
 
   getRoomFromID(id: number) {
     var room = this.api.getRoomByID(id);
-    return room.id;
+    return room.name;
   }
 
   getModelNameFromID(id: number) {
@@ -59,6 +62,10 @@ export class UiConfigComponent implements OnInit {
   getManufacturerFromModelID(id: number) {
     var model = this.api.getModelByID(id);
     return model.manufacturer;
+  }
+  
+  routeToParentRoom(dev: Device) {
+    this.router.navigate(["/room-config/" + dev.roomID]);
   }
 
   getControlPanels(): Device[] {

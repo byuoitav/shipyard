@@ -17,8 +17,7 @@ export class RoomListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private api: ApiService,
-    private dialog: MatDialog) {
+    private api: ApiService) {
   }
 
   ngOnInit(): void {
@@ -29,20 +28,6 @@ export class RoomListComponent implements OnInit {
 
   routeToRoomPage(roomID: string) {
     this.router.navigate(["/room-config/" + roomID]);
-  }
-
-  editRoom(r: string) {
-    // let room = this.proxy.getRoom(r);
-    // let room = this.api.getRoom(r);
-  //   const roomDialog = this.dialog.open(RoomDialogComponent, {data: room});
-
-  //   roomDialog.afterClosed().subscribe(result => {
-  //     if (result == "delete") {
-  //       console.log("deleting");
-  //     } else if (result != null) {
-  //       this.rooms.push(result);
-  //     }
-  //   });
   }
 
   filterRooms() {

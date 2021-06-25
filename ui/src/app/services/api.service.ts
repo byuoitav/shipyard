@@ -26,7 +26,8 @@ export class ApiService {
 
   testRooms: Room[] = [
     {
-      id: "ASB-TEST",
+      id: 1,
+      name: "ASB-TEST",
       designation: "designation ASB-TEST",
       publicDescription: "this is ASB-TEST",
       privateDescription: "notes on ASB-TEST",
@@ -34,7 +35,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "BYUB-TEST",
+      id: 2,
+      name: "BYUB-TEST",
       designation: "designation BYUB-TEST",
       publicDescription: "this is BYUB-TEST",
       privateDescription: "notes on BYUB-TEST",
@@ -42,7 +44,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "EB-TEST",
+      id: 3,
+      name: "EB-TEST",
       designation: "designation EB-TEST",
       publicDescription: "this is EB-TEST",
       privateDescription: "notes on EB-TEST",
@@ -50,7 +53,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "HBLL-TEST",
+      id: 4,
+      name: "HBLL-TEST",
       designation: "designation HBLL-TEST",
       publicDescription: "this is HBLL-TEST",
       privateDescription: "notes on HBLL-TEST",
@@ -58,7 +62,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "ITB-TEST",
+      id: 5,
+      name: "ITB-TEST",
       designation: "designation ITB-TEST",
       publicDescription: "this is ITB-TEST",
       privateDescription: "notes on ITB-TEST",
@@ -66,7 +71,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "ITB-TEST2",
+      id: 6,
+      name: "ITB-TEST2",
       designation: "designation ITB-TEST2",
       publicDescription: "this is ITB-TEST2",
       privateDescription: "notes on ITB-TEST2",
@@ -74,7 +80,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "ITB-TEST3",
+      id: 7,
+      name: "ITB-TEST3",
       designation: "designation ITB-TEST3",
       publicDescription: "this is ITB-TEST3",
       privateDescription: "notes on ITB-TEST3",
@@ -82,7 +89,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "JFSB-TEST",
+      id: 8,
+      name: "JFSB-TEST",
       designation: "designation JFSB-TEST",
       publicDescription: "this is JFSB-TEST",
       privateDescription: "notes on JFSB-TEST",
@@ -90,7 +98,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "KMBL-TEST",
+      id: 9,
+      name: "KMBL-TEST",
       designation: "designation KMBL-TEST",
       publicDescription: "this is KMBL-TEST",
       privateDescription: "notes on KMBL-TEST",
@@ -98,7 +107,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "MARB-TEST",
+      id: 10,
+      name: "MARB-TEST",
       designation: "designation MARB-TEST",
       publicDescription: "this is MARB-TEST",
       privateDescription: "notes on MARB-TEST",
@@ -106,7 +116,8 @@ export class ApiService {
       tags: new Map()
     },
     {
-      id: "TMCB-TEST",
+      id: 11,
+      name: "TMCB-TEST",
       designation: "designation TMCB-TEST",
       publicDescription: "this is TMCB-TEST",
       privateDescription: "notes on TMCB-TEST",
@@ -119,7 +130,7 @@ export class ApiService {
     {
       id: 1,
       name: "Device 1",
-      roomID: 12,
+      roomID: 7,
       modelID: 1,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -136,14 +147,14 @@ export class ApiService {
           id: 'Port1',
           name: 'Port1',
           endpoints: [],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
           id: 'Port2',
           name: 'Port2',
           endpoints: [],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
@@ -155,49 +166,49 @@ export class ApiService {
               port: 'Port6'
             }
           ],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
           id: 'Port4',
           name: 'Port4',
           endpoints: [],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
           id: 'Port5',
           name: 'Port5',
           endpoints: [],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
           id: 'Port6',
           name: 'Port6',
           endpoints: [],
-          direction: 'outgoing',
+          direction: 'Out',
           type: ''
         },
         {
           id: 'Port7',
           name: 'Port7',
           endpoints: [],
-          direction: 'outgoing',
+          direction: 'Out',
           type: ''
         },
         {
           id: 'Port8',
           name: 'Port8',
           endpoints: [],
-          direction: 'outgoing',
+          direction: 'Out',
           type: ''
         },
         {
           id: 'Port9',
           name: 'Port9',
           endpoints: [],
-          direction: 'outgoing',
+          direction: 'Out',
           type: ''
         }
       ],
@@ -207,7 +218,7 @@ export class ApiService {
     {
       id: 2,
       name: "Device 2",
-      roomID: 12,
+      roomID: 10,
       modelID: 2,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -224,35 +235,35 @@ export class ApiService {
           id: 'Port1',
           name: 'Port1',
           endpoints: [],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
           id: 'Port2',
           name: 'Port2',
           endpoints: [],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
           id: 'Port3',
           name: 'Port3',
           endpoints: [],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
           id: 'Port4',
           name: 'Port4',
           endpoints: [],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
           id: 'Port5',
           name: 'Port5',
           endpoints: [],
-          direction: 'incoming',
+          direction: 'In',
           type: ''
         },
         {
@@ -264,28 +275,28 @@ export class ApiService {
               port: 'Port3'
             }
           ],
-          direction: 'outgoing',
+          direction: 'Out',
           type: ''
         },
         {
           id: 'Port7',
           name: 'Port7',
           endpoints: [],
-          direction: 'outgoing',
+          direction: 'Out',
           type: ''
         },
         {
           id: 'Port8',
           name: 'Port8',
           endpoints: [],
-          direction: 'outgoing',
+          direction: 'Out',
           type: ''
         },
         {
           id: 'Port9',
           name: 'Port9',
           endpoints: [],
-          direction: 'outgoing',
+          direction: 'Out',
           type: ''
         }
       ],
@@ -295,7 +306,7 @@ export class ApiService {
     {
       id: 3,
       name: "TEST-0000-MIC1",
-      roomID: 12,
+      roomID: 3,
       modelID: 3,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -314,7 +325,7 @@ export class ApiService {
     {
       id: 4,
       name: "TEST-0000-MIC2",
-      roomID: 12,
+      roomID: 4,
       modelID: 4,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -333,7 +344,7 @@ export class ApiService {
     {
       id: 5,
       name: "TEST-0000-MIC3",
-      roomID: 12,
+      roomID: 9,
       modelID: 5,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -352,7 +363,7 @@ export class ApiService {
     {
       id: 6,
       name: "TEST-0000-CP1",
-      roomID: 12,
+      roomID: 6,
       modelID: 6,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -371,7 +382,7 @@ export class ApiService {
     {
       id: 7,
       name: "TEST-0000-CP2",
-      roomID: 12,
+      roomID: 8,
       modelID: 7,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -390,7 +401,7 @@ export class ApiService {
     {
       id: 8,
       name: "TEST-0000-CP3",
-      roomID: 12,
+      roomID: 1,
       modelID: 8,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -409,7 +420,7 @@ export class ApiService {
     {
       id: 9,
       name: "TEST-0000-D1",
-      roomID: 12,
+      roomID: 2,
       modelID: 5,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -428,7 +439,7 @@ export class ApiService {
     {
       id: 10,
       name: "TEST-0000-D2",
-      roomID: 12,
+      roomID: 11,
       modelID: 3,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -447,7 +458,7 @@ export class ApiService {
     {
       id: 11,
       name: "TEST-0000-D3",
-      roomID: 12,
+      roomID: 5,
       modelID: 7,
       installDate: new Date(),
       warrantyDate: new Date(),
@@ -562,7 +573,7 @@ export class ApiService {
 
   constructor() { }
 
-  getSystems(roomId: string): System[] {
+  getSystems(roomId: number): System[] {
     return this.testSystems;
   }
 
@@ -585,15 +596,15 @@ export class ApiService {
   }
 
   getRoomByID(id: number): Room {
-    // for (let i = 0; i < this.testRooms.length; i++) {
-    //   if (this.testRooms[i].id == id) {
-    //     return this.testRooms[i];
-    //   }
-    // }
+    for (let i = 0; i < this.testRooms.length; i++) {
+      if (this.testRooms[i].id == id) {
+        return this.testRooms[i];
+      }
+    }
     return this.testRooms[0];
   }
 
-  getRoom(roomid: string): Room {
+  getRoom(roomid: number): Room {
     for (let i = 0; i < this.testRooms.length; i++) {
       if (this.testRooms[i].id == roomid) {
         return this.testRooms[i];
@@ -614,7 +625,7 @@ export class ApiService {
     this.testRooms.push(room);
   }
 
-  getDevices(roomid: string): Device[] {
+  getDevices(roomid: number): Device[] {
     return this.testDevices;
   }
 

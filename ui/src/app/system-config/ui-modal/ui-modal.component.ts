@@ -32,7 +32,7 @@ export class UiModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: any,
     private api: ApiService,
     private dialog: MatDialog) {
-      this.devices = this.api.getDevices("");
+      this.devices = this.api.getDevices(0);
       if (this.data.ControlGroup) {
         this.config = data.ControlGroup;
         this.groupID = data.ID;

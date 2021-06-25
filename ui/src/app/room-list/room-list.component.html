@@ -1,5 +1,5 @@
 <div class="action-container">
-    <button mat-raised-button color="primary" (click)="editRoom('')">
+    <button mat-raised-button color="primary">
         <mat-icon>add</mat-icon>
         Add New
     </button>
@@ -14,10 +14,6 @@
         <mat-card (click)="routeToRoomPage(r)">
             <mat-card-header>
                 <mat-card-title>{{ r }}</mat-card-title>
-                <span class="spacing"></span>
-                <button mat-icon-button (click)="editRoom(r);$event.stopPropagation()">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
             </mat-card-header>
         </mat-card>
     </ng-container>
