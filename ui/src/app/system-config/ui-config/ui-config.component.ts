@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,7 +12,14 @@ import { UiModalComponent } from '../ui-modal/ui-modal.component';
 @Component({
   selector: 'app-ui-config',
   templateUrl: './ui-config.component.html',
-  styleUrls: ['./ui-config.component.scss']
+  styleUrls: ['./ui-config.component.scss'],
+  animations: [
+    trigger('rowExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class UiConfigComponent implements OnInit {
   roomConf: SystemUIConfig = new SystemUIConfig();
@@ -25,6 +33,12 @@ export class UiConfigComponent implements OnInit {
     'systems'
   ];
 
+  layoutColumns: string[] = [
+    'layouts'
+  ];
+
+  expandedLayout: UIControlGroup | null = null;
+
   constructor(private api: ApiService,
     private dialog: MatDialog,
     private router: Router) {
@@ -33,7 +47,10 @@ export class UiConfigComponent implements OnInit {
     this.updateDeviceTable();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  selectLayout(l: UIControlGroup) {
+    this.expandedLayout = this.expandedLayout === l ? null : l;
   }
 
   updateDeviceTable() {

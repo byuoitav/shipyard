@@ -10,18 +10,51 @@ import { SystemUIConfig } from './ui-config';
 })
 export class ApiService {
 
-  testRoomList: string[] = [
-    "ASB-TEST",
-    "BYUB-TEST",
-    "EB-TEST",
-    "HBLL-TEST",
-    "ITB-TEST",
-    "ITB-TEST2",
-    "ITB-TEST3",
-    "JFSB-TEST",
-    "KMBL-TEST",
-    "MARB-TEST",
-    "TMCB-TEST"
+  testRoomList: any[] = [
+    {
+      name: "ASB-TEST",
+      id: 1
+    },
+    {
+      name: "BYUB-TEST",
+      id: 2
+    }, 
+    {
+      name: "EB-TEST",
+      id: 3
+    },
+    {
+      name: "HBLL-TEST",
+      id: 4
+    },
+    {
+      name: "ITB-TEST",
+      id: 5
+    },
+    {
+      name: "ITB-TEST2",
+      id: 6
+    },
+    {
+      name: "ITB-TEST3",
+      id: 7
+    },
+    {
+      name: "JFSB-TEST",
+      id: 8
+    },
+    {
+      name: "KMBL-TEST",
+      id: 9
+    },
+    {
+      name: "MARB-TEST",
+      id: 10
+    },
+    {
+      name: "TMCB-TEST",
+      id: 11
+    }
   ];
 
   testRooms: Room[] = [
@@ -717,8 +750,10 @@ export class ApiService {
     return {
       id: "Test",
       controlPanels: new Map(),
-      controlGroups: new Map([
-        ["Layout 1", {
+      controlGroups: [
+        {
+          id: 1,
+          name: "Layout 1",
           displays: new Map(),
           inputs: [],
           microphones: new Map(),
@@ -726,8 +761,10 @@ export class ApiService {
             device: "Test",
             block: ""
           }
-        }],
-        ["Layout 2", {
+        },
+        {
+          id: 2,
+          name: "Layout 2",
           displays: new Map(),
           inputs: [],
           microphones: new Map(),
@@ -735,8 +772,10 @@ export class ApiService {
             device: "Test",
             block: ""
           }
-        }],
-        ["Layout 3", {
+        },
+        {
+          id: 3,
+          name: "Layout 3",
           displays: new Map(),
           inputs: [],
           microphones: new Map(),
@@ -744,8 +783,8 @@ export class ApiService {
             device: "Test",
             block: ""
           }
-        }]
-      ])
+        }
+      ]
     }
   }
 }

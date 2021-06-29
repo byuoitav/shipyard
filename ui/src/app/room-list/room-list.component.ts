@@ -11,8 +11,8 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent implements OnInit {
-  rooms: string[] = [];
-  filteredRooms: string[] = [];
+  rooms: any[] = [];
+  filteredRooms: any[] = [];
   filterParam: string = "";
 
   constructor(private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class RoomListComponent implements OnInit {
     this.filterRooms();
   }
 
-  routeToRoomPage(roomID: string) {
+  routeToRoomPage(roomID: number) {
     this.router.navigate(["/room-config/" + roomID]);
   }
 
@@ -34,7 +34,7 @@ export class RoomListComponent implements OnInit {
     this.filteredRooms = [];
     let re = new RegExp(this.filterParam.toLowerCase());
     this.rooms.forEach(rm => {
-      if (re.exec(rm.toLowerCase()) != null) {
+      if (re.exec(rm.name.toLowerCase()) != null) {
         this.filteredRooms.push(rm);
       }
     });

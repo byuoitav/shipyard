@@ -11,9 +11,9 @@
 
 <div class="room-list">
     <ng-container *ngFor="let r of filteredRooms">
-        <mat-card (click)="routeToRoomPage(r)">
+        <mat-card (click)="routeToRoomPage(r.id)">
             <mat-card-header>
-                <mat-card-title>{{ r }}</mat-card-title>
+                <mat-card-title>{{ r.name }}</mat-card-title>
             </mat-card-header>
         </mat-card>
     </ng-container>

@@ -2,7 +2,7 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: column;
     margin: 0 20px 0 20px;
     overflow-y: scroll;
@@ -43,7 +43,7 @@ table {
 }
 
 .list-wrapper {
-    height: 100%;
+    max-height: 100%;
     overflow-y: scroll;
     padding: 0 20px 20px 20px;
 }
@@ -59,9 +59,17 @@ table {
 }
 
 .config-section {
-    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.layout-container {
+    height: 70%;
+}
+
+.control-panel-container {
+    height: 30%;
 }
 
 .ui-button {
@@ -96,7 +104,7 @@ table {
 .control-panel-assignment {
     display: flex;
     justify-content: space-between;
-    margin-top: 2vh;
+    margin-top: 1vh;
 }
 
 .spacing {
@@ -133,4 +141,16 @@ mat-grid-list {
 
 mat-basic-chip {
     cursor: pointer;
+}
+ 
+tr.detail-row {
+    height: 0;
+}
+
+tr.layout-row:not(.expanded-row):hover {
+    background: whitesmoke;
+}
+
+.expanded-panel {
+    overflow: hidden;
 }

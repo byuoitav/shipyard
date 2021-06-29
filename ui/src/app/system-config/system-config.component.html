@@ -5,6 +5,8 @@
         <app-port-config></app-port-config>
     </mat-tab>
     <mat-tab label="UI Configuration">
-        <app-ui-config></app-ui-config>
+        <ng-template matTabContent>
+            <app-ui-config></app-ui-config>
+        </ng-template>
     </mat-tab>
 </mat-tab-group>

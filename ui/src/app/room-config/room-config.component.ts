@@ -66,12 +66,8 @@ export class RoomConfigComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.room = this.route.snapshot.data.room;
     this.room = this.api.getRoom(this.roomID);
-
-    // this.proxy.getRoomDevices(this.roomID).subscribe((data: Device[]) => {
-    //   this.devices = data;
-    // });
+    
     this.updateDeviceTable();
     this.updateSystemTable();
 
