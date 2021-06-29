@@ -32,12 +32,12 @@
                     </ng-container>
                     
                     <tr mat-header-row *matHeaderRowDef="deviceColumns;"></tr>
-                    <tr mat-row *matRowDef="let dev; columns: deviceColumns;" class="table-row" (click)="addDevice(dev)"></tr>
+                    <tr mat-row *matRowDef="let dev; columns: deviceColumns;" class="table-row" (click)="addDevice(dev, false)"></tr>
                 </table>
             </div>
         
             <div class="button-container">
-                <button mat-stroked-button color="primary" (click)="addDevice(null)">Add Device</button>
+                <button mat-stroked-button color="primary" (click)="addDevice(null, false)">Add Device</button>
                 <button mat-stroked-button color="primary">Add Existing Device</button>
             </div>
         </div>

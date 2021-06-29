@@ -1,7 +1,6 @@
 <mat-dialog-content class="system-container">
-    <mat-tab-group>
+    <mat-tab-group [selectedIndex]="selectedTab">
         <mat-tab label="Device Details">
-            <!-- <h2>Input Device Details</h2> -->
             <mat-grid-list cols="2" rowHeight="70px">
                 <mat-grid-tile>
                     <mat-form-field>
@@ -18,7 +17,7 @@
                 <mat-grid-tile>
                     <mat-form-field>
                         <mat-label>Manufacturer</mat-label>
-                        <mat-select [(value)]="device.modelID">
+                        <mat-select>
                             <mat-option *ngFor="let m of manufacturerList" [value]="m">{{m}}</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -57,7 +56,9 @@
                 <mat-grid-tile>
                     <mat-form-field>
                         <mat-label>FundingType</mat-label>
-                        <input matInput [(ngModel)]="device.fundingType">
+                        <mat-select [(value)]="device.fundingType">
+                            <mat-option *ngFor="let f of fundingTypeList" [value]="f">{{f}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile colspan="2" rowspan="2">
@@ -66,16 +67,30 @@
                         <textarea matInput [(ngModel)]="device.notes" rows="3"></textarea>
                     </mat-form-field>
                 </mat-grid-tile>
-                <mat-grid-tile colspan="2">
-                    <div class="button-container">
-                        <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
-                        <button mat-raised-button color="primary" (click)="onSave()">Save</button>
-                    </div>
-                </mat-grid-tile>
             </mat-grid-list>
         </mat-tab>
         <mat-tab label="Connected Systems">
+            <div class="list-wrapper">
+                <table mat-table [dataSource]="systems">
 
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> System Name </th>
+                        <td mat-cell *matCellDef="let sys"> {{sys.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="designation">
+                        <th mat-header-cell *matHeaderCellDef> Designation </th>
+                        <td mat-cell *matCellDef="let sys"> {{sys.designation}} </td>
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="systemColumns;"></tr>
+                    <tr mat-row *matRowDef="let sys; columns: systemColumns;" class="table-row" (click)="navigateToSystem(sys.id)"></tr>
+                </table>
+            </div>
         </mat-tab>
     </mat-tab-group>
+    <div class="button-container">
+        <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+    </div>
 </mat-dialog-content>

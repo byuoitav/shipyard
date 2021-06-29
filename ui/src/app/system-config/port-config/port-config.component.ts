@@ -48,8 +48,11 @@ export class PortConfigComponent implements OnInit {
     this.deviceData.data = this.devices;
   }
 
-  addDevice(dev: Device | null) {
-    const deviceModal = this.dialog.open(DeviceModalComponent, {data: dev});
+  addDevice(dev: Device | null, tabOver: boolean) {
+    const deviceModal = this.dialog.open(DeviceModalComponent, { data: {
+      device: dev,
+      tab: tabOver
+    } });
 
     deviceModal.afterClosed().subscribe(resp => {
 

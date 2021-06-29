@@ -96,16 +96,16 @@
                         <td mat-cell *matCellDef="let dev">
                             <mat-chip-list *ngIf="dev.systemIDs.length > 0">
                                 <mat-basic-chip (click)="navigateToSystem(null, dev.systemIDs[0])">{{getSystemName(dev.systemIDs[0])}}</mat-basic-chip>
-                                <mat-basic-chip *ngIf="dev.systemIDs.length > 1">+{{dev.systemIDs.length - 1}} More</mat-basic-chip>
+                                <mat-basic-chip *ngIf="dev.systemIDs.length > 1" (click)="showDeviceSystems(dev)">+{{dev.systemIDs.length - 1}} More</mat-basic-chip>
                             </mat-chip-list>
                         </td>
                     </ng-container>
                     
                     <tr mat-header-row *matHeaderRowDef="deviceColumns;"></tr>
-                    <tr mat-row *matRowDef="let dev; columns: deviceColumns;" class="table-row" (click)="addDevice(dev)"></tr>
+                    <tr mat-row *matRowDef="let dev; columns: deviceColumns;" class="table-row" (click)="addDevice(dev, false)"></tr>
                 </table>
             </div>
-            <button mat-stroked-button color="primary" class="system-button" (click)="addDevice(null)">Add Device</button>
+            <button mat-stroked-button color="primary" class="system-button" (click)="addDevice(null, false)">Add Device</button>
         </div>
     </mat-grid-tile>
 

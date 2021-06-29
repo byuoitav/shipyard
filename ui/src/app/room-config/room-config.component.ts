@@ -100,8 +100,15 @@ export class RoomConfigComponent implements OnInit {
     this.router.navigate(["/system/" + sysID]);
   }
 
-  addDevice(dev: Device | null) {
-    const deviceModal = this.dialog.open(DeviceModalComponent, { data: dev });
+  showDeviceSystems(dev: Device) {
+    this.addDevice(dev, true);
+  }
+
+  addDevice(dev: Device | null, tabOver: boolean) {
+    const deviceModal = this.dialog.open(DeviceModalComponent, { data: {
+      device: dev,
+      tab: tabOver
+    } });
 
     deviceModal.afterClosed().subscribe(resp => {
 

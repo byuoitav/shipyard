@@ -1,6 +1,14 @@
 .system-container {
     min-width: 700px;
     min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+mat-tab-group {
+    height: 100%;
+    width: 100%;
 }
 
 mat-grid-list {
@@ -18,4 +26,18 @@ mat-form-field {
     justify-content: space-between;
     width: 100%;
     align-content: flex-end;
+}
+
+.list-wrapper {
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0 20px 20px 20px;
+}
+
+table {
+    width: 100%;
+}
+
+.table-row:hover {
+    background-color: whitesmoke;
 }
