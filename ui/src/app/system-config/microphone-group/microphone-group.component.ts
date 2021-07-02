@@ -10,7 +10,7 @@ import { Device } from 'src/app/services/device';
   styleUrls: ['./microphone-group.component.scss']
 })
 export class MicrophoneGroupComponent implements OnInit {
-  MicSelection = new SelectionModel<string>(true, []);
+  MicSelection = new SelectionModel<Device>(true, []);
   groupID: string = '';
 
   devices: Device[] = [];
@@ -21,12 +21,19 @@ export class MicrophoneGroupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: any,
     private api: ApiService) {
       this.devices = this.api.getDevices(0);
-      console.log(this.data);
       if (this.data) this.groupID = "Group " + this.data;
       else this.groupID = "Group 1";
   }
 
   ngOnInit(): void {
+  }
+
+  selectAllMicrophones() {
+    if (this.MicSelection.selected.length === this.filterDevicesByRegularExpression('-MIC.*').length) {
+      this.MicSelection.clear();
+    } else {
+      this.MicSelection.select(...this.filterDevicesByRegularExpression('-MIC.*'));
+    }
   }
 
   filterDevicesByRegularExpression(pattern: string): Device[] {

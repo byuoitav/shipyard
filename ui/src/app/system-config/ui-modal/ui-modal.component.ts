@@ -3,8 +3,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
 import { Device } from 'src/app/services/device';
-import { MasterVolume, UIControlGroup, UIDisplay } from 'src/app/services/ui-config';
+import { UIControlGroup, UIDisplay, UIInput, UIMicrophoneGroup } from 'src/app/services/ui-config';
 import { MicrophoneGroupComponent } from '../microphone-group/microphone-group.component';
+import { ConfirmConfigComponent } from './confirm-config.component';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-ui-modal',
@@ -15,16 +17,23 @@ export class UiModalComponent implements OnInit {
   devices: Device[] = [];
   deviceTableColumns: string[] = ["select", "id", "type"];
 
-  config: UIControlGroup = new UIControlGroup();
-  groupID: string = "";
+  controlGroup: UIControlGroup = new UIControlGroup();
 
 
   CPSelection = new SelectionModel<Device>(true, []);
+
+
   DisplaySelection = new SelectionModel<Device>(true, []);
+  isAllDisplay: boolean = false;
+  editDisplay: boolean = false;
+
   InputSelection = new SelectionModel<Device>(true, []);
+  isAllInput: boolean = false;
+  editInput: boolean = false;
+
   MasterVolSelection = new SelectionModel<Device>(false, []);
 
-  MicrophoneGroups = new Map<string, string[]>();
+  MicrophoneGroups: UIMicrophoneGroup[] = [];
 
   selected: Device[] = [];
 
@@ -34,8 +43,7 @@ export class UiModalComponent implements OnInit {
     private dialog: MatDialog) {
       this.devices = this.api.getDevices(0);
       if (this.data.ControlGroup) {
-        this.config = data.ControlGroup;
-        this.groupID = data.ID;
+        this.controlGroup = data.ControlGroup;
         this.initializeSelectors();
       }
       this.MasterVolSelection.select(this.devices[0]);
@@ -43,54 +51,106 @@ export class UiModalComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  drop(e: any, dataList: any[]) {
+    moveItemInArray(dataList, e.previousIndex, e.currentIndex);
+  }
+
   cancel() {
     this.uiModal.close(null);
   }
 
-  saveControlGroup() {
-    this.config.displays = new Map<string, UIDisplay>();
+  selectAllInputs() {
+    if (this.InputSelection.selected.length === this.devices.length && !this.isAllInput) {
+      this.InputSelection.clear();
+    } else if (this.isAllInput) {
+      this.InputSelection.select(...this.devices);
+    }
+  }
+
+  saveInputs() {
+    this.controlGroup.inputs = [];
+    this.InputSelection.selected.forEach(input => {
+      let uiInput = new UIInput();
+      uiInput.deviceID = input.id;
+      uiInput.controlGroupID = this.controlGroup.id;
+      this.controlGroup.inputs.push(uiInput);
+    });
+
+    this.editInput = false;
+  }
+
+  selectAllDisplays() {
+    if (this.DisplaySelection.selected.length === this.filterDevicesByRegularExpression("-D.*").length && !this.isAllDisplay) {
+      this.DisplaySelection.clear();
+    } else if (this.isAllDisplay) {
+      this.DisplaySelection.select(...this.filterDevicesByRegularExpression("-D.*"));
+    }
+  }
+
+  saveDisplays() {
+    this.controlGroup.displays = [];
     this.DisplaySelection.selected.forEach(display => {
-      this.config.displays.set(display.name, new UIDisplay());
+      let uiDisplay = new UIDisplay();
+      uiDisplay.deviceID = display.id;
+      uiDisplay.controlGroupID = this.controlGroup.id;
+      this.controlGroup.displays.push(uiDisplay);
+    });
+
+    this.editDisplay = false;
+  }
+
+  saveControlGroup() {
+    this.controlGroup.displays = [];
+    this.DisplaySelection.selected.forEach(display => {
+      let uiDisplay = new UIDisplay();
+      uiDisplay.deviceID = display.id;
+      uiDisplay.controlGroupID = this.controlGroup.id;
+      this.controlGroup.displays.push(uiDisplay);
     });
     
-    this.config.inputs = [];
+    this.controlGroup.inputs = [];
     this.InputSelection.selected.forEach(input => {
-      this.config.inputs.push(input.name);
+      let uiInput = new UIInput();
+      uiInput.deviceID = input.id;
+      uiInput.controlGroupID = this.controlGroup.id;
+      this.controlGroup.inputs.push(uiInput);
     });
 
-    this.config.microphones = this.MicrophoneGroups;
+    this.controlGroup.microphoneGroups = this.MicrophoneGroups;
 
-    this.config.masterVolume = new MasterVolume();
-    this.config.masterVolume.device = this.MasterVolSelection.selected[0].name;
+    this.controlGroup.masterVolumeDeviceID = this.MasterVolSelection.selected[0].id;
 
-    this.uiModal.close({
-      Config: this.config,
-      ID: this.groupID
-    });
+    this.uiModal.close(this.controlGroup);
   }
 
   confirmSave() {
-    // let ref = this.dialog.open(ConfirmConfigComponent, {data: this.groupID});
-    // ref.afterClosed().subscribe(data => {
-    //   if (data != null) {
-    //     this.groupID = data;
-    //     this.saveControlGroup();
-    //   }
-    // });
+    let ref = this.dialog.open(ConfirmConfigComponent, {data: this.controlGroup.name});
+    ref.afterClosed().subscribe(data => {
+      if (data != null) {
+        this.controlGroup.name = data;
+        this.saveControlGroup();
+      }
+    });
+  }
+
+  getDeviceFromID(id: number) {
+    var device = this.api.getDeviceByID(id);
+    return device.name;
   }
 
   initializeSelectors() {
-    this.filterDevicesByName([...this.config.displays.keys()]).forEach(dev => {
+    this.filterDevicesByID(this.controlGroup.displays).forEach(dev => {
       this.DisplaySelection.select(dev);
     });
-    this.filterDevicesByName(this.config.inputs).forEach(dev => {
+    this.filterDevicesByID(this.controlGroup.inputs).forEach(dev => {
       this.InputSelection.select(dev);
     });
 
-    this.MicrophoneGroups = this.config.microphones;
+    this.MicrophoneGroups = this.controlGroup.microphoneGroups;
 
-    if (this.config.masterVolume != null) {
-      this.filterDevicesByName([this.config.masterVolume.device]).forEach(dev => {
+    if (this.controlGroup.masterVolumeDeviceID != 0) {
+      this.filterDevicesByID([this.controlGroup.masterVolumeDeviceID]).forEach(dev => {
         this.MasterVolSelection.select(dev);
       });
     } else {
@@ -99,17 +159,23 @@ export class UiModalComponent implements OnInit {
   }
 
   addMicGroup() {
-    let ref = this.dialog.open(MicrophoneGroupComponent, {width: '50vw', data: this.MicrophoneGroups.size + 1});
+    let ref = this.dialog.open(MicrophoneGroupComponent, {width: '50vw', data: this.MicrophoneGroups.length + 1});
 
     ref.afterClosed().subscribe(group => {
       if (group != null) {
-        this.MicrophoneGroups.set(group.ID, group.Microphones);
+        let micGroup = new UIMicrophoneGroup();
+        micGroup.name = group.ID;
+        micGroup.microphones = group.Microphones;
+        micGroup.controlGroupID = this.controlGroup.id;
+        micGroup.id = this.MicrophoneGroups.length + 1; // Temporary, must change when connected to backend
+        
+        this.MicrophoneGroups.push(micGroup);
       }
     });
   }
 
-  deleteMicGroup(id: string) {
-    this.MicrophoneGroups.delete(id);
+  deleteMicGroup(id: number) {
+    // this.MicrophoneGroups.delete(id);
   }
 
   filterDevicesByName(names: string[]): Device[] {
@@ -117,6 +183,18 @@ export class UiModalComponent implements OnInit {
     this.devices.forEach(dev => {
       names.forEach(name => {
         if (name === dev.name) {
+          filteredDevs.push(dev);
+        }
+      });
+    });
+    return filteredDevs;
+  }
+
+  filterDevicesByID(groups: any[]): Device[] {
+    var filteredDevs: Device[] = [];
+    this.devices.forEach(dev => {
+      groups.forEach(id => {
+        if (id.deviceID === dev.id) {
           filteredDevs.push(dev);
         }
       });

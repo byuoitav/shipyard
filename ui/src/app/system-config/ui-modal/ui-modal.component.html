@@ -2,89 +2,135 @@
 
     <mat-tab label="Displays">
         <div class="tab-content">
-            <table mat-table [dataSource]="filterDevicesByRegularExpression('-D.*')" class="mat-elevation-z0">
 
-                <ng-container matColumnDef="select">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let dev">
-                        <mat-checkbox (click)="$event.stopPropagation()"
-                                    (change)="$event ? DisplaySelection.toggle(dev) : null"
-                                    [checked]="DisplaySelection.isSelected(dev)"
-                                    color="primary">
-                        </mat-checkbox>
-                    </td>
-                </ng-container>
+            <ng-container *ngIf="editDisplay; else displayList">
+                <div class="section-header">
+                    <div class="section-title">Displays</div>
+                    <button mat-stroked-button color="primary" (click)="saveDisplays()">Save</button>
+                </div>
+                
+                <table mat-table [dataSource]="filterDevicesByRegularExpression('-D.*')" class="mat-elevation-z0">
 
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let dev"> {{dev.name}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="type">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let dev"> {{dev.modelID}} </td>
-                </ng-container>
-            
-                <tr mat-row *matRowDef="let device; columns: deviceTableColumns;" class="device-row" (click)="DisplaySelection.toggle(device)"></tr>
-            </table>
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? selectAllDisplays() : null" color="primary" [(ngModel)]="isAllDisplay"></mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let dev">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                        (change)="$event ? DisplaySelection.toggle(dev) : null"
+                                        [checked]="DisplaySelection.isSelected(dev)"
+                                        color="primary">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>Display Name</th>
+                        <td mat-cell *matCellDef="let dev"> {{dev.name}} </td>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef>Model</th>
+                        <td mat-cell *matCellDef="let dev"> {{dev.modelID}} </td>
+                    </ng-container>
+                
+                    <tr mat-header-row *matHeaderRowDef="deviceTableColumns;"></tr>
+                    <tr mat-row *matRowDef="let device; columns: deviceTableColumns;" class="device-row" (click)="DisplaySelection.toggle(device)"></tr>
+                </table>
+
+            </ng-container>
+
+            <ng-template #displayList>
+                <div class="section-header">
+                    <p class="section-title">Displays</p>
+                    <button mat-stroked-button color="primary" (click)="editDisplay = true;">Edit List</button>
+                </div>
+
+                <mat-list class="drag-list" cdkDropList (cdkDropListDropped)="drop($event, controlGroup.displays)">
+                    <mat-list-item class="drag-item" *ngFor="let disp of controlGroup.displays" cdkDrag><div class="list-content"><mat-icon>reorder</mat-icon><div>{{getDeviceFromID(disp.deviceID)}}</div></div></mat-list-item>
+                </mat-list>
+                
+            </ng-template>
         </div>
     </mat-tab>
 
     <mat-tab label="Inputs">
         <div class="tab-content">
-            <table mat-table [dataSource]="devices" class="mat-elevation-z0">
 
-                <ng-container matColumnDef="select">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let dev">
-                        <mat-checkbox (click)="$event.stopPropagation()"
-                                    (change)="$event ? InputSelection.toggle(dev) : null"
-                                    [checked]="InputSelection.isSelected(dev)"
-                                    color="primary">
-                        </mat-checkbox>
-                    </td>
-                </ng-container>
+            <ng-container *ngIf="editInput; else inputList">
+                <div class="section-header">
+                    <div class="section-title">Inputs</div>
+                    <button mat-stroked-button color="primary" (click)="saveInputs()">Save</button>
+                </div>
 
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let dev"> {{dev.name}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="type">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let dev"> {{dev.modelID}} </td>
-                </ng-container>
-            
-                <tr mat-row *matRowDef="let device; columns: deviceTableColumns;" class="device-row" (click)="InputSelection.toggle(device)"></tr>
-            </table>
+                <table mat-table [dataSource]="devices" class="mat-elevation-z0">
+
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? selectAllInputs() : null" color="primary" [(ngModel)]="isAllInput"></mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let dev">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                        (change)="$event ? InputSelection.toggle(dev) : null"
+                                        [checked]="InputSelection.isSelected(dev)"
+                                        color="primary">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>Input Name</th>
+                        <td mat-cell *matCellDef="let dev"> {{dev.name}} </td>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef>Model</th>
+                        <td mat-cell *matCellDef="let dev"> {{dev.modelID}} </td>
+                    </ng-container>
+                
+                    <tr mat-header-row *matHeaderRowDef="deviceTableColumns;"></tr>
+                    <tr mat-row *matRowDef="let device; columns: deviceTableColumns;" class="device-row" (click)="InputSelection.toggle(device)"></tr>
+                </table>
+            </ng-container>
+
+            <ng-template #inputList>
+                <div class="section-header">
+                    <p class="section-title">Inputs</p>
+                    <button mat-stroked-button color="primary" (click)="editInput = true;">Edit List</button>
+                </div>
+
+                <mat-list class="drag-list" cdkDropList (cdkDropListDropped)="drop($event, controlGroup.inputs)">
+                    <mat-list-item class="drag-item" *ngFor="let inpt of controlGroup.inputs" cdkDrag><div class="list-content"><mat-icon>reorder</mat-icon><div>{{getDeviceFromID(inpt.deviceID)}}</div></div></mat-list-item>
+                </mat-list>
+            </ng-template>
         </div>
     </mat-tab>
 
     <mat-tab label="Microphones">
         <div class="tab-content">
-            <div class="mic-group-header">
-                <div class="mic-group-header-title">Microphone Groups</div>
-                <button mat-raised-button color="primary" (click)="addMicGroup()">
-                    <mat-icon>add</mat-icon>
+            <div class="section-header">
+                <div class="section-title">Microphone Groups</div>
+                <button mat-stroked-button color="primary" (click)="addMicGroup()">
+                    <!-- <mat-icon>add</mat-icon> -->
                     Add Group
                 </button>
             </div>
             <div class="mic-group-wrapper">
-                <mat-card *ngFor="let micGroup of MicrophoneGroups | keyvalue" class="mic-group">
+                <mat-card *ngFor="let micGroup of MicrophoneGroups" class="mic-group">
                     <mat-card-header class="mic-group-header">
-                        <mat-card-title class="mic-group-title">{{ micGroup.key }}</mat-card-title>
+                        <mat-card-title class="mic-group-title">{{ micGroup.name }}</mat-card-title>
                         <button mat-icon-button [matMenuTriggerFor]="micGroupMenu">
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #micGroupMenu>
                             <ng-template matMenuContent>
-                                <button mat-menu-item (click)="deleteMicGroup(micGroup.key)">Delete</button>
+                                <button mat-menu-item (click)="deleteMicGroup(micGroup.id)">Delete</button>
                             </ng-template>
                         </mat-menu>
                     </mat-card-header>
                     <mat-card-content>
                         <mat-list>
-                            <mat-list-item *ngFor="let mic of micGroup.value">{{ mic }}</mat-list-item>
+                            <mat-list-item *ngFor="let mic of micGroup.microphones">{{ getDeviceFromID(mic.deviceID) }}</mat-list-item>
                         </mat-list>
                     </mat-card-content>
                 </mat-card>
@@ -94,6 +140,10 @@
 
     <mat-tab label="Master Volume">
         <div class="tab-content">
+            <div class="section-header">
+                <div class="section-title">Master Volume</div>
+            </div>
+
             <table mat-table [dataSource]="devices" class="mat-elevation-z0">
 
                 <ng-container matColumnDef="select">

@@ -1,4 +1,4 @@
-<mat-grid-list cols="2" rowHeight="fit">
+<mat-grid-list cols="2" rowHeight="fit" class="main-grid">
     <mat-grid-tile>
         <div class="column-section">
             <h1>Devices</h1>
@@ -49,7 +49,7 @@
                 <h1>UI Configuration</h1>
                 <p style="text-align: center;">Create UI layouts and assign them to the control panels in the system</p>
                 <div class="list-wrapper">
-                    <table mat-table [dataSource]="roomConf.controlGroups" multiTemplateDataRows>
+                    <table mat-table [dataSource]="controlGroupsTableData" multiTemplateDataRows>
                         <ng-container matColumnDef="layouts">
                             <th mat-header-cell *matHeaderCellDef>Layout</th>
                             <td mat-cell *matCellDef="let group">{{group.name }}</td>
@@ -58,77 +58,68 @@
                         <ng-container matColumnDef="expandedLayout">
                             <td mat-cell *matCellDef="let group" [attr.colspan]="layoutColumns.length">
                                 <div class="expanded-panel"  [@rowExpand]="group == expandedLayout ? 'expanded' : 'collapsed'">
-                                    <div class="cg-panel">
-                                        <mat-card class="cg-card">
-                                            <mat-card-header>
-                                                <mat-card-title>Displays</mat-card-title>
-                                            </mat-card-header>
-                                            <mat-card-content>
-                                                <mat-list>
-                                                    <mat-list-item *ngFor="let display of group.displays | keyvalue">{{ display.key }}</mat-list-item>
-                                                </mat-list>
-                                            </mat-card-content>
-                                        </mat-card>
-                                        <mat-card class="cg-card">
-                                            <mat-card-header>
-                                                <mat-card-title>Inputs</mat-card-title>
-                                            </mat-card-header>
-                                            <mat-card-content>
-                                                <mat-list>
-                                                    <mat-list-item *ngFor="let input of group.inputs">{{ input }}</mat-list-item>
-                                                </mat-list>
-                                            </mat-card-content>
-                                        </mat-card>
-                                        <mat-card class="cg-card">
-                                            <mat-card-header>
-                                                <mat-card-title>Master Volume</mat-card-title>
-                                            </mat-card-header>
-                                            <mat-card-content>
-                                                <mat-list>
-                                                    <mat-list-item>{{ group.masterVolume.device }}</mat-list-item>
-                                                </mat-list>
-                                            </mat-card-content>
-                                        </mat-card>
-                                        <!-- <mat-card class="cg-card">
-                                            <mat-card-header>
-                                                <mat-card-title>Microphones</mat-card-title>
-                                            </mat-card-header>
-                                            <mat-card-content>
-                                                <mat-expansion-panel *ngFor="let micGroup of group.value.microphones | keyvalue">
-                                                    <mat-expansion-panel-header>{{ micGroup.key }}</mat-expansion-panel-header>
-                                                    <section>
-                                                        <mat-list>
-                                                            <mat-list-item *ngFor="let mic of micGroup.value">{{ mic }}</mat-list-item>
-                                                        </mat-list>
-                                                    </section>
-                                                </mat-expansion-panel>
-                                            </mat-card-content>
-                                        </mat-card> -->
-                                        <mat-card class="cg-card" *ngIf="checkForCameras()">
-                                            <mat-card-header>
-                                                <mat-card-title>Cameras</mat-card-title>
-                                            </mat-card-header>
-                                            <mat-card-content>
-                                            </mat-card-content>
-                                        </mat-card>
-                                    </div>
-                                    <button mat-raised-button class="cg-button" color="primary" (click)="addGroup(group, group.id)">Edit</button>
+
+
+                                    <mat-grid-list cols=2 rowHeight="1:1">
+                                        <mat-grid-tile class="layout-section">
+                                            <div class="layout-section-test">
+                                                <h3>Inputs</h3>
+                                                <div class="layout-item-list">
+                                                    <div *ngFor="let i of group.inputs"> {{getDeviceFromID(i.deviceID)}} </div>
+                                                </div>
+                                            </div>
+                                        </mat-grid-tile>
+                                        <mat-grid-tile class="layout-section">
+                                            <div class="layout-section-test">
+                                                <h3>Displays</h3>
+                                                <div class="layout-item-list">
+                                                    <div *ngFor="let d of group.displays">{{ getDeviceFromID(d.deviceID) }}</div>
+                                                </div>
+                                            </div>
+                                        </mat-grid-tile>
+                                        <mat-grid-tile class="layout-section">
+                                            <div class="layout-section-test">
+                                                <h3>Master Volume</h3>
+                                                <div class="layout-item-list">
+                                                    <div>{{ getDeviceFromID(group.masterVolumeDeviceID) }}</div>
+                                                </div>
+                                            </div>
+                                        </mat-grid-tile>
+                                        <mat-grid-tile class="layout-section">
+                                            <div class="layout-section-test">
+                                                <h3>Microphones</h3>
+                                                <div class="layout-item-list">
+                                                    <mat-expansion-panel *ngFor="let micGroup of group.micrphoneGroups">
+                                                        <mat-expansion-panel-header>{{ micGroup.name }}</mat-expansion-panel-header>
+                                                        <section>
+                                                            <mat-list>
+                                                                <mat-list-item *ngFor="let mic in micGroup.microphones">{{ getDeviceFromID(mic.deviceID) }}</mat-list-item>
+                                                            </mat-list>
+                                                        </section>
+                                                    </mat-expansion-panel>
+                                                </div>
+                                            </div>
+                                        </mat-grid-tile>
+                                    </mat-grid-list>
+
+                                    <button mat-raised-button class="cg-button" color="primary" (click)="addGroup(group)">Edit</button>
                                     <button mat-raised-button class="cg-button" color="warn" >Delete</button>
                                 </div>
                             </td>
                         </ng-container>
 
+                        <!-- (click)="selectLayout(layout)" -->
                         <tr mat-row *matRowDef="let layout; columns: layoutColumns;"
                             class="layout-row"
                             [class.expanded-row]="expandedLayout === layout"
-                            (click)="selectLayout(layout)">
+                            (click)="addGroup(layout)">
                         </tr>
                         <tr mat-row *matRowDef="let row; columns: ['expandedLayout']" class="detail-row"></tr>
                     </table>
                 </div>
 
                 <div class="button-container ui-button">
-                    <button mat-stroked-button color="primary" (click)="addGroup(null, '')">Add Layout</button>
+                    <button mat-stroked-button color="primary" (click)="addGroup(null)">Add Layout</button>
                 </div>
             </div>
             <div class="config-section control-panel-container">
@@ -140,7 +131,7 @@
                             <mat-form-field>
                                 <mat-label>UI Layout</mat-label>
                                 <mat-select>
-                                    <mat-option *ngFor="let group of roomConf.controlGroups" [value]="group.id" (onSelectionChange)="mapControlPanel($event, panel.name, group.name)">
+                                    <mat-option *ngFor="let group of controlGroups" [value]="group.id" (onSelectionChange)="mapControlPanel($event, panel, group)">
                                         {{ group.name }}
                                     </mat-option>
                                 </mat-select>
@@ -153,3 +144,61 @@
         </div>
     </mat-grid-tile>
 </mat-grid-list>
+
+
+<!--
+<div class="cg-panel">
+    <mat-card class="cg-card">
+        <mat-card-header>
+            <mat-card-title>Displays</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item *ngFor="let display of group.displays | keyvalue">{{ display.key }}</mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="cg-card">
+        <mat-card-header>
+            <mat-card-title>Inputs</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item *ngFor="let input of group.inputs">{{ input }}</mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="cg-card">
+        <mat-card-header>
+            <mat-card-title>Master Volume</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item>{{ group.masterVolume.device }}</mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="cg-card">
+        <mat-card-header>
+            <mat-card-title>Microphones</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-expansion-panel *ngFor="let micGroup of group.value.microphones | keyvalue">
+                <mat-expansion-panel-header>{{ micGroup.key }}</mat-expansion-panel-header>
+                <section>
+                    <mat-list>
+                        <mat-list-item *ngFor="let mic of micGroup.value">{{ mic }}</mat-list-item>
+                    </mat-list>
+                </section>
+            </mat-expansion-panel>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="cg-card" *ngIf="checkForCameras()">
+        <mat-card-header>
+            <mat-card-title>Cameras</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+    </mat-card>
+</div>
+-->

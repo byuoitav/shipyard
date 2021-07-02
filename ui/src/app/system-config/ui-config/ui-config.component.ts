@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { DeviceModalComponent } from 'src/app/device-modal/device-modal.component';
 import { ApiService } from 'src/app/services/api.service';
 import { Device } from 'src/app/services/device';
-import { SystemUIConfig, UIControlGroup } from 'src/app/services/ui-config';
+import { SystemUIConfig, UIControlGroup, UIControlPanel } from 'src/app/services/ui-config';
 import { UiModalComponent } from '../ui-modal/ui-modal.component';
 
 @Component({
@@ -16,14 +16,15 @@ import { UiModalComponent } from '../ui-modal/ui-modal.component';
   animations: [
     trigger('rowExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('expanded', style({height: '*', padding: '10px'})),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 export class UiConfigComponent implements OnInit {
-  roomConf: SystemUIConfig = new SystemUIConfig();
+  controlGroups: UIControlGroup[] = [];
 
+  controlGroupsTableData: MatTableDataSource<UIControlGroup> = new MatTableDataSource();
   deviceData: MatTableDataSource<Device> = new MatTableDataSource();
   devices: Device[] = [];
   deviceColumns: string[] = [
@@ -42,7 +43,8 @@ export class UiConfigComponent implements OnInit {
   constructor(private api: ApiService,
     private dialog: MatDialog,
     private router: Router) {
-    this.roomConf = this.api.getRoomConfig();
+    this.controlGroups = this.api.getControlGroups(0);
+    this.controlGroupsTableData.data = this.controlGroups;
 
     this.updateDeviceTable();
   }
@@ -74,6 +76,11 @@ export class UiConfigComponent implements OnInit {
     return room.name;
   }
 
+  getDeviceFromID(id: number) {
+    var device = this.api.getDeviceByID(id);
+    return device.name;
+  }
+
   getModelNameFromID(id: number) {
     var model = this.api.getModelByID(id);
     return model.name;
@@ -100,17 +107,36 @@ export class UiConfigComponent implements OnInit {
     return filteredDevs;
   }
 
-  mapControlPanel(event: any, panel: string, group: string) {
+  mapControlPanel(event: any, panel: Device, group: UIControlGroup) {
     if (event.source.selected) {
-      this.roomConf.controlPanels.set(panel, group);
+      // Todo: check if the control panel is already connected somewhere else, or if it is already in the list
+
+      let controlPanel = new UIControlPanel();
+      controlPanel.deviceID = panel.id;
+      controlPanel.controlGroupID = group.id;
+      controlPanel.UIType = "Fruit";
+
+      group.controlPanels.push(controlPanel);
     }
   }
 
-  addGroup(group: UIControlGroup | null, id: string) {
-    const uiModal = this.dialog.open(UiModalComponent, {data: {ControlGroup: group, ID: id}, width: "800px"});
+  addGroup(group: UIControlGroup | null) {
+    const uiModal = this.dialog.open(UiModalComponent, {data: {ControlGroup: group}, width: "800px"});
 
     uiModal.afterClosed().subscribe(resp => {
+      if (resp) {
 
+        // check if control group already exists
+        for (var i = 0; i < this.controlGroups.length; i++) {
+          if (this.controlGroups[i].id === resp.id){
+            this.controlGroups[i] = resp;
+            return;
+          }
+        }
+
+        this.controlGroups.push(resp);
+        this.controlGroupsTableData.data = this.controlGroups;
+      }
     });
   }
 

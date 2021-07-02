@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 // Material Components
 import { MatButtonModule } from '@angular/material/button';
@@ -62,6 +64,8 @@ import { ConfirmPortDialog } from './system-config/port-modal/confirm-dialog';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
 import { UiModalComponent } from './system-config/ui-modal/ui-modal.component';
 import { MicrophoneGroupComponent } from './system-config/microphone-group/microphone-group.component';
+import { ConfirmConfigComponent } from './system-config/ui-modal/confirm-config.component';
+import { UiConfirmModalComponent } from './system-config/ui-confirm-modal/ui-confirm-modal.component';
 
 
 
@@ -98,6 +102,8 @@ import { MicrophoneGroupComponent } from './system-config/microphone-group/micro
     DeviceModalComponent,
     UiModalComponent,
     MicrophoneGroupComponent,
+    ConfirmConfigComponent,
+    UiConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -105,6 +111,7 @@ import { MicrophoneGroupComponent } from './system-config/microphone-group/micro
     BrowserAnimationsModule,
     FormsModule,
     NgbModule,
+    DragDropModule,
 
     MatButtonModule,
     MatToolbarModule,

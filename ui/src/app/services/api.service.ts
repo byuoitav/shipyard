@@ -3,7 +3,7 @@ import { Device } from './device';
 // import { RoomConfig } from '../components/room-page/ui-config/ui-config';
 import { Room } from './room';
 import { System } from './system';
-import { SystemUIConfig } from './ui-config';
+import { SystemUIConfig, UIControlGroup } from './ui-config';
 
 @Injectable({
   providedIn: 'root'
@@ -180,14 +180,14 @@ export class ApiService {
           id: 'Port1',
           name: 'Port1',
           endpoints: [],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
           id: 'Port2',
           name: 'Port2',
           endpoints: [],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
@@ -199,49 +199,49 @@ export class ApiService {
               port: 'Port6'
             }
           ],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
           id: 'Port4',
           name: 'Port4',
           endpoints: [],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
           id: 'Port5',
           name: 'Port5',
           endpoints: [],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
           id: 'Port6',
           name: 'Port6',
           endpoints: [],
-          direction: 'Out',
+          direction: 'Output',
           type: ''
         },
         {
           id: 'Port7',
           name: 'Port7',
           endpoints: [],
-          direction: 'Out',
+          direction: 'Output',
           type: ''
         },
         {
           id: 'Port8',
           name: 'Port8',
           endpoints: [],
-          direction: 'Out',
+          direction: 'Output',
           type: ''
         },
         {
           id: 'Port9',
           name: 'Port9',
           endpoints: [],
-          direction: 'Out',
+          direction: 'Output',
           type: ''
         }
       ],
@@ -268,35 +268,35 @@ export class ApiService {
           id: 'Port1',
           name: 'Port1',
           endpoints: [],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
           id: 'Port2',
           name: 'Port2',
           endpoints: [],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
           id: 'Port3',
           name: 'Port3',
           endpoints: [],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
           id: 'Port4',
           name: 'Port4',
           endpoints: [],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
           id: 'Port5',
           name: 'Port5',
           endpoints: [],
-          direction: 'In',
+          direction: 'Input',
           type: ''
         },
         {
@@ -308,28 +308,28 @@ export class ApiService {
               port: 'Port3'
             }
           ],
-          direction: 'Out',
+          direction: 'Output',
           type: ''
         },
         {
           id: 'Port7',
           name: 'Port7',
           endpoints: [],
-          direction: 'Out',
+          direction: 'Output',
           type: ''
         },
         {
           id: 'Port8',
           name: 'Port8',
           endpoints: [],
-          direction: 'Out',
+          direction: 'Output',
           type: ''
         },
         {
           id: 'Port9',
           name: 'Port9',
           endpoints: [],
-          direction: 'Out',
+          direction: 'Output',
           type: ''
         }
       ],
@@ -604,6 +604,19 @@ export class ApiService {
     }
   ];
 
+  testControlGroups: UIControlGroup[] = [
+    {
+      id: 1,
+      name: 'Default',
+      controlPanels: [],
+      displays: [],
+      inputs: [],
+      microphoneGroups: [],
+      masterVolumeDeviceID: 2,
+      masterVolumeDeviceBlock: ''
+    }
+  ];
+
   constructor() { }
 
   getSystems(roomId: number): System[] {
@@ -662,9 +675,18 @@ export class ApiService {
     return this.testDevices;
   }
 
+  getDeviceByID(id: number): Device {
+    for (var i = 0; i < this.testDevices.length; i++) {
+      if (id === this.testDevices[i].id) {
+        return this.testDevices[i];
+      }
+    }
+    return this.testDevices[0];
+  }
+
   getModelByID(id: number) {
     for (var i = 0; i < this.testModelList.length; i++) {
-      if (id == this.testModelList[i].id) {
+      if (id === this.testModelList[i].id) {
         return this.testModelList[i];
       }
     }
@@ -746,45 +768,7 @@ export class ApiService {
   //   ]
   // }
 
-  getRoomConfig(): SystemUIConfig {
-    return {
-      id: "Test",
-      controlPanels: new Map(),
-      controlGroups: [
-        {
-          id: 1,
-          name: "Layout 1",
-          displays: new Map(),
-          inputs: [],
-          microphones: new Map(),
-          masterVolume: {
-            device: "Test",
-            block: ""
-          }
-        },
-        {
-          id: 2,
-          name: "Layout 2",
-          displays: new Map(),
-          inputs: [],
-          microphones: new Map(),
-          masterVolume: {
-            device: "Test",
-            block: ""
-          }
-        },
-        {
-          id: 3,
-          name: "Layout 3",
-          displays: new Map(),
-          inputs: [],
-          microphones: new Map(),
-          masterVolume: {
-            device: "Test",
-            block: ""
-          }
-        }
-      ]
-    }
+  getControlGroups(systemID: number): UIControlGroup[] {
+    return this.testControlGroups;
   }
 }
