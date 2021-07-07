@@ -55,6 +55,7 @@ import { RoomListComponent } from './room-list/room-list.component';
 import { RoomConfigComponent } from './room-config/room-config.component';
 import { ImageModalComponent } from './room-config/image-modal/image-modal.component';
 import { DeleteModal } from './room-config/delete-modal';
+import { ImageDisplayModal } from './room-config/image-display-modal';
 import { SystemModalComponent } from './room-config/system-modal/system-modal.component';
 import { SystemConfigComponent } from './system-config/system-config.component';
 import { PortConfigComponent } from './system-config/port-config/port-config.component';
@@ -65,7 +66,6 @@ import { DeviceModalComponent } from './device-modal/device-modal.component';
 import { UiModalComponent } from './system-config/ui-modal/ui-modal.component';
 import { MicrophoneGroupComponent } from './system-config/microphone-group/microphone-group.component';
 import { ConfirmConfigComponent } from './system-config/ui-modal/confirm-config.component';
-import { UiConfirmModalComponent } from './system-config/ui-confirm-modal/ui-confirm-modal.component';
 
 
 
@@ -93,6 +93,7 @@ import { UiConfirmModalComponent } from './system-config/ui-confirm-modal/ui-con
     RoomConfigComponent,
     ImageModalComponent,
     DeleteModal,
+    ImageDisplayModal,
     SystemModalComponent,
     SystemConfigComponent,
     PortConfigComponent,
@@ -102,8 +103,7 @@ import { UiConfirmModalComponent } from './system-config/ui-confirm-modal/ui-con
     DeviceModalComponent,
     UiModalComponent,
     MicrophoneGroupComponent,
-    ConfirmConfigComponent,
-    UiConfirmModalComponent
+    ConfirmConfigComponent
   ],
   imports: [
     BrowserModule,

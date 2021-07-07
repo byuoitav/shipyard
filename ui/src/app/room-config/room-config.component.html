@@ -7,7 +7,7 @@
                 <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
                     <ng-template ngbSlide *ngFor="let img of images; index as i">
                         <div class="picsum-img-wrapper">
-                            <img class="room-img" [src]="img" alt="Image {{i + 1}}" (click)="deleteImage(i)">
+                            <img class="room-img" [src]="img" alt="Image {{i + 1}}" (click)="openImage(i)">
                         </div>
                     </ng-template>
                 </ngb-carousel>
@@ -15,8 +15,8 @@
             <div class="button-wrapper">
                 <button mat-icon-button color="primary" class="img-add-button" [matMenuTriggerFor]="addImageMenu"><mat-icon class="add-icon">add</mat-icon></button>
                 <mat-menu #addImageMenu="matMenu">
-                    <button mat-menu-item (click)="addImage()">From URL</button>
-                    <button mat-menu-item (click)="addImage()">File Upload</button>
+                    <button mat-menu-item (click)="addImage(false)">From URL</button>
+                    <button mat-menu-item (click)="addImage(true)">File Upload</button>
                 </mat-menu>
             </div>
         </div>

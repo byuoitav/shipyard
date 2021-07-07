@@ -11,6 +11,7 @@ import { System } from '../services/system';
 import { SystemModalComponent } from './system-modal/system-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { DeviceModalComponent } from '../device-modal/device-modal.component';
+import { ImageDisplayModal } from './image-display-modal';
 
 @Component({
   selector: 'app-room-config',
@@ -77,15 +78,15 @@ export class RoomConfigComponent implements OnInit {
     this.fundingTypes = this.getFundingTypes();
   }
 
-  addImage() {
-    const imageDialog = this.dialog.open(ImageModalComponent);
+  addImage(upload: boolean) {
+    const imageDialog = this.dialog.open(ImageModalComponent, {data: upload});
   }
 
-  deleteImage(index: number) {
-    const deleteModal = this.dialog.open(DeleteModal);
-    deleteModal.afterClosed().subscribe(confirm => {
-      if (confirm) {
-        // delete the image from memory
+  openImage(index: number) {
+    const imageModal = this.dialog.open(ImageDisplayModal, {data: this.images[index]});
+    imageModal.afterClosed().subscribe(toDelete => {
+      if (toDelete) {
+        // delete the image
         this.images.splice(index, 1);
       }
     });

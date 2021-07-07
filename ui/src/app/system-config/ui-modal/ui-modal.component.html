@@ -6,7 +6,7 @@
             <ng-container *ngIf="editDisplay; else displayList">
                 <div class="section-header">
                     <div class="section-title">Displays</div>
-                    <button mat-stroked-button color="primary" (click)="saveDisplays()">Save</button>
+                    <button mat-stroked-button color="primary" (click)="saveDisplays()">Save Selection</button>
                 </div>
                 
                 <table mat-table [dataSource]="filterDevicesByRegularExpression('-D.*')" class="mat-elevation-z0">
@@ -43,13 +43,14 @@
             <ng-template #displayList>
                 <div class="section-header">
                     <p class="section-title">Displays</p>
-                    <button mat-stroked-button color="primary" (click)="editDisplay = true;">Edit List</button>
+                    <button mat-stroked-button color="primary" (click)="editDisplay = true;"><ng-container *ngIf="this.controlGroup.displays.length == 0; else chooseDisplay">Add </ng-container><ng-template #chooseDisplay>Choose </ng-template>Displays</button>
                 </div>
 
-                <mat-list class="drag-list" cdkDropList (cdkDropListDropped)="drop($event, controlGroup.displays)">
+                <mat-list *ngIf="this.controlGroup.displays.length > 0; else noDisplayMessage" class="drag-list" cdkDropList (cdkDropListDropped)="drop($event, controlGroup.displays)">
                     <mat-list-item class="drag-item" *ngFor="let disp of controlGroup.displays" cdkDrag><div class="list-content"><mat-icon>reorder</mat-icon><div>{{getDeviceFromID(disp.deviceID)}}</div></div></mat-list-item>
                 </mat-list>
                 
+                <ng-template #noDisplayMessage>Please select some displays to add to the control group.</ng-template>
             </ng-template>
         </div>
     </mat-tab>
@@ -60,7 +61,7 @@
             <ng-container *ngIf="editInput; else inputList">
                 <div class="section-header">
                     <div class="section-title">Inputs</div>
-                    <button mat-stroked-button color="primary" (click)="saveInputs()">Save</button>
+                    <button mat-stroked-button color="primary" (click)="saveInputs()">Save Selection</button>
                 </div>
 
                 <table mat-table [dataSource]="devices" class="mat-elevation-z0">
@@ -96,12 +97,14 @@
             <ng-template #inputList>
                 <div class="section-header">
                     <p class="section-title">Inputs</p>
-                    <button mat-stroked-button color="primary" (click)="editInput = true;">Edit List</button>
+                    <button mat-stroked-button color="primary" (click)="editInput = true;"><ng-container *ngIf="this.controlGroup.inputs.length == 0; else chooseInput">Add </ng-container><ng-template #chooseInput>Choose </ng-template>Inputs</button>
                 </div>
 
-                <mat-list class="drag-list" cdkDropList (cdkDropListDropped)="drop($event, controlGroup.inputs)">
+                <mat-list *ngIf="this.controlGroup.inputs.length > 0; else noInputMessage" class="drag-list" cdkDropList (cdkDropListDropped)="drop($event, controlGroup.inputs)">
                     <mat-list-item class="drag-item" *ngFor="let inpt of controlGroup.inputs" cdkDrag><div class="list-content"><mat-icon>reorder</mat-icon><div>{{getDeviceFromID(inpt.deviceID)}}</div></div></mat-list-item>
                 </mat-list>
+
+                <ng-template #noInputMessage>Please select some inputs to add to the control group.</ng-template>
             </ng-template>
         </div>
     </mat-tab>

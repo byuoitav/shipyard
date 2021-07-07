@@ -24,6 +24,10 @@ body {
   background-color: white;
 }
 
+* { // universal scrollbar change for firefox support, just for you Brayden
+  scrollbar-color: lightgray white;
+}
+
 app-root {
   display: flex;
   flex-flow: column;
