@@ -44,6 +44,8 @@ export class UiModalComponent implements OnInit {
       this.devices = this.api.getDevices(0);
       if (this.data.ControlGroup) {
         this.controlGroup = data.ControlGroup;
+        this.controlGroup.displays = this.sortListBySortID(this.controlGroup.displays);
+        this.controlGroup.inputs = this.sortListBySortID(this.controlGroup.inputs);
         this.initializeSelectors();
       }
       this.MasterVolSelection.select(this.devices[0]);
@@ -54,6 +56,31 @@ export class UiModalComponent implements OnInit {
 
   drop(e: any, dataList: any[]) {
     moveItemInArray(dataList, e.previousIndex, e.currentIndex);
+    this.updateSortIDs(dataList);
+  }
+
+  updateSortIDs(list: any[]) {
+    let sort = 0;
+    list.forEach(item => {
+      item.sortID = sort++;
+    });
+  }
+
+  sortListBySortID(list: any[]) {
+    let sorted = [];
+
+    let currentID = 0;
+    while(currentID < list.length) {
+      for(let i = 0; i < list.length; i++) {
+        if (currentID === list[i].sortID) {
+          sorted.push(list[i]);
+          break;
+        }
+      }
+      currentID++;
+    }
+
+    return sorted;
   }
 
   cancel() {
@@ -76,6 +103,7 @@ export class UiModalComponent implements OnInit {
       uiInput.controlGroupID = this.controlGroup.id;
       this.controlGroup.inputs.push(uiInput);
     });
+    this.updateSortIDs(this.controlGroup.inputs);
 
     this.editInput = false;
   }
@@ -96,27 +124,12 @@ export class UiModalComponent implements OnInit {
       uiDisplay.controlGroupID = this.controlGroup.id;
       this.controlGroup.displays.push(uiDisplay);
     });
+    this.updateSortIDs(this.controlGroup.displays);
 
     this.editDisplay = false;
   }
 
   saveControlGroup() {
-    this.controlGroup.displays = [];
-    this.DisplaySelection.selected.forEach(display => {
-      let uiDisplay = new UIDisplay();
-      uiDisplay.deviceID = display.id;
-      uiDisplay.controlGroupID = this.controlGroup.id;
-      this.controlGroup.displays.push(uiDisplay);
-    });
-    
-    this.controlGroup.inputs = [];
-    this.InputSelection.selected.forEach(input => {
-      let uiInput = new UIInput();
-      uiInput.deviceID = input.id;
-      uiInput.controlGroupID = this.controlGroup.id;
-      this.controlGroup.inputs.push(uiInput);
-    });
-
     this.controlGroup.microphoneGroups = this.MicrophoneGroups;
 
     this.controlGroup.masterVolumeDeviceID = this.MasterVolSelection.selected[0].id;

@@ -45,9 +45,10 @@ table {
 
 .button-container {
     display: flex;
+    justify-content: flex-end;
     margin-top: 40px;
 }
 
 button {
-    margin-right: 1vw;
+    margin-left: 20px;
 }

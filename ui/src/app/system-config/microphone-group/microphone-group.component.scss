@@ -23,10 +23,11 @@ table, th, td {
 
 .button-container {
     display: flex;
+    justify-content: flex-end;
     margin-top: 2.5%;
     margin-left: 2.5%;
 }
 
 .action-button {
-    margin-right: 1vw;
+    margin-left: 20px;
 }

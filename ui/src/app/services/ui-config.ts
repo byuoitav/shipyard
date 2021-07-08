@@ -48,22 +48,25 @@ export class UIDisplay {
     deviceID: number;
     controlGroupID: number;
     defaultInput: string;
-    
+    sortID: number;
 
     constructor() {
         this.deviceID = 0;
         this.controlGroupID = 0;
         this.defaultInput = '';
+        this.sortID = 0;
     }
 }
 
 export class UIInput {
     deviceID: number;
     controlGroupID: number;
+    sortID: number;
 
     constructor() {
         this.deviceID = 0;
         this.controlGroupID = 0;
+        this.sortID = 0;
     }
 }
 

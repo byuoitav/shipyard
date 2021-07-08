@@ -17,6 +17,10 @@ mat-form-field {
 
 .button-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
+}
+
+button {
+    margin-left: 20px;
 }
