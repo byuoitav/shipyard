@@ -1,3 +1,8 @@
+<mat-form-field>
+    <mat-label>Layout Name</mat-label>
+    <input matInput type="text" [(ngModel)]="controlGroup.name">
+</mat-form-field>
+
 <mat-tab-group mat-stretch-tabs>
 
     <mat-tab label="Displays">
@@ -43,7 +48,7 @@
             <ng-template #displayList>
                 <div class="section-header">
                     <p class="section-title">Displays</p>
-                    <button mat-stroked-button color="primary" (click)="editDisplay = true;"><ng-container *ngIf="this.controlGroup.displays.length == 0; else chooseDisplay">Add </ng-container><ng-template #chooseDisplay>Choose </ng-template>Displays</button>
+                    <button mat-stroked-button color="primary" (click)="editDisplay = true;"><ng-container *ngIf="this.controlGroup.displays.length == 0; else chooseDisplay">Add </ng-container><ng-template #chooseDisplay>Modify </ng-template>Displays</button>
                 </div>
 
                 <mat-list *ngIf="this.controlGroup.displays.length > 0; else noDisplayMessage" class="drag-list" cdkDropList (cdkDropListDropped)="drop($event, controlGroup.displays)">
@@ -97,7 +102,7 @@
             <ng-template #inputList>
                 <div class="section-header">
                     <p class="section-title">Inputs</p>
-                    <button mat-stroked-button color="primary" (click)="editInput = true;"><ng-container *ngIf="this.controlGroup.inputs.length == 0; else chooseInput">Add </ng-container><ng-template #chooseInput>Choose </ng-template>Inputs</button>
+                    <button mat-stroked-button color="primary" (click)="editInput = true;"><ng-container *ngIf="this.controlGroup.inputs.length == 0; else chooseInput">Add </ng-container><ng-template #chooseInput>Modify </ng-template>Inputs</button>
                 </div>
 
                 <mat-list *ngIf="this.controlGroup.inputs.length > 0; else noInputMessage" class="drag-list" cdkDropList (cdkDropListDropped)="drop($event, controlGroup.inputs)">

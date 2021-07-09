@@ -34,6 +34,7 @@ export class RoomConfigComponent implements OnInit {
   unpauseOnArrow = false;
   pauseOnHover = true;
   pauseOnFocus = true;
+  currentSlideID: string = "";
 
   furniture: Map<string, boolean> = new Map();
   roomTypes: string[] = [];
@@ -83,11 +84,16 @@ export class RoomConfigComponent implements OnInit {
   }
 
   openImage(index: number) {
-    const imageModal = this.dialog.open(ImageDisplayModal, {data: this.images[index]});
-    imageModal.afterClosed().subscribe(toDelete => {
-      if (toDelete) {
+    const imageModal = this.dialog.open(ImageDisplayModal, {
+      data: {
+        images: this.images,
+        index: index.toString()
+      }
+    });
+    imageModal.afterClosed().subscribe(deleteIndex => {
+      if (deleteIndex) {
         // delete the image
-        this.images.splice(index, 1);
+        this.images.splice(parseInt(deleteIndex), 1);
       }
     });
   }
@@ -166,6 +172,7 @@ export class RoomConfigComponent implements OnInit {
   }
 
   onSlide(slideEvent: NgbSlideEvent) {
+    this.currentSlideID = slideEvent.current;
     if (this.unpauseOnArrow && slideEvent.paused &&
       (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
       this.togglePaused();

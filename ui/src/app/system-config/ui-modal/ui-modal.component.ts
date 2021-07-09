@@ -5,7 +5,6 @@ import { ApiService } from 'src/app/services/api.service';
 import { Device } from 'src/app/services/device';
 import { UIControlGroup, UIDisplay, UIInput, UIMicrophoneGroup } from 'src/app/services/ui-config';
 import { MicrophoneGroupComponent } from '../microphone-group/microphone-group.component';
-import { ConfirmConfigComponent } from './confirm-config.component';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -138,13 +137,7 @@ export class UiModalComponent implements OnInit {
   }
 
   confirmSave() {
-    let ref = this.dialog.open(ConfirmConfigComponent, {data: this.controlGroup.name});
-    ref.afterClosed().subscribe(data => {
-      if (data != null) {
-        this.controlGroup.name = data;
-        this.saveControlGroup();
-      }
-    });
+    this.saveControlGroup();
   }
 
   getDeviceFromID(id: number) {

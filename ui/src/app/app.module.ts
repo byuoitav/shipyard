@@ -65,7 +65,6 @@ import { ConfirmPortDialog } from './system-config/port-modal/confirm-dialog';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
 import { UiModalComponent } from './system-config/ui-modal/ui-modal.component';
 import { MicrophoneGroupComponent } from './system-config/microphone-group/microphone-group.component';
-import { ConfirmConfigComponent } from './system-config/ui-modal/confirm-config.component';
 
 
 
@@ -102,8 +101,7 @@ import { ConfirmConfigComponent } from './system-config/ui-modal/confirm-config.
     ConfirmPortDialog,
     DeviceModalComponent,
     UiModalComponent,
-    MicrophoneGroupComponent,
-    ConfirmConfigComponent
+    MicrophoneGroupComponent
   ],
   imports: [
     BrowserModule,
