@@ -19,7 +19,7 @@ import { NgbCarousel, NgbSlideEvent } from "@ng-bootstrap/ng-bootstrap";
             </ngb-carousel>
           </div>
           <div class="button-container">
-              <div></div>
+              <button mat-stroked-button (click)="closeModal()">Close</button>
               <button mat-raised-button color="warn" (click)="deleteImage()">Delete</button>
           </div>
         </div>
@@ -47,6 +47,10 @@ import { NgbCarousel, NgbSlideEvent } from "@ng-bootstrap/ng-bootstrap";
           justify-content: flex-end;
           width: 100%;
         }
+
+        button {
+          margin-left: 20px;
+        }
       `
     ]
   })
@@ -73,7 +77,7 @@ export class ImageDisplayModal {
     }
   }
   
-  cancel() {
+  closeModal() {
     this.dialogRef.close(false);
   }
 

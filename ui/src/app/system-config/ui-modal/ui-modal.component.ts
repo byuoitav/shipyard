@@ -13,6 +13,8 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./ui-modal.component.scss']
 })
 export class UiModalComponent implements OnInit {
+  editLayoutName: boolean = false;
+
   devices: Device[] = [];
   deviceTableColumns: string[] = ["select", "id", "type"];
 
@@ -40,6 +42,8 @@ export class UiModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: any,
     private api: ApiService,
     private dialog: MatDialog) {
+      this.controlGroup.id = Math.floor(Math.random() * 10000); // create a random id until given a proper one
+
       this.devices = this.api.getDevices(0);
       if (this.data.ControlGroup) {
         this.controlGroup = data.ControlGroup;
@@ -47,6 +51,11 @@ export class UiModalComponent implements OnInit {
         this.controlGroup.inputs = this.sortListBySortID(this.controlGroup.inputs);
         this.initializeSelectors();
       }
+
+      if (this.controlGroup.name === "") {
+        this.controlGroup.name = "New Layout"
+      }
+
       this.MasterVolSelection.select(this.devices[0]);
   }
 

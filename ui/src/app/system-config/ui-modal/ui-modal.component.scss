@@ -1,5 +1,22 @@
 mat-tab-group {
-    margin :1vw;
+    margin: 20px;
+}
+
+.layout-name-container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.layout-name {
+    font-size: xx-large;
+    margin: 0 20px 0 0;
+    padding: 27px 0 26px 0;
+}
+
+.layout-name-field {
+    font-size: large;
+    margin: 0 20px 0 0;
 }
 
 .button-container {

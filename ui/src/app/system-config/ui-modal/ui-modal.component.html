@@ -1,7 +1,18 @@
-<mat-form-field>
-    <mat-label>Layout Name</mat-label>
-    <input matInput type="text" [(ngModel)]="controlGroup.name">
-</mat-form-field>
+<ng-container *ngIf="!editLayoutName; else layoutName">
+    <div class="layout-name-container">
+        <div class="layout-name">{{controlGroup.name}}</div>
+        <button mat-icon-button (click)="editLayoutName = !editLayoutName;"><mat-icon>edit</mat-icon></button>
+    </div>
+</ng-container>
+<ng-template #layoutName>
+    <div class="layout-name-container">
+        <mat-form-field class="layout-name-field">
+            <!-- <mat-label>Layout Name</mat-label> -->
+            <input matInput type="text" [(ngModel)]="controlGroup.name">
+        </mat-form-field>
+        <button mat-stroked-button color="primary" (click)="editLayoutName = !editLayoutName;">Save</button>
+    </div>
+</ng-template>
 
 <mat-tab-group mat-stretch-tabs>
 
