@@ -6,7 +6,6 @@ import { Room } from '../services/room';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
-import { DeleteModal } from './delete-modal';
 import { System } from '../services/system';
 import { SystemModalComponent } from './system-modal/system-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -19,6 +18,9 @@ import { ImageDisplayModal } from './image-display-modal';
   styleUrls: ['./room-config.component.scss']
 })
 export class RoomConfigComponent implements OnInit {
+  savingMessage: string = "";
+  savingRoomTimer: any = null;
+
   roomID: number = 0;
   room: Room = new Room();
 
@@ -100,6 +102,27 @@ export class RoomConfigComponent implements OnInit {
 
   addSystem(s: System | null) {
     const systemDialog = this.dialog.open(SystemModalComponent, { data: s });
+  }
+
+  async onRoomEdit() {
+    this.savingMessage = "Saving room configuration...";
+    await this.delay(5000);
+    this.savingMessage = "";
+  }
+
+  delay = (ms: any) => new Promise(res => setTimeout(res, ms));
+
+  updateTimer() {
+    if (this.savingRoomTimer) {
+      clearTimeout(this.savingRoomTimer);
+    }
+    this.startRoomTimer();
+  }
+
+  async startRoomTimer() {
+    this.savingRoomTimer = setTimeout(() => {
+      this.onRoomEdit();
+    }, 10000);
   }
 
   navigateToSystem(e: any, sysID: number) {

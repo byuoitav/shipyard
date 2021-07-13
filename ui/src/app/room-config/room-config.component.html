@@ -1,3 +1,6 @@
+<!-- saving prompt - fixed position, up above on the menu bar -->
+<div class="saving-status">{{savingMessage}}</div>
+
 <h1 style="text-align: center; font-size: xx-large;">{{ room.name }}</h1>
 
 <div class="row">
@@ -27,13 +30,13 @@
                 <div>
                     <h3>Private Notes</h3>
                     <mat-form-field class="text-wrapper" appearance="outline">
-                        <textarea matInput rows="3" placeholder="description" [(ngModel)]="room.privateDescription"></textarea>
+                        <textarea matInput rows="3" placeholder="description" [(ngModel)]="room.privateDescription" (ngModelChange)="updateTimer()"></textarea>
                     </mat-form-field>
                 </div>
                 <div>
                     <h3>Public Notes</h3>
                     <mat-form-field class="text-wrapper" appearance="outline">
-                        <textarea matInput rows="3" placeholder="description" [(ngModel)]="room.publicDescription"></textarea>
+                        <textarea matInput rows="3" placeholder="description" [(ngModel)]="room.publicDescription" (ngModelChange)="updateTimer()"></textarea>
                     </mat-form-field>
                 </div>
             </div>
@@ -44,7 +47,7 @@
                     <h3>Furniture List</h3>
                     <ul>
                         <li *ngFor="let f of furniture | keyvalue">
-                            <mat-checkbox [(ngModel)]="f.value" color="primary">{{f.key}}</mat-checkbox>
+                            <mat-checkbox [(ngModel)]="f.value" color="primary" (change)="updateTimer()">{{f.key}}</mat-checkbox>
                         </li>
                     </ul>
                 </div>
@@ -52,14 +55,14 @@
                     <h3>Room Type</h3>
                     <mat-form-field class="select-field">
                         <mat-label>Room Type</mat-label>
-                        <mat-select [(value)]="roomType">
+                        <mat-select [(value)]="roomType" (selectionChange)="updateTimer()">
                             <mat-option *ngFor="let t of roomTypes" [value]="t">{{t}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <h3>Funding Type</h3>
                     <mat-form-field class="select-field">
                         <mat-label>Funding Type</mat-label>
-                        <mat-select [(value)]="fundingType">
+                        <mat-select [(value)]="fundingType" (selectionChange)="updateTimer()">
                             <mat-option *ngFor="let t of fundingTypes" [value]="t">{{t}}</mat-option>
                         </mat-select>
                     </mat-form-field>
