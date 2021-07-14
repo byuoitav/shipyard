@@ -1,6 +1,6 @@
 <mat-dialog-content class="main-container">
     <mat-horizontal-stepper #stepper>
-        <mat-step class="content-container">
+        <mat-step>
             <h1>Select a device to connect to {{ data.device.name }} : {{ data.port.name }}</h1>
             <div class="list-wrapper">
                 <table mat-table [dataSource]="filterDevices()">

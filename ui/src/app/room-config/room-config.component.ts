@@ -122,7 +122,7 @@ export class RoomConfigComponent implements OnInit {
   async startRoomTimer() {
     this.savingRoomTimer = setTimeout(() => {
       this.onRoomEdit();
-    }, 10000);
+    }, 5000);
   }
 
   navigateToSystem(e: any, sysID: number) {

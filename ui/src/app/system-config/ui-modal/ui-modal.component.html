@@ -7,7 +7,6 @@
 <ng-template #layoutName>
     <div class="layout-name-container">
         <mat-form-field class="layout-name-field">
-            <!-- <mat-label>Layout Name</mat-label> -->
             <input matInput type="text" [(ngModel)]="controlGroup.name">
         </mat-form-field>
         <button mat-stroked-button color="primary" (click)="editLayoutName = !editLayoutName;">Save</button>
@@ -134,24 +133,16 @@
                 </button>
             </div>
             <div class="mic-group-wrapper">
-                <mat-card *ngFor="let micGroup of MicrophoneGroups" class="mic-group">
-                    <mat-card-header class="mic-group-header">
-                        <mat-card-title class="mic-group-title">{{ micGroup.name }}</mat-card-title>
-                        <button mat-icon-button [matMenuTriggerFor]="micGroupMenu">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #micGroupMenu>
-                            <ng-template matMenuContent>
-                                <button mat-menu-item (click)="deleteMicGroup(micGroup.id)">Delete</button>
-                            </ng-template>
-                        </mat-menu>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <mat-list>
-                            <mat-list-item *ngFor="let mic of micGroup.microphones">{{ getDeviceFromID(mic.deviceID) }}</mat-list-item>
-                        </mat-list>
-                    </mat-card-content>
-                </mat-card>
+                <div *ngFor="let micGroup of MicrophoneGroups" class="mic-group">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>{{ micGroup.name }}</mat-expansion-panel-header>
+                        <section>
+                            <mat-list>
+                                <mat-list-item *ngFor="let mic of micGroup.microphones">{{ getDeviceFromID(mic.deviceID) }}</mat-list-item>
+                            </mat-list>
+                        </section>
+                    </mat-expansion-panel>
+                </div>
             </div>
         </div>
     </mat-tab>
@@ -168,7 +159,7 @@
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let dev">
                         <mat-radio-button (click)="$event.stopPropagation()"
-                                    (change)="$event ? MasterVolSelection.toggle(dev) : null"
+                                    (change)="$event ? selectMasterVolume(dev) : null"
                                     [checked]="MasterVolSelection.isSelected(dev)"
                                     color="primary">
                         </mat-radio-button>
@@ -185,7 +176,7 @@
                     <td mat-cell *matCellDef="let dev"> {{dev.modelID}} </td>
                 </ng-container>
             
-                <tr mat-row *matRowDef="let device; columns: deviceTableColumns;" class="device-row" (click)="MasterVolSelection.toggle(device)"></tr>
+                <tr mat-row *matRowDef="let device; columns: deviceTableColumns;" class="device-row" (click)="selectMasterVolume(device)"></tr>
             </table>
         </div>
     </mat-tab>

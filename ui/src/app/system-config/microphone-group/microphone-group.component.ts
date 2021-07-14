@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
 import { Device } from 'src/app/services/device';
+import { UIMicrophone, UIMicrophoneGroup } from 'src/app/services/ui-config';
 
 @Component({
   selector: 'app-microphone-group',
@@ -11,18 +12,16 @@ import { Device } from 'src/app/services/device';
 })
 export class MicrophoneGroupComponent implements OnInit {
   MicSelection = new SelectionModel<Device>(true, []);
-  groupID: string = '';
+  group: UIMicrophoneGroup = new UIMicrophoneGroup();
 
   devices: Device[] = [];
   deviceTableColumns: string[] = ["select", "id", "type"];
 
 
   constructor(private refDialog: MatDialogRef<MicrophoneGroupComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any,
     private api: ApiService) {
       this.devices = this.api.getDevices(0);
-      if (this.data) this.groupID = "Group " + this.data;
-      else this.groupID = "Group 1";
+      this.group.name = "New Group";
   }
 
   ngOnInit(): void {
@@ -53,10 +52,13 @@ export class MicrophoneGroupComponent implements OnInit {
   }
 
   saveGroup() {
-    this.refDialog.close({
-      ID: this.groupID,
-      Microphones: this.MicSelection.selected
+    this.MicSelection.selected.forEach(mic => {
+      let uiMic = new UIMicrophone();
+      uiMic.deviceID = mic.id;
+      this.group.microphones.push(uiMic);
     });
+
+    this.refDialog.close(this.group);
   }
 
 }

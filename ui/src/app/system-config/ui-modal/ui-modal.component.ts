@@ -50,13 +50,13 @@ export class UiModalComponent implements OnInit {
         this.controlGroup.displays = this.sortListBySortID(this.controlGroup.displays);
         this.controlGroup.inputs = this.sortListBySortID(this.controlGroup.inputs);
         this.initializeSelectors();
+      } else {
+        this.MasterVolSelection.select(this.devices[0]);
       }
 
       if (this.controlGroup.name === "") {
         this.controlGroup.name = "New Layout"
       }
-
-      this.MasterVolSelection.select(this.devices[0]);
   }
 
   ngOnInit(): void {
@@ -124,6 +124,11 @@ export class UiModalComponent implements OnInit {
     }
   }
 
+  selectMasterVolume(dev: Device) {
+    this.MasterVolSelection.toggle(dev) 
+    this.saveMasterVolume();
+  }
+
   saveDisplays() {
     this.controlGroup.displays = [];
     this.DisplaySelection.selected.forEach(display => {
@@ -137,10 +142,14 @@ export class UiModalComponent implements OnInit {
     this.editDisplay = false;
   }
 
+  saveMasterVolume() {
+    this.controlGroup.masterVolumeDeviceID = this.MasterVolSelection.selected[0].id;
+  }
+
   saveControlGroup() {
     this.controlGroup.microphoneGroups = this.MicrophoneGroups;
 
-    this.controlGroup.masterVolumeDeviceID = this.MasterVolSelection.selected[0].id;
+    this.saveMasterVolume();
 
     this.uiModal.close(this.controlGroup);
   }
@@ -165,8 +174,10 @@ export class UiModalComponent implements OnInit {
     this.MicrophoneGroups = this.controlGroup.microphoneGroups;
 
     if (this.controlGroup.masterVolumeDeviceID != 0) {
-      this.filterDevicesByID([this.controlGroup.masterVolumeDeviceID]).forEach(dev => {
-        this.MasterVolSelection.select(dev);
+      this.devices.forEach(dev => {
+        if (dev.id === this.controlGroup.masterVolumeDeviceID) {
+          this.MasterVolSelection.select(dev);
+        }
       });
     } else {
       this.MasterVolSelection.select(this.devices[0]);
@@ -174,35 +185,24 @@ export class UiModalComponent implements OnInit {
   }
 
   addMicGroup() {
-    let ref = this.dialog.open(MicrophoneGroupComponent, {width: '50vw', data: this.MicrophoneGroups.length + 1});
+    let ref = this.dialog.open(MicrophoneGroupComponent, {width: '50vw'});
 
     ref.afterClosed().subscribe(group => {
-      if (group != null) {
-        let micGroup = new UIMicrophoneGroup();
-        micGroup.name = group.ID;
-        micGroup.microphones = group.Microphones;
-        micGroup.controlGroupID = this.controlGroup.id;
-        micGroup.id = this.MicrophoneGroups.length + 1; // Temporary, must change when connected to backend
+      if (group) {
+        group.controlGroupID = this.controlGroup.id;
+
+        group.id = this.MicrophoneGroups.length + 1; // Temporary, must change when connected to backend
+        group.microphones.forEach((mic: any) => {
+          mic.microphoneGroupID = group.id;
+        });
         
-        this.MicrophoneGroups.push(micGroup);
+        this.MicrophoneGroups.push(group);
       }
     });
   }
 
   deleteMicGroup(id: number) {
     // this.MicrophoneGroups.delete(id);
-  }
-
-  filterDevicesByName(names: string[]): Device[] {
-    var filteredDevs: Device[] = [];
-    this.devices.forEach(dev => {
-      names.forEach(name => {
-        if (name === dev.name) {
-          filteredDevs.push(dev);
-        }
-      });
-    });
-    return filteredDevs;
   }
 
   filterDevicesByID(groups: any[]): Device[] {

@@ -1,7 +1,7 @@
 <div class="tab-content">
     <mat-form-field class="id-wrapper">
-        <mat-label>Group ID</mat-label>
-        <input matInput type="text" [(ngModel)]="groupID">
+        <mat-label>Group Name</mat-label>
+        <input matInput type="text" [(ngModel)]="group.name">
     </mat-form-field>
 
     <table mat-table [dataSource]="filterDevicesByRegularExpression('-MIC.*')" class="mat-elevation-z0">

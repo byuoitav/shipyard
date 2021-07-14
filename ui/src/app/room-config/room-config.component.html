@@ -1,10 +1,11 @@
-<!-- saving prompt - fixed position, up above on the menu bar -->
 <div class="saving-status">{{savingMessage}}</div>
 
 <h1 style="text-align: center; font-size: xx-large;">{{ room.name }}</h1>
 
 <div class="row">
+
     <div class="col mr-5">
+
         <div class="row">
             <div class="images-contianer">
                 <div class="carousel-wrapper">
@@ -25,6 +26,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row mt-3">
             <div class="notes-section-wrapper">
                 <div>
@@ -41,6 +43,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row mt-3">
             <div class="room-details">
                 <div class="details-container">
@@ -69,8 +72,11 @@
                 </div>
             </div>
         </div>
+
     </div>
+
     <div class="col">
+
         <div class="row half-section">
             <div class="config-section">
                 <h1>Connected Systems</h1>
@@ -99,6 +105,7 @@
                 <button mat-stroked-button color="primary" class="system-button" (click)="addSystem(null)">Add System</button>
             </div>
         </div>
+
         <div class="row half-section">
             <div class="config-section">
                 <h1>Devices</h1>
@@ -139,5 +146,6 @@
                 <button mat-stroked-button color="primary" class="system-button" (click)="addDevice(null, false)">Add Device</button>
             </div>
         </div>
+
     </div>
 </div>

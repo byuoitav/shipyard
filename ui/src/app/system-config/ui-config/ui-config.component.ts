@@ -121,7 +121,6 @@ export class UiConfigComponent implements OnInit {
         }
 
         this.controlGroups.push(resp);
-        console.log(this.controlGroups);
         this.controlGroupsTableData.data = this.controlGroups;
       }
     });

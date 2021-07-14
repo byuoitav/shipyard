@@ -28,17 +28,6 @@
     object-fit: cover;
 }
 
-.room-details {
-    display: flex;
-}
-
-.details-container {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-}
-
 .button-wrapper {
     display: flex;
     align-items: center;
@@ -91,11 +80,6 @@ table {
 }
 
 // Devices
-.final-device-column {
-    padding: 19px 0 0 0;
-    margin-bottom: 20px;
-}
-
 mat-chip-list {
     float: right;
     overflow: wrap;
@@ -156,14 +140,18 @@ mat-form-field {
 // Room Details Section
 .room-details {
     width: 100%;
+    display: flex;
+}
+
+.details-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
 h3 {
     margin: 0;
-}
-
-.list-section {
-    margin: 3vh;
 }
 
 ul {

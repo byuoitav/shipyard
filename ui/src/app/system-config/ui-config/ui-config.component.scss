@@ -76,43 +76,6 @@ table {
     padding-top: 25px;
 }
 
-.control-group {
-    margin-top: 10px;
-}
-
-.cg-panel {
-    display: flex;
-    justify-content: space-evenly;
-    flex-flow: row wrap;
-}
-
-.cg-panel-test {
-    display: flex;
-    justify-content: space-between;
-    flex-flow: row wrap;
-    width: 100%;
-}
-
-.cg-expansion {
-    width: 45%;
-    margin: 10px;
-}
-
-.cg-card {
-    width: 28%;
-    margin-bottom: 1vh;
-}
-
-.cg-button {
-    margin-right: 10px;
-}
-
-.control-panel-title {
-    padding-left: 2.5%;
-    padding-top: 3vh;
-    font-size: 16pt;
-}
-
 .control-panel-assignment {
     display: flex;
     justify-content: space-between;
@@ -121,11 +84,6 @@ table {
 
 .spacing {
     flex: 1 1 auto;
-}
-
-.final-device-column {
-    padding: 19px 0 0 0;
-    margin-bottom: 20px;
 }
 
 mat-chip-list {
@@ -153,35 +111,4 @@ mat-basic-chip:hover {
 
 mat-basic-chip {
     cursor: pointer;
-}
- 
-tr.detail-row {
-    height: 0;
-}
-
-tr.layout-row:not(.expanded-row):hover {
-    background: whitesmoke;
-}
-
-.expanded-panel {
-    overflow: hidden;
-}
-
-.layout-item-list {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    flex-direction: column;
-    height: 100%;
-}
-
-.layout-section-test {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    padding: 20px;
-}
-
-h3 {
-    text-align: center;
 }

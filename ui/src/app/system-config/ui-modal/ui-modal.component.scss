@@ -49,21 +49,6 @@ table, th, td {
     padding: 20px;
 }
 
-.mic-group-header {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-}
-
-.mic-group-header-title {
-    font-weight: bold;
-}
-
-.mic-button {
-    padding: 15px;
-}
-
 .mic-group-wrapper {
     display: flex;
     justify-content: space-evenly;
@@ -72,15 +57,6 @@ table, th, td {
 
 .mic-group {
     margin-bottom: 20px;
-}
-
-.mic-group-header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.mic-group-title {
-    padding-top: 15%;
 }
 
 .section-header {

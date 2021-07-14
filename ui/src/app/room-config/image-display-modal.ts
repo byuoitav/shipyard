@@ -7,8 +7,6 @@ import { NgbCarousel, NgbSlideEvent } from "@ng-bootstrap/ng-bootstrap";
     selector: "delete-modal",
     template: `
         <div class="main-container">
-          <!-- <img src="{{ imageSource }}"> -->
-          <!-- (slide)="onSlide($event)" -->
           <div class="carousel-wrapper">
             <ngb-carousel #carousel="ngbCarousel">
               <ng-template ngbSlide *ngFor="let img of images; index as i" id="{{i}}">
