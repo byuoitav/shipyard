@@ -19,6 +19,7 @@ export class Device {
     ports: Port[];
     systemIDs: number[];
     tags: Map<string, string>;
+    dynamicPorts: boolean;
 
     constructor() {
         this.id = 0;
@@ -38,5 +39,6 @@ export class Device {
         this.ports = [];
         this.systemIDs = [];
         this.tags = new Map();
+        this.dynamicPorts = false;
     }
 }

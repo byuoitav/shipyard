@@ -44,7 +44,7 @@ table {
 
 .button-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     padding-top: 20px;
 }
 
@@ -86,4 +86,14 @@ mat-grid-list {
 
 mat-basic-chip {
     cursor: pointer;
+}
+
+.port-edit-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.port-edit-container button {
+    margin-left: 10px;
 }

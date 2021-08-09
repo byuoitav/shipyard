@@ -1,25 +1,29 @@
 export class Port {
-    id: string;
+    id: number;
     name: string;
     endpoints: Endpoint[];
     direction: string;
     type: string;
 
     constructor() {
-        this.id = '';
+        this.id = 0;
         this.name = '';
         this.endpoints = [];
-        this.direction = 'bi-directional';
+        this.direction = 'Bi-directional';
         this.type = '';
     }
 }
   
 export class Endpoint {
-    device: string;
-    port: string;
+    deviceID: number;
+    portName: string;
+    connectedDeviceID: number;
+    connectedPortName: string;
 
     constructor() {
-        this.device = '';
-        this.port = '';
+        this.deviceID = 0;
+        this.portName = '';
+        this.connectedDeviceID = 0;
+        this.connectedPortName = '';
     }
 }

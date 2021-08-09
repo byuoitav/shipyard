@@ -48,11 +48,11 @@
             <h1>Ports<ng-container *ngIf="selectedDevice != null"> on {{ getDeviceName() }}</ng-container></h1>
             <p style="text-align: center;">Select a port to configure its connection</p>
             <div class="list-wrapper">
-                <table mat-table [dataSource]="getPortList()">
+                <table mat-table [dataSource]="portData">
 
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Port Name </th>
-                        <td mat-cell *matCellDef="let port"> {{port.name}} ({{port.direction}})</td>
+                        <td mat-cell *matCellDef="let port">{{port.name}} ({{port.direction}})</td>
                     </ng-container>
 
                     <ng-container matColumnDef="dir">
@@ -62,12 +62,25 @@
 
                     <ng-container matColumnDef="connection">
                         <th mat-header-cell *matHeaderCellDef> Connected Port </th>
-                        <td mat-cell *matCellDef="let port"> <div *ngIf="port.endpoints.length > 0">{{port.endpoints[0].device}} : {{port.endpoints[0].port}}</div> </td>
+                        <td mat-cell *matCellDef="let port"> <div *ngIf="port.endpoints.length > 0">{{getDeviceFromID(port.endpoints[0].connectedDeviceID).name}} : {{port.endpoints[0].connectedPortName}}</div> </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="portEdit">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let port">
+                            <div class="port-edit-container" *ngIf="selectedDevice.dynamicPorts">
+                                <button mat-icon-button (click)="editDynamicPort($event, port)"><mat-icon>edit</mat-icon></button>
+                                <button mat-icon-button (click)="onDeletePort($event, port)"><mat-icon>delete</mat-icon></button>
+                            </div>
+                        </td>
                     </ng-container>
                     
                     <tr mat-header-row *matHeaderRowDef="portColumns;"></tr>
                     <tr mat-row *matRowDef="let port; columns: portColumns;" class="table-row" (click)="connectPort(port)"></tr>
                 </table>
+            </div>
+            <div class="button-container" *ngIf="selectedDevice.dynamicPorts">
+                <button mat-stroked-button color="primary" (click)="addPort(null)">Add Port</button>
             </div>
         </div>
     </mat-grid-tile>

@@ -53,6 +53,10 @@ export class PortModalComponent implements OnInit {
     if (this.stepper) this.stepper.next();
   }
 
+  getDeviceNameFromID(id: number) {
+    return this.api.getDeviceByID(id).name;
+  }
+
   filterPorts(ports: Port[], type: string) {
     var filtered = [];
     for (var i = 0; i < ports.length; i++) {

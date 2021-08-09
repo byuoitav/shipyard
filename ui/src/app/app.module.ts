@@ -65,7 +65,8 @@ import { ConfirmPortDialog } from './system-config/port-modal/confirm-dialog';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
 import { UiModalComponent } from './system-config/ui-modal/ui-modal.component';
 import { MicrophoneGroupComponent } from './system-config/microphone-group/microphone-group.component';
-
+import { PortEditComponent } from './system-config/port-config/port-edit';
+import { PortDeleteConfirmComponent } from './system-config/port-config/port-delete-confirm';
 
 
 @NgModule({
@@ -101,7 +102,9 @@ import { MicrophoneGroupComponent } from './system-config/microphone-group/micro
     ConfirmPortDialog,
     DeviceModalComponent,
     UiModalComponent,
-    MicrophoneGroupComponent
+    MicrophoneGroupComponent,
+    PortEditComponent,
+    PortDeleteConfirmComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Device } from './device';
-// import { RoomConfig } from '../components/room-page/ui-config/ui-config';
 import { Room } from './room';
 import { System } from './system';
-import { SystemUIConfig, UIControlGroup } from './ui-config';
+import { UIControlGroup } from './ui-config';
 
 @Injectable({
   providedIn: 'root'
@@ -177,68 +176,70 @@ export class ApiService {
       presets: new Map(),
       ports: [
         {
-          id: 'Port1',
+          id: 1,
           name: 'Port1',
           endpoints: [],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port2',
+          id: 2,
           name: 'Port2',
           endpoints: [],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port3',
+          id: 3,
           name: 'Port3',
           endpoints: [
             {
-              device: 'Device 2',
-              port: 'Port6'
+              deviceID: 1,
+              portName: 'Port3',
+              connectedDeviceID: 2,
+              connectedPortName: 'Port6'
             }
           ],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port4',
+          id: 4,
           name: 'Port4',
           endpoints: [],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port5',
+          id: 5,
           name: 'Port5',
           endpoints: [],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port6',
+          id: 6,
           name: 'Port6',
           endpoints: [],
           direction: 'Output',
           type: ''
         },
         {
-          id: 'Port7',
+          id: 7,
           name: 'Port7',
           endpoints: [],
           direction: 'Output',
           type: ''
         },
         {
-          id: 'Port8',
+          id: 8,
           name: 'Port8',
           endpoints: [],
           direction: 'Output',
           type: ''
         },
         {
-          id: 'Port9',
+          id: 9,
           name: 'Port9',
           endpoints: [],
           direction: 'Output',
@@ -247,6 +248,7 @@ export class ApiService {
       ],
       systemIDs: [1, 2, 3, 4, 5, 6, 7],
       tags: new Map(),
+      dynamicPorts: true
     },
     {
       id: 2,
@@ -265,68 +267,70 @@ export class ApiService {
       presets: new Map(),
       ports: [
         {
-          id: 'Port1',
+          id: 91,
           name: 'Port1',
           endpoints: [],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port2',
+          id: 92,
           name: 'Port2',
           endpoints: [],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port3',
+          id: 93,
           name: 'Port3',
           endpoints: [],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port4',
+          id: 94,
           name: 'Port4',
           endpoints: [],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port5',
+          id: 95,
           name: 'Port5',
           endpoints: [],
           direction: 'Input',
           type: ''
         },
         {
-          id: 'Port6',
+          id: 96,
           name: 'Port6',
           endpoints: [
             {
-              device: 'Device 1',
-              port: 'Port3'
+              deviceID: 2,
+              portName: 'Port6',
+              connectedDeviceID: 1,
+              connectedPortName: 'Port3'
             }
           ],
           direction: 'Output',
           type: ''
         },
         {
-          id: 'Port7',
+          id: 97,
           name: 'Port7',
           endpoints: [],
           direction: 'Output',
           type: ''
         },
         {
-          id: 'Port8',
+          id: 98,
           name: 'Port8',
           endpoints: [],
           direction: 'Output',
           type: ''
         },
         {
-          id: 'Port9',
+          id: 99,
           name: 'Port9',
           endpoints: [],
           direction: 'Output',
@@ -335,6 +339,7 @@ export class ApiService {
       ],
       systemIDs: [4, 5, 6],
       tags: new Map(),
+      dynamicPorts: false
     },
     {
       id: 3,
@@ -353,7 +358,8 @@ export class ApiService {
       presets: new Map(),
       ports: [],
       systemIDs: [1],
-      tags: new Map()
+      tags: new Map(),
+      dynamicPorts: false
     },
     {
       id: 4,
@@ -372,7 +378,8 @@ export class ApiService {
       presets: new Map(),
       ports: [],
       systemIDs: [2],
-      tags: new Map()
+      tags: new Map(),
+      dynamicPorts: false
     },
     {
       id: 5,
@@ -391,7 +398,8 @@ export class ApiService {
       presets: new Map(),
       ports: [],
       systemIDs: [3],
-      tags: new Map()
+      tags: new Map(),
+      dynamicPorts: false
     },
     {
       id: 6,
@@ -410,7 +418,8 @@ export class ApiService {
       presets: new Map(),
       ports: [],
       systemIDs: [4],
-      tags: new Map()
+      tags: new Map(),
+      dynamicPorts: false
     },
     {
       id: 7,
@@ -429,7 +438,8 @@ export class ApiService {
       presets: new Map(),
       ports: [],
       systemIDs: [5],
-      tags: new Map()
+      tags: new Map(),
+      dynamicPorts: false
     },
     {
       id: 8,
@@ -448,7 +458,8 @@ export class ApiService {
       presets: new Map(),
       ports: [],
       systemIDs: [6],
-      tags: new Map()
+      tags: new Map(),
+      dynamicPorts: false
     },
     {
       id: 9,
@@ -467,7 +478,8 @@ export class ApiService {
       presets: new Map(),
       ports: [],
       systemIDs: [7],
-      tags: new Map()
+      tags: new Map(),
+      dynamicPorts: false
     },
     {
       id: 10,
@@ -486,7 +498,8 @@ export class ApiService {
       presets: new Map(),
       ports: [],
       systemIDs: [6],
-      tags: new Map()
+      tags: new Map(),
+      dynamicPorts: false
     },
     {
       id: 11,
@@ -505,7 +518,8 @@ export class ApiService {
       presets: new Map(),
       ports: [],
       systemIDs: [5],
-      tags: new Map()
+      tags: new Map(),
+      dynamicPorts: false
     }
   ];
 

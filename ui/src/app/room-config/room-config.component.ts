@@ -19,6 +19,7 @@ import { ImageDisplayModal } from './image-display-modal';
 })
 export class RoomConfigComponent implements OnInit {
   savingMessage: string = "";
+  savingIcon: string = "";
   savingRoomTimer: any = null;
 
   roomID: number = 0;
@@ -104,10 +105,9 @@ export class RoomConfigComponent implements OnInit {
     const systemDialog = this.dialog.open(SystemModalComponent, { data: s });
   }
 
-  async onRoomEdit() {
-    this.savingMessage = "Saving room configuration...";
-    await this.delay(5000);
-    this.savingMessage = "";
+  async onRoomSave() {
+    this.savingMessage = "Saved";
+    this.savingIcon = "cloud_done";
   }
 
   delay = (ms: any) => new Promise(res => setTimeout(res, ms));
@@ -120,9 +120,11 @@ export class RoomConfigComponent implements OnInit {
   }
 
   async startRoomTimer() {
+    this.savingMessage = "Saving...";
+    this.savingIcon = "sync";
     this.savingRoomTimer = setTimeout(() => {
-      this.onRoomEdit();
-    }, 5000);
+      this.onRoomSave();
+    }, 2000);
   }
 
   navigateToSystem(e: any, sysID: number) {

@@ -35,7 +35,7 @@
 
                     <ng-container matColumnDef="connection">
                         <th mat-header-cell *matHeaderCellDef> Connected Port </th>
-                        <td mat-cell *matCellDef="let port"> <div *ngIf="port.endpoints.length > 0">{{port.endpoints[0].device}} : {{port.endpoints[0].port}}</div> </td>
+                        <td mat-cell *matCellDef="let port"> <div *ngIf="port.endpoints.length > 0">{{getDeviceNameFromID(port.endpoints[0].connectedDeviceID)}} : {{port.endpoints[0].connectedPortName}}</div> </td>
                     </ng-container>
                     
                     <tr mat-header-row *matHeaderRowDef="portColumns;"></tr>
