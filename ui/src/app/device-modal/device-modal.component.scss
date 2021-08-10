@@ -1,13 +1,13 @@
 .system-container {
     min-width: 700px;
-    min-height: 600px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 mat-tab-group {
-    height: 100%;
+    height: 90%;
     width: 100%;
 }
 
@@ -16,7 +16,7 @@ mat-grid-list {
     margin: 20px 0 0 0;
 }
 
-mat-form-field {
+.device-data-memeber {
     margin: 0 20px 0 20px;
     width: 100%;
 }
@@ -44,4 +44,26 @@ table {
 
 .table-row:hover {
     background-color: whitesmoke;
+}
+
+.preset-tab {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.preset-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preset-add-field {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0 20px 0;
 }

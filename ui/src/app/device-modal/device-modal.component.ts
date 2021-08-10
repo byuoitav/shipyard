@@ -13,6 +13,10 @@ import { System } from '../services/system';
 export class DeviceModalComponent implements OnInit {
   selectedTab: number = 0;
   device: Device = new Device()
+
+  presetKey: string = "";
+  presetValue: string = "";
+
   modelList: any[] = [];
   manufacturerList: any[] = [];
   fundingTypeList: any[] = [];
@@ -40,6 +44,18 @@ export class DeviceModalComponent implements OnInit {
     }
 
   ngOnInit(): void {
+  }
+
+  addPreset() {
+    if (this.presetKey != "" && this.presetValue != "") {
+      this.device.presets.set(this.presetKey, this.presetValue);
+      this.presetKey = "";
+      this.presetValue = "";
+    }
+  }
+
+  deletePreset(preset: any) {
+    this.device.presets.delete(preset.key);
   }
 
   getDeviceModelList() {

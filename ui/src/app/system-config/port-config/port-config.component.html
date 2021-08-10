@@ -55,11 +55,6 @@
                         <td mat-cell *matCellDef="let port">{{port.name}} ({{port.direction}})</td>
                     </ng-container>
 
-                    <ng-container matColumnDef="dir">
-                        <th mat-header-cell *matHeaderCellDef> Direction (temp)</th>
-                        <td mat-cell *matCellDef="let port"> {{port.direction}} </td>
-                    </ng-container>
-
                     <ng-container matColumnDef="connection">
                         <th mat-header-cell *matHeaderCellDef> Connected Port </th>
                         <td mat-cell *matCellDef="let port"> <div *ngIf="port.endpoints.length > 0">{{getDeviceFromID(port.endpoints[0].connectedDeviceID).name}} : {{port.endpoints[0].connectedPortName}}</div> </td>

@@ -15,6 +15,7 @@ export class Device {
     proxyBaseURL: string;
     notes: string;
     address: string;
+    hasPresets: boolean;
     presets: Map<string, string>;
     ports: Port[];
     systemIDs: number[];
@@ -35,6 +36,7 @@ export class Device {
         this.proxyBaseURL = "";
         this.notes = "";
         this.address = "";
+        this.hasPresets = false;
         this.presets = new Map();
         this.ports = [];
         this.systemIDs = [];

@@ -3,19 +3,19 @@
         <mat-tab label="Device Details">
             <mat-grid-list cols="2" rowHeight="70px">
                 <mat-grid-tile>
-                    <mat-form-field>
+                    <mat-form-field class="device-data-memeber">
                         <mat-label>Device Name</mat-label>
                         <input matInput [(ngModel)]="device.name">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <mat-form-field>
+                    <mat-form-field class="device-data-memeber">
                         <mat-label>Address</mat-label>
                         <input matInput [(ngModel)]="device.address">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <mat-form-field>
+                    <mat-form-field class="device-data-memeber">
                         <mat-label>Manufacturer</mat-label>
                         <mat-select>
                             <mat-option *ngFor="let m of manufacturerList" [value]="m">{{m}}</mat-option>
@@ -23,7 +23,7 @@
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <mat-form-field>
+                    <mat-form-field class="device-data-memeber">
                         <mat-label>Model</mat-label>
                         <mat-select [(value)]="device.modelID">
                             <mat-option *ngFor="let m of modelList" [value]="m.id">{{m.name}}</mat-option>
@@ -32,7 +32,7 @@
                 </mat-grid-tile>
                 
                 <mat-grid-tile>
-                    <mat-form-field>
+                    <mat-form-field class="device-data-memeber">
                         <mat-label>Install Date</mat-label>
                         <input matInput [(ngModel)]="device.installDate" [matDatepicker]="installPicker">
                         <mat-datepicker-toggle matSuffix [for]="installPicker"></mat-datepicker-toggle>
@@ -40,7 +40,7 @@
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <mat-form-field>
+                    <mat-form-field class="device-data-memeber">
                         <mat-label>Warranty Date</mat-label>
                         <input matInput [(ngModel)]="device.warrantyDate" [matDatepicker]="warrantyPicker">
                         <mat-datepicker-toggle matSuffix [for]="warrantyPicker"></mat-datepicker-toggle>
@@ -48,13 +48,13 @@
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <mat-form-field>
+                    <mat-form-field class="device-data-memeber">
                         <mat-label>Location</mat-label>
                         <input matInput [(ngModel)]="device.location">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <mat-form-field>
+                    <mat-form-field class="device-data-memeber">
                         <mat-label>FundingType</mat-label>
                         <mat-select [(value)]="device.fundingType">
                             <mat-option *ngFor="let f of fundingTypeList" [value]="f">{{f}}</mat-option>
@@ -62,7 +62,7 @@
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile colspan="2" rowspan="2">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" class="device-data-memeber">
                         <mat-label>Notes</mat-label>
                         <textarea matInput [(ngModel)]="device.notes" rows="3"></textarea>
                     </mat-form-field>
@@ -86,6 +86,31 @@
                     <tr mat-header-row *matHeaderRowDef="systemColumns;"></tr>
                     <tr mat-row *matRowDef="let sys; columns: systemColumns;" class="table-row" (click)="navigateToSystem(sys.id)"></tr>
                 </table>
+            </div>
+        </mat-tab>
+        <mat-tab label="Device Presets" *ngIf="device.hasPresets">
+            <div class="preset-tab">
+                <mat-list class="list-wrapper">
+                    <mat-list-item *ngFor="let preset of device.presets | keyvalue">
+                        <div class="preset-item">
+                            <div>{{preset.key}}</div>
+                            <div>{{preset.value}}</div>
+                            <button mat-icon-button (click)="deletePreset(preset)"><mat-icon>delete</mat-icon></button>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+                <div class="preset-add-field">
+                    <mat-form-field>
+                        <mat-label>Key</mat-label>
+                        <input matInput [(ngModel)]="presetKey"/>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Value</mat-label>
+                        <input matInput [(ngModel)]="presetValue"/>
+                    </mat-form-field>
+                    <button mat-icon-button (click)="addPreset()"><mat-icon>add</mat-icon></button>
+                </div>
             </div>
         </mat-tab>
     </mat-tab-group>
