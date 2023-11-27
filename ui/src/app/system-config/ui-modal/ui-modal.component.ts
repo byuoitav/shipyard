@@ -20,9 +20,7 @@ export class UiModalComponent implements OnInit {
 
   controlGroup: UIControlGroup = new UIControlGroup();
 
-
   CPSelection = new SelectionModel<Device>(true, []);
-
 
   DisplaySelection = new SelectionModel<Device>(true, []);
   isAllDisplay: boolean = false;
@@ -35,6 +33,12 @@ export class UiModalComponent implements OnInit {
   MasterVolSelection = new SelectionModel<Device>(false, []);
 
   MicrophoneGroups: UIMicrophoneGroup[] = [];
+
+  CameraSelection = new SelectionModel<Device>(true, []);
+  isAllCamera: boolean = false;
+  editCamera: boolean = false;
+
+  cameras: Device[] = []; // Temporary
 
   selected: Device[] = [];
 
@@ -230,7 +234,23 @@ export class UiModalComponent implements OnInit {
   }
 
   checkForCameras(): boolean {
-    return false;
+    let cameras = this.filterDevicesByRegularExpression("CAM");
+
+    return cameras.length > 0;
+  }
+
+  selectAllCameras() {
+    if (this.CameraSelection.selected.length === this.devices.length && !this.isAllCamera) {
+      this.CameraSelection.clear();
+    } else if (this.isAllCamera) {
+      this.CameraSelection.select(...this.devices);
+    }
+  }
+
+  saveCameras() {
+    this.cameras = this.CameraSelection.selected;
+
+    this.editCamera = false;
   }
 
 }

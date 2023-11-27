@@ -534,6 +534,27 @@ export class ApiService {
       systemIDs: [5],
       tags: new Map(),
       dynamicPorts: false
+    },
+    {
+      id: 12,
+      name: "TEST-0000-CAM1",
+      roomID: 5,
+      modelID: 7,
+      installDate: new Date(),
+      warrantyDate: new Date(),
+      location: "in a cupboard under the stairs",
+      serialNumber: "asdf",
+      icon: "videocam",
+      fundingType: "Type 1",
+      proxyBaseURL: "",
+      notes: "these are notes on TEST-0000-CAM1",
+      address: "TEST-0000-CAM1.byu.edu",
+      hasPresets: false,
+      presets: new Map(),
+      ports: [],
+      systemIDs: [1],
+      tags: new Map(),
+      dynamicPorts: false
     }
   ];
 
